@@ -6,7 +6,7 @@
 | ----- | --------------- | ---------- | --------------- |
 | Elias Tamraz  | @eliastam  | Domain Modeling, Developer Operations |  |
 | George Kandalaft | @Georges1998 | System Requirements, Use Case Diagrams  |
-| Caleb Lim | @calebsh | Quality Assurance Lead |  |
+| Caleb Lim | @calebsh | Quality Assurance Lead | Persistence Layer Testing |
 | Ryan Arndsten | @ryanarndsten |  |
 | Louca Dufault | @loucadufault | Documentation |
 
