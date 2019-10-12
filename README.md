@@ -8,7 +8,7 @@
 | George Kandalaft | @Georges1998 | System Requirements, Use Case Diagrams  |
 | Caleb Lim | @calebsh | Quality Assurance Lead |  |
 | Ryan Arndsten | @ryanarndsten |  |
-| Louca Dufault | @loucadufault | Sprint Planning, Documentation |
+| Louca Dufault | @loucadufault | Sprint Planning, Documentation Lead |
 
 ## Project Reports
 
