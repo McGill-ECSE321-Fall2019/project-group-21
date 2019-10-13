@@ -5,10 +5,10 @@
 | Name  | GitHub Username | Team Role  | Efforts (hours) |
 | ----- | --------------- | ---------- | --------------- |
 | Elias Tamraz  | @eliastam  | Domain Modeling, Developer Operations |  |
-| George Kandalaft | @Georges1998 | System Requirements, Use Case Diagrams  |
+| George Kandalaft | @Georges1998 |  |
 | Caleb Lim | @calebsh | Quality Assurance Lead |  |
-| Ryan Arndsten | @ryanarndsten | Float |
-| Louca Dufault | @loucadufault | Sprint Planning, Documentation Lead |
+| Ryan Arndsten | @ryanarndsten |  |
+| Louca Dufault | @loucadufault | Documentation |
 
 ## Project Reports
 

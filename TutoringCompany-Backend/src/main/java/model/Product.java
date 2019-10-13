@@ -1,4 +1,5 @@
-package ca.mcgill.ecse321.tutoringcompany.model;
+package model;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.util.Set;
@@ -55,14 +56,14 @@ public int getPrice_group() {
       this.groupSession = groupSessions;
    }
    
-   private Set<IndividualSession> oneToOneSession;
+   private Set<OneToOneSession> oneToOneSession;
    
    @OneToMany(mappedBy="product" )
-   public Set<IndividualSession> getOneToOneSession() {
+   public Set<OneToOneSession> getOneToOneSession() {
       return this.oneToOneSession;
    }
    
-   public void setOneToOneSession(Set<IndividualSession> oneToOneSessions) {
+   public void setOneToOneSession(Set<OneToOneSession> oneToOneSessions) {
       this.oneToOneSession = oneToOneSessions;
    }
    

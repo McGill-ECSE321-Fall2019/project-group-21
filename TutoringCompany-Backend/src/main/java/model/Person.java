@@ -1,8 +1,8 @@
-package ca.mcgill.ecse321.tutoringcompany.model;
+package model;
+
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Id;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Person{
@@ -14,6 +14,17 @@ public void setFirst_name(String value) {
 public String getFirst_name() {
     return this.first_name;
 }
+private PersonRole personRole;
+
+@ManyToOne(optional=false)
+public PersonRole getPersonRole() {
+   return this.personRole;
+}
+
+public void setPersonRole(PersonRole personRole) {
+   this.personRole = personRole;
+}
+
 private String last_name;
 
 public void setLast_name(String value) {
@@ -47,15 +58,4 @@ public void setPassword(String value) {
 public String getPassword() {
     return this.password;
 }
-   private PersonRole personRole;
-   
-   @OneToOne(mappedBy="person" , cascade={CascadeType.ALL}, optional=false)
-   public PersonRole getPersonRole() {
-      return this.personRole;
-   }
-   
-   public void setPersonRole(PersonRole personRole) {
-      this.personRole = personRole;
-   }
-   
-   }
+}
