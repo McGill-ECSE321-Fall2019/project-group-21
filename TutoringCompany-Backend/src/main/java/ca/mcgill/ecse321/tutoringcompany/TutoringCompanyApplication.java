@@ -16,7 +16,7 @@ public class TutoringCompanyApplication {
 
   @RequestMapping("/")
   public String greeting(){
-    return "Elias";
+    return "Hello World!";
   }
 
 }
