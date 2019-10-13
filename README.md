@@ -7,7 +7,7 @@
 | Elias Tamraz  | @eliastam  | Domain Modeling, Developer Operations |  |
 | George Kandalaft | @Georges1998 | System Requirements, Use Case Diagrams  |
 | Caleb Lim | @calebsh | Quality Assurance Lead |  |
-| Ryan Arndsten | @ryanarndsten | Float |
+| Ryan Arndsten | @ryanarndsten | Quality Assurance, System Requirements, Domain Modeling, Documentation |
 | Louca Dufault | @loucadufault | Sprint Planning, Documentation Lead |
 
 ## Project Reports
