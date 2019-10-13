@@ -1,9 +1,9 @@
-package model;
-
+package ca.mcgill.ecse321.tutoringcompany.model;
 import javax.persistence.Entity;
 import java.util.Set;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
+import javax.persistence.CascadeType;
 
 @Entity
 public class Student extends PersonRole{
@@ -29,26 +29,26 @@ public class Student extends PersonRole{
       this.group = groups;
    }
    
-   private Set<OneToOneSession> oneToOneSession;
+   private Set<IndividualSession> oneToOneSession;
    
    @OneToMany(mappedBy="student" )
-   public Set<OneToOneSession> getOneToOneSession() {
+   public Set<IndividualSession> getOneToOneSession() {
       return this.oneToOneSession;
    }
    
-   public void setOneToOneSession(Set<OneToOneSession> oneToOneSessions) {
+   public void setOneToOneSession(Set<IndividualSession> oneToOneSessions) {
       this.oneToOneSession = oneToOneSessions;
    }
    
-   private Set<Review> revew;
+   private Set<Review> review;
    
-   @OneToMany(mappedBy="student" )
-   public Set<Review> getRevew() {
-      return this.revew;
+   @OneToMany(mappedBy="student" , cascade={CascadeType.ALL})
+   public Set<Review> getReview() {
+      return this.review;
    }
    
-   public void setRevew(Set<Review> revews) {
-      this.revew = revews;
+   public void setReview(Set<Review> reviews) {
+      this.review = reviews;
    }
    
    }

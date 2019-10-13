@@ -1,4 +1,4 @@
-package model;
+package ca.mcgill.ecse321.tutoringcompany.model;
 
 import javax.persistence.Entity;
 

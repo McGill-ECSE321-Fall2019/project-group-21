@@ -1,5 +1,4 @@
-package model;
-
+package ca.mcgill.ecse321.tutoringcompany.model;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -27,17 +26,6 @@ public class GroupSession extends Session{
       this.group = group;
    }
    
-   private Tutor tutor;
-   
-   @ManyToOne(optional=false)
-   public Tutor getTutor() {
-      return this.tutor;
-   }
-   
-   public void setTutor(Tutor tutor) {
-      this.tutor = tutor;
-   }
-   
    private Product product;
    
    @ManyToOne(optional=false)
@@ -47,6 +35,17 @@ public class GroupSession extends Session{
    
    public void setProduct(Product product) {
       this.product = product;
+   }
+   
+   private Tutor tutor;
+   
+   @ManyToOne(optional=false)
+   public Tutor getTutor() {
+      return this.tutor;
+   }
+   
+   public void setTutor(Tutor tutor) {
+      this.tutor = tutor;
    }
    
    }

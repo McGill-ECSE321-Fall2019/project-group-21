@@ -1,5 +1,4 @@
-package model;
-
+package ca.mcgill.ecse321.tutoringcompany.model;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -22,17 +21,6 @@ public String getReview_text() {
    
    public void setStudent(Student student) {
       this.student = student;
-   }
-   
-   private Tutor tutor;
-   
-   @ManyToOne(optional=false)
-   public Tutor getTutor() {
-      return this.tutor;
-   }
-   
-   public void setTutor(Tutor tutor) {
-      this.tutor = tutor;
    }
    
    }
