@@ -1,4 +1,6 @@
-/*package TestPersistenceClasses;
+/*import static org.junit.Assert.assertEquals;
+
+package TestPersistenceClasses;
 
 import static org.junit.Assert.*;
 
@@ -64,11 +66,11 @@ public class TestStudent {
 			fail();
 		}
 		
-		assertEquals(firstName, p.getFirstName());
-		assertEquals(lastName, p.getLastName());
+		assertEquals(firstName, p.getFirst_name());
+		assertEquals(lastName, p.getLast_name());
 		assertEquals(phone, p.getPhone());
-		assertEquals(email, p.getFirstName());
-		assertEquals(password, p.getFirstName());
+		assertEquals(email, p.getEmail());
+		assertEquals(password, p.getPassword());
 		
 		StudentRepository.deleteAll();
 	}
