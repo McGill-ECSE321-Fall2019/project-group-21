@@ -1,9 +1,9 @@
-package model;
-
+package ca.mcgill.ecse321.tutoringcompany.model;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.util.Set;
 import javax.persistence.OneToMany;
+import javax.persistence.GeneratedValue;
 
 @Entity
 public class Product{
@@ -45,26 +45,34 @@ public void setPrice_group(int value) {
 public int getPrice_group() {
     return this.price_group;
 }
-   private Set<GroupSession> groupSession;
-   
-   @OneToMany(mappedBy="product" )
-   public Set<GroupSession> getGroupSession() {
-      return this.groupSession;
-   }
-   
-   public void setGroupSession(Set<GroupSession> groupSessions) {
-      this.groupSession = groupSessions;
-   }
-   
-   private Set<OneToOneSession> oneToOneSession;
-   
-   @OneToMany(mappedBy="product" )
-   public Set<OneToOneSession> getOneToOneSession() {
-      return this.oneToOneSession;
-   }
-   
-   public void setOneToOneSession(Set<OneToOneSession> oneToOneSessions) {
-      this.oneToOneSession = oneToOneSessions;
-   }
-   
-   }
+private Set<GroupSession> groupSession;
+
+@OneToMany(mappedBy="product" )
+public Set<GroupSession> getGroupSession() {
+   return this.groupSession;
+}
+
+public void setGroupSession(Set<GroupSession> groupSessions) {
+   this.groupSession = groupSessions;
+}
+
+private Set<IndividualSession> oneToOneSession;
+
+@OneToMany(mappedBy="product" )
+public Set<IndividualSession> getOneToOneSession() {
+   return this.oneToOneSession;
+}
+
+public void setOneToOneSession(Set<IndividualSession> oneToOneSessions) {
+   this.oneToOneSession = oneToOneSessions;
+}
+
+private int id;
+
+public void setId(int value) {
+    this.id = value;
+}
+@GeneratedValue()public int getId() {
+    return this.id;
+}
+}

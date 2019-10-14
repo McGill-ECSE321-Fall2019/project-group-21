@@ -1,5 +1,4 @@
-package model;
-
+package ca.mcgill.ecse321.tutoringcompany.model;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.util.Set;

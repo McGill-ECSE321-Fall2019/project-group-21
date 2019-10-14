@@ -1,9 +1,9 @@
-package model;
+package ca.mcgill.ecse321.tutoringcompany.model;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class OneToOneSession extends Session{
+public class IndividualSession extends Session{
    private IndividualRoom individualRoom;
    
    @ManyToOne(optional=false)
@@ -26,17 +26,6 @@ public class OneToOneSession extends Session{
       this.student = student;
    }
    
-   private Tutor tutor;
-   
-   @ManyToOne(optional=false)
-   public Tutor getTutor() {
-      return this.tutor;
-   }
-   
-   public void setTutor(Tutor tutor) {
-      this.tutor = tutor;
-   }
-   
    private Product product;
    
    @ManyToOne(optional=false)
@@ -46,6 +35,17 @@ public class OneToOneSession extends Session{
    
    public void setProduct(Product product) {
       this.product = product;
+   }
+   
+   private Tutor tutor;
+   
+   @ManyToOne(optional=false)
+   public Tutor getTutor() {
+      return this.tutor;
+   }
+   
+   public void setTutor(Tutor tutor) {
+      this.tutor = tutor;
    }
    
    }
