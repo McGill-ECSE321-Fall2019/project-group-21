@@ -19,11 +19,11 @@ A multi-tier software solution to satisfy  those requirements, implement the sys
 
 | Name  | Team Role  | Efforts (hours) |
 | ----- | ---------- | :-------------: |
-| Elias Tamraz | Domain Modeling, Developer Operations |  |
-| George Kandalaft | System Requirements, Use Case Diagrams|
-| Caleb Lim | Quality Assurance Lead, Test Suite Developper  |  |
-| Ryan Arndtsen | Supporting Quality Assurance, Use Case Specifications |
-| Louca Dufault | Sprint Planning, Documentation Lead, Domain Modeling |
+| Elias Tamraz | Domain Modeling, Developer Operations | 28.5 |
+| George Kandalaft | System Requirements, Use Case Diagrams| 24.5 |
+| Caleb Lim | Quality Assurance Lead, Test Suite Developper  | 20 |
+| Ryan Arndtsen | Supporting Quality Assurance, Use Case Specifications | 20 |
+| Louca Dufault | Sprint Planning, Documentation Lead, Domain Modeling | 22.5 |
 
 ### Sprint 1 Documents
 
