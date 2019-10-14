@@ -1,4 +1,4 @@
-# project-group-21
+# ECSE321 Project Group 21
 
 ## Project Overview
 
@@ -25,6 +25,6 @@ A multi-tier software solution to satisfy  those requirements, implement the sys
 | Ryan Arndtsen | Supporting Quality Assurance, Use Case Specifications |
 | Louca Dufault | Sprint Planning, Documentation Lead, Domain Modeling |
 
-## Project Reports
+### Sprint 1 Documents
 
 [Project Report 1](https://github.com/McGill-ECSE321-Fall2019/project-group-21/wiki/Project-Report-1)
