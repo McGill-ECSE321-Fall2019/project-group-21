@@ -14,16 +14,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import ca.mcgill.ecse321.tutoringcompany.dao.StudentRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.ManagerRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TestStudent {
+public class TestManager {
 	
 	@Test
-	public void testCreateStudent() {
-		assertEquals(0, service.getAllStudents().size());
+	public void testCreateManager() {
+		assertEquals(0, service.getAllManagers().size());
 		
 		String firstName = "fName";
 		String lastName = "lName";
@@ -32,22 +32,22 @@ public class TestStudent {
 		String password = "password";
 		
 		try {
-			service.createStudent(firstName, lastName, phone, email, password);
+			service.createManager(firstName, lastName, phone, email, password);
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
 		
-		List<Student> allStudents = toList(StudentRepository.findAll());
+		List<Manager> allManagers = toList(ManagerRepository.findAll());
 		
-		assertEquals(1, allStudents.size());
-		assertEquals(email, allStudents.get(0).getEmail());
+		assertEquals(1, allManagers.size());
+		assertEquals(email, allManagers.get(0).getEmail());
 		
-		StudentRepository.deleteAll();
+		ManagerRepository.deleteAll();
 	}
 	
 	@Test
-	public void testReadStudent() {
-		assertEquals(0, service.getAllStudents().size());
+	public void testReadManager() {
+		assertEquals(0, service.getAllManagers().size());
 		
 		String firstName = "fName";
 		String lastName = "lName";
@@ -55,11 +55,11 @@ public class TestStudent {
 		String email = "email";
 		String password = "password";
 		
-		service.createStudent(firstName, lastName, phone, email, password);
+		service.createManager(firstName, lastName, phone, email, password);
 		
 		try {
-			Student s = service.getStudent(email);
-			Person p = service.getStudent(email);
+			Manager m = service.getManager(email);
+			Person p = service.getManager(email);
 		} catch (IllegalArgumentException e){
 			fail();
 		}
@@ -70,7 +70,7 @@ public class TestStudent {
 		assertEquals(email, p.getFirstName());
 		assertEquals(password, p.getFirstName());
 		
-		StudentRepository.deleteAll();
+		ManagerRepository.deleteAll();
 	}
 
 }
