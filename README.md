@@ -9,9 +9,9 @@ A multi-tier software solution to satisfy  those requirements, implement the sys
 
 | Name  | GitHub Username | Major | Year |
 | ----- | --------------- | ----- | :--: |
-| Elias Tamraz  | @eliastam  |  | U2 |
-| George Kandalaft | @Georges1998 | | U2  |
-| Caleb Lim | @calebsh |  | U2 |
+| Elias Tamraz  | @eliastam  | Software Engineering | U2 |
+| George Kandalaft | @Georges1998 | Software Engineering | U2 |
+| Caleb Lim | @calebsh | Software Engineering | U2 |
 | Ryan Arndtsen | @ryanarndtsen | Software Engineering | U2 |
 | Louca Dufault | @loucadufault | Software Engineering | U2 |
 
