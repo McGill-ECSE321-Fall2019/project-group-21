@@ -35,17 +35,17 @@ public class TutoringCompanyApplicationTests {
 	
 	@Test
 	public void testCreatePerson() {
-	studentRepository.deleteAll();
+		//studentRepository.deleteAll();
 	assertEquals(0, service.getAllStudents().size());
-	String name = "eliasso";
+	String name = "Oscar";
 	try {
-	service.createStudent(name,"k", "bob", "oj", "ijm");
+	service.createStudent(name,"k", "klk", "oj", "ijm");
 	} catch (IllegalArgumentException e) {
 	// Check that no error occurred
 	fail();
 	}
 	List<Student> allPersons = service.getAllStudents();
-	assertEquals(3, allPersons.size());
+	assertEquals(1, allPersons.size());
 	assertEquals(name, allPersons.get(0).getFirst_name());
 	}
 	

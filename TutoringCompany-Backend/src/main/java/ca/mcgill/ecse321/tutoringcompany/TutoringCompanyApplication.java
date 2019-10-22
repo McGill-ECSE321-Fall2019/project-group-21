@@ -23,8 +23,8 @@ public class TutoringCompanyApplication {
   }
 
   @RequestMapping("/")
-  public Student greeting(){
-	   return service.getstudent("eliasso");
+  public List<Student> greeting(){
+    return service.getAllStudents();
   }
 
 }
