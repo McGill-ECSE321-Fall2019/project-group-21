@@ -1,8 +1,9 @@
 package ca.mcgill.ecse321.tutoringcompany.model;
 import javax.persistence.Entity;
 import java.sql.Date;
-import javax.persistence.ManyToOne;
+import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class TimeBlock{
@@ -30,45 +31,35 @@ public void setStart_time(float value) {
 public float getStart_time() {
     return this.start_time;
 }
-private GroupRoom groupRoom;
-
-@ManyToOne(optional=false)
-public GroupRoom getGroupRoom() {
-   return this.groupRoom;
-}
-
-public void setGroupRoom(GroupRoom groupRoom) {
-   this.groupRoom = groupRoom;
-}
-
-private IndividualRoom individualRoom;
-
-@ManyToOne(optional=false)
-public IndividualRoom getIndividualRoom() {
-   return this.individualRoom;
-}
-
-public void setIndividualRoom(IndividualRoom individualRoom) {
-   this.individualRoom = individualRoom;
-}
-
-private Tutor tutor;
-
-@ManyToOne(optional=false)
-public Tutor getTutor() {
-   return this.tutor;
-}
-
-public void setTutor(Tutor tutor) {
-   this.tutor = tutor;
-}
-
 private int id;
 
 public void setId(int value) {
     this.id = value;
 }
+@Id
 @GeneratedValue()public int getId() {
     return this.id;
 }
-}
+   private Tutor tutor1;
+   
+   @ManyToOne(optional=false)
+   public Tutor getTutor1() {
+      return this.tutor1;
+   }
+   
+   public void setTutor1(Tutor tutor1) {
+      this.tutor1 = tutor1;
+   }
+   
+   private Room room;
+   
+   @ManyToOne(optional=false)
+   public Room getRoom() {
+      return this.room;
+   }
+   
+   public void setRoom(Room room) {
+      this.room = room;
+   }
+   
+   }

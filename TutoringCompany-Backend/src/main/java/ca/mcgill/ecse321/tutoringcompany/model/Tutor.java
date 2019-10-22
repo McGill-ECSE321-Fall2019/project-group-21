@@ -1,33 +1,56 @@
 package ca.mcgill.ecse321.tutoringcompany.model;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Set;
-import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Tutor extends PersonRole{
-   private Set<Product> product;
-   
-   @OneToMany(mappedBy="tutor" )
-   public Set<Product> getProduct() {
-      return this.product;
-   }
-   
-   public void setProduct(Set<Product> products) {
-      this.product = products;
-   }
-   
-   private boolean is_approved;
+public class Tutor{
+   private String first_name;
 
-public void setIs_approved(boolean value) {
-    this.is_approved = value;
+public void setFirst_name(String value) {
+    this.first_name = value;
 }
-public boolean isIs_approved() {
-    return this.is_approved;
+public String getFirst_name() {
+    return this.first_name;
+}
+private String last_name;
+
+public void setLast_name(String value) {
+    this.last_name = value;
+}
+public String getLast_name() {
+    return this.last_name;
+}
+private String email;
+
+public void setEmail(String value) {
+    this.email = value;
+}
+@Id
+public String getEmail() {
+    return this.email;
+}
+private String phone_number;
+
+public void setPhone_number(String value) {
+    this.phone_number = value;
+}
+public String getPhone_number() {
+    return this.phone_number;
+}
+private String password;
+
+public void setPassword(String value) {
+    this.password = value;
+}
+public String getPassword() {
+    return this.password;
 }
    private Set<Review> review;
    
-   @OneToMany(mappedBy="tutor" , cascade={CascadeType.ALL})
+   @OneToMany(mappedBy="tutor1" , cascade={CascadeType.ALL})
    public Set<Review> getReview() {
       return this.review;
    }
@@ -36,37 +59,37 @@ public boolean isIs_approved() {
       this.review = reviews;
    }
    
-   private Set<TimeBlock> availability;
+   private Set<Offering> offering;
    
    @OneToMany(mappedBy="tutor" )
-   public Set<TimeBlock> getAvailability() {
-      return this.availability;
+   public Set<Offering> getOffering() {
+      return this.offering;
    }
    
-   public void setAvailability(Set<TimeBlock> availabilitys) {
-      this.availability = availabilitys;
+   public void setOffering(Set<Offering> offerings) {
+      this.offering = offerings;
    }
    
-   private Set<IndividualSession> individualSession;
+   private Set<TimeBlock> timeBlock;
+   
+   @OneToMany(mappedBy="tutor1" )
+   public Set<TimeBlock> getTimeBlock() {
+      return this.timeBlock;
+   }
+   
+   public void setTimeBlock(Set<TimeBlock> timeBlocks) {
+      this.timeBlock = timeBlocks;
+   }
+   
+   private Set<Session> session;
    
    @OneToMany(mappedBy="tutor" )
-   public Set<IndividualSession> getIndividualSession() {
-      return this.individualSession;
+   public Set<Session> getSession() {
+      return this.session;
    }
    
-   public void setIndividualSession(Set<IndividualSession> individualSessions) {
-      this.individualSession = individualSessions;
-   }
-   
-   private Set<GroupSession> groupSession;
-   
-   @OneToMany(mappedBy="tutor" )
-   public Set<GroupSession> getGroupSession() {
-      return this.groupSession;
-   }
-   
-   public void setGroupSession(Set<GroupSession> groupSessions) {
-      this.groupSession = groupSessions;
+   public void setSession(Set<Session> sessions) {
+      this.session = sessions;
    }
    
    }

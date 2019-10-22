@@ -1,7 +1,8 @@
 package ca.mcgill.ecse321.tutoringcompany.model;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Review{
@@ -13,36 +14,15 @@ public void setBody(String value) {
 public String getBody() {
     return this.body;
 }
-private Tutor tutor;
-
-@ManyToOne(optional=false)
-public Tutor getTutor() {
-   return this.tutor;
-}
-
-public void setTutor(Tutor tutor) {
-   this.tutor = tutor;
-}
-
 private int id;
 
 public void setId(int value) {
     this.id = value;
 }
+@Id
 @GeneratedValue()public int getId() {
     return this.id;
 }
-private Student student;
-
-@ManyToOne(optional=false)
-public Student getStudent() {
-   return this.student;
-}
-
-public void setStudent(Student student) {
-   this.student = student;
-}
-
 private int stars;
 
 public void setStars(int value) {
@@ -51,4 +31,26 @@ public void setStars(int value) {
 public int getStars() {
     return this.stars;
 }
-}
+   private Student student;
+   
+   @ManyToOne(optional=false)
+   public Student getStudent() {
+      return this.student;
+   }
+   
+   public void setStudent(Student student) {
+      this.student = student;
+   }
+   
+   private Tutor tutor1;
+   
+   @ManyToOne(optional=false)
+   public Tutor getTutor1() {
+      return this.tutor1;
+   }
+   
+   public void setTutor1(Tutor tutor1) {
+      this.tutor1 = tutor1;
+   }
+   
+   }
