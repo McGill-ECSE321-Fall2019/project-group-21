@@ -29,14 +29,14 @@ public class TutoringCompanyApplicationTests {
 	@After
 	public void clearDatabase() {
 	// Fisrt, we clear registrations to avoid exceptions due to inconsistencies
-	//studentRepository.deleteAll();
+	studentRepository.deleteAll();
 	
 	}
 	
 	@Test
 	public void testCreatePerson() {
-	//studentRepository.deleteAll();
-	//assertEquals(0, service.getAllStudents().size());
+	studentRepository.deleteAll();
+	assertEquals(0, service.getAllStudents().size());
 	String name = "eliasso";
 	try {
 	service.createStudent(name,"k", "bob", "oj", "ijm");
@@ -45,8 +45,8 @@ public class TutoringCompanyApplicationTests {
 	fail();
 	}
 	List<Student> allPersons = service.getAllStudents();
-	//assertEquals(3, allPersons.size());
-	//assertEquals(name, allPersons.get(0).getFirst_name());
+	assertEquals(3, allPersons.size());
+	assertEquals(name, allPersons.get(0).getFirst_name());
 	}
 	
 	int y=0;
