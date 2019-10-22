@@ -26,20 +26,20 @@ public class TutoringCompanyApplicationTests {
 	@Autowired
 	private StudentRepository studentRepository;
 
-	@After
-	public void clearDatabase() {
-	// Fisrt, we clear registrations to avoid exceptions due to inconsistencies
-	studentRepository.deleteAll();
-	
-	}
-	
+//	@After
+//	public void clearDatabase() {
+//	// Fisrt, we clear registrations to avoid exceptions due to inconsistencies
+//	studentRepository.deleteAll();
+//	
+//	}
+//	
 	@Test
 	public void testCreatePerson() {
 		//studentRepository.deleteAll();
 	assertEquals(0, service.getAllStudents().size());
 	String name = "Oscar";
 	try {
-	service.createStudent(name,"k", "klk", "oj", "ijm");
+	service.createStudent(name,"hi", "kifak", "shu", "elakhbar");
 	} catch (IllegalArgumentException e) {
 	// Check that no error occurred
 	fail();
