@@ -8,8 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.web.bind.annotation.RestController;
 
+import ca.mcgill.ecse321.tutoringcompany.model.Manager;
 import ca.mcgill.ecse321.tutoringcompany.model.Student;
-import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyService;
+import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
+import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
+import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentService;
+import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTutorService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,15 +21,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @SpringBootApplication
 public class TutoringCompanyApplication {
 	@Autowired
-	private TutoringCompanyService service;
+	private TutoringCompanyStudentService StudentService;
+	@Autowired
+	private TutoringCompanyTutorService TutorService;
+	@Autowired
+	private TutoringCompanyManagerService ManagerService;
+	
   public static void main(String[] args) {
     SpringApplication.run(TutoringCompanyApplication.class, args);
   }
 
   @RequestMapping("/")
   public List<Student> greeting(){
-    return service.getAllStudents();
+    return StudentService.getAllStudents();
   }
+  @RequestMapping("/t")
+  public List<Tutor> tutors(){
+    return TutorService.getAllTutors();
+  }
+  @RequestMapping("/m")
+  public List<Manager> managers(){
+    return ManagerService.getAllManagers();
+  }
+
+
 
 }
 
