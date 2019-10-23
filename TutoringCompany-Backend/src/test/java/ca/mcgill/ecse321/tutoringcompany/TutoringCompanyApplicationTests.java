@@ -94,6 +94,7 @@ public class TutoringCompanyApplicationTests {
 	@Test
 	public void testCreatStudent(){
 		StudentService.createStudent("george", "kandalaft", "ELias@gmail.com", "4389883384", "123456");
+
 	}
 	
 //	public RoomType roomType;
