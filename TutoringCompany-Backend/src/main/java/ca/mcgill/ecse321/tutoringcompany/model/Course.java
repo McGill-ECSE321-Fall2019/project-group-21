@@ -23,14 +23,14 @@ public void setSubject(Subject value) {
 public Subject getSubject() {
     return this.subject;
 }
-private String course_id;
+private String courseid;
 
-public void setCourse_id(String value) {
-    this.course_id = value;
+public void setCourseid(String value) {
+    this.courseid = value;
 }
 @Id
-public String getCourse_id() {
-    return this.course_id;
+public String getCourseid() {
+    return this.courseid;
 }
    private Set<Offering> offering;
    
