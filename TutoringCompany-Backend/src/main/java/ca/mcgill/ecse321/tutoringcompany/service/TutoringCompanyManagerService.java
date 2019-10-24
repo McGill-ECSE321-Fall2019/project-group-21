@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import ca.mcgill.ecse321.tutoringcompany.dao.ManagerRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.Manager;
+import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 
 /**
  * 
@@ -159,6 +160,7 @@ public class TutoringCompanyManagerService {
     public List<Manager> getAllManagers() {
     return toList(managerRepository.findAll());
     }
+    
     private <T> List<T> toList(Iterable<T> iterable){
     	List<T> resultList = new ArrayList<T>();
     	for (T t : iterable) {
@@ -206,4 +208,17 @@ public class TutoringCompanyManagerService {
     	    }
     	    return false;
     	  }
+    
+//    
+//   public List<Manager> find() {
+//	   
+//    	List <Manager> all = getAllManagers();
+//    	List<Manager> results = new ArrayList<Manager>();
+//    	
+//    	for (Manager m : all) {
+//        	results.add(m);
+//        	}
+//    	
+//	    return results;
+//	    }
 }

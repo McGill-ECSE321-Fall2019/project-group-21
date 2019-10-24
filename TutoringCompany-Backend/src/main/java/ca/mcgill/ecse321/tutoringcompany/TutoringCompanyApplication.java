@@ -36,8 +36,8 @@ public class TutoringCompanyApplication {
   }
 
   @RequestMapping("/")
-  public List<Student> greeting(){
-    return StudentService.getAllStudents();
+  public String greeting(){
+    return "hello world!";
   }
   @RequestMapping("/t")
   public List<Tutor> tutors(){

@@ -29,8 +29,8 @@ public class TutoringCompanyApplicationTests {
 /**
  * @Autowiring services
  */
-//	@Autowired
-//	private TutoringCompanyTutorService TutorService;
+	@Autowired
+	private TutoringCompanyTutorService TutorService;
 	@Autowired
 	private TutoringCompanyStudentService StudentService;
 //	@Autowired
@@ -42,34 +42,34 @@ public class TutoringCompanyApplicationTests {
  */
 	@Autowired
 	private StudentRepository studentRepository;
-//	@Autowired
-//	private TutorRepository tutorRepository;
+	@Autowired
+	private TutorRepository tutorRepository;
 //	@Autowired
 //	private ManagerRepository managerRepository;
 //	@Autowired
 //	private RoomRepository roomRepository;
 	
-@After
-	public void clearDatabase() {
-		// Fisrt, we clear registrations to avoid exceptions due to inconsistencies
-		studentRepository.deleteAll();
-		
-		}
-	@Test
-	public void testCreateStudent() {
-	studentRepository.deleteAll();
-	assertEquals(0, StudentService.getAllStudents().size());
-	String name = "elias";
-	try {
-		StudentService.createStudent(name,"k", "eliasi@gmail.com", "oj", "ijm");
-	} catch (IllegalArgumentException e) {
-	// Check that no error occurred
-	fail();
-	}
-	List<Student> allStudents = StudentService.getAllStudents();
-	assertEquals(1, allStudents.size());
-  assertEquals(name, allStudents.get(0).getFirst_name());
-	}
+//@After
+//	public void clearDatabase() {
+//		// Fisrt, we clear registrations to avoid exceptions due to inconsistencies
+//		studentRepository.deleteAll();
+//		
+//		}
+//	@Test
+//	public void testCreateStudent() {
+//	studentRepository.deleteAll();
+//	assertEquals(0, StudentService.getAllStudents().size());
+//	String name = "elias";
+//	try {
+//		StudentService.createStudent(name,"k", "eliasi@gmail.com", "oj", "ijm");
+//	} catch (IllegalArgumentException e) {
+//	// Check that no error occurred
+//	fail();
+//	}
+//	List<Student> allStudents = StudentService.getAllStudents();
+//	assertEquals(1, allStudents.size());
+//  assertEquals(name, allStudents.get(0).getFirst_name());
+//	}
 	
 //@Test
 //public void testDeleteStudent() {
@@ -106,4 +106,8 @@ public class TutoringCompanyApplicationTests {
 //		RoomService. (RoomType.INDIVIDUAL_ROOM);
 	
 //	}
+	@Test 
+	public void lk() {
+		TutorService.deleteTutor("john@gmail.com");
+	}
 }

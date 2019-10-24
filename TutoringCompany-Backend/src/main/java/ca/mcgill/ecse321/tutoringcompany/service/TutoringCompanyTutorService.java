@@ -138,6 +138,15 @@ public class TutoringCompanyTutorService {
 	    Tutor tutor = tutorRepository.findByEmail(email);
 	    return tutor;
 	    }
+//	    public List<Tutor> getAllVerifiedTutors() {
+//	    	List<Tutor> verifiedTutors = new ArrayList<Tutor>();
+//	    	for (int i = 0; i < getAllTutors().size(); i++) {
+//	    		if (getAllTutors().get(i).isVerified() ==true) {
+//	    			verifiedTutors.add(getAllTutors().get(i));
+//	    		}
+//	    	}
+//		    return verifiedTutors;
+//		    }
 	    /**
 	     * this method returns a list of all the tutors in the tutor repository
 	     * @return list of all tutors
@@ -198,7 +207,11 @@ public class TutoringCompanyTutorService {
 	        	    }
 	        	    return false;
 	        	  }
-
+/*------------- other methods*************/
+//	        
+//	        public void verifyTutor(String email) {
+//	        	getTutor(email).setVerified(true);;
+//	        }
 	   
 
 }
