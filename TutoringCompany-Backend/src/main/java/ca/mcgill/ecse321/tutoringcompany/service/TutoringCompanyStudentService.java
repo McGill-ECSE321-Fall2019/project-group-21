@@ -8,11 +8,8 @@ import javax.persistence.EntityExistsException;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import ca.mcgill.ecse321.tutoringcompany.dao.StudentRepository;
-import ca.mcgill.ecse321.tutoringcompany.dao.TutorRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.Student;
-import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 /**
  * 
  * @author Elias Tamraz

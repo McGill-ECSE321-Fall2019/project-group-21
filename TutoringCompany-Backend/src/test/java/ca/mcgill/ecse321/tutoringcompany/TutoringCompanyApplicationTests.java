@@ -1,26 +1,21 @@
 package ca.mcgill.ecse321.tutoringcompany;
 
 import static org.junit.Assert.assertEquals;
-import ca.mcgill.ecse321.tutoringcompany.model.RoomType;
 import static org.junit.Assert.fail;
-
 import java.util.List;
-
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import ca.mcgill.ecse321.tutoringcompany.dao.ManagerRepository;
-//import ca.mcgill.ecse321.tutoringcompany.dao.RoomRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.RoomRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.StudentRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.TutorRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.Student;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
-//import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
+import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTutorService;
 /**
@@ -34,42 +29,47 @@ public class TutoringCompanyApplicationTests {
 /**
  * @Autowiring services
  */
-	@Autowired
-	private TutoringCompanyTutorService TutorService;
+//	@Autowired
+//	private TutoringCompanyTutorService TutorService;
 	@Autowired
 	private TutoringCompanyStudentService StudentService;
-	@Autowired
-	private TutoringCompanyManagerService ManagerService;
+//	@Autowired
+//	private TutoringCompanyManagerService ManagerService;
 	//@Autowired
-//	private TutoringCompanyRoomService RoomService;
+	//private TutoringCompanyRoomService RoomService;
 /**
  * @Autowiring repos
  */
 	@Autowired
 	private StudentRepository studentRepository;
-	@Autowired
-	private TutorRepository tutorRepository;
-	@Autowired
-	private ManagerRepository managerRepository;
-	@Autowired
-	//private RoomRepository roomRepository;
+//	@Autowired
+//	private TutorRepository tutorRepository;
+//	@Autowired
+//	private ManagerRepository managerRepository;
+//	@Autowired
+//	private RoomRepository roomRepository;
 	
-
-	
-//	@Test
-//	public void testCreateStudent() {
-//	//assertEquals(0, StudentService.getAllStudents().size());
-//	String name = "elias";
-//	try {
-//		StudentService.createStudent(name,"k", "eliasi@gmail.com", "oj", "ijm");
-//	} catch (IllegalArgumentException e) {
-//	// Check that no error occurred
-//	fail();
-//	}
-//	List<Student> allPersons = StudentService.getAllStudents();
-//	assertEquals(1, allPersons.size());
-//  assertEquals(name, allPersons.get(0).getFirst_name());
-//	}
+@After
+	public void clearDatabase() {
+		// Fisrt, we clear registrations to avoid exceptions due to inconsistencies
+		studentRepository.deleteAll();
+		
+		}
+	@Test
+	public void testCreateStudent() {
+	studentRepository.deleteAll();
+	assertEquals(0, StudentService.getAllStudents().size());
+	String name = "elias";
+	try {
+		StudentService.createStudent(name,"k", "eliasi@gmail.com", "oj", "ijm");
+	} catch (IllegalArgumentException e) {
+	// Check that no error occurred
+	fail();
+	}
+	List<Student> allStudents = StudentService.getAllStudents();
+	assertEquals(1, allStudents.size());
+  assertEquals(name, allStudents.get(0).getFirst_name());
+	}
 	
 //@Test
 //public void testDeleteStudent() {
@@ -91,11 +91,15 @@ public class TutoringCompanyApplicationTests {
 //	public void testCreatManager(){
 //		ManagerService.createManager("george", "kandalaft", "george@gmail.com", "4389883384", "123456");
 //	}
-	@Test
-	public void testCreatStudent(){
-		StudentService.createStudent("george", "kandalaft", "ELias@gmail.com", "4389883384", "123456");
-	}
-	
+//	@Test
+//	public void testCreatStudent(){
+//		StudentService.createStudent("george", "kandalaft", "ELias@gmail.com", "4389883384", "123456");
+//	}
+//	
+//@Test
+//public void testCreatRoom() {
+//	RoomService.createRoom(156, RoomType.INDIVIDUAL_ROOM);
+//}
 //	public RoomType roomType;
 //	@Test
 //	public void testCreatRoom() {

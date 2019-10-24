@@ -9,9 +9,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.tutoringcompany.model.Manager;
+import ca.mcgill.ecse321.tutoringcompany.model.Room;
 import ca.mcgill.ecse321.tutoringcompany.model.Student;
 import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
+import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTutorService;
 
@@ -26,6 +28,8 @@ public class TutoringCompanyApplication {
 	private TutoringCompanyTutorService TutorService;
 	@Autowired
 	private TutoringCompanyManagerService ManagerService;
+	@Autowired
+	private TutoringCompanyRoomService RoomService;
 	
   public static void main(String[] args) {
     SpringApplication.run(TutoringCompanyApplication.class, args);
@@ -43,6 +47,11 @@ public class TutoringCompanyApplication {
   public List<Manager> managers(){
     return ManagerService.getAllManagers();
   }
+  @RequestMapping("/room")
+  public List<Room> rooms(){
+    return RoomService.getAllRooms();
+  }
+
 
 
 
