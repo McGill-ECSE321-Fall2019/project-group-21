@@ -29,7 +29,7 @@ A multi-tier software solution to satisfy  those requirements, implement the sys
 
 [Project Report 1](https://github.com/McGill-ECSE321-Fall2019/project-group-21/wiki/Project-Report-1)
 
-### Deliverable 2
+## Deliverable 2
 
 | Name | Team Role | Efforts (hours) |
 | -----| --------- | :-------------: |
@@ -38,3 +38,7 @@ A multi-tier software solution to satisfy  those requirements, implement the sys
 | Caleb Lim | | |
 | Ryan Arndtsen | Documentation Lead,  | |
 | Louca Dufault | | |
+
+### Sprint 2 Documents
+
+[Project Report 2](https://github.com/McGill-ECSE321-Fall2019/project-group-21/wiki/Project-Report-2)
