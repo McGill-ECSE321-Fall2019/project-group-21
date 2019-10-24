@@ -209,16 +209,18 @@ public class TutoringCompanyManagerService {
     	    return false;
     	  }
     
-//    
-//   public List<Manager> find() {
-//	   
-//    	List <Manager> all = getAllManagers();
-//    	List<Manager> results = new ArrayList<Manager>();
-//    	
-//    	for (Manager m : all) {
-//        	results.add(m);
-//        	}
-//    	
-//	    return results;
-//	    }
+    
+   public ArrayList<Manager> find() {
+	   
+    	List <Manager> all = getAllManagers();
+    	ArrayList<Manager> results = new ArrayList<Manager>();
+    	
+    	for (Manager m : all) {
+    		if(m.getFirst_name().equalsIgnoreCase("elias")) {
+    			results.add(m);
+    		}
+        
+        	}
+	    return results;
+	    }
 }

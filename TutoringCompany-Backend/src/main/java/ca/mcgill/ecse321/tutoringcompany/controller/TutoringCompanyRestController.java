@@ -125,9 +125,9 @@ public class TutoringCompanyRestController {
 		    throws IllegalArgumentException {
 		 managerService.updateManagerLastName(Email, LastName);
 }	
-//	@PostMapping(value = { "/Elias", "/Elias/" })
-//	public void updateManagerLastName(@RequestParam(name = "firstName") String FirstName)
-//		    throws IllegalArgumentException {
-//		 managerService.find();
-//}	
+	@PostMapping(value = { "/Elias", "/Elias/" })
+	public void updateManagerLastName(@RequestParam(name = "firstName") String FirstName)
+		    throws IllegalArgumentException {
+		 managerService.find();
+}	
 }

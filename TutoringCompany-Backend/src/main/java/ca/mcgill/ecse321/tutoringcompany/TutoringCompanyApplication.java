@@ -51,7 +51,10 @@ public class TutoringCompanyApplication {
   public List<Room> rooms(){
     return RoomService.getAllRooms();
   }
-
+  @RequestMapping("/man")
+  public List<Manager> man(){
+    return ManagerService.find();
+  }
 
 
 
