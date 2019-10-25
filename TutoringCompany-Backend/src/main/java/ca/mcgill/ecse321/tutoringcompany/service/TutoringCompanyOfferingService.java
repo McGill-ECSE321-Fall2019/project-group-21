@@ -57,10 +57,10 @@ public class TutoringCompanyOfferingService {
 	 */
 
 	@Transactional
-	public List<Offering> getOfferingByTutor(Tutor tutor) {
+	public List<Offering> getOfferingByTutor(Tutor tutor) { //should be called getOfferings
 		List<Offering> offeringsByTutor = new ArrayList<>();
-		for (Offering ot : OfferingRepository.findOfferingByTutor(tutor)) {
-			offeringsByTutor.add(ot);
+		for (Offering offering : OfferingRepository.findOfferingByTutor(tutor)) {
+			offeringsByTutor.add(offering);
 		}
 		return offeringsByTutor;
 	}
@@ -75,9 +75,29 @@ public class TutoringCompanyOfferingService {
 	public List<Offering> getAllOfferings() {
 		return (List<Offering>) OfferingRepository.findAll();
 	}
-
+	
+	
 	/**
-	 * Get a offering for a tutor in a specific course.
+	 * Get a offering for a tutor in a specific course by id.
+	 * 
+	 * @param id
+	 * 
+	 * @exception NullPointerException if {@code offering} is null
+	 * 
+	 * @return offering
+	 */
+
+	@Transactional
+	public Offering getSpecificOffering(int id) {
+		Offering offering = OfferingRepository.findById(id);
+		if (offering == null) {
+			throw new NullPointerException("No such Offering.");
+		}
+		return offering;
+	}
+	
+	/**
+	 * Get a offering for a tutor in a specific course by tutor and course.
 	 * 
 	 * @param tutor
 	 * @param course
@@ -89,41 +109,37 @@ public class TutoringCompanyOfferingService {
 
 	@Transactional
 	public Offering getSpecificOffering(Tutor tutor, Course course) {
-		Offering sto = null;
-		List<Offering> offeringsByTutor = getOfferingByTutor(tutor);
-		for (Offering so : offeringsByTutor) {
-			if (so.getCourse().equals(course) || so.getTutor().equals(tutor)) {
-				sto = so;
+		Offering offering = null;
+		//List<Offering> offeringsByTutor = getOfferingByTutor(tutor);
+		for (Offering offeringByTutor : getOfferingByTutor(tutor)) {
+			if (offeringByTutor.getCourse().equals(course)) {// || offeringByTutor.getTutor().equals(tutor)) {
+				offering = offeringByTutor;
+				break;
 			}
-			if (sto == null) {
-
-				throw new NullPointerException("No such Offering.");
-			}
-
 		}
-		return sto;
+		if (offering == null) {
+			throw new NullPointerException("No such Offering.");
+		}
+		return offering;
 	}
 
 	/**
-	 * delete offering with the specific id
+	 * Delete offering with the specific id
 	 * 
 	 * @param id of the offering
+	 * 
+	 * @exception NullPointerException if {@code offering} is null
 	 * 
 	 */
 
 	@Transactional
-	public void deleteOffering(int ofID) {
-		Offering offering = OfferingRepository.findById(ofID);
-		if (offering == null) {
-			throw new NullPointerException("No such Offering.");
-		}
-		OfferingRepository.deleteById(ofID);
+	public void deleteOffering(int id) {
+		getSpecificOffering(id); //throw exception if offering DNE
+		OfferingRepository.deleteById(id);
 	}
 
 	/**
-	 * delete offering with a specific course for a specific tutor.
-	 * 
-	 * @param id     of the offering
+	 * Delete offering with a specific course for a specific tutor.
 	 * 
 	 * @param tutor
 	 * @param course
@@ -134,20 +150,20 @@ public class TutoringCompanyOfferingService {
 
 	@Transactional
 	public void deleteOffering(Tutor tutor, Course course) {
-		Offering sto = null;
-		List<Offering> offeringsByTutor = getOfferingByTutor(tutor);
-		for (Offering so : offeringsByTutor) {
-			if (so.getCourse().equals(course) || so.getTutor().equals(tutor)) {
-				sto = so;
-			}
-			if (sto == null) {
-
-				throw new NullPointerException("No such Offering.");
-			} else {
-				int ofID = sto.getId();
-				OfferingRepository.deleteById(ofID);
-			}
-
-		}
+		Offering offering = getSpecificOffering(tutor, course); //exception falls through to caller
+		OfferingRepository.deleteById(offering.getId());
+//		Offering offering = null;
+//		//List<Offering> offeringsByTutor = getOfferingByTutor(tutor);
+//		for (Offering offeringByTutor : getOfferingByTutor(tutor)) {
+//			if (offeringByTutor.getCourse().equals(course)) { // || offeringByTutor.getTutor().equals(tutor)) {
+//				offering = offeringByTutor;
+//				break;
+//			}
+//		}
+//		if (offering == null) {
+//			throw new NullPointerException("No such Offering.");
+//		} else {
+//			OfferingRepository.deleteById(offering.getId());
+//		}
 	}
 }
