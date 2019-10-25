@@ -9,24 +9,15 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import ca.mcgill.ecse321.tutoringcompany.dao.CourseRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.ManagerRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.RoomRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.StudentRepository;
-//import ca.mcgill.ecse321.tutoringcompany.dao.TimeBlockRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.TutorRepository;
-import ca.mcgill.ecse321.tutoringcompany.dao.TutorTimeBlockRepository;
-import ca.mcgill.ecse321.tutoringcompany.model.RoomType;
 import ca.mcgill.ecse321.tutoringcompany.model.Student;
-import ca.mcgill.ecse321.tutoringcompany.model.Subject;
-import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyCourseService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentService;
-//import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTimeBlockService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTutorService;
-//import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTutorTimeBlockService;
 /**
  * 
  * @author Elias Tamraz
@@ -41,16 +32,11 @@ public class TutoringCompanyApplicationTests {
 	@Autowired
 	private TutoringCompanyTutorService TutorService;
 	@Autowired
-	private TutoringCompanyCourseService CourseService;
-	@Autowired
 	private TutoringCompanyStudentService StudentService;
-	@Autowired
-	private TutoringCompanyManagerService ManagerService;
-	@Autowired
-	private TutoringCompanyRoomService RoomService;
 //	@Autowired
-//	private TutoringCompanyTutorTimeBlockService TutorTimeBlockService;
-	
+//	private TutoringCompanyManagerService ManagerService;
+	//@Autowired
+	//private TutoringCompanyRoomService RoomService;
 /**
  * @Autowiring repos
  */
@@ -58,14 +44,10 @@ public class TutoringCompanyApplicationTests {
 	private StudentRepository studentRepository;
 	@Autowired
 	private TutorRepository tutorRepository;
-	@Autowired
-	private ManagerRepository managerRepository;
-	@Autowired
-	private RoomRepository roomRepository;
-	@Autowired
-	private CourseRepository courseRepository;
-	@Autowired
-	private TutorTimeBlockRepository tutorTimeBlockRepository;
+//	@Autowired
+//	private ManagerRepository managerRepository;
+//	@Autowired
+//	private RoomRepository roomRepository;
 	
 //@After
 //	public void clearDatabase() {
@@ -114,22 +96,18 @@ public class TutoringCompanyApplicationTests {
 //		StudentService.createStudent("george", "kandalaft", "ELias@gmail.com", "4389883384", "123456");
 //	}
 //	
-@Test
-public void testCreatRoom() {
-	RoomService.createRoom(156, RoomType.INDIVIDUAL_ROOM);
-}
-
+//@Test
+//public void testCreatRoom() {
+//	RoomService.createRoom(156, RoomType.INDIVIDUAL_ROOM);
+//}
 //	public RoomType roomType;
 //	@Test
 //	public void testCreatRoom() {
 //		RoomService. (RoomType.INDIVIDUAL_ROOM);
 	
 //	}
-//	@Test 
-//	public void lk() {
-//		TutorTimeBlockService.createTutorsTimeBlock(04, 11, 1997, 8, "al7bib");
-//	}
-	
-	
-	
+	@Test 
+	public void lk() {
+		TutorService.deleteTutor("john@gmail.com");
+	}
 }

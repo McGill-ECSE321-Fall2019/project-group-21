@@ -4,18 +4,16 @@ import java.util.Collections;
 import java.util.Set;
 
 import ca.mcgill.ecse321.tutoringcompany.model.Offering;
-
+import ca.mcgill.ecse321.tutoringcompany.model.Review;
 import ca.mcgill.ecse321.tutoringcompany.model.Session;
-
-import ca.mcgill.ecse321.tutoringcompany.model.TutorReviews;
-import ca.mcgill.ecse321.tutoringcompany.model.TutorTimeBlock;
+import ca.mcgill.ecse321.tutoringcompany.model.TimeBlock;
 
 public class TutorDto {
 
 	private String first_name, last_name, email, phone_number, password;
-	private Set<TutorReviews> reviews;
+	private Set<Review> reviews;
 	private Set<Offering> offerings;
-	private Set<TutorTimeBlock> timeBlocks;
+	private Set<TimeBlock> timeBlocks;
 	private Set<Session> sessions;
 	
 //	public TutorDto() {
@@ -28,11 +26,11 @@ public class TutorDto {
 	
 
 	@SuppressWarnings("unchecked")
-	public TutorDto(String first_name, String last_name, String email, String phone_number, String password, Set<Offering> offerings, Set<TutorTimeBlock> timeBlocks) {
+	public TutorDto(String first_name, String last_name, String email, String phone_number, String password, Set<Offering> offerings, Set<TimeBlock> timeBlocks) {
 		this(first_name, last_name, email, phone_number, password, Collections.EMPTY_SET, offerings, timeBlocks, Collections.EMPTY_SET);
 	}
 
-	public TutorDto(String first_name, String last_name, String email, String phone_number, String password, Set<TutorReviews> reviews, Set<Offering> offerings, Set<TutorTimeBlock> timeBlocks, Set<Session> sessions) { //should this be review or reviews
+	public TutorDto(String first_name, String last_name, String email, String phone_number, String password, Set<Review> reviews, Set<Offering> offerings, Set<TimeBlock> timeBlocks, Set<Session> sessions) { //should this be review or reviews
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.email = email;
@@ -84,11 +82,11 @@ public class TutorDto {
 		this.password = password;
 	}
 
-	public Set<TutorReviews> getReviews() {
+	public Set<Review> getReviews() {
 		return reviews;
 	}
 
-	public void setReviews(Set<TutorReviews> reviews) {
+	public void setReviews(Set<Review> reviews) {
 		this.reviews = reviews;
 	}
 
@@ -100,11 +98,11 @@ public class TutorDto {
 		this.offerings = offerings;
 	}
 
-	public Set<TutorTimeBlock> getTimeBlocks() {
+	public Set<TimeBlock> getTimeBlocks() {
 		return timeBlocks;
 	}
 
-	public void setTimeBlocks(Set<TutorTimeBlock> timeBlocks) {
+	public void setTimeBlocks(Set<TimeBlock> timeBlocks) {
 		this.timeBlocks = timeBlocks;
 	}
 

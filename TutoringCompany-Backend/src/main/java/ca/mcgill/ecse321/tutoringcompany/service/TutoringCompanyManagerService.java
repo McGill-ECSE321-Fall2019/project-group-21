@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ca.mcgill.ecse321.tutoringcompany.dao.ManagerRepository;
-import ca.mcgill.ecse321.tutoringcompany.dao.TutorRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.Manager;
 import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 
@@ -25,10 +24,6 @@ public class TutoringCompanyManagerService {
 
     @Autowired
      ManagerRepository managerRepository;
-    @Autowired
-    TutorRepository tutorRepository;
-    @Autowired
-	TutoringCompanyTutorService tutorService;
    
     /*------- Creation methods -------*/
     /**
@@ -173,46 +168,6 @@ public class TutoringCompanyManagerService {
     	}
     	return resultList;
     	}
-     /*------- Other methods---------*/
-    
-    /**
-     * this method is used to verify a tutor by the manager 
-     * after doing the interview
-     * @param email: email of the tutor that will be verified
-     * @exception NullPointerException if tutor does not exist
-     */
-    public void verifyTutor(String email) {
-    	tutorService.getTutor(email).setVerified(true);;
-    }
-    /**
-     * this method returns all the verified tutors
-     * @return a list a verified tutors
-     */
-    public ArrayList<Tutor> getVerifiedTutors() {
- 	   
-    	List <Tutor> all = tutorService.getAllTutors();
-    	ArrayList<Tutor> result = new ArrayList<Tutor>();
-    	
-    	for (Tutor t : all) {
-    		if(t.isVerified()) {
-    			result.add(t);
-    		}
-        
-        	}
-	    return result;
-	    }
-    /**
-     * this method returns a tutor by giving his/her email
-     * @param email: email address of the tutor that will be returned
-     * @return tutor
-     * @exception NullPointerException if tutor does not exist
-     */   
-    @Transactional
-    public Tutor getTutor(String email) {
-    Tutor tutor = tutorRepository.findByEmail(email);
-    return tutor;
-    }
-
     
     /*------- Assert methods -------*/
 /**

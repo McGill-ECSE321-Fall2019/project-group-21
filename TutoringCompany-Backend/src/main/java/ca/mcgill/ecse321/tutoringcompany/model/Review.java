@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class TutorReviews{
+public class Review{
    private String body;
 
 public void setBody(String value) {
@@ -31,15 +31,26 @@ public void setStars(int value) {
 public int getStars() {
     return this.stars;
 }
-   private Tutor tutor;
+   private Student student;
    
    @ManyToOne(optional=false)
-   public Tutor getTutor() {
-      return this.tutor;
+   public Student getStudent() {
+      return this.student;
    }
    
-   public void setTutor(Tutor tutor) {
-      this.tutor = tutor;
+   public void setStudent(Student student) {
+      this.student = student;
+   }
+   
+   private Tutor tutor1;
+   
+   @ManyToOne(optional=false)
+   public Tutor getTutor1() {
+      return this.tutor1;
+   }
+   
+   public void setTutor1(Tutor tutor1) {
+      this.tutor1 = tutor1;
    }
    
    }

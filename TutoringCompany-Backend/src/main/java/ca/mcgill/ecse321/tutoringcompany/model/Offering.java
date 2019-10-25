@@ -3,6 +3,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.ManyToOne;
+import java.util.Set;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Offering{
@@ -31,6 +33,17 @@ public void setId(int value) {
 @GeneratedValue()public int getId() {
     return this.id;
 }
+   private Tutor tutor;
+   
+   @ManyToOne(optional=false)
+   public Tutor getTutor() {
+      return this.tutor;
+   }
+   
+   public void setTutor(Tutor tutor) {
+      this.tutor = tutor;
+   }
+   
    private Course course;
    
    @ManyToOne(optional=false)
@@ -42,15 +55,15 @@ public void setId(int value) {
       this.course = course;
    }
    
-   private Tutor tutor;
+   private Set<Session> session;
    
-   @ManyToOne(optional=false)
-   public Tutor getTutor() {
-      return this.tutor;
+   @OneToMany(mappedBy="offering" )
+   public Set<Session> getSession() {
+      return this.session;
    }
    
-   public void setTutor(Tutor tutor) {
-      this.tutor = tutor;
+   public void setSession(Set<Session> sessions) {
+      this.session = sessions;
    }
    
    }
