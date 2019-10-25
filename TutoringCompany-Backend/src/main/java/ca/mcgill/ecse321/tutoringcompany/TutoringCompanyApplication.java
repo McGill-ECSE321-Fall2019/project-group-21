@@ -7,13 +7,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.web.bind.annotation.RestController;
-
+import ca.mcgill.ecse321.tutoringcompany.model.Course;
 import ca.mcgill.ecse321.tutoringcompany.model.Manager;
 import ca.mcgill.ecse321.tutoringcompany.model.Room;
 import ca.mcgill.ecse321.tutoringcompany.model.Student;
 import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
+import ca.mcgill.ecse321.tutoringcompany.model.TutorTimeBlock;
+import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyCourseService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTutorService;
 
@@ -34,7 +36,11 @@ public class TutoringCompanyApplication {
   public static void main(String[] args) {
     SpringApplication.run(TutoringCompanyApplication.class, args);
   }
-
+  @Autowired
+	private TutoringCompanyCourseService CourseService;
+//	@Autowired
+//	private TutoringCompanyTutorTimeBlockService TutorTimeBlockService;
+//	
   @RequestMapping("/")
   public String greeting(){
     return "hello world!";
@@ -58,5 +64,20 @@ public class TutoringCompanyApplication {
 
 
 
+  
+  
+  @RequestMapping("/course")
+  public List<Course> course(){
+    return CourseService.getAllCourses();
+  }
+//  @RequestMapping("/tb")
+//  public List<TutorTimeBlock> tb(){
+//   return TutorTimeBlockService.getAllTimeBlocks();
+//   }
+//  
+//  @RequestMapping("/tt")
+//  public boolean tt(){
+//   return TutorTimeBlockService.isAvailable(04, 11, 1997, TutorService.getTutor("al7bib"), 8);
+ //  }
 }
 

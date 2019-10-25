@@ -1,10 +1,10 @@
 package ca.mcgill.ecse321.tutoringcompany.model;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class Student{
@@ -13,7 +13,6 @@ public class Student{
 public void setFirst_name(String value) {
     this.first_name = value;
 }
-
 public String getFirst_name() {
     return this.first_name;
 }
@@ -50,26 +49,15 @@ public void setPhone_number(String value) {
 public String getPhone_number() {
     return this.phone_number;
 }
-   private Set<Review> review;
+   private Set<StudentReviews> review;
    
    @OneToMany(mappedBy="student" , cascade={CascadeType.ALL})
-   public Set<Review> getReview() {
+   public Set<StudentReviews> getReview() {
       return this.review;
    }
    
-   public void setReview(Set<Review> reviews) {
+   public void setReview(Set<StudentReviews> reviews) {
       this.review = reviews;
-   }
-   
-   private Set<Session> session;
-   
-   @ManyToMany(mappedBy="student" )
-   public Set<Session> getSession() {
-      return this.session;
-   }
-   
-   public void setSession(Set<Session> sessions) {
-      this.session = sessions;
    }
    
    }

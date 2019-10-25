@@ -1,4 +1,5 @@
 package ca.mcgill.ecse321.tutoringcompany.model;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Set;
@@ -48,51 +49,7 @@ public void setPassword(String value) {
 public String getPassword() {
     return this.password;
 }
-private Set<Review> review;
-
-@OneToMany(mappedBy="tutor1" , cascade={CascadeType.ALL})
-public Set<Review> getReview() {
-   return this.review;
-}
-
-public void setReview(Set<Review> reviews) {
-   this.review = reviews;
-}
-
-private Set<Offering> offering;
-
-@OneToMany(mappedBy="tutor" )
-public Set<Offering> getOffering() {
-   return this.offering;
-}
-
-public void setOffering(Set<Offering> offerings) {
-   this.offering = offerings;
-}
-
-private Set<TimeBlock> timeBlock;
-
-@OneToMany(mappedBy="tutor1" )
-public Set<TimeBlock> getTimeBlock() {
-   return this.timeBlock;
-}
-
-public void setTimeBlock(Set<TimeBlock> timeBlocks) {
-   this.timeBlock = timeBlocks;
-}
-
-private Set<Session> session;
-
-@OneToMany(mappedBy="tutor" )
-public Set<Session> getSession() {
-   return this.session;
-}
-
-public void setSession(Set<Session> sessions) {
-   this.session = sessions;
-}
-
-private boolean verified=false;
+private boolean verified;
 
 public void setVerified(boolean value) {
     this.verified = value;
@@ -100,4 +57,15 @@ public void setVerified(boolean value) {
 public boolean isVerified() {
     return this.verified;
 }
-}
+   private Set<TutorReviews> review;
+   
+   @OneToMany(mappedBy="tutor" , cascade={CascadeType.ALL})
+   public Set<TutorReviews> getReview() {
+      return this.review;
+   }
+   
+   public void setReview(Set<TutorReviews> reviews) {
+      this.review = reviews;
+   }
+   
+   }
