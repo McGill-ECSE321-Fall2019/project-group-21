@@ -13,6 +13,7 @@ import ca.mcgill.ecse321.tutoringcompany.dao.ManagerRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.RoomRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.StudentRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.TutorRepository;
+import ca.mcgill.ecse321.tutoringcompany.model.RoomType;
 import ca.mcgill.ecse321.tutoringcompany.model.Student;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
@@ -35,8 +36,8 @@ public class TutoringCompanyApplicationTests {
 	private TutoringCompanyStudentService StudentService;
 //	@Autowired
 //	private TutoringCompanyManagerService ManagerService;
-	//@Autowired
-	//private TutoringCompanyRoomService RoomService;
+	@Autowired
+	private TutoringCompanyRoomService RoomService;
 /**
  * @Autowiring repos
  */
@@ -96,18 +97,18 @@ public class TutoringCompanyApplicationTests {
 //		StudentService.createStudent("george", "kandalaft", "ELias@gmail.com", "4389883384", "123456");
 //	}
 //	
-//@Test
-//public void testCreatRoom() {
-//	RoomService.createRoom(156, RoomType.INDIVIDUAL_ROOM);
-//}
+@Test
+public void testCreatRoom() {
+	RoomService.createRoom(156, RoomType.INDIVIDUAL_ROOM);
+}
 //	public RoomType roomType;
 //	@Test
 //	public void testCreatRoom() {
 //		RoomService. (RoomType.INDIVIDUAL_ROOM);
 	
 //	}
-	@Test 
-	public void lk() {
-		TutorService.deleteTutor("john@gmail.com");
-	}
+//	@Test 
+//	public void lk() {
+//		TutorService.deleteTutor("john@gmail.com");
+//	}
 }
