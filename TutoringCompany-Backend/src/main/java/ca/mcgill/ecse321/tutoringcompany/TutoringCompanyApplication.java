@@ -65,7 +65,7 @@ public class TutoringCompanyApplication {
   public List<Manager> man(){
     return ManagerService.find();
   }
-  @RequestMapping("/off")
+  @RequestMapping("/offering")
   public List<Offering> off(){
     return OfferingService.getAllOfferings();
   }

@@ -13,10 +13,14 @@ import ca.mcgill.ecse321.tutoringcompany.dao.ManagerRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.RoomRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.StudentRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.TutorRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.*;
+import ca.mcgill.ecse321.tutoringcompany.model.Course;
 import ca.mcgill.ecse321.tutoringcompany.model.RoomType;
 import ca.mcgill.ecse321.tutoringcompany.model.Student;
+import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
+import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyOfferingService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTutorService;
 /**
@@ -38,6 +42,8 @@ public class TutoringCompanyApplicationTests {
 //	private TutoringCompanyManagerService ManagerService;
 	@Autowired
 	private TutoringCompanyRoomService RoomService;
+	@Autowired
+	private TutoringCompanyOfferingService OfferingService;
 /**
  * @Autowiring repos
  */
@@ -45,6 +51,11 @@ public class TutoringCompanyApplicationTests {
 	private StudentRepository studentRepository;
 	@Autowired
 	private TutorRepository tutorRepository;
+	@Autowired
+	private OfferingRepository offeringRepository;
+	
+	@Autowired
+	private CourseRepository courseRepository;
 //	@Autowired
 //	private ManagerRepository managerRepository;
 //	@Autowired
@@ -81,7 +92,7 @@ public class TutoringCompanyApplicationTests {
 //	public void updateStudent() {
 //		StudentService.updateStudent("eliasi@gmail.com", "eliasso", "samo", "450", "thepass");
 //	}
-	
+//	
 //	@Test
 //	public void testCreateTutor() {
 //		TutorService.createTutor("John", "smith", "john@gmail.com", "450878", "123");
@@ -101,6 +112,25 @@ public class TutoringCompanyApplicationTests {
 public void testCreatRoom() {
 	RoomService.createRoom(156, RoomType.INDIVIDUAL_ROOM);
 }
+
+@Test
+public void testCreateOffering() {
+	Tutor tutor = new Tutor();
+	tutor.setEmail("George.kandalaft@gmail");
+	tutor.setFirst_name("George");
+	tutor.setLast_name("Kandlaft");
+	tutor.setPassword("george");
+	tutor.setPhone_number("5146993256");
+	tutorRepository.save(tutor);
+	
+	Course course = new Course();
+	course.setName("Math");
+	course.setCourse_id("41");
+	courseRepository.save(course);
+	
+	OfferingService.createOffering(14,20,course,tutor);
+}
+
 //	public RoomType roomType;
 //	@Test
 //	public void testCreatRoom() {
