@@ -17,4 +17,5 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public interface StudentRepository extends CrudRepository<Student, String> {
 
 	  Student findByEmail(String email);
+
 }

@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.tutoringcompany.dao.TutorRepository;
+import ca.mcgill.ecse321.tutoringcompany.model.Manager;
 import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 /**
  * 
@@ -208,10 +209,6 @@ public class TutoringCompanyTutorService {
 	        	    return false;
 	        	  }
 /*------------- other methods*************/
-//	        
-//	        public void verifyTutor(String email) {
-//	        	getTutor(email).setVerified(true);;
-//	        }
-	   
-
+	        
+	      
 }

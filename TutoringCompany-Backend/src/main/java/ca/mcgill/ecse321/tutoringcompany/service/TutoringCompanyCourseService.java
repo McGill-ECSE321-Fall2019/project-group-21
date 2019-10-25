@@ -1,42 +1,33 @@
 package ca.mcgill.ecse321.tutoringcompany.service;
-
 import java.util.ArrayList;
-
 import java.util.List;
-
+import java.util.Optional;
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import ca.mcgill.ecse321.tutoringcompany.dao.CourseRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.Course;
 import ca.mcgill.ecse321.tutoringcompany.model.Subject;
-
+@Service
 public class TutoringCompanyCourseService {
-	
 	@Autowired
     CourseRepository courseRepository;
-	
 	//create method
 	@Transactional
-	public Course createCourse(String name, Subject subject, String courseid) {
+	public Course createCourse(String name, Subject subject, String Course_id) {
 		Course course = new Course();
-		
+		course.setCourse_id(Course_id);
 		course.setName(name);
 		course.setSubject(subject);
-		course.setCourseid(courseid);
 		courseRepository.save(course);
 		return course;
 	}
-	
 	//read methods
 	@Transactional
-	public Course getCourse(String courseid) {
-		Course course = courseRepository.findByCourseid(courseid);
+	public Optional<Course> getCourse(String courseid) {
+		Optional<Course> course = courseRepository.findById(courseid);
 		return course;
 	}
-	
 	@Transactional
 	public List<Course> getAllCourses() {
 		return toList(courseRepository.findAll());
@@ -46,12 +37,12 @@ public class TutoringCompanyCourseService {
 	//update methods
 	@Transactional
 	public void updateName(String courseid, String newName) {
-		getCourse(courseid).setName(newName);
+		getCourse(courseid).get().setName(newName);
 	}
 	
 	@Transactional
 	public void updateSubject(String courseid, Subject newSubject) {
-		getCourse(courseid).setSubject(newSubject);
+		getCourse(courseid).get().setSubject(newSubject);
 	}
 	
 	//update methods combined:
@@ -62,7 +53,7 @@ public class TutoringCompanyCourseService {
 	//delete method
 	@Transactional
 	public void deleteCourse(String courseid) {
-		courseRepository.delete((getCourse(courseid)));
+		courseRepository.deleteById(courseid);
 	}
 	
 	//function for getAllCourses
@@ -74,3 +65,5 @@ public class TutoringCompanyCourseService {
     	return resultList;
     	}
 }
+
+
