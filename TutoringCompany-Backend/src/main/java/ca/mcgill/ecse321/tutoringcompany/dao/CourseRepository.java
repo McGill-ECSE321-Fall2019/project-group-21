@@ -8,5 +8,5 @@ import ca.mcgill.ecse321.tutoringcompany.model.Course;
 
 public interface CourseRepository extends CrudRepository<Course, String> {
 	
-	Course findByName(String name);
+	Optional<Course> findById(String id);
 }
