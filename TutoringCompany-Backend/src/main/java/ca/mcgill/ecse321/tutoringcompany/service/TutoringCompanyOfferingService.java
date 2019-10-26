@@ -18,6 +18,7 @@ import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 /**
  * 
  * @author George Kandalaft
+ * @author Louca Dufault
  *
  */
 
@@ -28,16 +29,15 @@ public class TutoringCompanyOfferingService {
 	OfferingRepository OfferingRepository;
 
 	/**
-	 * Create Offering
+	 * Create Offering instance and return it
 	 *
-	 * @param individualPrice individual Price
-	 * @param grouplPrice     group price
-	 * @param course          The course offered
-	 * @param tutor           The tutor
-	 * 
-	 * @return The Offering.
+	 * @param individualPrice
+	 * @param grouplPrice
+	 * @param course offered
+	 * @param tutor
+	 *  
+	 * @return the created offering
 	 */
-
 	@Transactional
 	public Offering createOffering(int individualPrice, int grouplPrice, Course course, Tutor tutor) {
 
@@ -52,12 +52,13 @@ public class TutoringCompanyOfferingService {
 	}
 
 	/**
-	 * Get Offerings by Tutor
+	 * Get List of Offerings by Tutor
 	 * 
 	 * @param tutor
-	 * @return a list of Offerings of this tutor
+	 * @return List of Offerings offered by the given tutor
+	 * 
+	 * @exception NullPointerException if no offerings by that tutor exist
 	 */
-
 	@Transactional
 	public List<Offering> getOfferingByTutor(Tutor tutor) { //should be called getOfferings
 		List<Offering> offeringsByTutor = new ArrayList<>();
@@ -68,27 +69,24 @@ public class TutoringCompanyOfferingService {
 	}
 
 	/**
-	 * Get all Offerings in the system.
+	 * Get List of all Offerings in the system
 	 *
-	 * @return a list of Offerings representing all Offerings in the system.
+	 * @return List of Offerings representing all Offerings in the system
 	 */
-
 	@Transactional
 	public List<Offering> getAllOfferings() {
 		return (List<Offering>) OfferingRepository.findAll();
 	}
 	
-	
 	/**
-	 * Get a offering for a tutor in a specific course by id.
+	 * Get a specific offering by its id
 	 * 
 	 * @param id
 	 * 
-	 * @exception NullPointerException if {@code offering} is null
+	 * @exception NullPointerException if offering by that id does not exist
 	 * 
 	 * @return offering
 	 */
-
 	@Transactional
 	public Offering getSpecificOffering(int id) {
 		try {
@@ -100,16 +98,15 @@ public class TutoringCompanyOfferingService {
 	}
 	
 	/**
-	 * Get a offering for a tutor in a specific course by tutor and course.
+	 * Get a specific offering for a given course by a given tutor
 	 * 
 	 * @param tutor
 	 * @param course
 	 * 
-	 * @exception NullPointerException if {@code offering} is null
+	 * @exception NullPointerException if offering by that tutor and course does not exist
 	 * 
 	 * @return offering
 	 */
-
 	@Transactional
 	public Offering getSpecificOffering(Tutor tutor, Course course) {
 		Offering offering = null;
@@ -127,14 +124,13 @@ public class TutoringCompanyOfferingService {
 	}
 
 	/**
-	 * Delete offering with the specific id
+	 * Delete specific offering with the given id
 	 * 
 	 * @param id of the offering
 	 * 
-	 * @exception NullPointerException if {@code offering} is null
+	 * @exception NullPointerException if offering by that id does not exist
 	 * 
 	 */
-
 	@Transactional
 	public void deleteOffering(int id) {
 		getSpecificOffering(id); //throw exception if offering DNE
@@ -142,31 +138,30 @@ public class TutoringCompanyOfferingService {
 	}
 
 	/**
-	 * Delete offering with a specific course for a specific tutor.
+	 * Delete specific offering for a given course by a given tutor
 	 * 
 	 * @param tutor
 	 * @param course
 	 * 
-	 * @exception NullPointerException if {@code offering} is null
+	 * @exception NullPointerException if offering by that tutor and course does not exist
 	 * 
 	 */
-
 	@Transactional
 	public void deleteOffering(Tutor tutor, Course course) {
 		Offering offering = getSpecificOffering(tutor, course); //exception falls through to caller
-		OfferingRepository.deleteById(offering.getId());
-//		Offering offering = null;
-//		//List<Offering> offeringsByTutor = getOfferingByTutor(tutor);
-//		for (Offering offeringByTutor : getOfferingByTutor(tutor)) {
-//			if (offeringByTutor.getCourse().equals(course)) { // || offeringByTutor.getTutor().equals(tutor)) {
-//				offering = offeringByTutor;
-//				break;
-//			}
-//		}
-//		if (offering == null) {
-//			throw new NullPointerException("No such Offering.");
-//		} else {
-//			OfferingRepository.deleteById(offering.getId());
-//		}
+		deleteOffering(offering.getId());
+		//OfferingRepository.deleteById(offering.getId());
+	}
+	
+	/**
+	 * Delete all offerings by a given tutor
+	 * 
+	 * @param tutor
+	 */
+	@Transactional
+	public void deleteOfferings(Tutor tutor) {
+		for (Offering offering : getOfferingByTutor(tutor)) {
+			deleteOffering(offering.getId());
+		}
 	}
 }
