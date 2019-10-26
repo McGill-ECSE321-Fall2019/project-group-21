@@ -49,14 +49,14 @@ public class TutoringCompanyRestController {
 	 * @throws IllegalArgumentException
 	 */
 	@PostMapping(value = { "/Manager/Create", "/Manager/Create/" })
-	public ManagerDto createManager(@RequestParam(name = "firstName") String FirstName,
+	public Manager createManager(@RequestParam(name = "firstName") String FirstName,
 	@RequestParam(name = "lastName") String LastName,
 	@RequestParam(name = "email") String Email, 
 	@RequestParam(name = "phonenumber") String PhoneNumber, 
 	@RequestParam(name = "password") String Password)
     throws IllegalArgumentException {
 		Manager manager = managerService.createManager(FirstName, LastName, Email, PhoneNumber, Password);
-		return convertToDto(manager);
+		return manager;
 	}
 	/**
 	 * This method can only be executed by an existing Manager to delete a manager

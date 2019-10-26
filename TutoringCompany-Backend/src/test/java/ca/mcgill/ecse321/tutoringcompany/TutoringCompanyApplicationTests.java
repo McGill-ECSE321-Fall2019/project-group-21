@@ -15,6 +15,8 @@ import ca.mcgill.ecse321.tutoringcompany.dao.StudentRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.TutorRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.RoomType;
 import ca.mcgill.ecse321.tutoringcompany.model.Student;
+import ca.mcgill.ecse321.tutoringcompany.model.Subject;
+import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyCourseService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentService;
@@ -38,6 +40,9 @@ public class TutoringCompanyApplicationTests {
 //	private TutoringCompanyManagerService ManagerService;
 	@Autowired
 	private TutoringCompanyRoomService RoomService;
+	@Autowired
+	private TutoringCompanyCourseService CourseService;
+	
 /**
  * @Autowiring repos
  */
@@ -107,8 +112,8 @@ public void testCreatRoom() {
 //		RoomService. (RoomType.INDIVIDUAL_ROOM);
 	
 //	}
-//	@Test 
-//	public void lk() {
-//		TutorService.deleteTutor("john@gmail.com");
-//	}
+	@Test 
+	public void lk() {
+		CourseService.createCourse("kk", Subject.BIOLOGY, "kk");
+	}
 }
