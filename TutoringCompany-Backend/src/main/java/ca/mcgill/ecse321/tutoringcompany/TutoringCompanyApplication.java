@@ -12,8 +12,10 @@ import ca.mcgill.ecse321.tutoringcompany.model.Manager;
 import ca.mcgill.ecse321.tutoringcompany.model.Room;
 import ca.mcgill.ecse321.tutoringcompany.model.Student;
 import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
+import ca.mcgill.ecse321.tutoringcompany.model.Offering;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
+import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyOfferingService;
 import ca.mcgill.ecse321.tutoringcompany.model.TutorTimeBlock;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyCourseService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentService;
@@ -32,6 +34,8 @@ public class TutoringCompanyApplication {
 	private TutoringCompanyManagerService ManagerService;
 	@Autowired
 	private TutoringCompanyRoomService RoomService;
+	@Autowired
+	private TutoringCompanyOfferingService OfferingService;
 	
   public static void main(String[] args) {
     SpringApplication.run(TutoringCompanyApplication.class, args);
@@ -60,6 +64,10 @@ public class TutoringCompanyApplication {
   @RequestMapping("/man")
   public List<Manager> man(){
     return ManagerService.find();
+  }
+  @RequestMapping("/offering")
+  public List<Offering> off(){
+    return OfferingService.getAllOfferings();
   }
 
 
