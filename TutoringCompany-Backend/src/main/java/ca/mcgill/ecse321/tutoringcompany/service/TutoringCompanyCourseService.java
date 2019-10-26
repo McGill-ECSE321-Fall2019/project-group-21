@@ -28,11 +28,11 @@ public class TutoringCompanyCourseService {
     CourseRepository courseRepository;
 	
 	/**
-	 * Create Course instance and return it
+	 * Create Course instance with the given parameters, save it, and return it
 	 *
 	 * @param name
 	 * @param subject
-	 * @param course_id
+	 * @param course_id -- @PrimaryKey -- String that represents the course id
 	 *  
 	 * @return the created course
 	 */
@@ -42,7 +42,6 @@ public class TutoringCompanyCourseService {
 		course.setCourse_id(course_id);
 		course.setName(name);
 		course.setSubject(subject);
-		
 		courseRepository.save(course);
 		return course;
 	}
@@ -59,8 +58,7 @@ public class TutoringCompanyCourseService {
 	@Transactional
 	public Course getCourse(String course_id) {
 		try {
-			Course course = courseRepository.findById(course_id).get();
-			return course;
+			return courseRepository.findById(course_id).get();
 		} catch (NoSuchElementException e) {
 			throw new NullPointerException("No such Course.");
 		}
@@ -95,7 +93,7 @@ public class TutoringCompanyCourseService {
 	@Transactional
 	public List<Course> getCourses(Subject subject) {
 		List<Course> coursesBySubject = new ArrayList<>();
-		for (Course course : courseRepository.findCourseBySubject()) {
+		for (Course course : courseRepository.findCourseBySubject(subject)) {
 			coursesBySubject.add(course);			
 		}
 		return coursesBySubject;

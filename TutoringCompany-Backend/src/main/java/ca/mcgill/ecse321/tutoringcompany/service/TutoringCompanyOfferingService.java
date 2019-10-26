@@ -30,7 +30,7 @@ public class TutoringCompanyOfferingService {
 	OfferingRepository offeringRepository;
 
 	/**
-	 * Create Offering instance and return it
+	 * Create Offering instance with the given parameters, save it, and return it
 	 *
 	 * @param individualPrice
 	 * @param grouplPrice
@@ -41,14 +41,12 @@ public class TutoringCompanyOfferingService {
 	 */
 	@Transactional
 	public Offering createOffering(int individualPrice, int grouplPrice, Course course, Tutor tutor) {
-
 		Offering offering = new Offering();
 		offering.setPrice_individual(individualPrice);
 		offering.setPrice_group(individualPrice);
 		offering.setTutor(tutor);
 		offering.setCourse(course);
 		offeringRepository.save(offering);
-
 		return offering;
 	}
 
@@ -91,8 +89,7 @@ public class TutoringCompanyOfferingService {
 	@Transactional
 	public Offering getSpecificOffering(int id) { //should be called getOffering
 		try {
-			Offering offering = offeringRepository.findById(id).get();
-			return offering;
+			return offeringRepository.findById(id).get();
 		} catch (NoSuchElementException e) {
 			throw new NullPointerException("No such Offering.");
 		}
