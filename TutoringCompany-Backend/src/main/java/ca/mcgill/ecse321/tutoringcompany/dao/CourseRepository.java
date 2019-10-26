@@ -9,4 +9,6 @@ import ca.mcgill.ecse321.tutoringcompany.model.Course;
 public interface CourseRepository extends CrudRepository<Course, String> {
 	
 	Optional<Course> findById(String id);
+	
+	List<Course> findCourseBySubject();
 }

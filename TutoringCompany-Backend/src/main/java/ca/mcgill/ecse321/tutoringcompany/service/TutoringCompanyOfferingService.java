@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.tutoringcompany.dao.OfferingRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.Course;
 import ca.mcgill.ecse321.tutoringcompany.model.Offering;
+import ca.mcgill.ecse321.tutoringcompany.model.Subject;
 import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 
 /**
@@ -26,7 +27,7 @@ import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 public class TutoringCompanyOfferingService {
 
 	@Autowired
-	OfferingRepository OfferingRepository;
+	OfferingRepository offeringRepository;
 
 	/**
 	 * Create Offering instance and return it
@@ -46,13 +47,13 @@ public class TutoringCompanyOfferingService {
 		offering.setPrice_group(individualPrice);
 		offering.setTutor(tutor);
 		offering.setCourse(course);
-		OfferingRepository.save(offering);
+		offeringRepository.save(offering);
 
 		return offering;
 	}
 
 	/**
-	 * Get List of Offerings by Tutor
+	 * Read List of Offerings by Tutor
 	 * 
 	 * @param tutor
 	 * @return List of Offerings offered by the given tutor
@@ -62,35 +63,35 @@ public class TutoringCompanyOfferingService {
 	@Transactional
 	public List<Offering> getOfferingByTutor(Tutor tutor) { //should be called getOfferings
 		List<Offering> offeringsByTutor = new ArrayList<>();
-		for (Offering offering : OfferingRepository.findOfferingByTutor(tutor)) {
+		for (Offering offering : offeringRepository.findOfferingByTutor(tutor)) {
 			offeringsByTutor.add(offering);
 		}
 		return offeringsByTutor;
 	}
 
 	/**
-	 * Get List of all Offerings in the system
+	 * Read List of all Offerings in the system
 	 *
 	 * @return List of Offerings representing all Offerings in the system
 	 */
 	@Transactional
 	public List<Offering> getAllOfferings() {
-		return (List<Offering>) OfferingRepository.findAll();
+		return (List<Offering>) offeringRepository.findAll();
 	}
 	
 	/**
-	 * Get a specific offering by its id
+	 * Read a specific offering by its id
 	 * 
 	 * @param id
 	 * 
-	 * @exception NullPointerException if offering by that id does not exist
+	 * @exception NullPointerException if offering with that id does not exist
 	 * 
 	 * @return offering
 	 */
 	@Transactional
-	public Offering getSpecificOffering(int id) {
+	public Offering getSpecificOffering(int id) { //should be called getOffering
 		try {
-			Offering offering = OfferingRepository.findById(id).get();
+			Offering offering = offeringRepository.findById(id).get();
 			return offering;
 		} catch (NoSuchElementException e) {
 			throw new NullPointerException("No such Offering.");
@@ -98,43 +99,69 @@ public class TutoringCompanyOfferingService {
 	}
 	
 	/**
-	 * Get a specific offering for a given course by a given tutor
+	 * Read a specific offering for a given course by a given tutor
 	 * 
 	 * @param tutor
 	 * @param course
 	 * 
-	 * @exception NullPointerException if offering by that tutor and course does not exist
+	 * @exception NullPointerException if offering by that tutor and for that course does not exist
 	 * 
 	 * @return offering
 	 */
 	@Transactional
-	public Offering getSpecificOffering(Tutor tutor, Course course) {
-		Offering offering = null;
+	public Offering getSpecificOffering(Tutor tutor, Course course) { //should be called getOffering
 		//List<Offering> offeringsByTutor = getOfferingByTutor(tutor);
 		for (Offering offeringByTutor : getOfferingByTutor(tutor)) {
 			if (offeringByTutor.getCourse().equals(course)) {// || offeringByTutor.getTutor().equals(tutor)) {
-				offering = offeringByTutor;
-				break;
+				return offeringByTutor;
 			}
 		}
-		if (offering == null) {
-			throw new NullPointerException("No such Offering.");
-		}
-		return offering;
+		throw new NullPointerException("No such Offering.");
 	}
-
+	
 	/**
-	 * Delete specific offering with the given id
+	 * Update price_individual for the specific offering passed
 	 * 
-	 * @param id of the offering
+	 * @param id
+	 * @param price_individual
+	 */
+	@Transactional
+	public void updatePrice_individual(Offering offering, int price_individual) {
+		getSpecificOffering(offering.getId()).setPrice_individual(price_individual);
+	}
+	
+	/**
+	 * Update price_individual for the specific offering passed
 	 * 
-	 * @exception NullPointerException if offering by that id does not exist
+	 * @param id
+	 * @param price_group
+	 */
+	@Transactional
+	public void updatePrice_group(Offering offering, int price_group) {
+		getSpecificOffering(offering.getId()).setPrice_group(price_group);
+	}
+	
+	/**
+	 * Delete the specific offering passed
+	 * 
+	 * @param offering
+	 */
+	@Transactional
+	public void deleteOffering(Offering offering) {
+		offeringRepository.delete(offering);
+	}
+	
+	/**
+	 * Delete an offering specified by the given id
+	 * 
+	 * @param id of the offering to delete
+	 * 
+	 * @exception NullPointerException if offering with that id does not exist
 	 * 
 	 */
 	@Transactional
 	public void deleteOffering(int id) {
-		getSpecificOffering(id); //throw exception if offering DNE
-		OfferingRepository.deleteById(id);
+		offeringRepository.delete(getSpecificOffering(id)); //throw exception if offering DNE
 	}
 
 	/**
@@ -143,14 +170,12 @@ public class TutoringCompanyOfferingService {
 	 * @param tutor
 	 * @param course
 	 * 
-	 * @exception NullPointerException if offering by that tutor and course does not exist
+	 * @exception NullPointerException if offering by that tutor and that course does not exist
 	 * 
 	 */
 	@Transactional
 	public void deleteOffering(Tutor tutor, Course course) {
-		Offering offering = getSpecificOffering(tutor, course); //exception falls through to caller
-		deleteOffering(offering.getId());
-		//OfferingRepository.deleteById(offering.getId());
+		deleteOffering(getSpecificOffering(tutor, course));
 	}
 	
 	/**
@@ -161,7 +186,7 @@ public class TutoringCompanyOfferingService {
 	@Transactional
 	public void deleteOfferings(Tutor tutor) {
 		for (Offering offering : getOfferingByTutor(tutor)) {
-			deleteOffering(offering.getId());
+			deleteOffering(offering);
 		}
 	}
 }
