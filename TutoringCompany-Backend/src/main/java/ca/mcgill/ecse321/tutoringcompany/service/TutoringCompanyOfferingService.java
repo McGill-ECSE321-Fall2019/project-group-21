@@ -2,6 +2,8 @@ package ca.mcgill.ecse321.tutoringcompany.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -89,11 +91,12 @@ public class TutoringCompanyOfferingService {
 
 	@Transactional
 	public Offering getSpecificOffering(int id) {
-		Offering offering = OfferingRepository.findById(id);
-		if (offering == null) {
+		try {
+			Offering offering = OfferingRepository.findById(id).get();
+			return offering;
+		} catch (NoSuchElementException e) {
 			throw new NullPointerException("No such Offering.");
 		}
-		return offering;
 	}
 	
 	/**
