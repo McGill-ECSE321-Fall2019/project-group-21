@@ -22,6 +22,9 @@ import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
  * @author George Kandalaft
  * 
  */
+
+//TODO: NOT FINISHED just using to test the database.
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestSession {
