@@ -113,7 +113,7 @@ public class TutoringCompanySessionService {
 	 * 
 	 * @return the sessions
 	 */
-	public List<Session> getSessionsByTutor(Tutor tutor) {
+	public List<Session> getTutorsSession(Tutor tutor) {
 		List<Session> sessionsByTutor = new ArrayList<>();
 		for (Session session : sessionRepository.findAll()) {
 			if (session.getTutor().equals(tutor)) {
@@ -133,7 +133,7 @@ public class TutoringCompanySessionService {
 	@Transactional
 	public void deleteSession(Tutor tutor, int startingHour) {
 		Session s = null;
-		List<Session> sessionsByTutor = getSessionsByTutor(tutor);
+		List<Session> sessionsByTutor = getTutorsSession(tutor);
 		for (Session session : sessionsByTutor) {
 			if (session.getStart_time().getHours() == startingHour) {
 				s = session;

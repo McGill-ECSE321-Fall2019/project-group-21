@@ -12,5 +12,5 @@ import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 public interface SessionRepository extends CrudRepository<Session, Integer> {
 	Optional<Session> findById(int id);
 	
-	List<Session> findSessionByTutor(Tutor tutor);
+
 }
