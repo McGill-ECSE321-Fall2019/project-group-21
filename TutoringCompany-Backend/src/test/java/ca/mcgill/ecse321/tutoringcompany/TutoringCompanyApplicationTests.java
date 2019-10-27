@@ -158,7 +158,8 @@ public void testCreateSession() {
 	
 
 	Tutor tutor = TutorService.getTutor("Tutorgeorge@gmail.com");
-
+	tutor.setVerified(true);
+	
 	Student studentc = StudentService.getstudent("StudentELias@gmail.com");
 	
 	Student studentf = StudentService.getstudent("StudentGeorge@gmail.com");
