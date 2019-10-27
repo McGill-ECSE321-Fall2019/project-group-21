@@ -4,13 +4,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import java.util.List;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import ca.mcgill.ecse321.tutoringcompany.dao.ManagerRepository;
-import ca.mcgill.ecse321.tutoringcompany.dao.RoomRepository;
+//import ca.mcgill.ecse321.tutoringcompany.dao.RoomRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.StudentRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.TutorRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.*;
@@ -21,10 +22,10 @@ import ca.mcgill.ecse321.tutoringcompany.model.Student;
 import ca.mcgill.ecse321.tutoringcompany.model.Subject;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyCourseService;
 
-import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
+import ca.mcgill.ecse321.tutoringcompany.model.*;
 
-import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
-import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
+import ca.mcgill.ecse321.tutoringcompany.service.*;
+//import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyOfferingService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTutorService;
@@ -45,13 +46,14 @@ public class TutoringCompanyApplicationTests {
 	private TutoringCompanyStudentService StudentService;
 //	@Autowired
 //	private TutoringCompanyManagerService ManagerService;
+//	@Autowired
+//	private TutoringCompanyRoomService RoomService;
 	@Autowired
-	private TutoringCompanyRoomService RoomService;
-	@Autowired
-
 	private TutoringCompanyCourseService CourseService;
 	
-
+	@Autowired
+	private TutoringCompanySessionService SessionService;
+	@Autowired
 	private TutoringCompanyOfferingService OfferingService;
 
 /**
@@ -66,6 +68,18 @@ public class TutoringCompanyApplicationTests {
 	
 	@Autowired
 	private CourseRepository courseRepository;
+	
+	@Autowired
+	private SessionRepository sessionRepository;
+	
+	@Autowired
+	private TutorReviewsRepository tutorReviewsRepository;
+	@Autowired
+	private RoomRepository roomRepository;
+	
+	@Autowired
+	private TutoringCompanyTutorReviewsService TutorReviewsService;
+	
 //	@Autowired
 //	private ManagerRepository managerRepository;
 //	@Autowired
@@ -110,35 +124,64 @@ public class TutoringCompanyApplicationTests {
 //	
 //
 //	@Test
-//	public void testCreatManager(){
-//		ManagerService.createManager("george", "kandalaft", "george@gmail.com", "4389883384", "123456");
+//	public void testCreatTutor(){
+//		TutorService.createTutor("george", "kandalaft", "george@gmail.com", "4389883384", "123456");
 //	}
 //	@Test
 //	public void testCreatStudent(){
 //		StudentService.createStudent("george", "kandalaft", "ELias@gmail.com", "4389883384", "123456");
 //	}
 //	
-@Test
-public void testCreatRoom() {
-	RoomService.createRoom(156, RoomType.INDIVIDUAL_ROOM);
-}
-
-@Test
-public void testCreateOffering() {
-	Tutor tutor = new Tutor();
-	tutor.setEmail("George.kandalaft@gmail");
-	tutor.setFirst_name("George");
-	tutor.setLast_name("Kandlaft");
-	tutor.setPassword("george");
-	tutor.setPhone_number("5146993256");
-	tutorRepository.save(tutor);
+//@Test
+//public void testCreatRoom() {
+//	RoomService.createRoom(156, RoomType.INDIVIDUAL_ROOM);
+//}
 	
+//@Test
+//public void ClearDataBase() {
+//	
+////	tutorRepository.deleteAll();
+////	studentRepository.deleteAll();
+////	roomRepository.deleteAll();
+////	courseRepository.deleteAll();
+////	offeringRepository.deleteAll();
+//	sessionRepository.deleteAll();
+//	
+////	TutorService.createTutor("george", "kandalaft", "Tutorgeorge@gmail.com", "4389883384", "123456");
+//	StudentService.createStudent("george", "kandalaft", "StudentELias@gmail.com", "4389883384", "123456");
+//	StudentService.createStudent("Student2", "kandalaft", "StudentGeorge@gmail.com", "4389883384", "123456");
+//
+//}
+	
+@Test
+public void testCreateSession() {
+	
+
+	Tutor tutor = TutorService.getTutor("Tutorgeorge@gmail.com");
+
+	Student studentc = StudentService.getstudent("StudentELias@gmail.com");
+	
+	Student studentf = StudentService.getstudent("StudentGeorge@gmail.com");
+	
+//	Student fd = StudentService.getstudent("StudentGeorge@gmail.com");
+	
+
+	
+	Room room = new Room();
 	Course course = new Course();
-	course.setName("Math");
-	course.setCourse_id("41");
+	course.setCourse_id("ECSE321George");
 	courseRepository.save(course);
 	
-	OfferingService.createOffering(14,20,course,tutor);
+	room.setNumber(1);
+	roomRepository.save(room);
+	
+	Offering offering = new Offering();
+	offering.setCourse(course);
+	offering.setTutor(tutor);
+	offeringRepository.save(offering);
+	
+	
+	SessionService.createSession(2020,10,13,14,00,15,00,room,tutor,offering,studentc,studentf);
 }
 
 //	public RoomType roomType;
@@ -147,8 +190,8 @@ public void testCreateOffering() {
 //		RoomService. (RoomType.INDIVIDUAL_ROOM);
 	
 //	}
-	@Test 
-	public void lk() {
-		CourseService.createCourse("kk", Subject.BIOLOGY, "kk");
-	}
+//	@Test 
+//	public void lk() {
+//		CourseService.createCourse("kokk", Subject.MATH, "fff");
+//	}
 }
