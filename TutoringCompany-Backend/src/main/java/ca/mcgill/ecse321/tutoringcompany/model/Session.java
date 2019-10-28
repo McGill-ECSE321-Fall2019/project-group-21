@@ -1,4 +1,5 @@
 package ca.mcgill.ecse321.tutoringcompany.model;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import java.sql.Date;
 import java.sql.Time;
@@ -75,7 +76,7 @@ public SessionType getSession_type() {
    
    private Offering offering;
    
-   @ManyToOne(optional=false)
+   @ManyToOne(optional=false, cascade=CascadeType.ALL)
    public Offering getOffering() {
       return this.offering;
    }

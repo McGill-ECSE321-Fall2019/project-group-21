@@ -11,7 +11,8 @@ import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 
 public interface OfferingRepository extends CrudRepository <Offering, Integer> {
 
-	Optional<Offering> findById(int id);
+	Optional<Offering> findById(int id); 
+	//Offering findById(int id);
 
 	List<Offering> findOfferingByTutor(Tutor tutor);
 

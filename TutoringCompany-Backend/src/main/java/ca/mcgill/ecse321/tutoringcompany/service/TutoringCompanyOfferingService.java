@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.tutoringcompany.dao.OfferingRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.Course;
 import ca.mcgill.ecse321.tutoringcompany.model.Offering;
-import ca.mcgill.ecse321.tutoringcompany.model.Subject;
 import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 
 /**
@@ -59,7 +58,7 @@ public class TutoringCompanyOfferingService {
 	 * @exception NullPointerException if no offerings by that tutor exist
 	 */
 	@Transactional
-	public List<Offering> getOfferingByTutor(Tutor tutor) { //should be called getOfferings
+	public List<Offering> getOfferings(Tutor tutor) { //should be called getOfferings
 		List<Offering> offeringsByTutor = new ArrayList<>();
 		for (Offering offering : offeringRepository.findOfferingByTutor(tutor)) {
 			offeringsByTutor.add(offering);
@@ -87,7 +86,7 @@ public class TutoringCompanyOfferingService {
 	 * @return offering
 	 */
 	@Transactional
-	public Offering getSpecificOffering(int id) { //should be called getOffering
+	public Offering getOffering(int id) { //should be called getOffering
 		try {
 			return offeringRepository.findById(id).get();
 		} catch (NoSuchElementException e) {
@@ -106,9 +105,8 @@ public class TutoringCompanyOfferingService {
 	 * @return offering
 	 */
 	@Transactional
-	public Offering getSpecificOffering(Tutor tutor, Course course) { //should be called getOffering
-		//List<Offering> offeringsByTutor = getOfferingByTutor(tutor);
-		for (Offering offeringByTutor : getOfferingByTutor(tutor)) {
+	public Offering getOffering(Tutor tutor, Course course) { //should be called getOffering
+		for (Offering offeringByTutor : getOfferings(tutor)) {
 			if (offeringByTutor.getCourse().equals(course)) {// || offeringByTutor.getTutor().equals(tutor)) {
 				return offeringByTutor;
 			}
@@ -124,7 +122,7 @@ public class TutoringCompanyOfferingService {
 	 */
 	@Transactional
 	public void updatePrice_individual(Offering offering, int price_individual) {
-		getSpecificOffering(offering.getId()).setPrice_individual(price_individual);
+		getOffering(offering.getId()).setPrice_individual(price_individual);
 	}
 	
 	/**
@@ -135,7 +133,7 @@ public class TutoringCompanyOfferingService {
 	 */
 	@Transactional
 	public void updatePrice_group(Offering offering, int price_group) {
-		getSpecificOffering(offering.getId()).setPrice_group(price_group);
+		getOffering(offering.getId()).setPrice_group(price_group);
 	}
 	
 	/**
@@ -158,7 +156,7 @@ public class TutoringCompanyOfferingService {
 	 */
 	@Transactional
 	public void deleteOffering(int id) {
-		offeringRepository.delete(getSpecificOffering(id)); //throw exception if offering DNE
+		deleteOffering(getOffering(id)); //throw exception if offering DNE
 	}
 
 	/**
@@ -172,7 +170,7 @@ public class TutoringCompanyOfferingService {
 	 */
 	@Transactional
 	public void deleteOffering(Tutor tutor, Course course) {
-		deleteOffering(getSpecificOffering(tutor, course));
+		deleteOffering(getOffering(tutor, course));
 	}
 	
 	/**
@@ -182,7 +180,7 @@ public class TutoringCompanyOfferingService {
 	 */
 	@Transactional
 	public void deleteOfferings(Tutor tutor) {
-		for (Offering offering : getOfferingByTutor(tutor)) {
+		for (Offering offering : getOfferings(tutor)) {
 			deleteOffering(offering);
 		}
 	}

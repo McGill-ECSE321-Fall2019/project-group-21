@@ -1,4 +1,5 @@
 package ca.mcgill.ecse321.tutoringcompany.model;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
@@ -44,7 +45,7 @@ public void setId(int value) {
    
    private Tutor tutor;
    
-   @ManyToOne(optional=false)
+   @ManyToOne(optional=false, cascade=CascadeType.ALL)
    public Tutor getTutor() {
       return this.tutor;
    }
