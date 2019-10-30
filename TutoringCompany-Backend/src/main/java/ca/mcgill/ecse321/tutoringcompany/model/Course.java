@@ -1,9 +1,6 @@
 package ca.mcgill.ecse321.tutoringcompany.model;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Set;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Course{
@@ -32,15 +29,4 @@ public void setCourse_id(String value) {
 public String getCourse_id() {
     return this.course_id;
 }
-   private Set<Offering> offering;
-   
-   @OneToMany(mappedBy="course" )
-   public Set<Offering> getOffering() {
-      return this.offering;
-   }
-   
-   public void setOffering(Set<Offering> offerings) {
-      this.offering = offerings;
-   }
-   
-   }
+}

@@ -51,16 +51,16 @@ public void setSession_type(SessionType value) {
 public SessionType getSession_type() {
     return this.session_type;
 }
-   private Room room;
-   
-   @ManyToOne(optional=false)
-   public Room getRoom() {
-      return this.room;
-   }
-   
-   public void setRoom(Room room) {
-      this.room = room;
-   }
+private Room room;
+
+@ManyToOne
+public Room getRoom() {
+   return this.room;
+}
+
+public void setRoom(Room room) {
+   this.room = room;
+}
    
    private Tutor tutor;
    
