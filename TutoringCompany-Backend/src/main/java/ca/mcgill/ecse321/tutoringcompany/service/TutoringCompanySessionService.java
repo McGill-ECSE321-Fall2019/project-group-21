@@ -62,13 +62,13 @@ public class TutoringCompanySessionService {
 
 		if (incorrectManagerDetails(year, month, day, startingHour, startingMinute, endingHour, endingMinute)) {
 
-			throw new InvalidParameterException("Your manager details are incomplete!");
+			throw new InvalidParameterException("Your session details are incomplete!");
 		}
-
-		if (!offering.getTutor().equals(tutor)) {
-			throw new NullPointerException("Tutor " + tutor.getLast_name()
-					+ "does not have this offering. Please check tutor" + offering.getTutor().getLast_name());
-		}
+//
+//		if (!offering.getTutor().equals(tutor)) {
+//			throw new NullPointerException("Tutor " + tutor.getLast_name()
+//					+ "does not have this offering. Please check tutor" + offering.getTutor().getLast_name());
+//		}
 
 		if (tutor.isVerified() == false) {
 			throw new InvalidParameterException("Tutor is not verfied yet");

@@ -97,6 +97,10 @@ public class TutoringCompanyApplication {
   public List<Student> st(){
    return StudentService.getAllStudents();
    }
+  @RequestMapping("/o")
+  public List<Offering> o(){
+   return OfferingService.getAllOfferings();
+  }
   
 //  @RequestMapping("/tt")
 //  public boolean tt(){
