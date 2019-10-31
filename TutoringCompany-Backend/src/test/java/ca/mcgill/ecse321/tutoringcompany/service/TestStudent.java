@@ -13,6 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import ca.mcgill.ecse321.tutoringcompany.dao.StudentRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.SessionRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.CourseRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.OfferingRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.Student;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentService;
 
@@ -30,11 +33,21 @@ public class TestStudent {
 
 	@Autowired
 	private StudentRepository studentRepository;
+	private CourseRepository courseRepository;
 	
-	@Before
-	public void clearDatabase() {
-		studentRepository.deleteAll();
-	}
+//	@Before
+//	public void clearDatabase() {
+//		studentRepository.deleteAll();
+//	}
+	
+//@Test
+//public void test() {
+//	try {
+//		courseRepository.deleteAll();
+//	} catch (IllegalArgumentException e) {
+//		fail();
+//	}
+//}
 	
 	/**
 	 * Create a student
