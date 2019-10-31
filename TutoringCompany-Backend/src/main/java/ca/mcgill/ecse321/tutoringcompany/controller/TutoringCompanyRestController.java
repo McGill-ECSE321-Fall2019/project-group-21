@@ -11,6 +11,7 @@ import javax.persistence.EntityExistsException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -851,6 +852,25 @@ public class TutoringCompanyRestController {
 		List<Session> result = SessionService.getPendingGroupSession();
 		return convertToSessionListDto(result);
 	}
+	
+	@RequestMapping(value = { "/Manager/get/allSessions", "/Manager/getAllSessions" })
+	public List<SessionDto> getAllSession() {
+		if (!ManagerLoggedin) {
+			throw new InvalidParameterException("you did not log in");
+		}
+		List<Session> result = SessionService.getAllSessions();
+		return convertToSessionListDto(result);
+	}
+
+	@RequestMapping(value = { "/Manager/get/Tutor/Sessions", "/Manager/getTutorSessions" })
+	public List<SessionDto> getTutorSession(@RequestParam(name = "tutorEmail") String tutorEmail) {
+		
+		if (!ManagerLoggedin) {
+			throw new InvalidParameterException("you did not log in");
+		}
+		List<Session> result = SessionService.getTutorSessions(tutorService.getTutor(tutorEmail));
+		return convertToSessionListDto(result);
+	}
 
 	/**
 	 * This methods allows the manager to delete a session by entering the
@@ -862,7 +882,7 @@ public class TutoringCompanyRestController {
 	 * @exception IllegalArgumentException  if the tutorEmail is not entered
 	 * @exception InvalidParameterException if the manager did not log in
 	 */
-	@PostMapping(value = { "/Manager/delete/Session", "/Manager/delete/session/" })
+	@DeleteMapping(value = { "/Manager/Delete/Session", "/Manager/delete/session/" })
 	public void deleteSession(@RequestParam(name = "sartingTime") int startingTime,
 			@RequestParam(name = "tutorEmail") String tutorEmail) throws IllegalArgumentException {
 		if (!ManagerLoggedin) {
@@ -872,6 +892,28 @@ public class TutoringCompanyRestController {
 		;
 	}
 
+	/**
+	 * This methods allows the manager to confirm a pending group session by entering the
+	 * tutorEmail and the startingTime and the room they want
+	 * 
+	 * @param tutorEmail
+	 * @param startingTime (only hour assuming there is no session that would last
+	 *                     for less than an hour.)
+	 * @exception IllegalArgumentException  if the tutorEmail is not entered
+	 * @exception InvalidParameterException if the manager did not log in
+	 */
+	@PostMapping(value = { "/Manager/confirm/session", "/Manager/Confirm/Session/" })
+	public String confirmSession(@RequestParam(name = "sartingTime") int startingTime,
+			@RequestParam(name = "tutorEmail") String tutorEmail, @RequestParam(name = "roomNumber") int roomNumber) throws IllegalArgumentException {
+		if (!ManagerLoggedin) {
+			throw new InvalidParameterException("you did not log in");
+		}
+		SessionService.ConfirmSession(tutorService.getTutor(tutorEmail), startingTime, RoomService.getRoom(roomNumber));
+		;
+		return "The Session has been confirmed";
+	}
+	
+	
 	/****************** Course Services Controllers *********************/
 
 	@PostMapping(value = { "/Manager/Create/Course", "/Manager/Create/Course/" })
@@ -907,7 +949,11 @@ public class TutoringCompanyRestController {
 		TutorReviews review = tutorReviewsService.createTutorReview(body, stars, email);
 		return review;
 	}
-
+	
+	/****************** Convert To methods Controllers *********************/
+	
+	//TODO : the rest of them.
+	
 	private StudentDto convertToDto(Student student) {
 		if (student == null) {
 			throw new IllegalArgumentException("There is no such Event!");

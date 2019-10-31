@@ -15,6 +15,7 @@ public class SessionDto {
 		this.date = date;
 		this.offeringDto = offeringDto;
 		this.students_Number = students_Number;
+		
 	}
 
 	public Time getStart_time() {

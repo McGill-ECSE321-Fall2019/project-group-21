@@ -26,7 +26,7 @@ import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyCourseService;
 
 import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 import ca.mcgill.ecse321.tutoringcompany.model.TutorReviews;
-import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
+import ca.mcgill.ecse321.tutoringcompany.service.*;
 //import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyOfferingService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentService;
@@ -73,6 +73,8 @@ public class TutoringCompanyApplicationTests {
 	private CourseRepository courseRepository;
 	@Autowired
 	private TutorReviewsRepository tutorReviewsRepository;
+	@Autowired
+	private SessionRepository sessionRepository;
 //	@Autowired
 //	private ManagerRepository managerRepository;
 //	@Autowired
@@ -84,6 +86,10 @@ public class TutoringCompanyApplicationTests {
 //		studentRepository.deleteAll();
 //		
 //		}
+//	@Test
+//	public void deleteAll() {
+//		sessionRepository.deleteAll();
+//	}
 //	@Test
 //	public void testCreateStudent() {
 //	studentRepository.deleteAll();

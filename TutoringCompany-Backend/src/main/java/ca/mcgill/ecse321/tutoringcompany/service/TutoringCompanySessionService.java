@@ -30,7 +30,6 @@ import ca.mcgill.ecse321.tutoringcompany.model.SessionType;
 @Service
 public class TutoringCompanySessionService {
 
-	
 	@Autowired
 	SessionRepository sessionRepository;
 
@@ -76,7 +75,7 @@ public class TutoringCompanySessionService {
 		}
 
 		Session session = new Session();
-		Date date = new Date(year-1900, month-1, day);
+		Date date = new Date(year - 1900, month - 1, day);
 
 		Time startingTime = new Time(startingHour, startingMinute, 00);
 		Time endingTime = new Time(endingHour, endingMinute, 00);
@@ -88,7 +87,7 @@ public class TutoringCompanySessionService {
 		session.setRoom(room);
 		session.setTutor(tutor);
 
-		if (students.size()==1) {
+		if (students.size() == 1) {
 			SessionType individual = SessionType.INDIVIDUAL_SESSION;
 			session.setSession_type(individual);
 
@@ -112,7 +111,7 @@ public class TutoringCompanySessionService {
 	 * 
 	 * @return the sessions
 	 */
-	public List<Session> getTutorsSession(Tutor tutor) {
+	public List<Session> getTutorSessions(Tutor tutor) {
 		List<Session> sessionsByTutor = new ArrayList<>();
 		for (Session session : sessionRepository.findAll()) {
 			if (session.getTutor().equals(tutor)) {
@@ -121,7 +120,7 @@ public class TutoringCompanySessionService {
 		}
 		return sessionsByTutor;
 	}
-	
+
 	/**
 	 * get all pending group sessions
 	 *
@@ -138,9 +137,9 @@ public class TutoringCompanySessionService {
 		}
 		return sessionsGroup;
 	}
-	
+
 	/**
-	 * Confirm a specific group Session 
+	 * Confirm a specific group Session
 	 * 
 	 * @param tutor
 	 * @param startingHour
@@ -150,21 +149,23 @@ public class TutoringCompanySessionService {
 	@Transactional
 	public void ConfirmSession(Tutor tutor, int startingHour, Room room) {
 		Session s = null;
-		List<Session> sessionsByTutor = getTutorsSession(tutor);
+		List<Session> sessionsByTutor = getTutorSessions(tutor);
 		for (Session session : sessionsByTutor) {
 			if (session.getStart_time().getHours() == startingHour) {
 				s = session;
 			}
-			if (s == null) {
-				throw new NullPointerException("such session doesn't exist");
-			}
-			if (!s.getRoom().equals(null)){
-				throw new NullPointerException("this session has already been approved");
-			}
-			s.setRoom(room);
 		}
-	}
+		if (s == null) {
+			throw new NullPointerException("such session doesn't exist");
+		}
+		if (!s.getSession_type().equals(SessionType.PENDING_SESSION)) {
+			throw new NullPointerException("this session has already been approved");
+		}
+		s.setRoom(room);
+		s.setSession_type(SessionType.GROUP_SESSION);
 
+	}
+//TODO: add month and day
 	/**
 	 * Delete the specific Session
 	 * 
@@ -175,16 +176,17 @@ public class TutoringCompanySessionService {
 	@Transactional
 	public void deleteSession(Tutor tutor, int startingHour) {
 		Session s = null;
-		List<Session> sessionsByTutor = getTutorsSession(tutor);
+		List<Session> sessionsByTutor = getTutorSessions(tutor);
 		for (Session session : sessionsByTutor) {
 			if (session.getStart_time().getHours() == startingHour) {
 				s = session;
 			}
-			if (s == null) {
-				throw new NullPointerException("such session doesn't exist");
-			}
-			sessionRepository.delete(s);
 		}
+		if (s == null) {
+			throw new NullPointerException("such session doesn't exist");
+		}
+		sessionRepository.delete(s);
+
 	}
 
 	@Transactional
