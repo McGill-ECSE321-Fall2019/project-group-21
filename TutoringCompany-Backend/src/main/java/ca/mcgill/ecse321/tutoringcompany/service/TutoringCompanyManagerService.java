@@ -201,6 +201,7 @@ public class TutoringCompanyManagerService {
     /*------- Assert methods -------*/
 /**
  * Ensures that no manager by the given email already exists or throws exception
+ * 
  * @param email: email address of manager
  * @exception EntityExistsException if manager already exists 
  */
@@ -211,6 +212,7 @@ public class TutoringCompanyManagerService {
     }
     /**
      * Ensures that manager by the given email already exists or throws exception
+     * 
      * @param : email address of manager
      * @exception NullPointerException if manager does not exist
      */
@@ -222,6 +224,7 @@ public class TutoringCompanyManagerService {
     
     /**
      * Ensures that manager info given is valid or throws exception
+     * 
      * @param first_name
      * @param last_name
      * @param Email

@@ -1,10 +1,12 @@
 package ca.mcgill.ecse321.tutoringcompany.service;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import javax.persistence.EntityExistsException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,22 +30,25 @@ public class TutoringCompanyOfferingService {
 
 	@Autowired
 	OfferingRepository offeringRepository;
-
+	
+	@Autowired
+	TutoringCompanyCourseService courseService;
 	/**
 	 * Create Offering instance with the given parameters, save it, and return it
 	 *
-	 * @param individualPrice
-	 * @param grouplPrice
+	 * @param price_individual
+	 * @param price_group
 	 * @param course offered
 	 * @param tutor
 	 *  
 	 * @return the created offering
 	 */
 	@Transactional
-	public Offering createOffering(int individualPrice, int grouplPrice, Course course, Tutor tutor) {
+	public Offering createOffering(int price_individual, int price_group, Course course, Tutor tutor) {
+		offeringValid(price_individual, price_group, course);
 		Offering offering = new Offering();
-		offering.setPrice_individual(individualPrice);
-		offering.setPrice_group(individualPrice);
+		offering.setPrice_individual(price_individual);
+		offering.setPrice_group(price_individual);
 		offering.setTutor(tutor);
 		offering.setCourse(course);
 		offeringRepository.save(offering);
@@ -88,11 +93,8 @@ public class TutoringCompanyOfferingService {
 	 */
 	@Transactional
 	public Offering getSpecificOffering(int id) { //should be called getOffering
-		try {
-			return offeringRepository.findById(id).get();
-		} catch (NoSuchElementException e) {
-			throw new NullPointerException("No such Offering.");
-		}
+		offeringExist(id);
+		return offeringRepository.findById(id).get();
 	}
 	
 	/**
@@ -186,4 +188,46 @@ public class TutoringCompanyOfferingService {
 //			deleteOffering(offering);
 //		}
 //	}
+
+	/**
+	 * Ensures that offering by the given id already exists or throws exception
+	 * 
+	 * @param id of offering
+	 * @exception EntityExistsException if offering already exists
+	 */
+	@Transactional
+    public void offeringUnique(int id) {
+      if (offeringRepository.existsById(id))
+        throw new EntityExistsException("offering Already Exists");
+    }
+    /**
+     * Ensures that offering by the given id already exists or throws exception
+     * 
+     * @param : id of offering
+     * @exception NullPointerException if offering does not exist
+     */
+    @Transactional
+    public void offeringExist(int id) {
+      if (offeringRepository.existsById(id)==false)
+        throw new NullPointerException("offering Does not Exist");
+    }
+    
+    /**
+     * Ensures that the offering info given is valid or throws exception
+     * 
+     * @param price_individual
+     * @param price_group
+     * @param course
+     * @exception InvalidParameterException if any of the given parameters are invalid (negative or zero price, or inexistent course)
+     */
+    private void offeringValid(int price_individual, int price_group, Course course) {
+    	try {
+    		courseService.courseExist(course.getCourse_id());
+    	} catch (NullPointerException e) {
+    		throw new InvalidParameterException("Your offering details are invalid (course DNE).");
+    	}
+ 	    if (price_individual <= 0 || price_group <= 0 ) {
+ 	      throw new InvalidParameterException("Your offering details are invalid.");
+ 	    }
+ }
 }
