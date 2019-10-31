@@ -70,7 +70,7 @@ public class TutoringCompanyRestController {
 		if (!managerRepository.existsById(ManagerEmail)) {
 			throw new NullPointerException("manager Does not Exist");
 		}
-		if (!managerService.getmanager(ManagerEmail).getPassword().contentEquals(ManagerPassword)) {
+		if (!managerService.getManager(ManagerEmail).getPassword().contentEquals(ManagerPassword)) {
 			throw new InvalidParameterException("Incorrect Password");
 		}
 		ManagerLoggedin = true;
@@ -267,7 +267,7 @@ public class TutoringCompanyRestController {
 		if (!managerRepository.existsById(ManagerEmail)) {
 			throw new NullPointerException("manager Does not Exist");
 		}
-		if (!managerService.getmanager(ManagerEmail).getPassword().contentEquals(ManagerPassword)) {
+		if (!managerService.getManager(ManagerEmail).getPassword().contentEquals(ManagerPassword)) {
 			throw new InvalidParameterException("Incorrect Password");
 		}
 		managerService.deleteManager(Email);
@@ -338,7 +338,7 @@ public class TutoringCompanyRestController {
 		if (!managerRepository.existsById(ManagerEmail)) {
 			throw new NullPointerException("manager Does not Exist");
 		}
-		if (!managerService.getmanager(ManagerEmail).getPassword().contentEquals(ManagerPassword)) {
+		if (!managerService.getManager(ManagerEmail).getPassword().contentEquals(ManagerPassword)) {
 			throw new InvalidParameterException("Incorrect Password");
 		}
 		managerService.updateManagerPassword(Email, Password);
@@ -378,7 +378,7 @@ public class TutoringCompanyRestController {
 		if (!managerRepository.existsById(ManagerEmail)) {
 			throw new NullPointerException("manager Does not Exist");
 		}
-		if (!managerService.getmanager(ManagerEmail).getPassword().contentEquals(ManagerPassword)) {
+		if (!managerService.getManager(ManagerEmail).getPassword().contentEquals(ManagerPassword)) {
 			throw new InvalidParameterException("Incorrect Password");
 		}
 		managerService.updateManagerFirstName(Email, FirstName);
@@ -427,10 +427,10 @@ public class TutoringCompanyRestController {
 		if (!managerRepository.existsById(ManagerEmail)) {
 			throw new NullPointerException("manager Does not Exist");
 		}
-		if (!managerService.getmanager(ManagerEmail).getPassword().contentEquals(ManagerPassword)) {
+		if (!managerService.getManager(ManagerEmail).getPassword().contentEquals(ManagerPassword)) {
 			throw new InvalidParameterException("Incorrect Password");
 		}
-		Manager manager = managerService.getmanager(email);
+		Manager manager = managerService.getManager(email);
 		return convertToDto(manager);
 	}
 
@@ -569,10 +569,10 @@ public class TutoringCompanyRestController {
 		if (!managerRepository.existsById(ManagerEmail)) {
 			throw new NullPointerException("manager Does not Exist");
 		}
-		if (!managerService.getmanager(ManagerEmail).getPassword().contentEquals(ManagerPassword)) {
+		if (!managerService.getManager(ManagerEmail).getPassword().contentEquals(ManagerPassword)) {
 			throw new InvalidParameterException("Incorrect Password");
 		}
-		return convertToTutorListDto(managerService.getVerifiedTutors());
+		return convertToTutorListDto(tutorService.getVerifiedTutors());
 
 	}
 
@@ -866,7 +866,7 @@ public class TutoringCompanyRestController {
 		if (!managerRepository.existsById(ManagerEmail)) {
 			throw new NullPointerException("manager Does not Exist");
 		}
-		if (!managerService.getmanager(ManagerEmail).getPassword().contentEquals(ManagerPassword)) {
+		if (!managerService.getManager(ManagerEmail).getPassword().contentEquals(ManagerPassword)) {
 			throw new InvalidParameterException("Incorrect Password");
 		}
 		Student student = StudentService.createStudent(FirstName, LastName, Email, PhoneNumber, Password);

@@ -42,10 +42,10 @@ public class TestSession {
 	@Autowired
 	private SessionRepository sessionRepository;
 	
-	@Before
-	public void clearDatabase() {
-		sessionRepository.deleteAll();
-	}
+//	@Before
+//	public void clearDatabase() {
+//		sessionRepository.deleteAll();
+//	}
 	
 	/**
 	 * Create a session

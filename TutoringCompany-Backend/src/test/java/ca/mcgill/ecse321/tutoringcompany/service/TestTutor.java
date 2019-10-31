@@ -32,10 +32,10 @@ public class TestTutor {
 	@Autowired
 	private TutorRepository tutorRepository;
 
-	@Before
-	public void clearDatabase() {
-		tutorRepository.deleteAll();
-	}
+//	@Before
+//	public void clearDatabase() {
+//		tutorRepository.deleteAll();
+//	}
 
 	/**
 	 * Create a tutor
