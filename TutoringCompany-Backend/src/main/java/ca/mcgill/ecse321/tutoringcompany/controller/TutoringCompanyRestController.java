@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.tutoringcompany.controller;
 
 import java.security.InvalidParameterException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.persistence.EntityExistsException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -775,63 +777,145 @@ public class TutoringCompanyRestController {
 	}
 
 	/****************** Session Services Controllers *********************/
-	
-	// TODO: convert to DTO
+
+	/**
+	 * This methods allows the manager to create an individual session
+	 * 
+	 * @param tutorEmail
+	 * @param year
+	 * @param month
+	 * @param day
+	 * @param Roomid
+	 * @param startinHour
+	 * @param startingMinute
+	 * @param endingHour
+	 * @param endingMinute
+	 * @param studentEmails
+	 * @exception IllegalArgumentException  if the tutorEmail is not entered
+	 * @exception InvalidParameterException if the manager did not log in
+	 */
 	@PostMapping(value = { "/Manager/Create/Session", "/Manager/CreateSession/" })
-	public Session CreatSession(@RequestParam(name = "year") int year, @RequestParam(name = "month") int month,
+	public SessionDto CreatSession(@RequestParam(name = "year") int year, @RequestParam(name = "month") int month,
 			@RequestParam(name = "day") int day, @RequestParam(name = "startingHour") int startingHour,
 			@RequestParam(name = "startingMinute") int startingMinute,
 			@RequestParam(name = "endingHour") int endingHour, @RequestParam(name = "endingMinute") int endingMinute,
 			@RequestParam(name = "roomid") int roomid, @RequestParam(name = "tutoremail") String tutor,
 			@RequestParam(name = "offeringid") int offeringid,
-			@RequestParam(name = "studentemail1") String studentemail1,
-			@RequestParam(name = "studentemail2") String studentemail2,
-			@RequestParam(name = "studentemail3") String studentemail3
+			@RequestParam(name = "studentEmail1", required = false) String studentEmail1,
+			@RequestParam(name = "studentEmail2", required = false) String studentEmail2,
+			@RequestParam(name = "studentEmail3", required = false) String studentEmail3,
+			@RequestParam(name = "studentEmail4", required = false) String studentEmail4,
+			@RequestParam(name = "studentEmail5", required = false) String studentEmail5
 
 	) throws IllegalArgumentException {
 		if (!ManagerLoggedin) {
 			throw new InvalidParameterException("you did not log in");
 		}
-		Set<Student> studentSet = new HashSet<Student>();
-		studentSet.add(StudentService.getstudent(studentemail1));
-		studentSet.add(StudentService.getstudent(studentemail2));
-
+		Set<Student> students = new HashSet<Student>();
+		//if(studentEmail1 != "" ||studentEmail1!=null ) {
+			Student student1 = StudentService.getstudent(studentEmail1);			
+			students.add(student1);
+	//	}
+			if(studentEmail2 != "" && studentEmail2!=null ) {
+			Student student2 = StudentService.getstudent(studentEmail2);			
+			students.add(student2);
+			}
+			
+			if(studentEmail3 != "" &&studentEmail3!=null ) {
+			Student student3 = StudentService.getstudent(studentEmail3);			
+			students.add(student3);
+			}
+			
+			if(studentEmail4 != "" &&studentEmail4!=null ) {
+			Student student4 = StudentService.getstudent(studentEmail4);			
+			students.add(student4);
+			}
+			
+			if(studentEmail5 != "" &&studentEmail5!=null ) {
+			Student student5 = StudentService.getstudent(studentEmail5);			
+			students.add(student5);
+			}
+			
 		Session session = SessionService.createSession(year, month, day, startingHour, startingMinute, endingHour,
 				endingMinute, RoomService.getRoom(roomid), tutorService.getTutor(tutor),
-				OfferingService.getSpecificOffering(offeringid), studentSet);
+				OfferingService.getSpecificOffering(offeringid), students);
 
-		return session;
+		return convertToDto(session);
 
 	}
-//	TODO : Missing DTO
-//	@RequestMapping(value = { "/Manager/get/GroupSessions", "/Manager/get/allGroupSessions" })
-//	public List<SessionDto> getAllGroupSession() {
-//		if (!ManagerLoggedin) {
-//			throw new InvalidParameterException("you did not log in");
-//		}
-//		ArrayList<Session> result = SessionService.getPendingGroupSession();
-//		return convertToSessionListDto(result);
-//	}
-	
-	/**
-	 * This methods allows the manager to delete a session by entering the tutorEmail and the startingTime
-	 * 
-	 * @param tutorEmail
-	 * @param startingTime (only hour assuming there is no session that would last for less than an hour.)
-	 * @exception IllegalArgumentException  if the tutorEmail is not entered
-	 * @exception InvalidParameterException if the manager did not log in
-	 */
-	@PostMapping(value = { "/Manager/delete/Session", "/Manager/delete/session/" })
-	public void deleteSession(@RequestParam(name = "sartingTime") int startingTime, @RequestParam(name = "tutorEmail") String tutorEmail)
-			throws IllegalArgumentException {
+
+	@RequestMapping(value = { "/Manager/get/PendingSessions", "/Manager/getPendingSessions" })
+	public List<SessionDto> getAllGroupSession() {
 		if (!ManagerLoggedin) {
 			throw new InvalidParameterException("you did not log in");
 		}
-		SessionService.deleteSession(tutorService.getTutor(tutorEmail), startingTime);;
+		List<Session> result = SessionService.getPendingGroupSession();
+		return convertToSessionListDto(result);
+	}
+	
+	@RequestMapping(value = { "/Manager/get/allSessions", "/Manager/getAllSessions" })
+	public List<SessionDto> getAllSession() {
+		if (!ManagerLoggedin) {
+			throw new InvalidParameterException("you did not log in");
+		}
+		List<Session> result = SessionService.getAllSessions();
+		return convertToSessionListDto(result);
 	}
 
-	/****************** Course Services Controllers *********************/
+	@RequestMapping(value = { "/Manager/get/Tutor/Sessions", "/Manager/getTutorSessions" })
+	public List<SessionDto> getTutorSession(@RequestParam(name = "tutorEmail") String tutorEmail) {
+		
+		if (!ManagerLoggedin) {
+			throw new InvalidParameterException("you did not log in");
+		}
+		List<Session> result = SessionService.getTutorSessions(tutorService.getTutor(tutorEmail));
+		return convertToSessionListDto(result);
+	}
+
+	/**
+	 * This methods allows the manager to delete a session by entering the
+	 * tutorEmail and the startingTime
+	 * 
+	 * @param tutorEmail
+	 * @param startingTime (only hour assuming there is no session that would last
+	 *                     for less than an hour.)
+	 * @exception IllegalArgumentException  if the tutorEmail is not entered
+	 * @exception InvalidParameterException if the manager did not log in
+	 */
+	@DeleteMapping(value = { "/Manager/Delete/Session", "/Manager/delete/session/" })
+	public void deleteSession(@RequestParam(name = "sartingTime") int startingTime,
+			@RequestParam(name = "tutorEmail") String tutorEmail) throws IllegalArgumentException {
+		if (!ManagerLoggedin) {
+			throw new InvalidParameterException("you did not log in");
+		}
+		SessionService.deleteSession(tutorService.getTutor(tutorEmail), startingTime);
+		;
+	}
+
+	/**
+	 * This methods allows the manager to confirm a pending group session by entering the
+	 * tutorEmail and the startingTime and the room they want
+	 * 
+	 * @param tutorEmail
+	 * @param startingTime (only hour assuming there is no session that would last
+	 *                     for less than an hour.)
+	 * @exception IllegalArgumentException  if the tutorEmail is not entered
+	 * @exception InvalidParameterException if the manager did not log in
+	 */
+	@PostMapping(value = { "/Manager/confirm/session", "/Manager/Confirm/Session/" })
+	public String confirmSession(@RequestParam(name = "sartingTime") int startingTime,
+			@RequestParam(name = "tutorEmail") String tutorEmail, @RequestParam(name = "roomNumber") int roomNumber) throws IllegalArgumentException {
+		if (!ManagerLoggedin) {
+			throw new InvalidParameterException("you did not log in");
+		}
+		SessionService.ConfirmSession(tutorService.getTutor(tutorEmail), startingTime, RoomService.getRoom(roomNumber));
+		;
+		return "The Session has been confirmed";
+	}
 	
+	
+	/****************** Course Services Controllers *********************/
+
 	@PostMapping(value = { "/Manager/Create/Course", "/Manager/Create/Course/" })
 	public Course createCourse(@RequestParam(name = "name") String name,
 			@RequestParam(name = "course_id") String course_id) throws IllegalArgumentException {
@@ -865,7 +949,11 @@ public class TutoringCompanyRestController {
 		TutorReviews review = tutorReviewsService.createTutorReview(body, stars, email);
 		return review;
 	}
-
+	
+	/****************** Convert To methods Controllers *********************/
+	
+	//TODO : the rest of them.
+	
 	private StudentDto convertToDto(Student student) {
 		if (student == null) {
 			throw new IllegalArgumentException("There is no such Event!");
@@ -917,6 +1005,15 @@ public class TutoringCompanyRestController {
 		return offeringDto;
 	}
 
+	private SessionDto convertToDto(Session session) {
+		if (session == null) {
+			throw new IllegalArgumentException("There is no such Event!");
+		}
+		OfferingDto offeringDto = convertToDto(session.getOffering());
+		SessionDto sessionDto = new SessionDto(session.getStart_time(), session.getEnd_time(), session.getDate(), offeringDto, session.getStudent().size());
+		return sessionDto;
+	}
+
 	private RoomDto convertToDto(Room room) {
 		if (room == null) {
 			throw new IllegalArgumentException("There is no such Event!");
@@ -960,18 +1057,18 @@ public class TutoringCompanyRestController {
 
 		return listCourseDto;
 	}
-//	TODO: Missing DTO
-//	private List<SessionDto> convertToSessionListDto(List<Session> listSession) {
-//		if (listSession == null) {
-//			throw new IllegalArgumentException("There is no such Event!");
-//		}
-//		List<SessioDto> listCourseDto = new ArrayList<SessionDto>();
-//		for (Session session : listSession) {
-//			listSessionDto.add(convertToDto(Session));
-//		}
-//
-//		return listSessionDto;
-//	}
+
+	private List<SessionDto> convertToSessionListDto(List<Session> listSession) {
+		if (listSession == null) {
+			throw new IllegalArgumentException("There is no such Event!");
+		}
+		List<SessionDto> listSessionDto = new ArrayList<SessionDto>();
+		for (Session session : listSession) {
+			listSessionDto.add(convertToDto(session));
+		}
+
+		return listSessionDto;
+	}
 
 	private List<TutorDto> convertToTutorListDto(List<Tutor> listTutor) {
 		if (listTutor == null) {
