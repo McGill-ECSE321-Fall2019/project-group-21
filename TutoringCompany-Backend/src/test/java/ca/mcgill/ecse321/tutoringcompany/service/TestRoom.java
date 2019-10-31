@@ -34,29 +34,29 @@ public class TestRoom {
 	@Autowired
 	private RoomRepository roomRepository;
 	
-	@Before
-	public void clearDatabase() {
-		roomRepository.deleteAll();
-	}
-	
-//	/**
-//	 * Create a room
-//	 * @result Room will be persisted without any errors
-//	 */
-//	@Test
-//	public void testCreateRoom() {
-//		assertEquals(0, RoomService.getAllRooms().size());
-//		int roomNumber = 123;
-//		try {
-//			RoomService.createRoom(roomNumber, RoomType.INDIVIDUAL_ROOM);
-//		} catch (IllegalArgumentException e) {
-//			fail();
-//		}
-//		List<Room> allRooms = RoomService.getAllRooms();
-//		assertEquals(1, allRooms.size());
-//		//no getRoomNumber()?
-//		assertEquals(roomNumber, allRooms.get(0).getRoomNumber());
+//	@Before
+//	public void clearDatabase() {
+//		roomRepository.deleteAll();
 //	}
+	
+	/**
+	 * Create a room
+	 * @result Room will be persisted without any errors
+	 */
+	@Test
+	public void testCreateRoom() {
+		assertEquals(0, RoomService.getAllRooms().size());
+		int roomNumber = 123;
+		try {
+			RoomService.createRoom(roomNumber, RoomType.INDIVIDUAL_ROOM);
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
+		List<Room> allRooms = RoomService.getAllRooms();
+		assertEquals(1, allRooms.size());
+		//no getRoomNumber()?
+		assertEquals(roomNumber, allRooms.get(0).getNumber());
+	}
 	
 	/**
 	 * Create a room with a null room type
@@ -76,29 +76,29 @@ public class TestRoom {
 		assertEquals(0, RoomService.getAllRooms().size());
 	}
 	
-//	/**
-//	 * Delete a room
-//	 * @result Room will be deleted without any errors
-//	 */
-//	@Test
-//	public void testDeleteRoom() {
-//		assertEquals(0, RoomService.getAllRooms().size());
-//		testCreateRoom();
-//		assertEquals(1, RoomService.getAllRooms().size());
-//		try {
-//			RoomService.deleteRoom(RoomService.getRoom(123));
-//		} catch (IllegalArgumentException e) {
-//			fail();
-//		}
-//		assertEquals(0, RoomService.getAllRooms().size());
-//	}
+	/**
+	 * Delete a room
+	 * @result Room will be deleted without any errors
+	 */
+	@Test
+	public void testDeleteRoom() {
+		assertEquals(0, RoomService.getAllRooms().size());
+		testCreateRoom();
+		assertEquals(1, RoomService.getAllRooms().size());
+		try {
+			RoomService.deleteRoom(RoomService.getRoom(123));
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
+		assertEquals(0, RoomService.getAllRooms().size());
+	}
 	
 	/**
 	 * Update a room
 	 * @result Room will be updated without any errors
 	 */
 	@Test
-	public void testUpdateStudent() {
+	public void testUpdateRoom() {
 		
 		assertEquals(0, RoomService.getAllRooms().size());
 		

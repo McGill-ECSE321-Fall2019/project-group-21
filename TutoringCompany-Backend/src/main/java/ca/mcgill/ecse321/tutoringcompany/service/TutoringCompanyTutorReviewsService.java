@@ -30,7 +30,7 @@ public class TutoringCompanyTutorReviewsService {
 	public TutorReviews createTutorReview(String body, int stars, String email) {
 		TutorService.tutorExist(email);
 		if(incorrectTutorReviewsDetails(body,stars,email)) {
-			throw new InvalidParameterException("No manager with email provided.");
+			throw new InvalidParameterException("Your tutor review details are incomplete!");
 		}
 		TutorReviews reviews = new TutorReviews();
 		reviews.setBody(body);

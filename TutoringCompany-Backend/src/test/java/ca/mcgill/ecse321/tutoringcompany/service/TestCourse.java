@@ -34,10 +34,10 @@ public class TestCourse {
 	@Autowired
 	private CourseRepository courseRepository;
 	
-	@Before
-	public void clearDatabase() {
-		courseRepository.deleteAll();
-	}
+//	@Before
+//	public void clearDatabase() {
+//		courseRepository.deleteAll();
+//	}
 	
 	/**
 	 * Create a course
@@ -132,34 +132,34 @@ public class TestCourse {
 		assertEquals(0, CourseService.getAllCourses().size());
 	}
 
-//	//TODO
-//	/**
-//	 * Update a course
-//	 * @result course will be updated without any errors
-//	 */
-//	@Test
-//	public void testUpdateCourse() {
-//		
-//		assertEquals(0, CourseService.getAllCourses().size());
-//		
-//		String name2 = "name2";
-//		Subject subject1 = Subject.MATH;
-//		Subject subject2 = Subject.PHYSICS;
-//		String course = "ecse321";
-//		
-//		try {
-//			CourseService.createCourse("name1",subject1, course);
-//		} catch (IllegalArgumentException e) {
-//			fail();
-//		}
-//		
-//		CourseService.updateName(CourseService.getCourse("ecse321"), name2);
-//		CourseService.updateSubject(CourseService.getCourse("ecse321"), subject2);
-//		
-//		List<Course> allcourses = CourseService.getAllCourses();
-//		Course course1 = allcourses.get(0);
-//		
-//		assertEquals(name2, course1.getName());
-//		assertEquals(subject2, course1.getSubject());
-//	}
+	//TODO
+	/**
+	 * Update a course
+	 * @result course will be updated without any errors
+	 */
+	@Test
+	public void testUpdateCourse() {
+		
+		assertEquals(0, CourseService.getAllCourses().size());
+		
+		String name2 = "name2";
+		Subject subject1 = Subject.MATH;
+		Subject subject2 = Subject.PHYSICS;
+		String course = "ecse321";
+		
+		try {
+			CourseService.createCourse("name1",subject1, course);
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
+		
+		CourseService.updateName(CourseService.getCourse("ecse321"), name2);
+		CourseService.updateSubject(CourseService.getCourse("ecse321"), subject2);
+		
+		List<Course> allcourses = CourseService.getAllCourses();
+		Course course1 = allcourses.get(0);
+		
+		assertEquals(name2, course1.getName());
+		assertEquals(subject2, course1.getSubject());
+	}
 }
