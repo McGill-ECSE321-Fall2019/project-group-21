@@ -12,16 +12,16 @@ public class RoomDto {
 	private int number;
 	private RoomType roomType;
 	
+	
 
-	@SuppressWarnings("unchecked")
-	public RoomDto(int number, RoomType roomType) {
-		this(number, roomType, Collections.EMPTY_SET, Collections.EMPTY_SET);
-	}
+//	@SuppressWarnings("unchecked")
+//	public RoomDto(int number, RoomType roomType) {
+//		this(number, roomType, Collections.EMPTY_SET, Collections.EMPTY_SET);
+//	}
 
-	public RoomDto(int number, RoomType roomType, Set<RoomTimeBlock> roomTimeBlock, Set<Session> sessions) {
+	public RoomDto(int number, RoomType roomType) {// Set<RoomTimeBlock> roomTimeBlock, Set<Session> sessions) {
 		this.number = number;
 		this.roomType = roomType;
-		
 	}
 
 	public int getNumber() {
