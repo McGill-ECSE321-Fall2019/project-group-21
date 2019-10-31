@@ -190,7 +190,7 @@ public class TutoringCompanyOfferingService {
 //	}
 
 	/**
-	 * Ensures that offering by the given id already exists or throws exception
+	 * Ensures that offering by the given id is unique or throws exception
 	 * 
 	 * @param id of offering
 	 * @exception EntityExistsException if offering already exists

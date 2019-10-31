@@ -47,7 +47,7 @@ public class TutoringCompanySessionService {
 	 * @param room
 	 * @param tutor
 	 * @param offering
-	 * @param student(s)
+	 * @param Set of student(s)
 	 * 
 	 * @exception InvalidParameterException if any of the previous integer
 	 *                                      parameters is not valid.
@@ -59,19 +59,15 @@ public class TutoringCompanySessionService {
 	@Transactional
 	public Session createSession(int year, int month, int day, int startingHour, int startingMinute, int endingHour,
 			int endingMinute, Room room, Tutor tutor, Offering offering, Set<Student> students) {
-
-		if (incorrectManagerDetails(year, month, day, startingHour, startingMinute, endingHour, endingMinute)) {
-
-			throw new InvalidParameterException("Your manager details are incomplete!");
-		}
+		sessionValid(year, month, day, startingHour, startingMinute, endingHour, endingMinute);
 
 		if (!offering.getTutor().equals(tutor)) {
 			throw new NullPointerException("Tutor " + tutor.getLast_name()
 					+ "does not have this offering. Please check tutor" + offering.getTutor().getLast_name());
 		}
 
-		if (tutor.isVerified() == false) {
-			throw new InvalidParameterException("Tutor is not verfied yet");
+		if (!tutor.isVerified()) {
+			throw new InvalidParameterException("Tutor is yet not verfied");
 		}
 
 		Session session = new Session();
@@ -105,7 +101,7 @@ public class TutoringCompanySessionService {
 	}
 
 	/**
-	 * get sessions of a specific tutor
+	 * Read list of sessions of the given tutor
 	 *
 	 * @param tutor
 	 * 
@@ -122,24 +118,22 @@ public class TutoringCompanySessionService {
 	}
 
 	/**
-	 * get all pending group sessions
-	 *
-	 *
+	 * Read all group sessions that are pending
 	 * 
 	 * @return the sessions
 	 */
 	public List<Session> getPendingGroupSession() {
-		List<Session> sessionsGroup = new ArrayList<>();
+		List<Session> pendingGroupSessions = new ArrayList<>();
 		for (Session session : sessionRepository.findAll()) {
 			if (session.getSession_type().equals(SessionType.PENDING_SESSION)) {
-				sessionsGroup.add(session);
+				pendingGroupSessions.add(session);
 			}
 		}
-		return sessionsGroup;
+		return pendingGroupSessions;
 	}
 
 	/**
-	 * Confirm a specific group Session
+	 * Confirm a specific group session
 	 * 
 	 * @param tutor
 	 * @param startingHour
@@ -147,7 +141,7 @@ public class TutoringCompanySessionService {
 	 * @exception NullPointerException if tutor has no such offering
 	 */
 	@Transactional
-	public void ConfirmSession(Tutor tutor, int startingHour, Room room) {
+	public void confirmSession(Tutor tutor, int startingHour, Room room) {
 		Session s = null;
 		List<Session> sessionsByTutor = getTutorSessions(tutor);
 		for (Session session : sessionsByTutor) {
@@ -167,7 +161,7 @@ public class TutoringCompanySessionService {
 	}
 //TODO: add month and day
 	/**
-	 * Delete the specific Session
+	 * Delete the specific session
 	 * 
 	 * @param tutor
 	 * @param startingHour
@@ -175,27 +169,31 @@ public class TutoringCompanySessionService {
 	 */
 	@Transactional
 	public void deleteSession(Tutor tutor, int startingHour) {
-		Session s = null;
-		List<Session> sessionsByTutor = getTutorSessions(tutor);
-		for (Session session : sessionsByTutor) {
-			if (session.getStart_time().getHours() == startingHour) {
-				s = session;
+		Session session = null;
+		//List<Session> sessionsByTutor = getTutorSessions(tutor);
+		for (Session sessionByTutor : getTutorSessions(tutor)) {
+			if (sessionByTutor.getStart_time().getHours() == startingHour) {
+				session = sessionByTutor;
 			}
 		}
-		if (s == null) {
+		if (session == null) {
 			throw new NullPointerException("such session doesn't exist");
 		}
-		sessionRepository.delete(s);
-
+		sessionRepository.delete(session);
 	}
-
+	
+	/**
+	 * Read list of all sessions in the repository
+	 * 
+	 * @return list of all sessions
+	 */
 	@Transactional
 	public List<Session> getAllSessions() {
 		return (List<Session>) sessionRepository.findAll();
 	}
 
 	/**
-	 * this method makes sure that the input follows the correct pattern
+	 * Ensures that the session info given is valid or throws exception
 	 * 
 	 * @param year
 	 * @param month
@@ -204,15 +202,14 @@ public class TutoringCompanySessionService {
 	 * @param startingMinute
 	 * @param endingHour
 	 * @param endingMinute
-	 * @return true if in input is not correct, false otherwise
+	 * @exception InvalidParameterException if any of the given parameters are invalid (time units outside of range)
 	 */
-	private boolean incorrectManagerDetails(int year, int month, int day, int startingHour, int startingMinute,
+	public void sessionValid(int year, int month, int day, int startingHour, int startingMinute,
 			int endingHour, int endingMinute) {
 		if (year < 2019 || month > 12 || month <= 0 || day > 31 || day <= 0 || endingHour - startingHour < 0
 				|| endingHour > 24 || startingHour < 00 || startingMinute < 0 || startingMinute >= 60
 				|| endingMinute < 0 || endingMinute >= 60) {
-			return true;
+			throw new InvalidParameterException("Your session details are invalid");
 		}
-		return false;
 	}
 }

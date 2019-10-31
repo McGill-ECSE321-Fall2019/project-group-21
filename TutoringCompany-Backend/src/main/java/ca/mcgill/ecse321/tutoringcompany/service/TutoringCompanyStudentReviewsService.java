@@ -28,14 +28,14 @@ public class TutoringCompanyStudentReviewsService {
 
 	@Transactional
 	public StudentReviews createStudentReview(String body, int stars, String email) {
-		StudentService.studentNotExisted(email);
+		StudentService.studentExist(email);
 		if(incorrectStudentReviewsDetails(body,stars,email)) {
 			throw new InvalidParameterException("Your student review details are incomplete!");
 		}
 		StudentReviews reviews = new StudentReviews();
 		reviews.setBody(body);
 		reviews.setStars(stars);
-		reviews.setStudent(StudentService.getstudent(email));
+		reviews.setStudent(StudentService.getStudent(email));
 		studentReviewsRepository.save(reviews);
 		return reviews;
 	}
