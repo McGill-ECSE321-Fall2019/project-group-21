@@ -30,6 +30,7 @@ import ca.mcgill.ecse321.tutoringcompany.model.SessionType;
 @Service
 public class TutoringCompanySessionService {
 
+	
 	@Autowired
 	SessionRepository sessionRepository;
 
@@ -120,6 +121,49 @@ public class TutoringCompanySessionService {
 		}
 		return sessionsByTutor;
 	}
+	
+	/**
+	 * get all pending group sessions
+	 *
+	 *
+	 * 
+	 * @return the sessions
+	 */
+	public List<Session> getPendingGroupSession() {
+		List<Session> sessionsGroup = new ArrayList<>();
+		for (Session session : sessionRepository.findAll()) {
+			if (session.getRoom().equals(null)) {
+				sessionsGroup.add(session);
+			}
+		}
+		return sessionsGroup;
+	}
+	
+	/**
+	 * Confirm a specific group Session 
+	 * 
+	 * @param tutor
+	 * @param startingHour
+	 * @param room
+	 * @exception NullPointerException if tutor has no such offering
+	 */
+	@Transactional
+	public void ConfirmSession(Tutor tutor, int startingHour, Room room) {
+		Session s = null;
+		List<Session> sessionsByTutor = getTutorsSession(tutor);
+		for (Session session : sessionsByTutor) {
+			if (session.getStart_time().getHours() == startingHour) {
+				s = session;
+			}
+			if (s == null) {
+				throw new NullPointerException("such session doesn't exist");
+			}
+			if (!s.getRoom().equals(null)){
+				throw new NullPointerException("this session has already been approved");
+			}
+			s.setRoom(room);
+		}
+	}
 
 	/**
 	 * Delete the specific Session
@@ -137,8 +181,9 @@ public class TutoringCompanySessionService {
 				s = session;
 			}
 			if (s == null) {
-				throw new NullPointerException("such Offering doesn't exist");
+				throw new NullPointerException("such session doesn't exist");
 			}
+			sessionRepository.delete(s);
 		}
 	}
 
