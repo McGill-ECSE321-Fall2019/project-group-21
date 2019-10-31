@@ -5,7 +5,6 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import org.apache.catalina.Manager;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,31 +25,27 @@ import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentService;
 @SpringBootTest
 public class TestStudent {
 
-	/**
-	 * @Autowiring services
-	 */
-
 	@Autowired
 	private TutoringCompanyStudentService StudentService;
 
-	/**
-	 * @Autowiring repos
-	 */
-
 	@Autowired
 	private StudentRepository studentRepository;
-
+	
 	@Before
 	public void clearDatabase() {
 		studentRepository.deleteAll();
 	}
 	
+	/**
+	 * Create a student
+	 * @result Student will be persisted without any errors
+	 */
 	@Test
 	public void testCreateStudent() {
 		assertEquals(0, StudentService.getAllStudents().size());
-		String firstName = "Elias";
+		String firstName = "fName";
 		try {
-			StudentService.createStudent(firstName,"k", "eliasi@gmail.com", "oj", "ijm");
+			StudentService.createStudent(firstName,"lName", "mail@mail.com", "pNum", "pWord");
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
@@ -59,64 +54,110 @@ public class TestStudent {
 		assertEquals(firstName, allStudents.get(0).getFirst_name());
 	}
 	
-//	@Test
-//	public void testCreateStudentNull() {
-//		assertEquals(0, StudentService.getAllStudents().size());
-//		String firstName = null;
-//		String error = null;
-//		try {
-//			StudentService.createStudent(firstName,"k", "eliasi@gmail.com", "oj", "ijm");
-//		} catch (IllegalArgumentException e) {
-//			error = e.getMessage();
-//		}
-//		
-//		// check error
-//		// haven't set the error message so this fails
-//		//assertEquals("Student name cannot be empty!", error);
-//		
-//		// check no change in memory
-//		// this gives an error because StudentService allows you to create a student with null values. Have to add checks to the constructor
-//		//assertEquals(0, StudentService.getAllStudents().size());
-//	}
+	/**
+	 * Create a student with a null name
+	 * @result Student will not be created due to an error
+	 */
+	@Test
+	public void testCreateStudentNull() {
+		assertEquals(0, StudentService.getAllStudents().size());
+		String firstName = null;
+		String error = null;
+		try {
+			StudentService.createStudent(firstName,"lName", "mail@mail.com", "pNum", "pWord");
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertEquals("Your student details are incomplete!", error);
+		assertEquals(0, StudentService.getAllStudents().size());
+	}
 	
+	/**
+	 * Create a student with an empty name
+	 * @result Student will not be created due to an error
+	 */
+	@Test
+	public void testCreateStudentEmpty() {
+		assertEquals(0, StudentService.getAllStudents().size());
+		String firstName = "";
+		String error = null;
+		try {
+			StudentService.createStudent(firstName,"lName", "mail@mail.com", "pNum", "pWord");
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertEquals("Your student details are incomplete!", error);
+		assertEquals(0, StudentService.getAllStudents().size());
+	}
+	
+	/**
+	 * Create a student with a space as it's first name
+	 * @result Student will not be created due to an error
+	 */
+	@Test
+	public void testCreateStudentSpaces() {
+		assertEquals(0, StudentService.getAllStudents().size());
+		String firstName = " ";
+		String error = null;
+		try {
+			StudentService.createStudent(firstName,"lName", "mail@mail.com", "pNum", "pWord");
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertEquals("Your student details are incomplete!", error);
+		assertEquals(0, StudentService.getAllStudents().size());
+	}
+	
+	/**
+	 * Delete a student
+	 * @result Student will be deleted without any errors
+	 */
 	@Test
 	public void testDeleteStudent() {
 		assertEquals(0, StudentService.getAllStudents().size());
+		testCreateStudent();
+		assertEquals(1, StudentService.getAllStudents().size());
 		try {
-			StudentService.createStudent("Elias","k", "eliasi@gmail.com", "oj", "ijm");
+			StudentService.deleteStudent("mail@mail.com");
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
-		assertEquals(1, StudentService.getAllStudents().size());
-		StudentService.deleteStudent("eliasi@gmail.com");
 		assertEquals(0, StudentService.getAllStudents().size());
 	}
 
+	/**
+	 * Update a student
+	 * @result Student will be updated without any errors
+	 */
 	@Test
 	public void testUpdateStudent() {
 		
 		assertEquals(0, StudentService.getAllStudents().size());
 		
-		String firstName = "Elias";
-		String lastName = "Eliasso";
-		String email = "eliasi@gmail.com";
-		String phoneNum = "321";
-		String password = "thepass";
+		String firstName1 = "fName1";
+		String firstName2 = "fName2";
+		String lastName1 = "lName1";
+		String lastName2 = "lName2";
+		String email = "mail@mail.com";
+		String phoneNum1 = "pNum1";
+		String phoneNum2 = "pNum2";
+		String password1 = "pWord1";
+		String password2 = "pWord2";
 		
 		try {
-			StudentService.createStudent("Caleb", "Lim", email, "123", "pass");
+			StudentService.createStudent(firstName1, lastName1, email, phoneNum1, password1);
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
 		
-		StudentService.updateStudent(email, firstName, lastName, phoneNum, password);
+		StudentService.updateStudent(email, firstName2, lastName2, phoneNum2, password2);
 		
 		List<Student> allStudents = StudentService.getAllStudents();
 		Student student = allStudents.get(0);
 		
-		assertEquals(firstName, student.getFirst_name());
-		assertEquals(lastName, student.getLast_name());
-		assertEquals(phoneNum, student.getPhone_number());
-		assertEquals(password, student.getPassword());
+		assertEquals(firstName2, student.getFirst_name());
+		assertEquals(lastName2, student.getLast_name());
+		assertEquals(phoneNum2, student.getPhone_number());
+		assertEquals(password2, student.getPassword());
 	}
 }
