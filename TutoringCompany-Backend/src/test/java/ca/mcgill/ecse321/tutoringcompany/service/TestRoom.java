@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import ca.mcgill.ecse321.tutoringcompany.dao.RoomRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.SessionRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.StudentRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.Room;
 import ca.mcgill.ecse321.tutoringcompany.model.RoomType;
@@ -33,11 +34,14 @@ public class TestRoom {
 
 	@Autowired
 	private RoomRepository roomRepository;
+	@Autowired
+	private SessionRepository sessionRepository;
 	
-//	@Before
-//	public void clearDatabase() {
-//		roomRepository.deleteAll();
-//	}
+	@Before
+	public void clearDatabase() {
+		sessionRepository.deleteAll();
+		roomRepository.deleteAll();
+	}
 	
 	/**
 	 * Create a room

@@ -10,9 +10,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.tutoringcompany.dao.RoomRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.SessionRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.Course;
 import ca.mcgill.ecse321.tutoringcompany.model.Room;
 import ca.mcgill.ecse321.tutoringcompany.model.RoomType;
+import ca.mcgill.ecse321.tutoringcompany.model.Session;
 import ca.mcgill.ecse321.tutoringcompany.model.Subject;
 import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 
@@ -27,6 +29,11 @@ import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 public class TutoringCompanyRoomService {
 	@Autowired
 	RoomRepository roomRepository;
+	@Autowired
+	SessionRepository sessionRepository;
+
+	@Autowired
+	private TutoringCompanySessionService SessionService;
 
 	/**
 	 * Create a room instance with the given parameters, save it, and return it
@@ -165,6 +172,19 @@ public class TutoringCompanyRoomService {
 		
 	}
 
+	@Transactional
+	public void deleteAllGroupRooms() {
+		List<Room> allRooms= toList(roomRepository.findAll());
+		List<Session> allSessions= toList(sessionRepository.findAll());
+		
+		for(Room r : allRooms) {
+		for(Session s : allSessions) {
+			if(s.getRoom().equals(r)){
+				SessionService.deleteSession(s.getTutor(), s.getStart_time().getHours());
+			}
+		}
+		}
+	}
 	@Transactional
 	public ArrayList<Room> getAllGroupRooms() {
 		List<Room> allRooms= toList(roomRepository.findAll());
