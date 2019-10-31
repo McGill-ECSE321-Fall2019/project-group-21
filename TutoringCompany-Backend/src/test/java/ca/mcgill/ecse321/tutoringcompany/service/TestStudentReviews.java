@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import ca.mcgill.ecse321.tutoringcompany.dao.StudentRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.StudentReviewsRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.StudentReviews;
+import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentReviewsService;
 
 /**
@@ -27,12 +29,15 @@ public class TestStudentReviews {
 
 	@Autowired
 	private TutoringCompanyStudentReviewsService StudentReviewsService;
+	private TutoringCompanyStudentService StudentService;
 
 	@Autowired
+	private StudentRepository studentRepository;
 	private StudentReviewsRepository studentReviewsRepository;
 	
 //	@Before
 //	public void clearDatabase() {
+//		studentRepository.deleteAll();
 //		studentReviewsRepository.deleteAll();
 //	}
 	
@@ -42,6 +47,8 @@ public class TestStudentReviews {
 	 */
 	@Test
 	public void testCreateStudentReview() {
+
+		StudentService.createStudent("fName","lName","mail@mail.com","pNum","pWord");
 		
 		String body = "body";
 		
@@ -62,6 +69,8 @@ public class TestStudentReviews {
 	 */
 	@Test
 	public void testCreateStudentReviewNull() {
+		
+		StudentService.createStudent("fName","lName","mail@mail.com","pNum","pWord");
 		
 		String body = null;
 		String error = null;
@@ -84,6 +93,8 @@ public class TestStudentReviews {
 	@Test
 	public void testCreateStudentReviewEmpty() {
 
+		StudentService.createStudent("fName","lName","mail@mail.com","pNum","pWord");
+		
 		String body = "";
 		String error = null;
 		
@@ -105,6 +116,8 @@ public class TestStudentReviews {
 	@Test
 	public void testCreateStudentReviewSpaces() {
 		
+		StudentService.createStudent("fName","lName","mail@mail.com","pNum","pWord");
+		
 		String body = " ";
 		String error = null;
 		
@@ -125,6 +138,8 @@ public class TestStudentReviews {
 	 */
 	@Test
 	public void testDeleteStudentReview() {
+
+		StudentService.createStudent("fName","lName","mail@mail.com","pNum","pWord");
 		
 		assertEquals(0, StudentReviewsService.getAllStudentReviews().size());
 		StudentReviewsService.createStudentReview("body", 5, "mail@mail.com");
@@ -143,6 +158,8 @@ public class TestStudentReviews {
 	 */
 	@Test
 	public void testUpdateStudentReview() {
+		
+		StudentService.createStudent("fName","lName","mail@mail.com","pNum","pWord");
 		
 		assertEquals(0, StudentReviewsService.getAllStudentReviews().size());
 		
