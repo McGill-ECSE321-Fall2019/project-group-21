@@ -46,11 +46,11 @@
 //	public void testCreateTutorReview() {
 //		
 //		Tutor tutor = new Tutor();
-//		tutor.setFirst_name("fName");
-//		tutor.setLast_name("lName");
-//		tutor.setEmail("mail@mail.com");
-//		tutor.setPhone_number("pNum");
-//		tutor.setPassword("pWord");
+//		//tutor.setFirst_name("fName");
+//		//tutor.setLast_name("lName");
+//		//tutor.setEmail("mail@mail.com");
+//		//tutor.setPhone_number("pNum");
+//		//tutor.setPassword("pWord");
 //		
 //		String body = "body";
 //		
@@ -75,11 +75,11 @@
 //	public void testCreateTutorReviewNull() {
 //		
 //		Tutor tutor = new Tutor();
-//		tutor.setFirst_name("fName");
-//		tutor.setLast_name("lName");
-//		tutor.setEmail("mail@mail.com");
-//		tutor.setPhone_number("pNum");
-//		tutor.setPassword("pWord");
+//		//tutor.setFirst_name("fName");
+//		//tutor.setLast_name("lName");
+//		//tutor.setEmail("mail@mail.com");
+//		//tutor.setPhone_number("pNum");
+//		//tutor.setPassword("pWord");
 //		
 //		String body = null;
 //		String error = null;
@@ -103,11 +103,11 @@
 //	public void testCreateTutorReviewEmpty() {
 //		
 //		Tutor tutor = new Tutor();
-//		tutor.setFirst_name("fName");
-//		tutor.setLast_name("lName");
-//		tutor.setEmail("mail@mail.com");
-//		tutor.setPhone_number("pNum");
-//		tutor.setPassword("pWord");
+//		//tutor.setFirst_name("fName");
+//		//tutor.setLast_name("lName");
+//		//tutor.setEmail("mail@mail.com");
+//		//tutor.setPhone_number("pNum");
+//		//tutor.setPassword("pWord");
 //		
 //		String body = "";
 //		String error = null;
@@ -131,11 +131,11 @@
 //	public void testCreateTutorReviewSpaces() {
 //		
 //		Tutor tutor = new Tutor();
-//		tutor.setFirst_name("fName");
-//		tutor.setLast_name("lName");
-//		tutor.setEmail("mail@mail.com");
-//		tutor.setPhone_number("pNum");
-//		tutor.setPassword("pWord");
+//		//tutor.setFirst_name("fName");
+//		//tutor.setLast_name("lName");
+//		//tutor.setEmail("mail@mail.com");
+//		//tutor.setPhone_number("pNum");
+//		//tutor.setPassword("pWord");
 //		
 //		String body = " ";
 //		String error = null;
@@ -159,11 +159,11 @@
 //	public void testDeleteTutorReview() {
 //		
 //		Tutor tutor = new Tutor();
-//		tutor.setFirst_name("fName");
-//		tutor.setLast_name("lName");
-//		tutor.setEmail("mail@mail.com");
-//		tutor.setPhone_number("pNum");
-//		tutor.setPassword("pWord");
+//		//tutor.setFirst_name("fName");
+//		//tutor.setLast_name("lName");
+//		//tutor.setEmail("mail@mail.com");
+//		//tutor.setPhone_number("pNum");
+//		//tutor.setPassword("pWord");
 //		
 //		assertEquals(0, TutorReviewsService.getAllReviewsForTutor(tutor).size());
 //		TutorReviewsService.createTutorReview("body", 5, tutor);
@@ -186,11 +186,11 @@
 //	public void testUpdateTutorReview() {
 //		
 //		Tutor tutor = new Tutor();
-//		tutor.setFirst_name("fName");
-//		tutor.setLast_name("lName");
-//		tutor.setEmail("mail@mail.com");
-//		tutor.setPhone_number("pNum");
-//		tutor.setPassword("pWord");
+//		//tutor.setFirst_name("fName");
+//		//tutor.setLast_name("lName");
+//		//tutor.setEmail("mail@mail.com");
+//		//tutor.setPhone_number("pNum");
+//		//tutor.setPassword("pWord");
 //		
 //		assertEquals(0, TutorReviewsService.getAllReviewsForTutor(tutor).size());
 //		

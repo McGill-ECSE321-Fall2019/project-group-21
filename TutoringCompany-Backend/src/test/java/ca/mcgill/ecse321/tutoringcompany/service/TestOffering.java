@@ -111,16 +111,16 @@
 //		assertEquals(0, OfferingService.getAllOfferings().size());
 //		
 //		Tutor tutor = new Tutor();
-//		tutor.setFirst_name("fName");
-//		tutor.setLast_name("lName");
-//		tutor.setEmail("mail@mail.com");
-//		tutor.setPhone_number("pNum");
-//		tutor.setPassword("pWord");
+//		//tutor.setFirst_name("fName");
+//		//tutor.setLast_name("lName");
+//		//tutor.setEmail("mail@mail.com");
+//		//tutor.setPhone_number("pNum");
+//		//tutor.setPassword("pWord");
 //		
 //		Course course = new Course();
-//		course.setName("name");
-//		course.setCourse_id("id");
-//		course.setSubject(Subject.MATH);
+//		//course.setName("name");
+//		//course.setCourse_id("id");
+//		//course.setSubject(Subject.MATH);
 //		
 //		OfferingService.createOffering(15, 20, course, tutor);
 //		
@@ -143,16 +143,16 @@
 //		assertEquals(0, OfferingService.getAllOfferings().size());
 //		
 //		Tutor tutor = new Tutor();
-//		tutor.setFirst_name("fName");
-//		tutor.setLast_name("lName");
-//		tutor.setEmail("mail@mail.com");
-//		tutor.setPhone_number("pNum");
-//		tutor.setPassword("pWord");
+//		//tutor.setFirst_name("fName");
+//		//tutor.setLast_name("lName");
+//		//tutor.setEmail("mail@mail.com");
+//		//tutor.setPhone_number("pNum");
+//		//tutor.setPassword("pWord");
 //		
 //		Course course = new Course();
-//		course.setName("name");
-//		course.setCourse_id("id");
-//		course.setSubject(Subject.MATH);
+//		//course.setName("name");
+//		//course.setCourse_id("id");
+//		//course.setSubject(Subject.MATH);
 //		
 //		int individualPrice1 = 15;
 //		int individualPrice2 = 20;
