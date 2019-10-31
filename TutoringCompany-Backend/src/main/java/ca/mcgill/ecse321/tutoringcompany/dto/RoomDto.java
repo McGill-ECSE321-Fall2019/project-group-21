@@ -12,8 +12,6 @@ public class RoomDto {
 	private int number;
 	private RoomType roomType;
 	
-	
-
 //	@SuppressWarnings("unchecked")
 //	public RoomDto(int number, RoomType roomType) {
 //		this(number, roomType, Collections.EMPTY_SET, Collections.EMPTY_SET);

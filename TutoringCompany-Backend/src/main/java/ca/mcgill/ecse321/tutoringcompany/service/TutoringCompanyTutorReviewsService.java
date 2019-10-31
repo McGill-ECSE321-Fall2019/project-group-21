@@ -28,7 +28,7 @@ public class TutoringCompanyTutorReviewsService {
 
 	@Transactional
 	public TutorReviews createTutorReview(String body, int stars, String email) {
-		TutorService.tutorNotExisted(email);
+		TutorService.tutorExist(email);
 		if(incorrectTutorReviewsDetails(body,stars,email)) {
 			throw new InvalidParameterException("No manager with email provided.");
 		}

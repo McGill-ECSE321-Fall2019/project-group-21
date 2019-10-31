@@ -31,51 +31,55 @@ public class TutoringCompanyManagerService {
    
     /*------- Creation methods -------*/
     /**
-     * this method creates a new manager and save it in the manager repository
-     * @param FirsName : first name of the manager that will be created
-     * @param LastName : last name of the manager that will be created
-     * @param Email    : email address of the manager that will be created 
+     * Create Manager instance with the given parameters, save it, and return it
+     * 
+     * @param first_name : first name of the manager that will be created
+     * @param last_name : last name of the manager that will be created
+     * @param email    : email address of the manager that will be created 
      * @param PhoneNumber : phone number of the manager that will be created
      * @param Password : password of the manager that will be created
      * @return the created manager
-     * @exception EntityExistsException if the manager is existed or the email is used
+     * @exception EntityExistsException if a manager by the same email exists
      * @exception InvalidParameterException if any of the previous parameters equals to null or 
      * the string length equals to zero
      */
     @Transactional
-    public Manager createManager(String FirsName, String LastName, String Email, String PhoneNumber, String Password) {
-    	containsManager(Email);
-    	if  (incorrectManagerDetails(FirsName, LastName, Email, PhoneNumber, Password)) {
+    public Manager createManager(String first_name, String last_name, String email, String phone_number, String password) {
+    	managerUnique(email);
+    	if  (invalidManagerInfo(first_name, last_name, email, phone_number, password)) {
     		throw new InvalidParameterException("Your manager details are incomplete!");
     	}
-       Manager manager = new Manager();
-       manager.setFirst_name(FirsName);
-       manager.setLast_name(LastName);
-       manager.setEmail(Email);
-       manager.setPhone_number(PhoneNumber);
-       manager.setPassword(Password);
+       Manager manager = getManager(email);
+       manager.setFirst_name(first_name);
+       manager.setLast_name(last_name);
+       manager.setEmail(email);
+       manager.setPhone_number(phone_number);
+       manager.setPassword(password);
         managerRepository.save(manager);
         return manager;
     }
+    
     /*-------  Delete methods -------*/
     
     /**
-     * this method deletes manager giving his email address
-     * @param Email: email address of the manager that will be deleted 
+     * Delete specific manager with the given email
+     * 
+     * @param email: email address of the manager to delete
      * @exception NullPointerException if manager does not exist
      */
     @Transactional
-    public void deleteManager(String Email) {
-    	managerNotExisted(Email);
-    	managerRepository.delete(getmanager(Email));
+    public void deleteManager(String email) {
+    	managerExist(email);
+    	managerRepository.delete(getManager(email));
 	}
     /*------- Update methods -------*/
     
     /**
-     * this method updates the manager's all information
-     * @param currentEmail: email address of the manager that we will update his/her information
-     * @param FirsName: new first name
-     * @param LastName: new last name
+     * Update all information for the manager with the given email
+     * 
+     * @param email: email address of the manager whose information is to be updated
+     * @param first_name: new first name
+     * @param last_name: new last name
      * @param PhoneNumber: new phone number
      * @param Password: new password
      * @exception NullPointerException if manager does not exist
@@ -83,81 +87,87 @@ public class TutoringCompanyManagerService {
      * the string length equals to zero
      */
     @Transactional
-    public void updateManager(String currentEmail, String FirsName, String LastName, String PhoneNumber, String Password) {
-    	managerNotExisted(currentEmail);
-    	if (incorrectManagerDetails(FirsName, LastName, currentEmail, PhoneNumber, Password)) {
+    public void updateManager(String email, String first_name, String last_name, String PhoneNumber, String Password) {
+    	managerExist(email);
+    	if (invalidManagerInfo(first_name, last_name, email, PhoneNumber, Password)) {
     		throw new InvalidParameterException("Your manager details are incomplete!");
     	}
-    	getmanager(currentEmail).setFirst_name(FirsName);
-    	getmanager(currentEmail).setLast_name(LastName);
-    	getmanager(currentEmail).setPhone_number(PhoneNumber);
-    	getmanager(currentEmail).setPassword(Password);
+    	Manager manager = getManager(email);
+    	manager.setFirst_name(first_name);
+    	manager.setLast_name(last_name);
+    	manager.setPhone_number(PhoneNumber);
+    	manager.setPassword(Password);
     	
 	}
     /**
-     * this method updates the manager's password
-     * @param currentEmail: email address of the manager that we will update his/her password
-     * @param Password: new password
+     * Update password for the specific manager whose email is given
+     * 
+     * @param email: email address of the manager whose password is to be updated
+     * @param password: new password
      * @exception NullPointerException if manager does not exist
      * @exception InvalidParameterException if any of the previous parameters equals to null or 
      * the string length equals to zero
      */
     @Transactional
-    public void updateManagerPassword(String currentEmail,String Password) {
-    	 managerNotExisted(currentEmail);
-     	if (Password == null || Password.trim().length() == 0) {
+    public void updateManagerPassword(String email, String password) {
+    	 managerExist(email);
+     	if (password == null || password.trim().length() == 0) {
      		throw new InvalidParameterException("Your Password input is not correct");
      	}
-    	getmanager(currentEmail).setPassword(Password);
+    	getManager(email).setPassword(password);
 	}
+    
     /**
-     * this method updates the manager's first name
-     * @param currentEmail: email address of the manager that we will update his/her first name
-     * @param FirstName: new first name
+     * Update first name for the specific manager whose email is given
+     * 
+     * @param email: email address of the manager whose first name is to be updated
+     * @param first_name: new first name
      * @exception NullPointerException if manager does not exist
      * @exception InvalidParameterException if any of the previous parameters equals to null or 
      * the string length equals to zero
      */
     @Transactional
-    public void updateManagerFirstName(String currentEmail, String FirsName) {
-   	 managerNotExisted(currentEmail);
-	 if (FirsName == null || FirsName.trim().length() == 0) {
- 		throw new InvalidParameterException("Your FirsName input is not correct");
+    public void updateManagerFirstName(String email, String first_name) {
+   	 managerExist(email);
+	 if (first_name == null || first_name.trim().length() == 0) {
+ 		throw new InvalidParameterException("Your first name input is not correct");
  	}
-    	getmanager(currentEmail).setFirst_name(FirsName);
+    	getManager(email).setFirst_name(first_name);
 	}
     /**
-     * this method updates the manager's last name
-     * @param currentEmail: email address of the manager that we will update his/her last name
-     * @param LastName: new last name
+     * Update first name for the specific manager whose email is given
+     * 
+     * @param email: email address of the manager that we will update his/her last name
+     * @param last_name: new last name
      * @exception NullPointerException if manager does not exist
      * @exception InvalidParameterException if any of the previous parameters equals to null or 
      * the string length equals to zero
      */
     @Transactional
-    public void updateManagerLastName(String currentEmail, String LastName) {
-   	 managerNotExisted(currentEmail);
-	 if (LastName == null || LastName.trim().length() == 0) {
-  		throw new InvalidParameterException("Your FirsName input is not correct");
+    public void updateManagerLastName(String email, String last_name) {
+   	 managerExist(email);
+	 if (last_name == null || last_name.trim().length() == 0) {
+  		throw new InvalidParameterException("Your last name input is not correct");
   	}
-    	getmanager(currentEmail).setLast_name(LastName);
+    	getManager(email).setLast_name(last_name);
 	}
     /*------- Get methods -------*/
 
     /**
-     * this method returns a manager by giving his/her email
+     * Read a specific manager by its email
+     * 
      * @param email: email address of the manager that will be returned
      * @return manager
      * @exception NullPointerException if manager does not exist
      */
     @Transactional
-    public Manager getmanager(String email) {
-   	 managerNotExisted(email);
+    public Manager getManager(String email) {
+   	 managerExist(email);
     Manager manager = managerRepository.findByEmail(email);
     return manager;
     }
     /**
-     * this method returns a list of all the managers in the manager repository
+     * Read a list of all managers in the repository
      * @return list of all managers
      */
     @Transactional
@@ -174,43 +184,6 @@ public class TutoringCompanyManagerService {
     	}
  /*------- Other methods---------*/
     
-    /**
-     * this method is used to verify a tutor by the manager 
-     * after doing the interview
-     * @param email: email of the tutor that will be verified
-     * @exception NullPointerException if tutor does not exist
-     */
-    public void verifyTutor(String email) {
-    	tutorService.getTutor(email).setVerified(true);;
-    }
-    /**
-     * this method returns all the verified tutors
-     * @return a list a verified tutors
-     */
-    public ArrayList<Tutor> getVerifiedTutors() {
- 	   
-    	List <Tutor> all = tutorService.getAllTutors();
-    	ArrayList<Tutor> result = new ArrayList<Tutor>();
-    	
-    	for (Tutor t : all) {
-    		if(t.isVerified()) {
-    			result.add(t);
-    		}
-        
-        	}
-	    return result;
-	    }
-    /**
-     * this method returns a tutor by giving his/her email
-     * @param email: email address of the tutor that will be returned
-     * @return tutor
-     * @exception NullPointerException if tutor does not exist
-     */   
-    @Transactional
-    public Tutor getTutor(String email) {
-    Tutor tutor = tutorRepository.findByEmail(email);
-    return tutor;
-    }
 
     /*------- Assert methods -------*/
 /**
@@ -219,7 +192,7 @@ public class TutoringCompanyManagerService {
  * @exception EntityExistsException if manager already exists 
  */
     @Transactional
-    public void containsManager(String email) {
+    public void managerUnique(String email) {
       if (managerRepository.existsById(email))
         throw new EntityExistsException("manager Already Exists");
     }
@@ -229,22 +202,22 @@ public class TutoringCompanyManagerService {
      * @exception NullPointerException if manager does not exist
      */
     @Transactional
-    public void managerNotExisted(String email) {
+    public void managerExist(String email) {
       if (managerRepository.existsById(email)==false)
         throw new NullPointerException("manager Does not Exist");
     }
     
    /**
     * this method makes sure that the input follows the correct pattern
-    * @param FirsName
-    * @param LastName
+    * @param first_name
+    * @param last_name
     * @param Email
     * @param PhoneNumber
     * @param Password
     * @return true if in input is not correct, false otherwise
     */
-    private boolean incorrectManagerDetails(String FirsName, String LastName, String Email, String PhoneNumber, String Password) {
-    	    if (FirsName == null || FirsName.trim().length() == 0 ||LastName == null || LastName.trim().length() == 0 ||  
+    private boolean invalidManagerInfo(String first_name, String last_name, String Email, String PhoneNumber, String Password) {
+    	    if (first_name == null || first_name.trim().length() == 0 ||last_name == null || last_name.trim().length() == 0 ||  
     	    		Email == null|| Email.trim().length() == 0 || PhoneNumber == null || PhoneNumber == null ||
     	    				Password ==null   || Password.trim().length() == 0) {
     	      return true;

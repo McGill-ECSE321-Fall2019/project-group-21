@@ -20,124 +20,129 @@ public class TutoringCompanyTutorService {
      TutorRepository tutorRepository;
 	    /*------- Creation methods -------*/
 	 /**
-	  * this method creates a new tutor and save it in the tutor repository
-	  * @param FirsName : first name of the tutor that will be created
-	  * @param LastName : last name of the tutor that will be created
-	  * @param Email    : email address of the tutor that will be created 
-	  * @param PhoneNumber : phone number of the tutor that will be created
-	  * @param Password : password of the tutor that will be created
+	  * Create Tutor instance with the given parameters, save it, and return it
+	  * @param first_name : first name of the tutor that will be created
+	  * @param last_name : last name of the tutor that will be created
+	  * @param email    : email address of the tutor that will be created 
+	  * @param phone_number : phone number of the tutor that will be created
+	  * @param password : password of the tutor that will be created
 	  * @return the created tutor
 	  * @exception EntityExistsException if the tutor is existed or the email is used
 	  * @exception InvalidParameterException if any of the previous parameters equals to null or 
 	  * the string length equals to zero
 	  */	 
 	 @Transactional
-	    public Tutor createTutor(String FirsName, String LastName, String Email, String PhoneNumber, String Password) {
-		 containsTutor(Email);
-	    	if  (incorrectTutorDetails(FirsName, LastName, Email, PhoneNumber, Password)) {
+	    public Tutor createTutor(String first_name, String last_name, String email, String phone_number, String password) {
+		 tutorUnique(email);
+	    	if  (invalidTutorInfo(first_name, last_name, email, phone_number, password)) {
 	    		throw new InvalidParameterException("Your tutor details are incomplete!");
 	    	}
 		   Tutor tutor = new Tutor();
 		   tutor.setVerified(false);
-	       tutor.setFirst_name(FirsName);
-	       tutor.setLast_name(LastName);
-	       tutor.setEmail(Email);
-	       tutor.setPhone_number(PhoneNumber);
-	       tutor.setPassword(Password);
+	       tutor.setFirst_name(first_name);
+	       tutor.setLast_name(last_name);
+	       tutor.setEmail(email);
+	       tutor.setPhone_number(phone_number);
+	       tutor.setPassword(password);
 	        tutorRepository.save(tutor);
 	        return tutor;
 	    }
 	   /*-------  Delete methods -------*/
 	    
 	    /**
-	     * this method deletes tutor giving his email address
-	     * @param Email: email address of the tutor that will be deleted 
+	     * Delete specific tutor with the given email
+	     * @param email: email address of the tutor to delete
 	     * @exception NullPointerException if tutor does not exist
 	     */
 	    @Transactional
-	    public void deleteTutor(String Email) {
-	    	tutorNotExisted(Email);
-	    	tutorRepository.delete(getTutor(Email));
+	    public void deleteTutor(String email) {
+	    	tutorExist(email);
+	    	tutorRepository.delete(getTutor(email));
 	    	
 		}
 	    /*------- Update methods -------*/
 	    
 	    /**
-	     * this method updates the tutor's all information
-	     * @param currentEmail: email address of the tutor that we will update his/her information
-	     * @param FirsName: new first name
-	     * @param LastName: new last name
-	     * @param PhoneNumber: new phone number
-	     * @param Password: new password
+	     * Update all information for the tutor with the given email
+	     * 
+	     * @param currentemail: email address of the tutor that we will update his/her information
+	     * @param first_name: new first name
+	     * @param last_name: new last name
+	     * @param phone_number: new phone number
+	     * @param password: new password
 	     * @exception NullPointerException if tutor does not exist
 	     * @exception InvalidParameterException if any of the previous parameters equals to null or 
 	     * the string length equals to zero
 	     */
 	    @Transactional
-	    public void updateTutor(String currentEmail, String FirsName, String LastName, String PhoneNumber, String Password) {
-	    	tutorNotExisted(currentEmail);
-	    	if (incorrectTutorDetails(FirsName, LastName, currentEmail, PhoneNumber, Password)) {
+	    public void updateTutor(String email, String first_name, String last_name, String phone_number, String password) {
+	    	tutorExist(email);
+	    	if (invalidTutorInfo(first_name, last_name, email, phone_number, password)) {
 	    		throw new InvalidParameterException("Your tutor details are incomplete!");
 	    	}
-	    	getTutor(currentEmail).setFirst_name(FirsName);
-	    	getTutor(currentEmail).setLast_name(LastName);
-	    	getTutor(currentEmail).setPhone_number(PhoneNumber);
-	    	getTutor(currentEmail).setPassword(Password);
+	    	Tutor tutor = getTutor(email);
+	    	tutor.setFirst_name(first_name);
+	    	tutor.setLast_name(last_name);
+	    	tutor.setPhone_number(phone_number);
+	    	tutor.setPassword(password);
 	    	
 		}
 	    /**
-	     * this method updates the tutor's password
-	     * @param currentEmail: email address of the tutor that we will update his/her password
-	     * @param Password: new password
+	     * Update password for the specific tutor whose email is given
+	     * 
+	     * @param email: email address of the tutor that we will update his/her password
+	     * @param password: new password
 	     * @exception NullPointerException if tutor does not exist
 	     * @exception InvalidParameterException if any of the previous parameters equals to null or 
 	     * the string length equals to zero
 	     */
 	    @Transactional
-	    	 public void updateTutorPassword(String currentEmail,String Password) {
-	    		   tutorNotExisted(currentEmail);
-	    		    	if (Password == null || Password.trim().length() == 0) {
-	    		    		throw new InvalidParameterException("Your Password input is not correct");
+	    	 public void updateTutorPassword(String email,String password) {
+	    		   tutorExist(email);
+	    		    	if (password == null || password.trim().length() == 0) {
+	    		    		throw new InvalidParameterException("Your password input is not correct");
 	    		    	}
-	    	getTutor(currentEmail).setPassword(Password);}
+	    	getTutor(email).setPassword(password);}
 	     /**
-	      * this method updates the tutor's first name
-	      * @param currentEmail: email address of the tutor that we will update his/her first name
-	      * @param FirstName: new first name
+	      * Update first name for the specific tutor whose email is given
+	      * 
+	      * @param email: email address of the tutor that we will update his/her first name
+	      * @param first_name: new first name
 	      * @exception NullPointerException if tutor does not exist
 	      * @exception InvalidParameterException if any of the previous parameters equals to null or 
 	      * the string length equals to zero
 	      */
 	   @Transactional
-	    public void updateTutorFirstName(String currentEmail, String FirsName) {
-	    	getTutor(currentEmail).setFirst_name(FirsName);
+	    public void updateTutorFirstName(String email, String first_name) {
+	    	getTutor(email).setFirst_name(first_name);
 	  	
 		}
 	   /**
-	     * this method updates the tutor's last name
-	     * @param currentEmail: email address of the tutor that we will update his/her last name
-	     * @param LastName: new last name
+	     * Update last name for the specific tutor whose email is given
+	     * 
+	     * @param email: email address of the tutor that we will update his/her last name
+	     * @param last_name: new last name
 	     * @exception NullPointerException if tutor does not exist
 	     * @exception InvalidParameterException if any of the previous parameters equals to null or 
 	     * the string length equals to zero
 	     */
 	    @Transactional
-	    public void updateTutorLastName(String currentEmail, String LastName) {
-	    	getTutor(currentEmail).setLast_name(LastName);
+	    public void updateTutorLastName(String email, String last_name) {
+	    	getTutor(email).setLast_name(last_name);
 	  	
 		}
 	    /*------- Get methods -------*/
 
 	    /**
-	     * this method returns a tutor by giving his/her email
+	     * Read specific tutor by its given email
+	     * 
 	     * @param email: email address of the tutor that will be returned
 	     * @return tutor
 	     * @exception NullPointerException if tutor does not exist
 	     */   
 	    @Transactional
 	    public Tutor getTutor(String email) {
-	    Tutor tutor = tutorRepository.findByEmail(email);
-	    return tutor;
+	    return tutorRepository.findByEmail(email);
 	    }
 //	    public List<Tutor> getAllVerifiedTutors() {
 //	    	List<Tutor> verifiedTutors = new ArrayList<Tutor>();
@@ -149,13 +154,32 @@ public class TutoringCompanyTutorService {
 //		    return verifiedTutors;
 //		    }
 	    /**
-	     * this method returns a list of all the tutors in the tutor repository
+	     * Read list of all the tutors in the tutor repository
+	     * 
 	     * @return list of all tutors
 	     */
 	    @Transactional
 	    public List<Tutor> getAllTutors() {
 	    return toList(tutorRepository.findAll());
 	    }
+	    
+	    /**
+	     * Read list of all verified tutors
+	     * 
+	     * @return list of all verified tutors
+	     */
+	    public List<Tutor> getVerifiedTutors() {
+	  	   
+	    	List<Tutor> results = new ArrayList<Tutor>();
+	    	
+	    	for (Tutor tutor : getAllTutors()) {
+	    		if(tutor.isVerified()) {
+	    			results.add(tutor);
+	    		}
+	        
+	        	}
+		    return results;
+		    }
 	    /**
 	     * this method create a list of type <T> 
 	     * @param <T>
@@ -177,33 +201,35 @@ public class TutoringCompanyTutorService {
 	     * @exception EntityExistsException if tutor already exists 
 	     */
 	        @Transactional
-	        public void containsTutor(String email) {
+	        public void tutorUnique(String email) {
 	          if (tutorRepository.existsById(email))
 	            throw new EntityExistsException("Tutor Already Exists");
 	        }
+	        
 	        /**
 	         * throws an exception if tutor does not exist
 	         * @param : email address of tutor
 	         * @exception NullPointerException if tutor does not exist
 	         */
 	        @Transactional
-	        public void tutorNotExisted(String email) {
+	        public void tutorExist(String email) {
 	          if (tutorRepository.existsById(email)==false)
 	            throw new NullPointerException("Tutor Does not Exist");
 	        }
+	        
 	       /**
 	        * this method makes sure that the input follows the correct pattern
-	        * @param FirsName
-	        * @param LastName
-	        * @param Email
-	        * @param PhoneNumber
-	        * @param Password
+	        * @param first_name
+	        * @param last_name
+	        * @param email
+	        * @param phone_number
+	        * @param password
 	        * @return true if in input is not correct, false otherwise
 	        */
-	        private boolean incorrectTutorDetails(String FirsName, String LastName, String Email, String PhoneNumber, String Password) {
-	        	    if (FirsName == null || FirsName.trim().length() == 0 ||LastName == null || LastName.trim().length() == 0 ||  
-	        	    		Email == null|| Email.trim().length() == 0 || PhoneNumber == null || PhoneNumber == null ||
-	        	    				Password ==null   || Password.trim().length() == 0) {
+	        private boolean invalidTutorInfo(String first_name, String last_name, String email, String phone_number, String password) {
+	        	    if (first_name == null || first_name.trim().length() == 0 ||last_name == null || last_name.trim().length() == 0 ||  
+	        	    		email == null|| email.trim().length() == 0 || phone_number == null || phone_number == null ||
+	        	    				password ==null   || password.trim().length() == 0) {
 	        	      return true;
 	        	    }
 	        	    return false;
