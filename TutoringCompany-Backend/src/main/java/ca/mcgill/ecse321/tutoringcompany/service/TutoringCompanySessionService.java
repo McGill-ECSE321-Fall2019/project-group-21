@@ -94,7 +94,7 @@ public class TutoringCompanySessionService {
 		} else {
 			SessionType group = SessionType.GROUP_SESSION;
 			session.setSession_type(group);
-			session.setRoom(null);
+	//		session.setRoom(null);
 		}
 //		Set<Student> students = new HashSet<Student>();
 //		for (int i = 0; i < students.s; i++) {

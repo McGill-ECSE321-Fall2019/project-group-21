@@ -800,13 +800,41 @@ public class TutoringCompanyRestController {
 			@RequestParam(name = "endingHour") int endingHour, @RequestParam(name = "endingMinute") int endingMinute,
 			@RequestParam(name = "roomid") int roomid, @RequestParam(name = "tutoremail") String tutor,
 			@RequestParam(name = "offeringid") int offeringid,
-			@RequestParam(name = "studentEmails") Set<Student> students
+			@RequestParam(name = "studentEmail1", required = false) String studentEmail1,
+			@RequestParam(name = "studentEmail2", required = false) String studentEmail2,
+			@RequestParam(name = "studentEmail3", required = false) String studentEmail3,
+			@RequestParam(name = "studentEmail4", required = false) String studentEmail4,
+			@RequestParam(name = "studentEmail5", required = false) String studentEmail5
 
 	) throws IllegalArgumentException {
 		if (!ManagerLoggedin) {
 			throw new InvalidParameterException("you did not log in");
 		}
-
+		Set<Student> students = new HashSet<Student>();
+		//if(studentEmail1 != "" ||studentEmail1!=null ) {
+			Student student1 = StudentService.getstudent(studentEmail1);			
+			students.add(student1);
+	//	}
+			if(studentEmail2 != "" && studentEmail2!=null ) {
+			Student student2 = StudentService.getstudent(studentEmail2);			
+			students.add(student2);
+			}
+			
+			if(studentEmail3 != "" &&studentEmail3!=null ) {
+			Student student3 = StudentService.getstudent(studentEmail3);			
+			students.add(student3);
+			}
+			
+			if(studentEmail4 != "" &&studentEmail4!=null ) {
+			Student student4 = StudentService.getstudent(studentEmail4);			
+			students.add(student4);
+			}
+			
+			if(studentEmail5 != "" &&studentEmail5!=null ) {
+			Student student5 = StudentService.getstudent(studentEmail5);			
+			students.add(student5);
+			}
+			
 		Session session = SessionService.createSession(year, month, day, startingHour, startingMinute, endingHour,
 				endingMinute, RoomService.getRoom(roomid), tutorService.getTutor(tutor),
 				OfferingService.getSpecificOffering(offeringid), students);
@@ -935,9 +963,9 @@ public class TutoringCompanyRestController {
 		if (session == null) {
 			throw new IllegalArgumentException("There is no such Event!");
 		}
-
+		TutorDto tutorDto = convertToDto(session.getTutor());
 		SessionDto sessionDto = new SessionDto(session.getStart_time(), session.getEnd_time(), session.getDate(),
-				convertToDto(session.getTutor()));
+				tutorDto);
 		return sessionDto;
 	}
 

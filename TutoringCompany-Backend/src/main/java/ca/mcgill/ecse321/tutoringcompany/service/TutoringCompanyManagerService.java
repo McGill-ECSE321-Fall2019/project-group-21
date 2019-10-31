@@ -49,10 +49,10 @@ public class TutoringCompanyManagerService {
     	if  (invalidManagerInfo(first_name, last_name, email, phone_number, password)) {
     		throw new InvalidParameterException("Your manager details are incomplete!");
     	}
-       Manager manager = getManager(email);
+       Manager manager = new Manager();
+       manager.setEmail(email);
        manager.setFirst_name(first_name);
        manager.setLast_name(last_name);
-       manager.setEmail(email);
        manager.setPhone_number(phone_number);
        manager.setPassword(password);
         managerRepository.save(manager);
