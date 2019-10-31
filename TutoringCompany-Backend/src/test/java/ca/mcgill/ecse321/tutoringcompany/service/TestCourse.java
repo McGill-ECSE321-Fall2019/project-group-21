@@ -34,10 +34,10 @@ public class TestCourse {
 	@Autowired
 	private CourseRepository courseRepository;
 	
-//	@Before
-//	public void clearDatabase() {
-//		courseRepository.deleteAll();
-//	}
+	@Before
+	public void clearDatabase() {
+		courseRepository.deleteAll();
+	}
 	
 	/**
 	 * Create a course
