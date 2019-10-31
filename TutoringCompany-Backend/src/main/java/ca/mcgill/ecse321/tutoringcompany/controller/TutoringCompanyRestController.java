@@ -963,9 +963,8 @@ public class TutoringCompanyRestController {
 		if (session == null) {
 			throw new IllegalArgumentException("There is no such Event!");
 		}
-		TutorDto tutorDto = convertToDto(session.getTutor());
-		SessionDto sessionDto = new SessionDto(session.getStart_time(), session.getEnd_time(), session.getDate(),
-				tutorDto);
+		OfferingDto offeringDto = convertToDto(session.getOffering());
+		SessionDto sessionDto = new SessionDto(session.getStart_time(), session.getEnd_time(), session.getDate(), offeringDto);
 		return sessionDto;
 	}
 

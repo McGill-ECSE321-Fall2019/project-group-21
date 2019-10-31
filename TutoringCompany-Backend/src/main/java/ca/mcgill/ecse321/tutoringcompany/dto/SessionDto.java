@@ -6,20 +6,21 @@ import java.sql.Time;
 public class SessionDto {
 	private Time start_time, end_time;
 	private Date date;
-	private TutorDto tutorDto;
+	private OfferingDto offeringDto;
 
-	public SessionDto(Time start_time, Time end_time, Date date, TutorDto tutorDto) {
+	public SessionDto(Time start_time, Time end_time, Date date, OfferingDto offeringDto) {
 		this.start_time = start_time;
 		this.end_time = end_time;
 		this.date = date;
+		this.offeringDto = offeringDto;
 	}
 
 	public Time getStart_time() {
 		return start_time;
 	}
-	
-	public TutorDto getTutorDto() {
-		return tutorDto;
+
+	public OfferingDto getOfferingDto() {
+		return offeringDto;
 	}
 
 	public void setStart_time(Time start_time) {
