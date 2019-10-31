@@ -843,7 +843,7 @@ public class TutoringCompanyRestController {
 
 	}
 
-	@RequestMapping(value = { "/Manager/get/GroupSessions", "/Manager/get/allGroupSessions" })
+	@RequestMapping(value = { "/Manager/get/PendingSessions", "/Manager/getPendingSessions" })
 	public List<SessionDto> getAllGroupSession() {
 		if (!ManagerLoggedin) {
 			throw new InvalidParameterException("you did not log in");
@@ -964,7 +964,7 @@ public class TutoringCompanyRestController {
 			throw new IllegalArgumentException("There is no such Event!");
 		}
 		OfferingDto offeringDto = convertToDto(session.getOffering());
-		SessionDto sessionDto = new SessionDto(session.getStart_time(), session.getEnd_time(), session.getDate(), offeringDto);
+		SessionDto sessionDto = new SessionDto(session.getStart_time(), session.getEnd_time(), session.getDate(), offeringDto, session.getStudent().size());
 		return sessionDto;
 	}
 

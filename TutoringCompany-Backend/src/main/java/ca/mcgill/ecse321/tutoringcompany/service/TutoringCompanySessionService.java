@@ -91,10 +91,10 @@ public class TutoringCompanySessionService {
 		if (students.size()==1) {
 			SessionType individual = SessionType.INDIVIDUAL_SESSION;
 			session.setSession_type(individual);
+
 		} else {
-			SessionType group = SessionType.GROUP_SESSION;
+			SessionType group = SessionType.PENDING_SESSION;
 			session.setSession_type(group);
-	//		session.setRoom(null);
 		}
 //		Set<Student> students = new HashSet<Student>();
 //		for (int i = 0; i < students.s; i++) {
@@ -132,7 +132,7 @@ public class TutoringCompanySessionService {
 	public List<Session> getPendingGroupSession() {
 		List<Session> sessionsGroup = new ArrayList<>();
 		for (Session session : sessionRepository.findAll()) {
-			if (session.getRoom().equals(null)) {
+			if (session.getSession_type().equals(SessionType.PENDING_SESSION)) {
 				sessionsGroup.add(session);
 			}
 		}
