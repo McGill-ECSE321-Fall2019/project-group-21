@@ -777,6 +777,22 @@ public class TutoringCompanyRestController {
 	/****************** Session Services Controllers *********************/
 	
 	// TODO: convert to DTO
+	/**
+	 * This methods allows the manager to create an individual session
+	 * 
+	 * @param tutorEmail
+	 * @param year
+	 * @param month 
+	 * @param day
+	 * @param Roomid
+	 * @param startinHour
+	 * @param startingMinute
+	 * @param endingHour
+	 * @param endingMinute
+	 * @param studentEmails
+	 * @exception IllegalArgumentException  if the tutorEmail is not entered
+	 * @exception InvalidParameterException if the manager did not log in
+	 */
 	@PostMapping(value = { "/Manager/Create/Session", "/Manager/CreateSession/" })
 	public Session CreatSession(@RequestParam(name = "year") int year, @RequestParam(name = "month") int month,
 			@RequestParam(name = "day") int day, @RequestParam(name = "startingHour") int startingHour,
@@ -784,21 +800,17 @@ public class TutoringCompanyRestController {
 			@RequestParam(name = "endingHour") int endingHour, @RequestParam(name = "endingMinute") int endingMinute,
 			@RequestParam(name = "roomid") int roomid, @RequestParam(name = "tutoremail") String tutor,
 			@RequestParam(name = "offeringid") int offeringid,
-			@RequestParam(name = "studentemail1") String studentemail1,
-			@RequestParam(name = "studentemail2") String studentemail2,
-			@RequestParam(name = "studentemail3") String studentemail3
+			@RequestParam(name = "studentEmails") Set<Student> students
 
 	) throws IllegalArgumentException {
 		if (!ManagerLoggedin) {
 			throw new InvalidParameterException("you did not log in");
 		}
-		Set<Student> studentSet = new HashSet<Student>();
-		studentSet.add(StudentService.getstudent(studentemail1));
-		studentSet.add(StudentService.getstudent(studentemail2));
+
 
 		Session session = SessionService.createSession(year, month, day, startingHour, startingMinute, endingHour,
 				endingMinute, RoomService.getRoom(roomid), tutorService.getTutor(tutor),
-				OfferingService.getSpecificOffering(offeringid), studentSet);
+				OfferingService.getSpecificOffering(offeringid), students);
 
 		return session;
 
