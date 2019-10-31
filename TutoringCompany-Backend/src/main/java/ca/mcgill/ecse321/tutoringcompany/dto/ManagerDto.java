@@ -3,9 +3,6 @@ package ca.mcgill.ecse321.tutoringcompany.dto;
 public class ManagerDto {
 
 	private String first_name, last_name, email, phone_number, password;
-	
-//	public ManagerDto() {
-//	}
 
 	public ManagerDto(String first_name, String last_name, String email, String phone_number, String password) {
 		this.first_name = first_name;
