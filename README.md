@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-open  my  own  tutoring  company. Through this company, I plan to cater to the needs of students at the high school, CÉGEP, and university levels. Any student looking for a tutor in any subject taught at those levels can approach the company and ask its help to find an appropriate tutor.
+Through this company, I plan to cater to the needs of students at the high school, CÉGEP, and university levels. Any student looking for a tutor in any subject taught at those levels can approach the company and ask its help to find an appropriate tutor.
 A multi-tier software solution to satisfy  those requirements, implement the system, validate that the system is satisfying the requirements, and develop a release pipeline to automate the software delivery process. Viewpoints developed by multiple teams will be integrated via service calls.
 
 ## Team Members
@@ -28,3 +28,16 @@ A multi-tier software solution to satisfy  those requirements, implement the sys
 ### Sprint 1 Documents
 
 [Project Report 1](https://github.com/McGill-ECSE321-Fall2019/project-group-21/wiki/Project-Report-1)
+
+## Deliverable 2
+
+| Name  | Team Role  | Efforts (hours) |
+| ----- | ---------- | :-------------: |
+| Elias Tamraz | Service Methods, Controller Methods |  |
+| George Kandalaft | Service Methods, DTO, DAO, Controller Methods |  |
+| Caleb Lim | Business Methods Unit Testing, Test Suite |  |
+| Ryan Arndtsen | Documentation, Service Methods, DAO, Quality Assurance Planner |  |
+| Louca Dufault | DTOs, Service Methods, Developer Operations, Mock Testing |  |
+
+### Sprint 2 Documents
+[Project Report 2](https://github.com/McGill-ECSE321-Fall2019/project-group-21/wiki/Project-Report-2)
