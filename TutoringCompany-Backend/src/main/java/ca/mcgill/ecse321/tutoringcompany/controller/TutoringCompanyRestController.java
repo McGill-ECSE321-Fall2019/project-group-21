@@ -50,6 +50,8 @@ public class TutoringCompanyRestController {
 	TutoringCompanyCourseService CourseService;
 	@Autowired
 	TutoringCompanyStudentService StudentService;
+	@Autowired
+	TutoringCompanyTutorTimeBlockService TutorTimeBlockService;
 
 	boolean ManagerLoggedin = false;
 
@@ -948,6 +950,16 @@ public class TutoringCompanyRestController {
 			@RequestParam(name = "email") String email) throws IllegalArgumentException {
 		TutorReviews review = tutorReviewsService.createTutorReview(body, stars, email);
 		return review;
+	}
+	
+	@PostMapping(value = { "Create/TutorTimeBlock", "Create/TutorTimeBlock/" })
+	public TutorTimeBlock createTutorTimeBlock(@RequestParam(name = "day") int day,
+			@RequestParam(name = "month") int month,@RequestParam(name = "year") int year,
+			@RequestParam(name = "start_time") double start_time, @RequestParam(name = "tutorEmail") String tutorEmail)
+					throws IllegalArgumentException {
+	
+		TutorTimeBlock timeBlock = TutorTimeBlockService.createTutorTimeBlock(day, month, year,start_time, tutorEmail);
+		return timeBlock;
 	}
 	
 	/****************** Convert To methods Controllers *********************/

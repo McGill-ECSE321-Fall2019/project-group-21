@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ca.mcgill.ecse321.tutoringcompany.model.Course;
 import ca.mcgill.ecse321.tutoringcompany.model.Manager;
 import ca.mcgill.ecse321.tutoringcompany.model.Room;
+import ca.mcgill.ecse321.tutoringcompany.model.TutorTimeBlock;
 import ca.mcgill.ecse321.tutoringcompany.model.Student;
 import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 import ca.mcgill.ecse321.tutoringcompany.model.TutorReviews;
@@ -17,7 +18,7 @@ import ca.mcgill.ecse321.tutoringcompany.model.Offering;
 import ca.mcgill.ecse321.tutoringcompany.model.Session;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanySessionService;
-//import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
+import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTutorTimeBlockService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyOfferingService;
 import ca.mcgill.ecse321.tutoringcompany.model.TutorTimeBlock;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyCourseService;
@@ -44,6 +45,8 @@ public class TutoringCompanyApplication {
 	private TutoringCompanyOfferingService OfferingService;
 	@Autowired
 	private TutoringCompanyTutorReviewsService TutorReviewsService;
+	@Autowired
+	private TutoringCompanyTutorTimeBlockService TutorTimeBlockService;
 	
   public static void main(String[] args) {
     SpringApplication.run(TutoringCompanyApplication.class, args);
@@ -96,6 +99,10 @@ public class TutoringCompanyApplication {
   @RequestMapping("/student")
   public List<Student> st(){
    return StudentService.getAllStudents();
+   } 
+  @RequestMapping("/tutorTimeBlock")
+  public List<TutorTimeBlock> ttb(){
+   return TutorTimeBlockService.getAllTutorTimeBlocks();
    }
   
 //  @RequestMapping("/tt")
