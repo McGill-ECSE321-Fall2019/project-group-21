@@ -85,6 +85,7 @@ public class TutoringCompanyTutorService {
 	    	tutor.setLast_name(last_name);
 	    	tutor.setPhone_number(phone_number);
 	    	tutor.setPassword(password);
+	    	tutorRepository.save(tutor);
 	    	
 		}
 	    /**
@@ -102,7 +103,8 @@ public class TutoringCompanyTutorService {
 	    		    	if (password == null || password.trim().length() == 0) {
 	    		    		throw new InvalidParameterException("Your password input is not correct");
 	    		    	}
-	    	getTutor(email).setPassword(password);}
+	    	getTutor(email).setPassword(password);
+	    	tutorRepository.save(getTutor(email));}
 	     /**
 	      * Update first name for the specific tutor whose email is given
 	      * 
@@ -115,6 +117,7 @@ public class TutoringCompanyTutorService {
 	   @Transactional
 	    public void updateTutorFirstName(String email, String first_name) {
 	    	getTutor(email).setFirst_name(first_name);
+	    	tutorRepository.save(getTutor(email));
 	  	
 		}
 	   /**
@@ -129,7 +132,7 @@ public class TutoringCompanyTutorService {
 	    @Transactional
 	    public void updateTutorLastName(String email, String last_name) {
 	    	getTutor(email).setLast_name(last_name);
-	  	
+	    	tutorRepository.save(getTutor(email));
 		}
 	    /*------- Get methods -------*/
 
@@ -239,6 +242,12 @@ public class TutoringCompanyTutorService {
 //	        public void verifyTutor(String email) {
 //	        	getTutor(email).setVerified(true);;
 //	        }
-	   
+	        @Transactional
+	        public Tutor verifyTutor(String email) {
+	         Tutor t = getTutor(email);
+	         t.setVerified(true);
+	         tutorRepository.save(t);
+	        return t;
+	        }	   
 
 }

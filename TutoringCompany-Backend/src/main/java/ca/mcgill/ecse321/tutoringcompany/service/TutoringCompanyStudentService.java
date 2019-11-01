@@ -85,6 +85,7 @@ public class TutoringCompanyStudentService {
     	getstudent(currentEmail).setLast_name(LastName);
     	getstudent(currentEmail).setPhone_number(PhoneNumber);
     	getstudent(currentEmail).setPassword(Password);
+    	studentRepository.save(getstudent(currentEmail));
     	
 	}
     /**
@@ -102,6 +103,7 @@ public class TutoringCompanyStudentService {
     		throw new InvalidParameterException("Your Password input is not correct");
     	}
     	getstudent(currentEmail).setPassword(Password);
+    	studentRepository.save(getstudent(currentEmail));
 	}
     /**
      * this method updates the student's first name
@@ -118,6 +120,7 @@ public class TutoringCompanyStudentService {
      		throw new InvalidParameterException("Your FirsName input is not correct");
      	}
     	getstudent(currentEmail).setFirst_name(FirsName);
+    	studentRepository.save(getstudent(currentEmail));
 	}
     /**
      * this method updates the student's last name
@@ -134,6 +137,7 @@ public class TutoringCompanyStudentService {
       		throw new InvalidParameterException("Your FirsName input is not correct");
       	}
     	getstudent(currentEmail).setLast_name(LastName);
+    	studentRepository.save(getstudent(currentEmail));
   	
 	}
    
@@ -148,7 +152,7 @@ public class TutoringCompanyStudentService {
      */
     @Transactional
     public Student getstudent(String email) { 
-    	 studentNotExisted(email);
+    	// studentNotExisted(email);
     Student student = studentRepository.findByEmail(email);
     return student;
     }
@@ -213,5 +217,10 @@ public class TutoringCompanyStudentService {
     	    }
     	    return false;
     	  }
+    @Transactional
+    public void studentExist(String email) {
+      if (! studentRepository.existsById(email))
+        throw new NullPointerException("Student Does not Exist");
+    }
 
 }

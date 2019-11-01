@@ -28,7 +28,7 @@ public class TutoringCompanyStudentReviewsService {
 
 	@Transactional
 	public StudentReviews createStudentReview(String body, int stars, String email) {
-		StudentService.studentNotExisted(email);
+		StudentService.studentExist(email);
 		if(incorrectStudentReviewsDetails(body,stars,email)) {
 			throw new InvalidParameterException("Your student review details are incomplete!");
 		}
@@ -69,17 +69,20 @@ public class TutoringCompanyStudentReviewsService {
 	@Transactional
 	public void updateStudentReviewsBody(StudentReviews review, String body) {
 		review.setBody(body);
+studentReviewsRepository.save(review);
 	}
 
 	@Transactional
 	public void updateStudentReviewsStars(StudentReviews review, int stars) {
 		review.setStars(stars);
+		studentReviewsRepository.save(review);
 	}
 
 	@Transactional
 	public void updateStudentReview(StudentReviews review, String body, int stars) {
 		updateStudentReviewsStars(review,stars);
 		updateStudentReviewsBody(review,body);
+		studentReviewsRepository.save(review);
 	}
 
 	//delete method

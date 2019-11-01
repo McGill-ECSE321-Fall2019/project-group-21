@@ -6,6 +6,9 @@ import javax.persistence.Id;
 public class Manager{
    private String first_name;
 
+public Manager() {
+
+}
 public void setFirst_name(String value) {
     this.first_name = value;
 }
@@ -44,5 +47,8 @@ public void setPhone_number(String value) {
 }
 public String getPhone_number() {
     return this.phone_number;
+}
+public Manager(String email) {
+	this.email = email;
 }
 }

@@ -14,6 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import ca.mcgill.ecse321.tutoringcompany.dao.CourseRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.OfferingRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.SessionRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.Course;
 import ca.mcgill.ecse321.tutoringcompany.model.Subject;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyCourseService;
@@ -34,10 +36,18 @@ public class TestCourse {
 	@Autowired
 	private CourseRepository courseRepository;
 	
-//	@Before
-//	public void clearDatabase() {
-//		courseRepository.deleteAll();
-//	}
+	@Autowired
+	private SessionRepository sessionRepository;
+	
+	@Autowired
+	private OfferingRepository offeringRepository;
+	
+	@Before
+	public void clearDatabase() {
+		sessionRepository.deleteAll();
+		offeringRepository.deleteAll();
+		courseRepository.deleteAll();
+	}
 	
 	/**
 	 * Create a course
@@ -58,62 +68,62 @@ public class TestCourse {
 		assertEquals(name, allcourses.get(0).getName());
 	}
 	
-//	/**
-//	 * Create a course with a null name
-//	 * @result course will not be created due to an error
-//	 */
-//	@Test
-//	public void testCreateCourseNull() {
-//		assertEquals(0, CourseService.getAllCourses().size());
-//		String name = null;
-//		Subject subject = Subject.MATH;
-//		String error = null;
-//		try {
-//			CourseService.createCourse(name, subject, "courseID");
-//		} catch (IllegalArgumentException e) {
-//			error = e.getMessage();
-//		}
-//		assertEquals("Your course details are incomplete!", error);
-//		assertEquals(0, CourseService.getAllCourses().size());
-//	}
-//	
-//	/**
-//	 * Create a course with an empty name
-//	 * @result course will not be created due to an error
-//	 */
-//	@Test
-//	public void testCreateCourseEmpty() {
-//		assertEquals(0, CourseService.getAllCourses().size());
-//		String name = "";
-//		Subject subject = Subject.MATH;
-//		String error = null;
-//		try {
-//			CourseService.createCourse(name, subject, "courseID");
-//		} catch (IllegalArgumentException e) {
-//			error = e.getMessage();
-//		}
-//		assertEquals("Your course details are incomplete!", error);
-//		assertEquals(0, CourseService.getAllCourses().size());
-//	}
-//	
-//	/**
-//	 * Create a course with a space as it's first name
-//	 * @result course will not be created due to an error
-//	 */
-//	@Test
-//	public void testCreateCourseSpaces() {
-//		assertEquals(0, CourseService.getAllCourses().size());
-//		String name = " ";
-//		Subject subject = Subject.MATH;
-//		String error = null;
-//		try {
-//			CourseService.createCourse(name, subject, "courseID");
-//		} catch (IllegalArgumentException e) {
-//			error = e.getMessage();
-//		}
-//		assertEquals("Your course details are incomplete!", error);
-//		assertEquals(0, CourseService.getAllCourses().size());
-//	}
+	/**
+	 * Create a course with a null name
+	 * @result course will not be created due to an error
+	 */
+	@Test
+	public void testCreateCourseNull() {
+		assertEquals(0, CourseService.getAllCourses().size());
+		String name = null;
+		Subject subject = Subject.MATH;
+		String error = null;
+		try {
+			CourseService.createCourse(name, subject, "courseID");
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertEquals("Your course details are incomplete!", error);
+		assertEquals(0, CourseService.getAllCourses().size());
+	}
+	
+	/**
+	 * Create a course with an empty name
+	 * @result course will not be created due to an error
+	 */
+	@Test
+	public void testCreateCourseEmpty() {
+		assertEquals(0, CourseService.getAllCourses().size());
+		String name = "";
+		Subject subject = Subject.MATH;
+		String error = null;
+		try {
+			CourseService.createCourse(name, subject, "courseID");
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertEquals("Your course details are incomplete!", error);
+		assertEquals(0, CourseService.getAllCourses().size());
+	}
+	
+	/**
+	 * Create a course with a space as it's first name
+	 * @result course will not be created due to an error
+	 */
+	@Test
+	public void testCreateCourseSpaces() {
+		assertEquals(0, CourseService.getAllCourses().size());
+		String name = " ";
+		Subject subject = Subject.MATH;
+		String error = null;
+		try {
+			CourseService.createCourse(name, subject, "courseID");
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertEquals("Your course details are incomplete!", error);
+		assertEquals(0, CourseService.getAllCourses().size());
+	}
 	
 	/**
 	 * Delete a course
@@ -139,27 +149,23 @@ public class TestCourse {
 	 */
 	@Test
 	public void testUpdateCourse() {
-		
 		assertEquals(0, CourseService.getAllCourses().size());
 		
 		String name2 = "name2";
-		Subject subject1 = Subject.MATH;
 		Subject subject2 = Subject.PHYSICS;
-		String course = "ecse321";
+		Course course = null;
 		
 		try {
-			CourseService.createCourse("name1",subject1, course);
+			course = CourseService.createCourse("name1", Subject.MATH, "ecse321");
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
 		
-		CourseService.updateName(CourseService.getCourse("ecse321"), name2);
-		CourseService.updateSubject(CourseService.getCourse("ecse321"), subject2);
-		
+		CourseService.updateCourseName(course.getCourse_id(), name2);
+		CourseService.updateCourseSubject(course.getCourse_id(), subject2);
+
 		List<Course> allcourses = CourseService.getAllCourses();
-		Course course1 = allcourses.get(0);
-		
-		assertEquals(name2, course1.getName());
-		assertEquals(subject2, course1.getSubject());
+		assertEquals(name2, allcourses.get(0).getName());
+		assertEquals(subject2, allcourses.get(0).getSubject());
 	}
 }

@@ -15,10 +15,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import ca.mcgill.ecse321.tutoringcompany.dao.CourseRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.OfferingRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.RoomRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.RoomTimeBlockRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.SessionRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.StudentRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.TutorRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.TutorReviewsRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.TutorTimeBlockRepository;
+import ca.mcgill.ecse321.tutoringcompany.model.Course;
 import ca.mcgill.ecse321.tutoringcompany.model.Offering;
-import ca.mcgill.ecse321.tutoringcompany.model.*;
+import ca.mcgill.ecse321.tutoringcompany.model.Room;
 import ca.mcgill.ecse321.tutoringcompany.model.RoomType;
 import ca.mcgill.ecse321.tutoringcompany.model.Session;
 import ca.mcgill.ecse321.tutoringcompany.model.Student;
@@ -38,32 +46,58 @@ import org.junit.Test;
 public class TestSession {
 
 	@Autowired
-	private TutoringCompanySessionService SessionService;
+	private TutoringCompanySessionService sessionService;
 
+	@Autowired
+	private TutoringCompanyRoomService roomService;
+	
+	@Autowired
+	private TutoringCompanyTutorService tutorService;
+	
+	@Autowired
+	private TutoringCompanyOfferingService offeringService;
+	
+	@Autowired
+	private TutoringCompanyCourseService courseService;
+	
+	
 	@Autowired
 	private SessionRepository sessionRepository;
+	
 	@Autowired
-	private TutoringCompanyRoomService RoomService;
+	private RoomTimeBlockRepository roomTimeBlockRepository;
+	
 	@Autowired
-	private TutoringCompanyOfferingService OfferingService;
+	private RoomRepository roomRepository;
+	
 	@Autowired
-	private TutoringCompanyStudentService StudentService;
+	private TutorReviewsRepository tutorReviewsRepository;
+	
 	@Autowired
-	private TutoringCompanyTutorService TutorService;
+	private OfferingRepository offeringRepository;
+	
 	@Autowired
-	private TutoringCompanyCourseService CourseService;
+	private TutorTimeBlockRepository tutorTimeBlockRepository;
+	
 	@Autowired
-	private TutoringCompanyManagerService ManagerService;
-
-
+	private CourseRepository courseRepository;
+	
+	@Autowired
+	private TutorRepository tutorRepository;
 	
 	@Before
 	public void clearDatabase() {
 		sessionRepository.deleteAll();
-//		StudentService.createStudent("george", "tamraz", "st1@gmail.com", "1234567890", "123456");
-//		TutorService.createTutor("elias", "tamraz", "tut1@gmail.com", "4389883384", "50000");
-//		TutorService.getTutor("tut1@gmail.com").setVerified(true);
 		
+		roomTimeBlockRepository.deleteAll();
+		roomRepository.deleteAll();
+		
+		tutorTimeBlockRepository.deleteAll();
+		offeringRepository.deleteAll();
+		tutorReviewsRepository.deleteAll();
+		tutorRepository.deleteAll();
+		
+		courseRepository.deleteAll();
 	}
 	
 	/**
@@ -72,26 +106,36 @@ public class TestSession {
 	 */
 	@Test
 	public void testCreateSession() {
+		assertEquals(0, sessionService.getAllSessions().size());
 		
-		assertEquals(0, SessionService.getAllSessions().size());
-		Set<Student> students = new HashSet<Student>();
-		Student s = StudentService.getstudent("st1@gmail.com");
-		students.add(s);
-		Tutor t = TutorService.getTutor("tut1@gmail.com");
-		Room r = RoomService.getRoom(12);
-		Offering o =  OfferingService.getSpecificOffering(21);
-	
-		
-		int year = 2019;
+		Room room = null;
+		Tutor tutor = null;
+		Offering offering = null;
+		Course course = null;
 		
 		try {
-			SessionService.createSession(year, 11, 23, 13, 0, 14, 0, r, t,o ,students);
+			course = courseService.createCourse("name", Subject.MATH, "ecse321");
+			room = roomService.createRoom(123, RoomType.INDIVIDUAL_ROOM);
+			tutor = tutorService.createTutor("Louca", "Dufault", "mail@mail.com", "1234567890", "pWord");
+			tutor = tutorService.verifyTutor("mail@mail.com");
+			offering = offeringService.createOffering(20, 25, course, tutor);
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
-		List<Session> allSessions = SessionService.getAllSessions();
+		
+		Set<Student> students = new HashSet<Student>();
+		
+		int year = 2019;
+		int month = 4;
+		try {
+			sessionService.createSession(year, month, 30, 1, 1, 23, 59, room, tutor, offering, students);
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
+		List<Session> allSessions = sessionService.getAllSessions();
 		assertEquals(1, allSessions.size());
-		//assertEquals(year, allSessions.get(0).getDate().getYear());
+		assertEquals(year, allSessions.get(0).getDate().getYear()  +1900);
+		assertEquals(month, allSessions.get(0).getDate().getMonth()  +1);
 	}
 	
 	/**
@@ -100,45 +144,70 @@ public class TestSession {
 	 */
 	@Test
 	public void testCreateSessionNull() {
-		assertEquals(0, SessionService.getAllSessions().size());
+		assertEquals(0, sessionService.getAllSessions().size());
 		
+		Course course = null;
 		Room room = null;
-		Tutor tutor = new Tutor();
-		Offering offering = new Offering();
-		Set<Student> students = new HashSet<Student>();
-		
-		String error ="";
+		Tutor tutor = null;
+		Offering offering = null;
 		
 		try {
-			SessionService.createSession(2000, 12, 30, 1, 0, 23, 59, room, tutor, offering, students);
+			course = courseService.createCourse("name", Subject.MATH, "ecse321");
+			room = roomService.createRoom(123, RoomType.INDIVIDUAL_ROOM);
+			tutor = tutorService.createTutor("Louca", "Dufault", "mail@mail.com", "1234567890", "pWord");
+			tutor = tutorService.verifyTutor("mail@mail.com");
+			offering = offeringService.createOffering(20, 25, course, tutor);
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
+		
+		Set<Student> students = new HashSet<Student>();
+		
+		String error = null;
+		
+		try {
+			sessionService.createSession(2000, 12, 30, 1, 0, 23, 59, room, tutor, offering, students);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
+		
 		assertEquals("Your session details are incomplete!", error);
-		assertEquals(0, SessionService.getAllSessions().size());
+		assertEquals(0, sessionService.getAllSessions().size());
 	}
-//	
-//	/**
-//	 * Delete a session
-//	 * @result Session will be deleted without any errors
-//	 */
-//	@Test
-//	public void testDeleteSession() {
-//		assertEquals(0, SessionService.getAllSessions().size());
-//		
-//		Room room = new Room();
-//		Tutor tutor = new Tutor();
-//		Offering offering = new Offering();
-//		Set<Student> students = new HashSet<Student>();
-//		
-//		SessionService.createSession(2000, 12, 30, 1, 0, 23, 59, room, tutor, offering, students);
-//		
-//		assertEquals(1, SessionService.getAllSessions().size());
-//		try {
-//			SessionService.deleteSession(tutor,1);
-//		} catch (IllegalArgumentException e) {
-//			fail();
-//		}
-//		assertEquals(0, SessionService.getAllSessions().size());
-//	}
+	
+	/**
+	 * Delete a session
+	 * @result Session will be deleted without any errors
+	 */
+	@Test
+	public void testDeleteSession() {
+		assertEquals(0, sessionService.getAllSessions().size());
+		
+		Course course = null;
+		Room room = null;
+		Tutor tutor = null;
+		Offering offering = null;
+		
+		try {
+			course = courseService.createCourse("name", Subject.MATH, "ecse321");
+			room = roomService.createRoom(123, RoomType.INDIVIDUAL_ROOM);
+			tutor = tutorService.createTutor("Louca", "Dufault", "mail@mail.com", "1234567890", "pWord");
+			tutor = tutorService.verifyTutor("mail@mail.com");
+			offering = offeringService.createOffering(20, 25, course, tutor);
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
+		
+		Set<Student> students = new HashSet<Student>();
+		
+		sessionService.createSession(2019, 12, 30, 1, 3, 23, 59, room, tutor, offering, students);
+		
+		assertEquals(1, sessionService.getAllSessions().size());
+		try {
+			sessionService.deleteSession(tutor.getEmail(), 1);
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
+		assertEquals(0, sessionService.getAllSessions().size());
+	}
 }

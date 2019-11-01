@@ -4,37 +4,88 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.List;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 
-import org.apache.catalina.Manager;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
+import ca.mcgill.ecse321.tutoringcompany.model.*;
 import ca.mcgill.ecse321.tutoringcompany.dao.ManagerRepository;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.when;
+import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+
 
 /**
  * 
  * @author calebsh
  *
  */
-@RunWith(SpringRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
 public class TestManager {
-	
-	@Autowired
+
+	@InjectMocks
 	private TutoringCompanyManagerService ManagerService;
 	
-	@Autowired
+	@Mock
 	private ManagerRepository managerRepository;
+	private static final String FIRST_NAME = "first_name";
+	private static final String LAST_NAME = "last_name";
+    private static final String Email = "manager@email.com";
+	private static final String phoneNumber = "4500000000";
+	private static final String Password = "123456";
 	
 	@Before
-	public void clearDatabase() {
-		managerRepository.deleteAll();
-	}
+	  public void mockSetUp() {
+	    when(managerRepository.save(any(Manager.class))).thenAnswer((InvocationOnMock invocation) -> {
+	     Manager manager = new Manager();
+	     manager.setFirst_name(FIRST_NAME);
+	     manager.setLast_name(LAST_NAME);
+	     manager.setEmail(Email);
+	     manager.setPassword(Password);
+	     manager.setPhone_number(phoneNumber);
+	    	return manager;
+	    });
+	    when(managerRepository.findByEmail(anyString())).thenAnswer((InvocationOnMock invocation) -> {
+	      
+	    	if (invocation.getArgument(0).equals(Email)) {
+	        	 Manager manager = new Manager();
+	    	     manager.setFirst_name(FIRST_NAME);
+	    	     manager.setLast_name(LAST_NAME);
+	    	     manager.setEmail(Email);
+	    	     manager.setPassword(Password);
+	    	     manager.setPhone_number(phoneNumber);
+	    	    	return manager;
+	    	}
+	    	
+	    	 else {
+					return null;
+				}
+	      });
+	 
+
+	  }
 	
 	/**
 	 * Create a manager
@@ -42,16 +93,20 @@ public class TestManager {
 	 */
 	@Test
 	public void testCreateManager(){
-		assertEquals(0, ManagerService.getAllManagers().size());
-		String firstName = "fName";
 		try {
-			ManagerService.createManager(firstName, "lName", "mail@mail.com", "pNum", "pWord");
+			ManagerService.createManager(FIRST_NAME, LAST_NAME, Email, phoneNumber, Password);
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
-		List<ca.mcgill.ecse321.tutoringcompany.model.Manager> allManagers = ManagerService.getAllManagers();
-		assertEquals(1, allManagers.size());
-		assertEquals(firstName, allManagers.get(0).getFirst_name());
+		 
+		Manager m =ManagerService.getManager(Email);
+		 assertEquals(FIRST_NAME, m.getFirst_name());
+		 assertEquals(LAST_NAME, m.getLast_name());
+		 assertEquals(Email, m.getEmail());
+		 assertEquals(phoneNumber, m.getPhone_number());
+		 assertEquals(Password, m.getPassword());
+		 
+		 
 	}
 	
 	/**
@@ -60,7 +115,7 @@ public class TestManager {
 	 */
 	@Test
 	public void testCreateManagerNull() {
-		assertEquals(0, ManagerService.getAllManagers().size());
+		
 		String firstName = null;
 		String error = null;
 		try {
@@ -69,26 +124,10 @@ public class TestManager {
 			error = e.getMessage();
 		}
 		assertEquals("Your manager details are incomplete!", error);
-		assertEquals(0, ManagerService.getAllManagers().size());
+		
 	}
 	
-	/**
-	 * Create a manager with an empty name
-	 * @result Manager will not be created due to an error
-	 */
-	@Test
-	public void testCreateManagerEmpty() {
-		assertEquals(0, ManagerService.getAllManagers().size());
-		String firstName = "";
-		String error = null;
-		try {
-			ManagerService.createManager(firstName,"lName", "mail@mail.com", "pNum", "pWord");
-		} catch (IllegalArgumentException e) {
-			error = e.getMessage();
-		}
-		assertEquals("Your manager details are incomplete!", error);
-		assertEquals(0, ManagerService.getAllManagers().size());
-	}
+
 	
 	/**
 	 * Create a manager with a space as it's first name
@@ -96,7 +135,7 @@ public class TestManager {
 	 */
 	@Test
 	public void testCreateManagerSpaces() {
-		assertEquals(0, ManagerService.getAllManagers().size());
+		
 		String firstName = " ";
 		String error = null;
 		try {
@@ -105,59 +144,6 @@ public class TestManager {
 			error = e.getMessage();
 		}
 		assertEquals("Your manager details are incomplete!", error);
-		assertEquals(0, ManagerService.getAllManagers().size());
-	}
-	
-	/**
-	 * Delete a manager
-	 * @result Manager will be deleted without any errors
-	 */
-	@Test
-	public void testDeleteManager() {
-		assertEquals(0, ManagerService.getAllManagers().size());
-		testCreateManager();
-		assertEquals(1, ManagerService.getAllManagers().size());
-		try {
-			ManagerService.deleteManager("mail@mail.com");
-		} catch (IllegalArgumentException e) {
-			
-		}
-		assertEquals(0, ManagerService.getAllManagers().size());
-	}
-	
-	/**
-	 * Update a Manager
-	 * @result Manager will be updated without any errors
-	 */
-	@Test
-	public void testUpdateManager() {
 		
-		assertEquals(0, ManagerService.getAllManagers().size());
-		
-		String firstName1 = "fName1";
-		String firstName2 = "fName2";
-		String lastName1 = "lName1";
-		String lastName2 = "lName2";
-		String email = "mail@mail.com";
-		String phoneNum1 = "pNum1";
-		String phoneNum2 = "pNum2";
-		String password1 = "pWord1";
-		String password2 = "pWord2";
-		
-		try {
-			ManagerService.createManager(firstName1, lastName1, email, phoneNum1, password1);
-		} catch (IllegalArgumentException e) {
-			fail();
-		}
-		
-		ManagerService.updateManager(email, firstName2, lastName2, phoneNum2, password2);
-		
-		List<ca.mcgill.ecse321.tutoringcompany.model.Manager> allManagers = ManagerService.getAllManagers();
-		ca.mcgill.ecse321.tutoringcompany.model.Manager manager = allManagers.get(0);
-		
-		assertEquals(firstName2, manager.getFirst_name());
-		assertEquals(lastName2, manager.getLast_name());
-		assertEquals(phoneNum2, manager.getPhone_number());
-		assertEquals(password2, manager.getPassword());
 	}
 }

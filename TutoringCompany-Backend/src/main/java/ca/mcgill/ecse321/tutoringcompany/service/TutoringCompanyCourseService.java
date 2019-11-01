@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.persistence.EntityExistsException;
 import javax.transaction.Transactional;
 import ca.mcgill.ecse321.tutoringcompany.model.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ public class TutoringCompanyCourseService {
 	 */
 	@Transactional
 	public Course createCourse(String name, Subject subject, String course_id) {
+		courseValid(course_id, name, subject);
 		Course course = new Course();
 		course.setCourse_id(course_id);
 		course.setName(name);
@@ -50,18 +52,12 @@ public class TutoringCompanyCourseService {
 	 * Read a specific course by its id
 	 * 
 	 * @param course_id
-	 * 
-	 * @exception NullPointerException if course by that course_id does not exist
-	 * 
 	 * @return course
 	 */
 	@Transactional
 	public Course getCourse(String course_id) {
-		try {
-			return courseRepository.findById(course_id).get();
-		} catch (NoSuchElementException e) {
-			throw new NullPointerException("No such Course.");
-		}
+		//courseExist(course_id);
+		return courseRepository.findById(course_id).get();
 	}
 	
 	/**
@@ -125,25 +121,27 @@ public class TutoringCompanyCourseService {
 	
 	
 	/**
-	 * Update name for the specific course passed
+	 * Update name for the specific course whose course_id is passed
 	 * 
-	 * @param course
+	 * @param course_id
 	 * @param name
 	 */
 	@Transactional
-	public void updateName(Course course, String name) {
-		course.setName(name);
+	public void updateCourseName(String course_id, String name) {
+		getCourse(course_id).setName(name);
+		courseRepository.save(getCourse(course_id));
 	}
 	
 	/**
-	 * Update subject for the specific course passed
+	 * Update subject for the specific course whose course_id is passed
 	 * 
-	 * @param course
+	 * @param course_id
 	 * @param subject
 	 */
 	@Transactional
-	public void updateSubject(Course course, Subject subject) {
-		course.setSubject(subject);
+	public void updateCourseSubject(String course_id, Subject subject) {
+		getCourse(course_id).setSubject(subject);
+		courseRepository.save(getCourse(course_id));
 	}
 	
 //	Unnecessary complexity
@@ -214,4 +212,43 @@ public class TutoringCompanyCourseService {
 //    	}
 //    	return resultList;
 //    	}
+	
+	/**
+	 * Ensures that offering by the given id is unique or throws exception
+	 * 
+	 * @param course_id of course
+	 * @exception EntityExistsException if course already exists
+	 */
+	@Transactional
+    public void courseUnique(String course_id) {
+      if (courseRepository.existsById(course_id))
+        throw new EntityExistsException("offering Already Exists");
+    }
+	
+    /**
+     * Ensures that offering by the given id already exists or throws exception
+     * 
+     * @param course_id of course
+     * @exception NullPointerException if course does not exist
+     */
+    @Transactional
+    public void courseExist(String course_id) {
+      if (! courseRepository.existsById(course_id))
+        throw new NullPointerException("offering Does not Exist");
+    }
+    
+    /**
+     * Ensures that the course info given is valid or throws exception
+     * 
+     * @param course_id
+     * @param name
+     * @param subject
+     * @exception IllegalArgumentException if any of the given parameters are invalid (null or length 0 after trim)
+     */
+    private void courseValid(String course_id, String name, Subject subject) {
+ 	    if (course_id == null || course_id.trim().length() == 0 || 
+ 	    		name == null || name.trim().length() == 0) {
+ 	      throw new IllegalArgumentException("Your course details are incomplete!");
+ 	    }
+    }
 }

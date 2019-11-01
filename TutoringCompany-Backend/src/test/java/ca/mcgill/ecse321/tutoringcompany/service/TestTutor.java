@@ -4,55 +4,109 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.List;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 
-import org.apache.catalina.Manager;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
+import ca.mcgill.ecse321.tutoringcompany.model.*;
+import ca.mcgill.ecse321.tutoringcompany.dao.ManagerRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.TutorRepository;
-import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
-import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTutorService;
+import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.when;
+import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+
 
 /**
  * 
  * @author calebsh
  *
  */
-@RunWith(SpringRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
 public class TestTutor {
 
-	@Autowired
+	@InjectMocks
 	private TutoringCompanyTutorService TutorService;
-
-	@Autowired
+	
+	@Mock
 	private TutorRepository tutorRepository;
+	private static final String FIRST_NAME = "first_name";
+	private static final String LAST_NAME = "last_name";
+    private static final String Email = "tutor@email.com";
+	private static final String phoneNumber = "4500000000";
+	private static final String Password = "123456";
+	
+	@Before
+	  public void mockSetUp() {
+	    when(tutorRepository.save(any(Tutor.class))).thenAnswer((InvocationOnMock invocation) -> {
+	     Tutor tutor = new Tutor();
+	     tutor.setFirst_name(FIRST_NAME);
+	     tutor.setLast_name(LAST_NAME);
+	     tutor.setEmail(Email);
+	     tutor.setPassword(Password);
+	     tutor.setPhone_number(phoneNumber);
+	    	return tutor;
+	    });
+	    when(tutorRepository.findByEmail(anyString())).thenAnswer((InvocationOnMock invocation) -> {
+	      
+	    	if (invocation.getArgument(0).equals(Email)) {
+	        	 Tutor tutor = new Tutor();
+	    	     tutor.setFirst_name(FIRST_NAME);
+	    	     tutor.setLast_name(LAST_NAME);
+	    	     tutor.setEmail(Email);
+	    	     tutor.setPassword(Password);
+	    	     tutor.setPhone_number(phoneNumber);
+	    	    	return tutor;
+	    	}
+	    	 else {
+					return null;
+				}
+	      });
+	 
 
-//	@Before
-//	public void clearDatabase() {
-//		tutorRepository.deleteAll();
-//	}
-
+	  }
+	
 	/**
 	 * Create a tutor
 	 * @result Tutor will be persisted without any errors
 	 */
 	@Test
-	public void testCreateTutor() {
-		assertEquals(0, TutorService.getAllTutors().size());
-		String firstName = "fName";
+	public void testCreateTutor(){
 		try {
-			TutorService.createTutor(firstName, "lName", "mail@mail.com", "pNum", "pWord");
+			TutorService.createTutor(FIRST_NAME, LAST_NAME, Email, phoneNumber, Password);
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
-		List<Tutor> allTutors = TutorService.getAllTutors();
-		assertEquals(1, allTutors.size());
-		assertEquals(firstName, allTutors.get(0).getFirst_name());
+		 
+		Tutor m =TutorService.getTutor(Email);
+		 assertEquals(FIRST_NAME, m.getFirst_name());
+		 assertEquals(LAST_NAME, m.getLast_name());
+		 assertEquals(Email, m.getEmail());
+		 assertEquals(phoneNumber, m.getPhone_number());
+		 assertEquals(Password, m.getPassword());
+		 
+		 
 	}
 	
 	/**
@@ -61,7 +115,7 @@ public class TestTutor {
 	 */
 	@Test
 	public void testCreateTutorNull() {
-		assertEquals(0, TutorService.getAllTutors().size());
+		
 		String firstName = null;
 		String error = null;
 		try {
@@ -70,26 +124,10 @@ public class TestTutor {
 			error = e.getMessage();
 		}
 		assertEquals("Your tutor details are incomplete!", error);
-		assertEquals(0, TutorService.getAllTutors().size());
+		
 	}
 	
-	/**
-	 * Create a tutor with an empty name
-	 * @result Tutor will not be created due to an error
-	 */
-	@Test
-	public void testCreateTutorEmpty() {
-		assertEquals(0, TutorService.getAllTutors().size());
-		String firstName = "";
-		String error = null;
-		try {
-			TutorService.createTutor(firstName,"lName", "mail@mail.com", "pNum", "pWord");
-		} catch (IllegalArgumentException e) {
-			error = e.getMessage();
-		}
-		assertEquals("Your tutor details are incomplete!", error);
-		assertEquals(0, TutorService.getAllTutors().size());
-	}
+
 	
 	/**
 	 * Create a tutor with a space as it's first name
@@ -97,7 +135,7 @@ public class TestTutor {
 	 */
 	@Test
 	public void testCreateTutorSpaces() {
-		assertEquals(0, TutorService.getAllTutors().size());
+		
 		String firstName = " ";
 		String error = null;
 		try {
@@ -106,60 +144,6 @@ public class TestTutor {
 			error = e.getMessage();
 		}
 		assertEquals("Your tutor details are incomplete!", error);
-		assertEquals(0, TutorService.getAllTutors().size());
+		
 	}
-
-	/**
-	 * Delete a tutor
-	 * @result Tutor will be deleted without any errors
-	 */
-	@Test
-	public void testDeleteTutor() {
-		assertEquals(0, TutorService.getAllTutors().size());
-		testCreateTutor();
-		assertEquals(1, TutorService.getAllTutors().size());
-		try {
-			TutorService.deleteTutor("mail@mail.com");
-		} catch (IllegalArgumentException e) {
-			fail();
-		}
-		assertEquals(0, TutorService.getAllTutors().size());
-	}
-
-	/**
-	 * Update a tutor
-	 * @result Tutor will be updated without any errors
-	 */
-	@Test
-	public void testUpdateTutor() {
-
-		assertEquals(0, TutorService.getAllTutors().size());
-
-		String firstName1 = "fName1";
-		String firstName2 = "fName2";
-		String lastName1 = "lName1";
-		String lastName2 = "lName2";
-		String email = "mail@mail.com";
-		String phoneNum1 = "pNum1";
-		String phoneNum2 = "pNum2";
-		String password1 = "pWord1";
-		String password2 = "pWord2";
-
-		try {
-			TutorService.createTutor(firstName1, lastName1, email, phoneNum1, password1);
-		} catch (IllegalArgumentException e) {
-			fail();
-		}
-
-		TutorService.updateTutor(email, firstName2, lastName2, phoneNum2, password2);
-
-		List<Tutor> allTutors = TutorService.getAllTutors();
-		Tutor tutor = allTutors.get(0);
-
-		assertEquals(firstName2, tutor.getFirst_name());
-		assertEquals(lastName2, tutor.getLast_name());
-		assertEquals(phoneNum2, tutor.getPhone_number());
-		assertEquals(password2, tutor.getPassword());
-	}
-
 }

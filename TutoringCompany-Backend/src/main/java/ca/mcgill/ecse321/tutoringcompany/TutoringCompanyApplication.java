@@ -30,81 +30,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 @SpringBootApplication
 public class TutoringCompanyApplication {
-	@Autowired
-	private TutoringCompanyStudentService StudentService;
-	@Autowired
-	private TutoringCompanySessionService SessionService;
-	@Autowired
-	private TutoringCompanyTutorService TutorService;
-	@Autowired
-	private TutoringCompanyManagerService ManagerService;
-	@Autowired
-//	private TutoringCompanyRoomService RoomService;
-//	@Autowired
-	private TutoringCompanyOfferingService OfferingService;
-	@Autowired
-	private TutoringCompanyTutorReviewsService TutorReviewsService;
+	
 	
   public static void main(String[] args) {
     SpringApplication.run(TutoringCompanyApplication.class, args);
   }
-  @Autowired
-	private TutoringCompanyCourseService CourseService;
-//	@Autowired
-//	private TutoringCompanyTutorTimeBlockService TutorTimeBlockService;
-//	
+  
   @RequestMapping("/")
   public String greeting(){
     return "hello world!";
   }
-  @RequestMapping("/t")
-  public List<Tutor> tutors(){
-    return TutorService.getAllTutors();
-  }
-  @RequestMapping("/m")
-  public List<Manager> managers(){
-    return ManagerService.getAllManagers();
-  }
-  //@RequestMapping("/room")
-//  public List<Room> rooms(){
-//    return RoomService.getAllRooms();
-//  }
-  @RequestMapping("/man")
-  public List<Manager> man(){
-    return ManagerService.find();
-  }
-  @RequestMapping("/offering")
-  public List<Offering> off(){
-    return OfferingService.getAllOfferings();
-  }
-
-
-  @RequestMapping("/review")
-  public List<TutorReviews> review(){
-    return TutorReviewsService.getAllTutorReviews();
-  }
-  
-  
-  @RequestMapping("/course")
-  public List<Course> course(){
-    return CourseService.getAllCourses();
-  }
-  @RequestMapping("/session")
-  public List<Session> tb(){
-   return SessionService.getAllSessions();
-   }
-  @RequestMapping("/student")
-  public List<Student> st(){
-   return StudentService.getAllStudents();
-   }
-  @RequestMapping("/o")
-  public List<Offering> o(){
-   return OfferingService.getAllOfferings();
-  }
-  
-//  @RequestMapping("/tt")
-//  public boolean tt(){
-//   return TutorTimeBlockService.isAvailable(04, 11, 1997, TutorService.getTutor("al7bib"), 8);
- //  }
+ 
 }
 

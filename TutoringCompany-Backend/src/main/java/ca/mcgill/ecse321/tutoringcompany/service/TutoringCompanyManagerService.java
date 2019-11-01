@@ -13,21 +13,20 @@ import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.tutoringcompany.dao.ManagerRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.TutorRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.Manager;
-import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
-
 /**
  * 
  * @author Elias Tamraz
  *
  */
+
 @Service
 public class TutoringCompanyManagerService {
 	  @Autowired
-	    TutorRepository tutorRepository;
-	    @Autowired
-		TutoringCompanyTutorService tutorService;
-    @Autowired
-     ManagerRepository managerRepository;
+	  TutorRepository tutorRepository;
+	  @Autowired
+	  TutoringCompanyTutorService tutorService;
+      @Autowired
+      ManagerRepository managerRepository;
    
     /*------- Creation methods -------*/
     /**
@@ -59,6 +58,7 @@ public class TutoringCompanyManagerService {
         return manager;
     }
     
+    
     /*-------  Delete methods -------*/
     
     /**
@@ -69,7 +69,7 @@ public class TutoringCompanyManagerService {
      */
     @Transactional
     public void deleteManager(String email) {
-    	managerExist(email);
+    	//managerExist(email);
     	managerRepository.delete(getManager(email));
 	}
     /*------- Update methods -------*/
@@ -97,6 +97,7 @@ public class TutoringCompanyManagerService {
     	manager.setLast_name(last_name);
     	manager.setPhone_number(PhoneNumber);
     	manager.setPassword(Password);
+    	managerRepository.save(getManager(email));
     	
 	}
     /**
@@ -115,6 +116,8 @@ public class TutoringCompanyManagerService {
      		throw new InvalidParameterException("Your Password input is not correct");
      	}
     	getManager(email).setPassword(password);
+    	managerRepository.save(getManager(email));
+    	
 	}
     
     /**
@@ -133,6 +136,7 @@ public class TutoringCompanyManagerService {
  		throw new InvalidParameterException("Your first name input is not correct");
  	}
     	getManager(email).setFirst_name(first_name);
+    	managerRepository.save(getManager(email));
 	}
     /**
      * Update first name for the specific manager whose email is given
@@ -150,6 +154,7 @@ public class TutoringCompanyManagerService {
   		throw new InvalidParameterException("Your last name input is not correct");
   	}
     	getManager(email).setLast_name(last_name);
+    	managerRepository.save(getManager(email));
 	}
     /*------- Get methods -------*/
 
@@ -162,8 +167,9 @@ public class TutoringCompanyManagerService {
      */
     @Transactional
     public Manager getManager(String email) {
-   	 managerExist(email);
+//   	 managerExist(email);
     Manager manager = managerRepository.findByEmail(email);
+    
     return manager;
     }
     /**
@@ -206,6 +212,7 @@ public class TutoringCompanyManagerService {
       if (managerRepository.existsById(email)==false)
         throw new NullPointerException("manager Does not Exist");
     }
+    
     
    /**
     * this method makes sure that the input follows the correct pattern
