@@ -1059,7 +1059,7 @@ public class TutoringCompanyRestController {
 			throw new InvalidParameterException("you did not log in");
 		}
 		StudentReviewsService.updateStudentReviewsBody(StudentReviewsService.getStudentReview(id), body);
-		return "The review has been changer to: " + body;
+		return "The review has been changed to: " + body;
 	}
 
 	/****************** TutorReview Services Controllers *********************/
