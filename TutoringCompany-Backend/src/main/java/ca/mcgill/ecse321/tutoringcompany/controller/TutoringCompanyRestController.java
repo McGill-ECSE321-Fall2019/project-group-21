@@ -52,6 +52,8 @@ public class TutoringCompanyRestController {
 	TutoringCompanyStudentService StudentService;
 	@Autowired
 	TutoringCompanyTutorTimeBlockService TutorTimeBlockService;
+	@Autowired
+	TutoringCompanyRoomTimeBlockService RoomTimeBlockService;
 
 	boolean ManagerLoggedin = false;
 
@@ -974,27 +976,27 @@ public class TutoringCompanyRestController {
 		return convertToTutorTimeBlockListDto(result);
 	}
 	
-//	/****************** RoomTimeBlock Services Controllers *********************/
-//
-//	@PostMapping(value = { "Create/RoomTimeBlock", "Create/RoomTimeBlock/" })
-//	public RoomTimeBlockDto createRoomTimeBlock(@RequestParam(name = "day") int day,
-//			@RequestParam(name = "month") int month, @RequestParam(name = "year") int year,
-//			@RequestParam(name = "start_time") double start_time, @RequestParam(name = "roomEmail") String tutorEmail)
-//			throws IllegalArgumentException {
-//
-//		RoomTimeBlock timeBlock = RoomTimeBlockService.createRoomTimeBlock(day, month, year, start_time, tutorEmail);
-//		return convertToDto(timeBlock);
-//	}
-//
-//	@RequestMapping(value = { "get/Room/TimeBlocks", "getRoomTimeBlocks" })
-//	public List<RoomTimeBlockDto> getRoomTimeBlocks(@RequestParam(name = "tutorEmail") String tutorEmail) {
-//
-////		if (!ManagerLoggedin) {
-////			throw new InvalidParameterException("you did not log in");
-////		}
-//		List<RoomTimeBlock> result = RoomTimeBlockService.getRoomTimeBlocks(tutorService.getRoom(tutorEmail));
-//		return convertToRoomTimeBlockListDto(result);
-//	}
+	/****************** RoomTimeBlock Services Controllers *********************/
+
+	@PostMapping(value = { "Create/RoomTimeBlock", "Create/RoomTimeBlock/" })
+	public RoomTimeBlockDto createRoomTimeBlock(@RequestParam(name = "day") int day,
+			@RequestParam(name = "month") int month, @RequestParam(name = "year") int year,
+			@RequestParam(name = "start_time") double start_time, @RequestParam(name = "roomId") int roomId)
+			throws IllegalArgumentException {
+
+		RoomTimeBlock timeBlock = RoomTimeBlockService.createRoomTimeBlock(day, month, year, start_time, roomId);
+		return convertToDto(timeBlock);
+	}
+
+	@RequestMapping(value = { "get/Room/TimeBlocks", "getRoomTimeBlocks" })
+	public List<RoomTimeBlockDto> getRoomTimeBlocks(@RequestParam(name = "roomId") int roomId) {
+
+//		if (!ManagerLoggedin) {
+//			throw new InvalidParameterException("you did not log in");
+//		}
+		List<RoomTimeBlock> result = RoomTimeBlockService.getRoomTimeBlocks(RoomService.getRoom(roomId));
+		return convertToRoomTimeBlockListDto(result);
+	}
 
 	/****************** Convert To methods Controllers *********************/
 
@@ -1069,6 +1071,16 @@ public class TutoringCompanyRestController {
 				tutorTimeBlock.getMonth(), tutorTimeBlock.getYear(), convertToDto(tutorTimeBlock.getTutor()));
 		return timeBlockDto;
 	}
+	
+
+	private RoomTimeBlockDto convertToDto(RoomTimeBlock roomTimeBlock) {
+		if (roomTimeBlock == null) {
+			throw new IllegalArgumentException("There is no such Event!");
+		}
+		RoomTimeBlockDto timeBlockDto = new RoomTimeBlockDto(roomTimeBlock.getStart_time(), roomTimeBlock.getDay(),
+				roomTimeBlock.getMonth(), roomTimeBlock.getYear());
+		return timeBlockDto;
+	}
 
 	private RoomDto convertToDto(Room room) {
 		if (room == null) {
@@ -1131,11 +1143,23 @@ public class TutoringCompanyRestController {
 			throw new IllegalArgumentException("There is no such Event!");
 		}
 		List<TutorTimeBlockDto> listTutorTimeBlockDto = new ArrayList<TutorTimeBlockDto>();
-		for (TutorTimeBlock session : listTutorTimeBlock) {
-			listTutorTimeBlockDto.add(convertToDto(session));
+		for (TutorTimeBlock tt : listTutorTimeBlock) {
+			listTutorTimeBlockDto.add(convertToDto(tt));
 		}
 
 		return listTutorTimeBlockDto;
+	}
+
+	private List<RoomTimeBlockDto> convertToRoomTimeBlockListDto(List<RoomTimeBlock> listRoomTimeBlock) {
+		if (listRoomTimeBlock == null) {
+			throw new IllegalArgumentException("There is no such Event!");
+		}
+		List<RoomTimeBlockDto> listRoomTimeBlockDto = new ArrayList<RoomTimeBlockDto>();
+		for (RoomTimeBlock rt : listRoomTimeBlock) {
+			listRoomTimeBlockDto.add(convertToDto(rt));
+		}
+
+		return listRoomTimeBlockDto;
 	}
 
 	private List<TutorDto> convertToTutorListDto(List<Tutor> listTutor) {

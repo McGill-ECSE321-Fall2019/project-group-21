@@ -21,10 +21,13 @@ import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanySessionService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTutorTimeBlockService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyOfferingService;
 import ca.mcgill.ecse321.tutoringcompany.model.TutorTimeBlock;
+import ca.mcgill.ecse321.tutoringcompany.model.RoomTimeBlock;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyCourseService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTutorReviewsService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTutorService;
+import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomTimeBlockService;
+import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -47,6 +50,10 @@ public class TutoringCompanyApplication {
 	private TutoringCompanyTutorReviewsService TutorReviewsService;
 	@Autowired
 	private TutoringCompanyTutorTimeBlockService TutorTimeBlockService;
+	@Autowired
+	private TutoringCompanyRoomTimeBlockService RoomTimeBlockService;
+	@Autowired
+	private TutoringCompanyRoomService RoomService;
 	
   public static void main(String[] args) {
     SpringApplication.run(TutoringCompanyApplication.class, args);
@@ -105,6 +112,16 @@ public class TutoringCompanyApplication {
    return TutorTimeBlockService.getAllTutorTimeBlocks();
    }
   
+  @RequestMapping("/roomTimeBlock")
+  public List<RoomTimeBlock> rtb(){
+   return RoomTimeBlockService.getAllRoomTimeBlocks();
+   }
+
+@RequestMapping("/Room")
+public List<Room> room(){
+ return RoomService.getAllRooms();
+ }
+
 //  @RequestMapping("/tt")
 //  public boolean tt(){
 //   return TutorTimeBlockService.isAvailable(04, 11, 1997, TutorService.getTutor("al7bib"), 8);
