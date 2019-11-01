@@ -3,16 +3,21 @@ package ca.mcgill.ecse321.tutoringcompany.dto;
 public class TutorTimeBlockDto {
 	private double start_time;
 	private int day, month, year;
+	private TutorDto tutorDto;
 
-	public TutorTimeBlockDto(double start_time, int day, int month, int year) {
+	public TutorTimeBlockDto(double start_time, int day, int month, int year, TutorDto tutorDto) {
 		this.start_time = start_time;
 		this.day = day;
 		this.month = month;
 		this.year = year;
+		this.tutorDto = tutorDto;
 	}
 
 	public double getStart_time() {
 		return start_time;
+	}
+	public TutorDto getTutorDto() {
+		return tutorDto;
 	}
 
 	public void setStart_time(double start_time) {
