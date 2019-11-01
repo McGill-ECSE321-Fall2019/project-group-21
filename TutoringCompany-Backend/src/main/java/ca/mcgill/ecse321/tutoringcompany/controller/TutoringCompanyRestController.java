@@ -858,6 +858,7 @@ public class TutoringCompanyRestController {
 			throw new InvalidParameterException("you did not log in");
 		}
 		Set<Student> students = new HashSet<Student>();
+
 		// if(studentEmail1 != "" ||studentEmail1!=null ) {
 		Student student1 = StudentService.getstudent(studentEmail1);
 		students.add(student1);
@@ -879,6 +880,7 @@ public class TutoringCompanyRestController {
 
 		if (studentEmail5 != "" && studentEmail5 != null) {
 			Student student5 = StudentService.getstudent(studentEmail5);
+
 			students.add(student5);
 		}
 
@@ -964,7 +966,7 @@ public class TutoringCompanyRestController {
 		if (!ManagerLoggedin) {
 			throw new InvalidParameterException("you did not log in");
 		}
-		SessionService.ConfirmSession(tutorService.getTutor(tutorEmail), startingTime, RoomService.getRoom(roomNumber));
+		SessionService.confirmSession(tutorService.getTutor(tutorEmail), startingTime, RoomService.getRoom(roomNumber));
 		;
 		return "The Session has been confirmed";
 	}

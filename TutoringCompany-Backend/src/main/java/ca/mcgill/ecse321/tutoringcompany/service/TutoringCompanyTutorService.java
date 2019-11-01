@@ -21,6 +21,7 @@ public class TutoringCompanyTutorService {
 	    /*------- Creation methods -------*/
 	 /**
 	  * Create Tutor instance with the given parameters, save it, and return it
+	  * 
 	  * @param first_name : first name of the tutor that will be created
 	  * @param last_name : last name of the tutor that will be created
 	  * @param email    : email address of the tutor that will be created 
@@ -34,9 +35,7 @@ public class TutoringCompanyTutorService {
 	 @Transactional
 	    public Tutor createTutor(String first_name, String last_name, String email, String phone_number, String password) {
 		 tutorUnique(email);
-	    	if  (invalidTutorInfo(first_name, last_name, email, phone_number, password)) {
-	    		throw new InvalidParameterException("Your tutor details are incomplete!");
-	    	}
+		 tutorValid(first_name, last_name, email, phone_number, password);
 		   Tutor tutor = new Tutor();
 		   tutor.setVerified(false);
 	       tutor.setFirst_name(first_name);
@@ -47,6 +46,7 @@ public class TutoringCompanyTutorService {
 	        tutorRepository.save(tutor);
 	        return tutor;
 	    }
+	 
 	   /*-------  Delete methods -------*/
 	    
 	    /**
@@ -58,8 +58,8 @@ public class TutoringCompanyTutorService {
 	    public void deleteTutor(String email) {
 	    	tutorExist(email);
 	    	tutorRepository.delete(getTutor(email));
-	    	
 		}
+	    
 	    /*------- Update methods -------*/
 	    
 	    /**
@@ -77,9 +77,7 @@ public class TutoringCompanyTutorService {
 	    @Transactional
 	    public void updateTutor(String email, String first_name, String last_name, String phone_number, String password) {
 	    	tutorExist(email);
-	    	if (invalidTutorInfo(first_name, last_name, email, phone_number, password)) {
-	    		throw new InvalidParameterException("Your tutor details are incomplete!");
-	    	}
+	    	tutorValid(first_name, last_name, email, phone_number, password);
 	    	Tutor tutor = getTutor(email);
 	    	tutor.setFirst_name(first_name);
 	    	tutor.setLast_name(last_name);
@@ -97,7 +95,7 @@ public class TutoringCompanyTutorService {
 	     * the string length equals to zero
 	     */
 	    @Transactional
-	    	 public void updateTutorPassword(String email,String password) {
+	    	 public void updateTutorPassword(String email, String password) {
 	    		   tutorExist(email);
 	    		    	if (password == null || password.trim().length() == 0) {
 	    		    		throw new InvalidParameterException("Your password input is not correct");
@@ -196,7 +194,8 @@ public class TutoringCompanyTutorService {
 
 	    /*------- Assert methods -------*/
 	    /**
-	     * throws an exception if tutor already exists
+	     * Ensures that tutor by the given email is unique or throws exception
+	     * 
 	     * @param email: email address of tutor
 	     * @exception EntityExistsException if tutor already exists 
 	     */
@@ -207,7 +206,8 @@ public class TutoringCompanyTutorService {
 	        }
 	        
 	        /**
-	         * throws an exception if tutor does not exist
+	         * Ensures that tutor by the given email already exists or throws exception
+	         * 
 	         * @param : email address of tutor
 	         * @exception NullPointerException if tutor does not exist
 	         */
@@ -218,21 +218,21 @@ public class TutoringCompanyTutorService {
 	        }
 	        
 	       /**
-	        * this method makes sure that the input follows the correct pattern
+	        * Ensures that tutor info given is valid or throws exception
+	        * 
 	        * @param first_name
 	        * @param last_name
-	        * @param email
+	        * @param emails
 	        * @param phone_number
 	        * @param password
-	        * @return true if in input is not correct, false otherwise
+	        * @exception InvalidParameterException if any of the given parameters are invalid (null or length 0 after trim)
 	        */
-	        private boolean invalidTutorInfo(String first_name, String last_name, String email, String phone_number, String password) {
+	        private void tutorValid(String first_name, String last_name, String email, String phone_number, String password) {
 	        	    if (first_name == null || first_name.trim().length() == 0 ||last_name == null || last_name.trim().length() == 0 ||  
 	        	    		email == null|| email.trim().length() == 0 || phone_number == null || phone_number == null ||
 	        	    				password ==null   || password.trim().length() == 0) {
-	        	      return true;
+	        	      throw new InvalidParameterException("Your tutor details are invalid.");
 	        	    }
-	        	    return false;
 	        	  }
 /*------------- other methods*************/
 //	        

@@ -46,9 +46,7 @@ public class TutoringCompanyManagerService {
     @Transactional
     public Manager createManager(String first_name, String last_name, String email, String phone_number, String password) {
     	managerUnique(email);
-    	if  (invalidManagerInfo(first_name, last_name, email, phone_number, password)) {
-    		throw new InvalidParameterException("Your manager details are incomplete!");
-    	}
+    	managerValid(first_name, last_name, email, phone_number, password);
        Manager manager = new Manager();
        manager.setEmail(email);
        manager.setFirst_name(first_name);
@@ -89,16 +87,14 @@ public class TutoringCompanyManagerService {
     @Transactional
     public void updateManager(String email, String first_name, String last_name, String PhoneNumber, String Password) {
     	managerExist(email);
-    	if (invalidManagerInfo(first_name, last_name, email, PhoneNumber, Password)) {
-    		throw new InvalidParameterException("Your manager details are incomplete!");
-    	}
+    	managerValid(first_name, last_name, email, PhoneNumber, Password);
     	Manager manager = getManager(email);
     	manager.setFirst_name(first_name);
     	manager.setLast_name(last_name);
     	manager.setPhone_number(PhoneNumber);
     	manager.setPassword(Password);
-    	
 	}
+    
     /**
      * Update password for the specific manager whose email is given
      * 
@@ -134,6 +130,7 @@ public class TutoringCompanyManagerService {
  	}
     	getManager(email).setFirst_name(first_name);
 	}
+    
     /**
      * Update first name for the specific manager whose email is given
      * 
@@ -151,6 +148,7 @@ public class TutoringCompanyManagerService {
   	}
     	getManager(email).setLast_name(last_name);
 	}
+    
     /*------- Get methods -------*/
 
     /**
@@ -166,6 +164,7 @@ public class TutoringCompanyManagerService {
     Manager manager = managerRepository.findByEmail(email);
     return manager;
     }
+    
     /**
      * Read a list of all managers in the repository
      * @return list of all managers
@@ -175,55 +174,7 @@ public class TutoringCompanyManagerService {
     return toList(managerRepository.findAll());
     }
     
-    private <T> List<T> toList(Iterable<T> iterable){
-    	List<T> resultList = new ArrayList<T>();
-    	for (T t : iterable) {
-    	resultList.add(t);
-    	}
-    	return resultList;
-    	}
  /*------- Other methods---------*/
-    
-
-    /*------- Assert methods -------*/
-/**
- * throws an exception if manager already exists
- * @param email: email address of manager
- * @exception EntityExistsException if manager already exists 
- */
-    @Transactional
-    public void managerUnique(String email) {
-      if (managerRepository.existsById(email))
-        throw new EntityExistsException("manager Already Exists");
-    }
-    /**
-     * throws an exception if manager does not exist
-     * @param : email address of manager
-     * @exception NullPointerException if manager does not exist
-     */
-    @Transactional
-    public void managerExist(String email) {
-      if (managerRepository.existsById(email)==false)
-        throw new NullPointerException("manager Does not Exist");
-    }
-    
-   /**
-    * this method makes sure that the input follows the correct pattern
-    * @param first_name
-    * @param last_name
-    * @param Email
-    * @param PhoneNumber
-    * @param Password
-    * @return true if in input is not correct, false otherwise
-    */
-    private boolean invalidManagerInfo(String first_name, String last_name, String Email, String PhoneNumber, String Password) {
-    	    if (first_name == null || first_name.trim().length() == 0 ||last_name == null || last_name.trim().length() == 0 ||  
-    	    		Email == null|| Email.trim().length() == 0 || PhoneNumber == null || PhoneNumber == null ||
-    	    				Password ==null   || Password.trim().length() == 0) {
-    	      return true;
-    	    }
-    	    return false;
-    	  }
     
     
    public ArrayList<Manager> find() {
@@ -239,4 +190,53 @@ public class TutoringCompanyManagerService {
         	}
 	    return results;
 	    }
+   
+   private <T> List<T> toList(Iterable<T> iterable){
+   	List<T> resultList = new ArrayList<T>();
+   	for (T t : iterable) {
+   	resultList.add(t);
+   	}
+   	return resultList;
+   	}
+    /*------- Assert methods -------*/
+/**
+ * Ensures that manager by the given email is unique or throws exception
+ * 
+ * @param email: email address of manager
+ * @exception EntityExistsException if manager already exists 
+ */
+    @Transactional
+    public void managerUnique(String email) {
+      if (managerRepository.existsById(email))
+        throw new EntityExistsException("manager Already Exists");
+    }
+    /**
+     * Ensures that manager by the given email already exists or throws exception
+     * 
+     * @param : email address of manager
+     * @exception NullPointerException if manager does not exist
+     */
+    @Transactional
+    public void managerExist(String email) {
+      if (managerRepository.existsById(email)==false)
+        throw new NullPointerException("manager Does not Exist");
+    }
+    
+    /**
+     * Ensures that manager info given is valid or throws exception
+     * 
+     * @param first_name
+     * @param last_name
+     * @param Email
+     * @param PhoneNumber
+     * @param Password
+     * @exception InvalidParameterException if any of the given parameters are invalid (null or length 0 after trim)
+     */
+     private void managerValid(String first_name, String last_name, String Email, String PhoneNumber, String Password) {
+     	    if (first_name == null || first_name.trim().length() == 0 ||last_name == null || last_name.trim().length() == 0 ||  
+     	    		Email == null|| Email.trim().length() == 0 || PhoneNumber == null || PhoneNumber == null ||
+     	    				Password ==null   || Password.trim().length() == 0) {
+     	      throw new InvalidParameterException("Your manager details are incomplete.");
+     	    }
+     }
 }
