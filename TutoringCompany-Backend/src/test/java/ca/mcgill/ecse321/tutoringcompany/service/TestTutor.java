@@ -13,7 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import ca.mcgill.ecse321.tutoringcompany.dao.OfferingRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.SessionRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.TutorRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.TutorReviewsRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.TutorTimeBlockRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTutorService;
 
@@ -31,11 +35,28 @@ public class TestTutor {
 
 	@Autowired
 	private TutorRepository tutorRepository;
+	
+	@Autowired
+	private TutorReviewsRepository tutorReviewsRepository;
+	
+	@Autowired
+	private TutorTimeBlockRepository tutorTimeBlockRepository;
+	
+	@Autowired
+	private SessionRepository sessionRepository;
+	
+	@Autowired
+	private OfferingRepository offeringRepository;
+	
 
-//	@Before
-//	public void clearDatabase() {
-//		tutorRepository.deleteAll();
-//	}
+	@Before
+	public void clearDatabase() {
+		tutorReviewsRepository.deleteAll();
+		tutorTimeBlockRepository.deleteAll();
+		sessionRepository.deleteAll();
+		offeringRepository.deleteAll();
+		tutorRepository.deleteAll();
+	}
 
 	/**
 	 * Create a tutor

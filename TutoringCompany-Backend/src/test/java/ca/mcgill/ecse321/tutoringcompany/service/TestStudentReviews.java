@@ -44,9 +44,9 @@ public class TestStudentReviews {
 	
 	@Before
 	public void clearDatabase() {
-		sessionRepository.deleteAll();
-		studentRepository.deleteAll();
-		
+//		sessionRepository.deleteAll();
+//		studentRepository.deleteAll();
+//		
 		studentReviewsRepository.deleteAll(); // was first
 	}
 	

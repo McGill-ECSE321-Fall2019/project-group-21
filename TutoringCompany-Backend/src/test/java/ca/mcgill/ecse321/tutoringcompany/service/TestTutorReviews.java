@@ -31,10 +31,10 @@ public class TestTutorReviews {
 	@Autowired
 	private TutorReviewsRepository tutorReviewsRepository;
 	
-//	@Before
-//	public void clearDatabase() {
-//		tutorReviewsRepository.deleteAll();
-//	}
+	@Before
+	public void clearDatabase() {
+		tutorReviewsRepository.deleteAll();
+	}
 	
 	/**
 	 * Create a tutor review

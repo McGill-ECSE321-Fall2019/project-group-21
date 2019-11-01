@@ -244,7 +244,7 @@ public class TutoringCompanyTutorService {
 	        	    if (first_name == null || first_name.trim().length() == 0 ||last_name == null || last_name.trim().length() == 0 ||  
 	        	    		email == null|| email.trim().length() == 0 || phone_number == null || phone_number == null ||
 	        	    				password ==null   || password.trim().length() == 0) {
-	        	      throw new InvalidParameterException("Your tutor details are invalid.");
+	        	      throw new InvalidParameterException("Your tutor details are incomplete!");
 	        	    }
 	        	  }
 /*------------- other methods*************/
