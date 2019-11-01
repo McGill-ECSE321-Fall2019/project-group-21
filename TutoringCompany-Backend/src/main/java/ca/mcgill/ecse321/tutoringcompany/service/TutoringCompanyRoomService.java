@@ -39,7 +39,7 @@ public class TutoringCompanyRoomService {
 	 */
 	@Transactional
 	public Room createRoom(int number, RoomType roomType) {
-		roomValid(number);
+		roomValid(number, roomType);
 		roomUnique(number);
 		Room room = new Room();
 		room.setNumber(number);
@@ -94,9 +94,9 @@ public class TutoringCompanyRoomService {
 	 * @param roomType
 	 */
 	@Transactional
-	public void updateRoom(Room room, RoomType roomType) {
-		roomExist(room.getNumber());
-		room.setRoom_type(roomType);
+	public void updateRoom(int number, RoomType roomType) {
+		roomExist(number);
+		getRoom(number).setRoom_type(roomType);
 	}
 	
 	/**
@@ -203,9 +203,9 @@ public class TutoringCompanyRoomService {
 	  * @exception InvalidParameterException if the number is null or negative
 	  */
 	 @Transactional
-	 private void roomValid(int number) {
- 	    if ((Integer) number == null || number <= 0) {
- 	      throw new InvalidParameterException("Your room details are invalid");
+	 private void roomValid(int number, RoomType roomType) {
+ 	    if ((Integer) number == null || number <= 0 || roomType == null) {
+ 	      throw new InvalidParameterException("Your room details are incomplete!");
  	    }
  	  }
 }

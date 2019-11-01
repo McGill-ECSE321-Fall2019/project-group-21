@@ -62,6 +62,16 @@ public class TutoringCompanyTutorService {
 	    
 	    /*------- Update methods -------*/
 	    
+	    
+	    /**
+	     * Verify the tutor whose email is given
+	     * @param email of the tutor to verify
+	     */
+	    @Transactional
+	    public void verifyTutor(String email) {
+	    	getTutor(email).setVerified(true);
+	    }
+	    
 	    /**
 	     * Update all information for the tutor with the given email
 	     * 
@@ -140,7 +150,7 @@ public class TutoringCompanyTutorService {
 	     */   
 	    @Transactional
 	    public Tutor getTutor(String email) {
-	    return tutorRepository.findByEmail(email);
+	    	return tutorRepository.findByEmail(email);
 	    }
 //	    public List<Tutor> getAllVerifiedTutors() {
 //	    	List<Tutor> verifiedTutors = new ArrayList<Tutor>();

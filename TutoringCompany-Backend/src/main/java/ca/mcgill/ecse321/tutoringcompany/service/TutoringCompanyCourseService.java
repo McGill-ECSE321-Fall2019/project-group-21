@@ -8,7 +8,6 @@ package ca.mcgill.ecse321.tutoringcompany.service;
  */
 
 import java.util.Optional;
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -122,25 +121,25 @@ public class TutoringCompanyCourseService {
 	
 	
 	/**
-	 * Update name for the specific course passed
+	 * Update name for the specific course whose course_id is passed
 	 * 
-	 * @param course
+	 * @param course_id
 	 * @param name
 	 */
 	@Transactional
-	public void updateName(Course course, String name) {
-		course.setName(name);
+	public void updateCourseName(String course_id, String name) {
+		getCourse(course_id).setName(name);
 	}
 	
 	/**
-	 * Update subject for the specific course passed
+	 * Update subject for the specific course whose course_id is passed
 	 * 
-	 * @param course
+	 * @param course_id
 	 * @param subject
 	 */
 	@Transactional
-	public void updateSubject(Course course, Subject subject) {
-		course.setSubject(subject);
+	public void updateCourseSubject(String course_id, Subject subject) {
+		getCourse(course_id).setSubject(subject);
 	}
 	
 //	Unnecessary complexity
@@ -232,7 +231,7 @@ public class TutoringCompanyCourseService {
      */
     @Transactional
     public void courseExist(String course_id) {
-      if (courseRepository.existsById(course_id)==false)
+      if (! courseRepository.existsById(course_id))
         throw new NullPointerException("offering Does not Exist");
     }
     
@@ -242,12 +241,12 @@ public class TutoringCompanyCourseService {
      * @param course_id
      * @param name
      * @param subject
-     * @exception InvalidParameterException if any of the given parameters are invalid (null or length 0 after trim)
+     * @exception IllegalArgumentException if any of the given parameters are invalid (null or length 0 after trim)
      */
     private void courseValid(String course_id, String name, Subject subject) {
  	    if (course_id == null || course_id.trim().length() == 0 || 
  	    		name == null || name.trim().length() == 0) {
- 	      throw new InvalidParameterException("Your course details are invalid.");
+ 	      throw new IllegalArgumentException("Your course details are incomplete!");
  	    }
     }
 }

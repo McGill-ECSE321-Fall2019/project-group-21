@@ -12,8 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import ca.mcgill.ecse321.tutoringcompany.dao.CourseRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.OfferingRepository;
-
+import ca.mcgill.ecse321.tutoringcompany.dao.SessionRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.TutorRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.TutorReviewsRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.TutorTimeBlockRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 import ca.mcgill.ecse321.tutoringcompany.model.Course;
 import ca.mcgill.ecse321.tutoringcompany.model.Offering;
@@ -32,15 +36,45 @@ import ca.mcgill.ecse321.tutoringcompany.model.Subject;
 public class TestOffering {
 	
 	@Autowired
-	private TutoringCompanyOfferingService OfferingService;
+	private TutoringCompanyOfferingService offeringService;
+	
+	@Autowired
+	private TutoringCompanyCourseService courseService;
+	
+	@Autowired
+	private TutoringCompanyTutorService tutorService;
+	
+	
+	@Autowired
+	private TutorTimeBlockRepository tutorTimeBlockRepository;
+	
+	@Autowired
+	private TutorReviewsRepository tutorReviewsRepository;
 	
 	@Autowired
 	private OfferingRepository offeringRepository;
 	
-//	@Before
-//	public void clearDatabase() {		
-//		offeringRepository.deleteAll();
-//	}
+	@Autowired
+	private SessionRepository sessionRepository;
+	
+	@Autowired
+	private  TutorRepository tutorRepository;
+	
+	@Autowired
+	private CourseRepository courseRepository;
+	
+	@Before
+	public void clearDatabase() {
+		sessionRepository.deleteAll();
+		offeringRepository.deleteAll();
+		
+		tutorTimeBlockRepository.deleteAll();
+		sessionRepository.deleteAll();
+		tutorReviewsRepository.deleteAll();
+		tutorRepository.deleteAll();
+		
+		courseRepository.deleteAll();
+	}
 	
 	/**
 	 * Create an offering
@@ -48,28 +82,26 @@ public class TestOffering {
 	 */
 	@Test
 	public void testCreateOffering(){
-		assertEquals(0, OfferingService.getAllOfferings().size());
+		assertEquals(0, offeringService.getAllOfferings().size());
+		Tutor tutor = null;
+		Course course = null;
+		try {
+			tutor = tutorService.createTutor("Louca", "Dufault", "mail@mail.com", "1234567890", "pWord");
+			course = courseService.createCourse("name", Subject.MATH, "math240");
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
 
-		Tutor tutor = new Tutor();
-		//tutor.setFirst_name("fName");
-		//tutor.setLast_name("lName");
-		//tutor.setEmail("mail@mail.com");
-		//tutor.setPhone_number("pNum");
-		//tutor.setPassword("pWord");
-		
-		Course course = new Course();
-		//course.setName("name");
-		//course.setCourse_id("id");
-		//course.setSubject(Subject.MATH);
 
 		int individualPrice = 15;
 		
 		try {
-			OfferingService.createOffering(individualPrice, 20, course, tutor);
+			offeringService.createOffering(individualPrice, 20, course, tutor);
 		} catch (IllegalArgumentException e) {
+			System.out.println("failed here >>>>>>>>>>>>>>>>>>>>");
 			fail();
 		}
-		List<Offering> allOffering = OfferingService.getAllOfferings();
+		List<Offering> allOffering = offeringService.getAllOfferings();
 		assertEquals(1, allOffering.size());
 		assertEquals(individualPrice, allOffering.get(0).getPrice_individual());
 	}
@@ -80,26 +112,53 @@ public class TestOffering {
 	 */
 	@Test
 	public void testCreateOfferingNull() {
-		assertEquals(0, OfferingService.getAllOfferings().size());
+		assertEquals(0, offeringService.getAllOfferings().size());
 		
-		Tutor tutor = new Tutor();
-		//tutor.setFirst_name("fName");
-		//tutor.setLast_name("lName");
-		//tutor.setEmail("mail@mail.com");
-		//tutor.setPhone_number("pNum");
-		//tutor.setPassword("pWord");
-		
+		Tutor tutor = null;
 		Course course = null;
+		try {
+			tutor = tutorService.createTutor("Louca", "Dufault", "mail@mail.com", "1234567890", "pWord");
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
 		
 		String error = null;
 		
 		try {
-			OfferingService.createOffering(15, 20, course, tutor);
+			offeringService.createOffering(15, 20, course, tutor);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
 		assertEquals("Your offering details are incomplete!", error);
-		assertEquals(0, OfferingService.getAllOfferings().size());
+		assertEquals(0, offeringService.getAllOfferings().size());
+	}
+	
+	/**
+	 * Create an offering with a negative individual price
+	 * @result Offering will not be created due to an error
+	 */
+	@Test
+	public void testCreateOfferingNegative() {
+		assertEquals(0, offeringService.getAllOfferings().size());
+		
+		Tutor tutor = null;
+		Course course = null;
+		try {
+			tutor = tutorService.createTutor("Louca", "Dufault", "mail@mail.com", "1234567890", "pWord");
+			course = courseService.createCourse("name", Subject.MATH, "math240");
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
+		
+		String error = null;
+		int price_individual = -25;
+		try {
+			offeringService.createOffering(price_individual, 20, course, tutor);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertEquals("Your offering details are incomplete!", error);
+		assertEquals(0, offeringService.getAllOfferings().size());
 	}
 	
 	/**
@@ -108,29 +167,26 @@ public class TestOffering {
 	 */
 	@Test
 	public void testDeleteOffering() {
-		assertEquals(0, OfferingService.getAllOfferings().size());
+		assertEquals(0, offeringService.getAllOfferings().size());
 		
-		Tutor tutor = new Tutor();
-		//tutor.setFirst_name("fName");
-		//tutor.setLast_name("lName");
-		//tutor.setEmail("mail@mail.com");
-		//tutor.setPhone_number("pNum");
-		//tutor.setPassword("pWord");
-		
-		Course course = new Course();
-		//course.setName("name");
-		//course.setCourse_id("id");
-		//course.setSubject(Subject.MATH);
-		
-		Offering offering = OfferingService.createOffering(15, 20, course, tutor);
-		
-		assertEquals(1, OfferingService.getAllOfferings().size());
+		Tutor tutor = null;
+		Course course = null;
 		try {
-			OfferingService.deleteOffering(offering);
+			tutor = tutorService.createTutor("Louca", "Dufault", "mail@mail.com", "1234567890", "pWord");
+			course = courseService.createCourse("name", Subject.MATH, "math240");
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
-		assertEquals(0, OfferingService.getAllOfferings().size());
+		
+		Offering offering = offeringService.createOffering(15, 20, course, tutor);
+		
+		assertEquals(1, offeringService.getAllOfferings().size());
+		try {
+			offeringService.deleteOffering(offering);
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
+		assertEquals(0, offeringService.getAllOfferings().size());
 	}
 	
 	/**
@@ -140,35 +196,35 @@ public class TestOffering {
 	@Test
 	public void testUpdateOffering() {
 		
-		assertEquals(0, OfferingService.getAllOfferings().size());
+		assertEquals(0, offeringService.getAllOfferings().size());
+		Tutor tutor = null;
+		Course course = null;
+		try {
+			tutor = tutorService.createTutor("Ryan", "Dufault", "mail@mail.com", "1234567890", "pWord");
+			course = courseService.createCourse("name", Subject.MATH, "math240");
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
+
+		Offering offering = null;
+
 		
-		Tutor tutor = new Tutor();
-		//tutor.setFirst_name("fName");
-		//tutor.setLast_name("lName");
-		//tutor.setEmail("mail@mail.com");
-		//tutor.setPhone_number("pNum");
-		//tutor.setPassword("pWord");
-		
-		Course course = new Course();
-		//course.setName("name");
-		//course.setCourse_id("id");
-		//course.setSubject(Subject.MATH);
-		
-		int individualPrice1 = 15;
 		int individualPrice2 = 20;
-		int groupPrice1 = 20;
 		int groupPrice2 = 30;
 		
-		Offering offering = OfferingService.createOffering(individualPrice1, groupPrice1, course, tutor);
+		try {
+			offering = offeringService.createOffering(15, 20, course, tutor);
+		} catch (IllegalArgumentException e) {
+			fail();
+		}	
 		
-		OfferingService.updatePrice_individual(offering, individualPrice2);
-		OfferingService.updatePrice_group(offering, groupPrice2);
+		offeringService.updatePrice_individual(offering.getId(), individualPrice2);
+		offeringService.updatePrice_group(offering.getId(), groupPrice2);
 		
-		List<Offering> allOfferings = OfferingService.getAllOfferings();
-		Offering offeringg = allOfferings.get(0);
+		List<Offering> allOfferings = offeringService.getAllOfferings();
 		
-		assertEquals(individualPrice2, offeringg.getPrice_individual());
-		assertEquals(groupPrice2, offeringg.getPrice_group());
+		assertEquals(individualPrice2, allOfferings.get(0).getPrice_individual());
+		assertEquals(groupPrice2, allOfferings.get(0).getPrice_group());
 	}
 
 }

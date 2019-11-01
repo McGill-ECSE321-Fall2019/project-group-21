@@ -67,7 +67,7 @@ public class TutoringCompanySessionService {
 		}
 
 		if (!tutor.isVerified()) {
-			throw new InvalidParameterException("Tutor is yet not verfied");
+			throw new IllegalArgumentException("Tutor is not yet verfied");
 		}
 
 		Session session = new Session();
@@ -209,7 +209,7 @@ public class TutoringCompanySessionService {
 		if (year < 2019 || month > 12 || month <= 0 || day > 31 || day <= 0 || endingHour - startingHour < 0
 				|| endingHour > 24 || startingHour < 00 || startingMinute < 0 || startingMinute >= 60
 				|| endingMinute < 0 || endingMinute >= 60) {
-			throw new InvalidParameterException("Your session details are invalid");
+			throw new InvalidParameterException("Your session details are incomplete!");
 		}
 	}
 }

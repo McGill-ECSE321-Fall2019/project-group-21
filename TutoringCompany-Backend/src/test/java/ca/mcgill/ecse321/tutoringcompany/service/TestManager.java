@@ -5,7 +5,6 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import org.apache.catalina.Manager;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import ca.mcgill.ecse321.tutoringcompany.dao.ManagerRepository;
+import ca.mcgill.ecse321.tutoringcompany.model.Manager;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
 
 /**
@@ -49,7 +49,7 @@ public class TestManager {
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
-		List<ca.mcgill.ecse321.tutoringcompany.model.Manager> allManagers = ManagerService.getAllManagers();
+		List<Manager> allManagers = ManagerService.getAllManagers();
 		assertEquals(1, allManagers.size());
 		assertEquals(firstName, allManagers.get(0).getFirst_name());
 	}
@@ -64,7 +64,7 @@ public class TestManager {
 		String firstName = null;
 		String error = null;
 		try {
-			ManagerService.createManager(firstName,"lName", "mail@mail.com", "pNum", "pWord");
+			ManagerService.createManager(firstName, "lName", "mail@mail.com", "pNum", "pWord");
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -120,7 +120,7 @@ public class TestManager {
 		try {
 			ManagerService.deleteManager("mail@mail.com");
 		} catch (IllegalArgumentException e) {
-			
+			fail();
 		}
 		assertEquals(0, ManagerService.getAllManagers().size());
 	}
@@ -144,8 +144,13 @@ public class TestManager {
 		String password1 = "pWord1";
 		String password2 = "pWord2";
 		
+//		try {
+//			ManagerService.createManager(firstName1, lastName1, email, phoneNum1, password1);
+//		} catch (IllegalArgumentException e) {
+//			fail();
+//		}
 		try {
-			ManagerService.createManager(firstName1, lastName1, email, phoneNum1, password1);
+			testCreateManager();
 		} catch (IllegalArgumentException e) {
 			fail();
 		}

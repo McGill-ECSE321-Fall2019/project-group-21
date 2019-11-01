@@ -108,7 +108,7 @@ public class TutoringCompanyManagerService {
     public void updateManagerPassword(String email, String password) {
     	 managerExist(email);
      	if (password == null || password.trim().length() == 0) {
-     		throw new InvalidParameterException("Your Password input is not correct");
+     		throw new IllegalArgumentException("Your Password input is not correct");
      	}
     	getManager(email).setPassword(password);
 	}
@@ -126,7 +126,7 @@ public class TutoringCompanyManagerService {
     public void updateManagerFirstName(String email, String first_name) {
    	 managerExist(email);
 	 if (first_name == null || first_name.trim().length() == 0) {
- 		throw new InvalidParameterException("Your first name input is not correct");
+ 		throw new IllegalArgumentException("Your first name input is not correct");
  	}
     	getManager(email).setFirst_name(first_name);
 	}
@@ -144,7 +144,7 @@ public class TutoringCompanyManagerService {
     public void updateManagerLastName(String email, String last_name) {
    	 managerExist(email);
 	 if (last_name == null || last_name.trim().length() == 0) {
-  		throw new InvalidParameterException("Your last name input is not correct");
+  		throw new IllegalArgumentException("Your last name input is not correct");
   	}
     	getManager(email).setLast_name(last_name);
 	}
@@ -236,7 +236,7 @@ public class TutoringCompanyManagerService {
      	    if (first_name == null || first_name.trim().length() == 0 ||last_name == null || last_name.trim().length() == 0 ||  
      	    		Email == null|| Email.trim().length() == 0 || PhoneNumber == null || PhoneNumber == null ||
      	    				Password ==null   || Password.trim().length() == 0) {
-     	      throw new InvalidParameterException("Your manager details are incomplete.");
+     	      throw new IllegalArgumentException("Your manager details are incomplete!");
      	    }
      }
 }

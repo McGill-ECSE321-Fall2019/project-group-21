@@ -119,25 +119,25 @@ public class TutoringCompanyOfferingService {
 //	}
 	
 	/**
-	 * Update price_individual for the specific offering passed
+	 * Update price_individual for the specific offering whose id is passed
 	 * 
 	 * @param id
 	 * @param price_individual
 	 */
 	@Transactional
-	public void updatePrice_individual(Offering offering, int price_individual) {
-		getSpecificOffering(offering.getId()).setPrice_individual(price_individual);
+	public void updatePrice_individual(int id, int price_individual) {
+		getSpecificOffering(id).setPrice_individual(price_individual);
 	}
 	
 	/**
-	 * Update price_individual for the specific offering passed
+	 * Update price_individual for the specific offering  whose id is passed
 	 * 
 	 * @param id
 	 * @param price_group
 	 */
 	@Transactional
-	public void updatePrice_group(Offering offering, int price_group) {
-		getSpecificOffering(offering.getId()).setPrice_group(price_group);
+	public void updatePrice_group(int id, int price_group) {
+		getSpecificOffering(id).setPrice_group(price_group);
 	}
 	
 	/**
@@ -224,10 +224,10 @@ public class TutoringCompanyOfferingService {
     	try {
     		courseService.courseExist(course.getCourse_id());
     	} catch (NullPointerException e) {
-    		throw new InvalidParameterException("Your offering details are invalid (course DNE).");
+    		throw new InvalidParameterException("Your offering details are incomplete!");
     	}
  	    if (price_individual <= 0 || price_group <= 0 ) {
- 	      throw new InvalidParameterException("Your offering details are invalid.");
+ 	      throw new InvalidParameterException("Your offering details are incomplete!");
  	    }
  }
 }
