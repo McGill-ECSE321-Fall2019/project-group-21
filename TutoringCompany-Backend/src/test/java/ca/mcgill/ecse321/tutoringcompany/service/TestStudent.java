@@ -33,12 +33,18 @@ public class TestStudent {
 
 	@Autowired
 	private StudentRepository studentRepository;
+	
+	@Autowired
 	private CourseRepository courseRepository;
 	
-//	@Before
-//	public void clearDatabase() {
-//		studentRepository.deleteAll();
-//	}
+	@Autowired
+	private SessionRepository sessionRepository;
+	
+	@Before
+	public void clearDatabase() {
+		sessionRepository.deleteAll();
+		studentRepository.deleteAll();
+	}
 	
 //@Test
 //public void test() {

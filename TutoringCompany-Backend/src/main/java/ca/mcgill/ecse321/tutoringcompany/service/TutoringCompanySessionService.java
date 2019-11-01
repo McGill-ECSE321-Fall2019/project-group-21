@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ca.mcgill.ecse321.tutoringcompany.dao.SessionRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.TutorRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.Session;
 import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 import ca.mcgill.ecse321.tutoringcompany.model.Room;
@@ -32,6 +33,9 @@ public class TutoringCompanySessionService {
 
 	@Autowired
 	SessionRepository sessionRepository;
+	
+	@Autowired
+	TutoringCompanyTutorService tutorService;
 
 	/*------- Creation methods -------*/
 	/**
@@ -168,10 +172,10 @@ public class TutoringCompanySessionService {
 	 * @exception NullPointerException if tutor has no such offering
 	 */
 	@Transactional
-	public void deleteSession(Tutor tutor, int startingHour) {
+	public void deleteSession(String tutorEmail, int startingHour) {
 		Session session = null;
 		//List<Session> sessionsByTutor = getTutorSessions(tutor);
-		for (Session sessionByTutor : getTutorSessions(tutor)) {
+		for (Session sessionByTutor : getTutorSessions(tutorService.getTutor(tutorEmail))) {
 			if (sessionByTutor.getStart_time().getHours() == startingHour) {
 				session = sessionByTutor;
 			}

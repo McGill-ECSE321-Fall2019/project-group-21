@@ -888,7 +888,7 @@ public class TutoringCompanyRestController {
 		if (!ManagerLoggedin) {
 			throw new InvalidParameterException("you did not log in");
 		}
-		SessionService.deleteSession(tutorService.getTutor(tutorEmail), startingTime);
+		SessionService.deleteSession(tutorEmail, startingTime);
 		;
 	}
 

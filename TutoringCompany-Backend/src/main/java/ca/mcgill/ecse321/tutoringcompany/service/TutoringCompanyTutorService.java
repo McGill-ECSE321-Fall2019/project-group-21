@@ -68,8 +68,11 @@ public class TutoringCompanyTutorService {
 	     * @param email of the tutor to verify
 	     */
 	    @Transactional
-	    public void verifyTutor(String email) {
-	    	getTutor(email).setVerified(true);
+	    public Tutor verifyTutor(String email) {
+	    	Tutor tutor = getTutor(email);
+	    	tutor.setVerified(true);
+	    	tutorRepository.save(tutor);
+	    	return tutor; //for some reason this is vital
 	    }
 	    
 	    /**

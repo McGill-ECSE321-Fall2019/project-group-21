@@ -117,7 +117,7 @@ public class TestSession {
 			course = courseService.createCourse("name", Subject.MATH, "ecse321");
 			room = roomService.createRoom(123, RoomType.INDIVIDUAL_ROOM);
 			tutor = tutorService.createTutor("Louca", "Dufault", "mail@mail.com", "1234567890", "pWord");
-			tutorService.verifyTutor("mail@mail.com");
+			tutor = tutorService.verifyTutor("mail@mail.com");
 			offering = offeringService.createOffering(20, 25, course, tutor);
 		} catch (IllegalArgumentException e) {
 			fail();
@@ -125,16 +125,17 @@ public class TestSession {
 		
 		Set<Student> students = new HashSet<Student>();
 		
-		int year = 2000;
-		
+		int year = 2019;
+		int month = 4;
 		try {
-			sessionService.createSession(year, 12, 30, 1, 0, 23, 59, room, tutor, offering, students);
+			sessionService.createSession(year, month, 30, 1, 1, 23, 59, room, tutor, offering, students);
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
 		List<Session> allSessions = sessionService.getAllSessions();
 		assertEquals(1, allSessions.size());
-		assertEquals(year, allSessions.get(0).getDate().getYear());
+		assertEquals(year, allSessions.get(0).getDate().getYear()  +1900);
+		assertEquals(month, allSessions.get(0).getDate().getMonth()  +1);
 	}
 	
 	/**
@@ -154,7 +155,7 @@ public class TestSession {
 			course = courseService.createCourse("name", Subject.MATH, "ecse321");
 			room = roomService.createRoom(123, RoomType.INDIVIDUAL_ROOM);
 			tutor = tutorService.createTutor("Louca", "Dufault", "mail@mail.com", "1234567890", "pWord");
-			tutorService.verifyTutor("mail@mail.com");
+			tutor = tutorService.verifyTutor("mail@mail.com");
 			offering = offeringService.createOffering(20, 25, course, tutor);
 		} catch (IllegalArgumentException e) {
 			fail();
@@ -191,8 +192,7 @@ public class TestSession {
 			course = courseService.createCourse("name", Subject.MATH, "ecse321");
 			room = roomService.createRoom(123, RoomType.INDIVIDUAL_ROOM);
 			tutor = tutorService.createTutor("Louca", "Dufault", "mail@mail.com", "1234567890", "pWord");
-			tutorService.verifyTutor("mail@mail.com");
-			System.out.println(tutorService.getTutor("mail@mail.com").isVerified());
+			tutor = tutorService.verifyTutor("mail@mail.com");
 			offering = offeringService.createOffering(20, 25, course, tutor);
 		} catch (IllegalArgumentException e) {
 			fail();
@@ -204,7 +204,7 @@ public class TestSession {
 		
 		assertEquals(1, sessionService.getAllSessions().size());
 		try {
-			sessionService.deleteSession(tutor,1);
+			sessionService.deleteSession(tutor.getEmail(), 1);
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
