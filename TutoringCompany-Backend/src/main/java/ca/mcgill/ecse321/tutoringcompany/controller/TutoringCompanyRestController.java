@@ -27,7 +27,8 @@ import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
 /**
  * 
  * @author Elias Tamraz
- *
+ * @author George Kandalaft
+ * 
  */
 @CrossOrigin(origins = "*")
 @RestController
@@ -37,7 +38,7 @@ public class TutoringCompanyRestController {
 	@Autowired
 	TutoringCompanyTutorService tutorService;
 	@Autowired
-	TutoringCompanyTutorReviewsService tutorReviewsService;
+	TutoringCompanyTutorReviewsService TutorReviewsService;
 	@Autowired
 	TutoringCompanyRoomService RoomService;
 	@Autowired
@@ -54,10 +55,14 @@ public class TutoringCompanyRestController {
 	TutoringCompanyTutorTimeBlockService TutorTimeBlockService;
 	@Autowired
 	TutoringCompanyRoomTimeBlockService RoomTimeBlockService;
+	@Autowired
+	TutoringCompanyStudentReviewsService StudentReviewsService;
 
 	boolean ManagerLoggedin = false;
 
 	/****************** Login-logout Controllers ***************/
+
+	/****************** @Identifier F1 ***************/
 	/**
 	 * This method allows a manager to login in order to allow him to use the
 	 * methods that follows the path /Manager/...
@@ -82,6 +87,7 @@ public class TutoringCompanyRestController {
 		return "Welcome you're logged in sucessfully";
 	}
 
+	/****************** @Identifier F2 ***************/
 	/**
 	 * @return false to the boolean ManagerLoggedin
 	 * @exception InvalidParameterException the manager is not logged in
@@ -126,6 +132,8 @@ public class TutoringCompanyRestController {
 		Room room = RoomService.createRoom(number, roomType);
 		return convertToDto(room);
 	}
+
+	/****************** @Identifier F7 ***************/
 
 	/**
 	 * This method allows the manager to get all rooms in the database
@@ -453,7 +461,10 @@ public class TutoringCompanyRestController {
 	}
 
 	/****************** Tutor Services Controllers *********************/
+
+	/****************** @Identifier F3 ***************/
 	/**
+	 * 
 	 * @Identifier F3 this method can only be executed by an existing Manager to
 	 *             verify a tutor by the manager after doing the interview
 	 * @param email: email of the tutor that will be verified
@@ -498,6 +509,12 @@ public class TutoringCompanyRestController {
 		tutorService.deleteTutor(Email);
 	}
 
+	/****************** @Identifier F11 ***************/
+	/**
+	 * @Identifier F11 A list of methods to allow the manager to modify information
+	 *             about a specific tutor.
+	 */
+
 	@PostMapping(value = { "/Manager/update/Tutor/Information", "/Manager/update/Tutor/Information/" })
 	public void updateTutorInformation(@RequestParam(name = "email") String Email,
 			@RequestParam(name = "FirstName") String FirstName, @RequestParam(name = "LastName") String LastName,
@@ -525,7 +542,7 @@ public class TutoringCompanyRestController {
 		tutorService.updateTutorLastName(Email, LastName);
 	}
 
-	// getters
+	/****************** @Identifier F6 ***************/
 	/**
 	 * @Identifier F6 this method can only be executed by an existing Manager to
 	 *             return a tutor by giving his/her email
@@ -546,6 +563,19 @@ public class TutoringCompanyRestController {
 		Tutor tutor = tutorService.getTutor(email);
 		return convertToDto(tutor);
 	}
+
+	/****************** @Identifier F8 ***************/
+	/**
+	 * @Identifier F8 this method can only be executed by an existing Manager to
+	 *             return all the informations about all the tutors in the system
+	 * 
+	 * 
+	 * @return tutors
+	 * 
+	 * @exception NullPointerException      if the the manager (who executes this
+	 *                                      method) email does not exist
+	 * @exception InvalidParameterException if the manager password is wrong
+	 */
 
 	@RequestMapping(value = { "/Manager/get/allTutors", "/Manager/get/allTutors/" })
 	public List<TutorDto> getAllTutors() {
@@ -624,6 +654,18 @@ public class TutoringCompanyRestController {
 		StudentService.updateStudentLastName(Email, LastName);
 	}
 
+	/****************** @Identifier F9 ***************/
+	/**
+	 * @Identifier F9 this method can only be executed by an existing Manager to
+	 *             retunr all the informations about all the students in the system
+	 * 
+	 * 
+	 * @return students
+	 * 
+	 * @exception NullPointerException      if the the manager (who executes this
+	 *                                      method) email does not exist
+	 * @exception InvalidParameterException if the manager password is wrong
+	 */
 	@RequestMapping(value = { "/Manager/get/allStudents", "/Manager/get/allStudents/" })
 	public List<StudentDto> getAllStudents() {
 		if (!ManagerLoggedin) {
@@ -857,6 +899,13 @@ public class TutoringCompanyRestController {
 		return convertToSessionListDto(result);
 	}
 
+	/****************** @Identifier F4 ***************/
+
+	/**
+	 * This methods allows the manager to view all sessions
+	 * 
+	 * @exception InvalidParameterException if the manager did not log in
+	 */
 	@RequestMapping(value = { "/Manager/get/allSessions", "/Manager/getAllSessions" })
 	public List<SessionDto> getAllSession() {
 		if (!ManagerLoggedin) {
@@ -895,6 +944,8 @@ public class TutoringCompanyRestController {
 		SessionService.deleteSession(tutorService.getTutor(tutorEmail), startingTime);
 		;
 	}
+
+	/****************** @Identifier F5 ***************/
 
 	/**
 	 * This methods allows the manager to confirm a pending group session by
@@ -950,7 +1001,7 @@ public class TutoringCompanyRestController {
 	@PostMapping(value = { "/t/review", "/t/review/" })
 	public TutorReviews review(@RequestParam(name = "stares") int stars, @RequestParam(name = "body") String body,
 			@RequestParam(name = "email") String email) throws IllegalArgumentException {
-		TutorReviews review = tutorReviewsService.createTutorReview(body, stars, email);
+		TutorReviews review = TutorReviewsService.createTutorReview(body, stars, email);
 		return review;
 	}
 
@@ -975,7 +1026,72 @@ public class TutoringCompanyRestController {
 		List<TutorTimeBlock> result = TutorTimeBlockService.getTutorTimeBlocks(tutorService.getTutor(tutorEmail));
 		return convertToTutorTimeBlockListDto(result);
 	}
-	
+
+	/****************** StudentReview Services Controllers *********************/
+
+	@PostMapping(value = { "Create/StudentReview", "Create/Student/Review" })
+	public StudentReviewsDto createStudentReview(@RequestParam(name = "body") String body,
+			@RequestParam(name = "stars") int stars, @RequestParam(name = "studentEmail") String studentEmail)
+			throws IllegalArgumentException {
+
+		StudentReviews sr = StudentReviewsService.createStudentReview(body, stars, studentEmail);
+		return convertToDto(sr);
+	}
+
+	@RequestMapping(value = { "get/Student/Reviews", "getStudentReviews" })
+	public List<StudentReviewsDto> getStudentReviews(@RequestParam(name = "studentEmail") String studentEmail) {
+
+//		if (!ManagerLoggedin) {
+//			throw new InvalidParameterException("you did not log in");
+//		}
+		List<StudentReviews> result = StudentReviewsService
+				.getAllReviewsForStudent(StudentService.getstudent(studentEmail));
+		return convertToStudentReviewsListDto(result);
+	}
+
+	/****************** @Identifier F12 ***************/
+	@RequestMapping(value = { "Manager/update/Student/Reviews", "Manager/updateStudentReviews" })
+	public String updateStudentReviews(@RequestParam(name = "id") int id, @RequestParam(name = "body") String body) {
+
+		if (!ManagerLoggedin) {
+			throw new InvalidParameterException("you did not log in");
+		}
+		StudentReviewsService.updateStudentReviewsBody(StudentReviewsService.getStudentReview(id), body);
+		return "The review has been changer to: " + body;
+	}
+
+	/****************** TutorReview Services Controllers *********************/
+
+	@PostMapping(value = { "Create/TutorReview", "Create/Tutor/Review" })
+	public TutorReviewsDto createTutorReview(@RequestParam(name = "body") String body,
+			@RequestParam(name = "stars") int stars, @RequestParam(name = "tutorEmail") String tutorEmail)
+			throws IllegalArgumentException {
+
+		TutorReviews sr = TutorReviewsService.createTutorReview(body, stars, tutorEmail);
+		return convertToDto(sr);
+
+	}
+
+	@RequestMapping(value = { "get/Tutor/Reviews", "getTutorReviews" })
+	public List<TutorReviewsDto> getTutorReviews(@RequestParam(name = "tutorEmail") String tutorEmail) {
+
+//		if (!ManagerLoggedin) {
+//			throw new InvalidParameterException("you did not log in");
+//		}
+		List<TutorReviews> result = TutorReviewsService.getAllReviewsForTutor(tutorService.getTutor(tutorEmail));
+		return convertToTutorReviewsListDto(result);
+	}
+
+	@RequestMapping(value = { "Manager/update/Tutor/Reviews", "Manager/updateTutorReviews" })
+	public String updateTutorReviews(@RequestParam(name = "id") int id, @RequestParam(name = "body") String body) {
+
+		if (!ManagerLoggedin) {
+			throw new InvalidParameterException("you did not log in");
+		}
+		TutorReviewsService.updateTutorReviewsBody(TutorReviewsService.getTutorReview(id), body);
+		return "The review has been changer to: " + body;
+	}
+
 	/****************** RoomTimeBlock Services Controllers *********************/
 
 	@PostMapping(value = { "Create/RoomTimeBlock", "Create/RoomTimeBlock/" })
@@ -1000,7 +1116,25 @@ public class TutoringCompanyRestController {
 
 	/****************** Convert To methods Controllers *********************/
 
-	// TODO : the rest of them.
+	private StudentReviewsDto convertToDto(StudentReviews studentReviews) {
+		if (studentReviews == null) {
+			throw new IllegalArgumentException("There is no such Review!");
+		}
+
+		StudentReviewsDto studentReviewsDto = new StudentReviewsDto(studentReviews.getBody(), studentReviews.getStars(),
+				studentReviews.getId());
+		return studentReviewsDto;
+	}
+
+	private TutorReviewsDto convertToDto(TutorReviews tutorReviews) {
+		if (tutorReviews == null) {
+			throw new IllegalArgumentException("There is no such Review!");
+		}
+
+		TutorReviewsDto tutorReviewsDto = new TutorReviewsDto(tutorReviews.getBody(), tutorReviews.getStars(),
+				tutorReviews.getId());
+		return tutorReviewsDto;
+	}
 
 	private StudentDto convertToDto(Student student) {
 		if (student == null) {
@@ -1071,7 +1205,6 @@ public class TutoringCompanyRestController {
 				tutorTimeBlock.getMonth(), tutorTimeBlock.getYear(), convertToDto(tutorTimeBlock.getTutor()));
 		return timeBlockDto;
 	}
-	
 
 	private RoomTimeBlockDto convertToDto(RoomTimeBlock roomTimeBlock) {
 		if (roomTimeBlock == null) {
@@ -1100,6 +1233,30 @@ public class TutoringCompanyRestController {
 		}
 
 		return listRoomDto;
+	}
+
+	private List<StudentReviewsDto> convertToStudentReviewsListDto(List<StudentReviews> listStudentReviews) {
+		if (listStudentReviews == null) {
+			throw new IllegalArgumentException("There is no such Event!");
+		}
+		List<StudentReviewsDto> listStudentReviewsDto = new ArrayList<StudentReviewsDto>();
+		for (StudentReviews room : listStudentReviews) {
+			listStudentReviewsDto.add(convertToDto(room));
+		}
+
+		return listStudentReviewsDto;
+	}
+
+	private List<TutorReviewsDto> convertToTutorReviewsListDto(List<TutorReviews> listTutorReviews) {
+		if (listTutorReviews == null) {
+			throw new IllegalArgumentException("There is no such Event!");
+		}
+		List<TutorReviewsDto> listTutorReviewsDto = new ArrayList<TutorReviewsDto>();
+		for (TutorReviews room : listTutorReviews) {
+			listTutorReviewsDto.add(convertToDto(room));
+		}
+
+		return listTutorReviewsDto;
 	}
 
 	private List<ManagerDto> convertToManagerListDto(List<Manager> listManager) {

@@ -13,7 +13,7 @@ import ca.mcgill.ecse321.tutoringcompany.model.Room;
 import ca.mcgill.ecse321.tutoringcompany.model.TutorTimeBlock;
 import ca.mcgill.ecse321.tutoringcompany.model.Student;
 import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
-import ca.mcgill.ecse321.tutoringcompany.model.TutorReviews;
+import ca.mcgill.ecse321.tutoringcompany.model.StudentReviews;
 import ca.mcgill.ecse321.tutoringcompany.model.Offering;
 import ca.mcgill.ecse321.tutoringcompany.model.Session;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
@@ -28,6 +28,7 @@ import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTutorReviewsServ
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyTutorService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomTimeBlockService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
+import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentReviewsService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -54,6 +55,8 @@ public class TutoringCompanyApplication {
 	private TutoringCompanyRoomTimeBlockService RoomTimeBlockService;
 	@Autowired
 	private TutoringCompanyRoomService RoomService;
+	@Autowired
+	private TutoringCompanyStudentReviewsService StudentReviewsService;
 	
   public static void main(String[] args) {
     SpringApplication.run(TutoringCompanyApplication.class, args);
@@ -89,10 +92,10 @@ public class TutoringCompanyApplication {
   }
 
 
-  @RequestMapping("/review")
-  public List<TutorReviews> review(){
-    return TutorReviewsService.getAllTutorReviews();
-  }
+//  @RequestMapping("/review")
+//  public List<TutorReviews> review(){
+//    return TutorReviewsService.getAllTutorReviews();
+//  }
   
   
   @RequestMapping("/course")
@@ -117,9 +120,13 @@ public class TutoringCompanyApplication {
    return RoomTimeBlockService.getAllRoomTimeBlocks();
    }
 
-@RequestMapping("/Room")
+@RequestMapping("/room")
 public List<Room> room(){
  return RoomService.getAllRooms();
+ }
+@RequestMapping("/review")
+public List<StudentReviews> reviews(){
+ return StudentReviewsService.getAllStudentReviews();
  }
 
 //  @RequestMapping("/tt")

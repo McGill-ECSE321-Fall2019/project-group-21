@@ -17,6 +17,7 @@ import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 import ca.mcgill.ecse321.tutoringcompany.model.Manager;
 import ca.mcgill.ecse321.tutoringcompany.model.Offering;
 import ca.mcgill.ecse321.tutoringcompany.model.Student;
+import ca.mcgill.ecse321.tutoringcompany.model.StudentReviews;
 
 @Service
 public class TutoringCompanyTutorReviewsService {
@@ -80,6 +81,11 @@ public class TutoringCompanyTutorReviewsService {
 	public void updateTutorReview(TutorReviews review, String body, int stars) {
 		updateStars(review,stars);
 		updateBody(review,body);
+	}
+	
+	@Transactional
+	public void updateTutorReviewsBody(TutorReviews review, String body) {
+		review.setBody(body);
 	}
 
 	//delete method
