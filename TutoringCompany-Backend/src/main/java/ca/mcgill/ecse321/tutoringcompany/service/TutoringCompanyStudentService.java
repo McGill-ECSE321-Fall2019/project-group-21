@@ -215,7 +215,7 @@ public class TutoringCompanyStudentService {
     	    if (first_name == null || first_name.trim().length() == 0 ||last_name == null || last_name.trim().length() == 0 ||  
     	    		Email == null|| Email.trim().length() == 0 || phone_number == null || phone_number == null ||
     	    				Password ==null   || Password.trim().length() == 0) {
-    	    	throw new InvalidParameterException("Your student details are incomplete.");
+    	    	throw new InvalidParameterException("Your student details are incomplete!");
     	    }
     	  }
 

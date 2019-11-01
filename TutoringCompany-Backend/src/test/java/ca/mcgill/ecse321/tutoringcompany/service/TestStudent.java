@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import ca.mcgill.ecse321.tutoringcompany.dao.StudentRepository;
+import ca.mcgill.ecse321.tutoringcompany.dao.StudentReviewsRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.SessionRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.CourseRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.OfferingRepository;
@@ -35,25 +36,17 @@ public class TestStudent {
 	private StudentRepository studentRepository;
 	
 	@Autowired
-	private CourseRepository courseRepository;
+	private SessionRepository sessionRepository;
 	
 	@Autowired
-	private SessionRepository sessionRepository;
+	private StudentReviewsRepository studentReviewsRepository;
 	
 	@Before
 	public void clearDatabase() {
+		studentReviewsRepository.deleteAll();
 		sessionRepository.deleteAll();
 		studentRepository.deleteAll();
 	}
-	
-//@Test
-//public void test() {
-//	try {
-//		courseRepository.deleteAll();
-//	} catch (IllegalArgumentException e) {
-//		fail();
-//	}
-//}
 	
 	/**
 	 * Create a student
@@ -64,7 +57,7 @@ public class TestStudent {
 		assertEquals(0, StudentService.getAllStudents().size());
 		String firstName = "fName";
 		try {
-			StudentService.createStudent(firstName,"lName", "mail@mail.com", "pNum", "pWord");
+			StudentService.createStudent(firstName,"lName", "mail@mail.com", "1234567890", "pWord");
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
@@ -83,7 +76,7 @@ public class TestStudent {
 		String firstName = null;
 		String error = null;
 		try {
-			StudentService.createStudent(firstName,"lName", "mail@mail.com", "pNum", "pWord");
+			StudentService.createStudent(firstName,"lName", "mail@mail.com", "1234567890", "pWord");
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -101,7 +94,7 @@ public class TestStudent {
 		String firstName = "";
 		String error = null;
 		try {
-			StudentService.createStudent(firstName,"lName", "mail@mail.com", "pNum", "pWord");
+			StudentService.createStudent(firstName,"lName", "mail@mail.com", "1234567890", "pWord");
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -119,7 +112,7 @@ public class TestStudent {
 		String firstName = " ";
 		String error = null;
 		try {
-			StudentService.createStudent(firstName,"lName", "mail@mail.com", "pNum", "pWord");
+			StudentService.createStudent(firstName, "lName", "mail@mail.com", "1234567890", "pWord");
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -150,21 +143,16 @@ public class TestStudent {
 	 */
 	@Test
 	public void testUpdateStudent() {
-		
 		assertEquals(0, StudentService.getAllStudents().size());
 		
-		String firstName1 = "fName1";
 		String firstName2 = "fName2";
-		String lastName1 = "lName1";
 		String lastName2 = "lName2";
 		String email = "mail@mail.com";
-		String phoneNum1 = "pNum1";
 		String phoneNum2 = "pNum2";
-		String password1 = "pWord1";
 		String password2 = "pWord2";
 		
 		try {
-			StudentService.createStudent(firstName1, lastName1, email, phoneNum1, password1);
+			StudentService.createStudent("Name1", "lName1", email, "1234567890", "pWord");
 		} catch (IllegalArgumentException e) {
 			fail();
 		}

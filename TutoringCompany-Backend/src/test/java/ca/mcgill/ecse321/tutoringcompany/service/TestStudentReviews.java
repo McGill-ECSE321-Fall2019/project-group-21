@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import ca.mcgill.ecse321.tutoringcompany.dao.SessionRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.StudentRepository;
 import ca.mcgill.ecse321.tutoringcompany.dao.StudentReviewsRepository;
+import ca.mcgill.ecse321.tutoringcompany.model.Student;
 import ca.mcgill.ecse321.tutoringcompany.model.StudentReviews;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentReviewsService;
@@ -28,18 +30,25 @@ import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyStudentReviewsSe
 public class TestStudentReviews {
 
 	@Autowired
-	private TutoringCompanyStudentReviewsService StudentReviewsService;
-	private TutoringCompanyStudentService StudentService;
+	private TutoringCompanyStudentReviewsService studentReviewsService;
+	private TutoringCompanyStudentService studentService;
 
 	@Autowired
 	private StudentRepository studentRepository;
+	
+	@Autowired
 	private StudentReviewsRepository studentReviewsRepository;
 	
-//	@Before
-//	public void clearDatabase() {
-//		studentRepository.deleteAll();
-//		studentReviewsRepository.deleteAll();
-//	}
+	@Autowired
+	private SessionRepository sessionRepository;
+	
+	@Before
+	public void clearDatabase() {
+		sessionRepository.deleteAll();
+		studentRepository.deleteAll();
+		
+		studentReviewsRepository.deleteAll(); // was first
+	}
 	
 	/**
 	 * Create a student review
@@ -48,17 +57,20 @@ public class TestStudentReviews {
 	@Test
 	public void testCreateStudentReview() {
 
-		StudentService.createStudent("fName","lName","mail@mail.com","pNum","pWord");
+		studentService.createStudent("fName","lName","mail@mail.com","1234567890","pWord");
 		
 		String body = "body";
 		
-		assertEquals(0, StudentReviewsService.getAllStudentReviews().size());
+		assertEquals(0, studentReviewsService.getAllStudentReviews().size());
+		
 		try {
-			StudentReviewsService.createStudentReview(body, 5, "mail@mail.com");
+			studentReviewsService.createStudentReview(body, 5, "mail@mail.com");
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
-		List<StudentReviews> allStudentReviews = StudentReviewsService.getAllStudentReviews();
+		
+		List<StudentReviews> allStudentReviews = studentReviewsService.getAllStudentReviews();
+		
 		assertEquals(1, allStudentReviews.size());
 		assertEquals(body, allStudentReviews.get(0).getBody());
 	}
@@ -70,20 +82,20 @@ public class TestStudentReviews {
 	@Test
 	public void testCreateStudentReviewNull() {
 		
-		StudentService.createStudent("fName","lName","mail@mail.com","pNum","pWord");
+		studentService.createStudent("fName","lName","mail@mail.com","1234567890","pWord");
 		
 		String body = null;
 		String error = null;
 		
-		assertEquals(0, StudentReviewsService.getAllStudentReviews().size());
+		assertEquals(0, studentReviewsService.getAllStudentReviews().size());
 		try {
-			StudentReviewsService.createStudentReview(body, 5, "mail@mail.com");
+			studentReviewsService.createStudentReview(body, 5, "mail@mail.com");
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
 
 		assertEquals("Your student review details are incomplete!", error);
-		assertEquals(0, StudentReviewsService.getAllStudentReviews().size());
+		assertEquals(0, studentReviewsService.getAllStudentReviews().size());
 	}
 	
 	/**
@@ -93,20 +105,20 @@ public class TestStudentReviews {
 	@Test
 	public void testCreateStudentReviewEmpty() {
 
-		StudentService.createStudent("fName","lName","mail@mail.com","pNum","pWord");
+		studentService.createStudent("fName","lName","mail@mail.com","1234567890","pWord");
 		
 		String body = "";
 		String error = null;
 		
-		assertEquals(0, StudentReviewsService.getAllStudentReviews().size());
+		assertEquals(0, studentReviewsService.getAllStudentReviews().size());
 		try {
-			StudentReviewsService.createStudentReview(body, 5, "mail@mail.com");
+			studentReviewsService.createStudentReview(body, 5, "mail@mail.com");
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
 
 		assertEquals("Your student review details are incomplete!", error);
-		assertEquals(0, StudentReviewsService.getAllStudentReviews().size());
+		assertEquals(0, studentReviewsService.getAllStudentReviews().size());
 	}
 	
 	/**
@@ -115,21 +127,20 @@ public class TestStudentReviews {
 	 */
 	@Test
 	public void testCreateStudentReviewSpaces() {
-		
-		StudentService.createStudent("fName","lName","mail@mail.com","pNum","pWord");
+		studentService.createStudent("fName","lName","mail@mail.com","1234567890","pWord");
 		
 		String body = " ";
 		String error = null;
 		
-		assertEquals(0, StudentReviewsService.getAllStudentReviews().size());
+		assertEquals(0, studentReviewsService.getAllStudentReviews().size());
 		try {
-			StudentReviewsService.createStudentReview(body, 5, "mail@mail.com");
+			studentReviewsService.createStudentReview(body, 5, "mail@mail.com");
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
 
 		assertEquals("Your student review details are incomplete!", error);
-		assertEquals(0, StudentReviewsService.getAllStudentReviews().size());
+		assertEquals(0, studentReviewsService.getAllStudentReviews().size());
 	}
 	
 	/**
@@ -139,17 +150,19 @@ public class TestStudentReviews {
 	@Test
 	public void testDeleteStudentReview() {
 
-		StudentService.createStudent("fName","lName","mail@mail.com","pNum","pWord");
+		studentService.createStudent("fName","lName","mail@mail.com","1234567890","pWord");
 		
-		assertEquals(0, StudentReviewsService.getAllStudentReviews().size());
-		StudentReviewsService.createStudentReview("body", 5, "mail@mail.com");
-		assertEquals(1, StudentReviewsService.getAllStudentReviews().size());
+		assertEquals(0, studentReviewsService.getAllStudentReviews().size());
+		StudentReviews studentReview = studentReviewsService.createStudentReview("body", 5, "mail@mail.com");
+		assertEquals(1, studentReviewsService.getAllStudentReviews().size());
+		
 		try {
-			StudentReviewsService.deleteStudentReview(StudentReviewsService.getStudentReview(123));
+			studentReviewsService.deleteStudentReview(studentReviewsService.getAllStudentReviews().get(0));
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
-		assertEquals(0, StudentReviewsService.getAllStudentReviews().size());
+		
+		assertEquals(0, studentReviewsService.getAllStudentReviews().size());
 	}
 	
 	/**
@@ -159,21 +172,21 @@ public class TestStudentReviews {
 	@Test
 	public void testUpdateStudentReview() {
 		
-		StudentService.createStudent("fName","lName","mail@mail.com","pNum","pWord");
+		studentService.createStudent("fName","lName","mail@mail.com","1234567890","pWord");
 		
-		assertEquals(0, StudentReviewsService.getAllStudentReviews().size());
+		assertEquals(0, studentReviewsService.getAllStudentReviews().size());
 		
 		String body1 = "body1";
 		String body2 = "body2";
 		int stars1 = 1;
 		int stars2 = 5;
 		
-		StudentReviews studentReview = StudentReviewsService.createStudentReview(body1, stars1, "mail@mail.com");
+		StudentReviews studentReview = studentReviewsService.createStudentReview(body1, stars1, "mail@mail.com");
 		
 		
-		StudentReviewsService.updateStudentReview(studentReview, body2, stars2);
+		studentReviewsService.updateStudentReview(studentReview, body2, stars2);
 		
-		List<StudentReviews> allStudentReviews = StudentReviewsService.getAllStudentReviews();
+		List<StudentReviews> allStudentReviews = studentReviewsService.getAllStudentReviews();
 		StudentReviews studentRevieww = allStudentReviews.get(0);
 		
 		assertEquals(body2, studentRevieww.getBody());
