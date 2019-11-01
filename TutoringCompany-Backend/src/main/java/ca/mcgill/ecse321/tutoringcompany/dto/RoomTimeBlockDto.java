@@ -42,7 +42,7 @@ public class RoomTimeBlockDto {
 	public void setYear(int year) {
 		this.year = year;
 	}
-	
+
 	/**
 	 * Wrapper that sets the day, month and year passed as arguments
 	 * 
@@ -55,13 +55,13 @@ public class RoomTimeBlockDto {
 		this.month = month;
 		this.year = year;
 	}
-	
+
 	/**
 	 * Wrapper that gets the day, month and year as a 3-item integer array
 	 * 
 	 * @return array with the day, month year
 	 */
 	public int[] getDMY() {
-		return new int[] {day, month, year};
-	}	
+		return new int[] { day, month, year };
+	}
 }

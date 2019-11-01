@@ -22,19 +22,20 @@ import ca.mcgill.ecse321.tutoringcompany.dao.CourseRepository;
 import ca.mcgill.ecse321.tutoringcompany.model.Course;
 import ca.mcgill.ecse321.tutoringcompany.model.Offering;
 import ca.mcgill.ecse321.tutoringcompany.model.Subject;
+
 @Service
 public class TutoringCompanyCourseService {
-	
+
 	@Autowired
-    CourseRepository courseRepository;
-	
+	CourseRepository courseRepository;
+
 	/**
 	 * Create Course instance with the given parameters, save it, and return it
 	 *
 	 * @param name
 	 * @param subject
 	 * @param course_id -- @PrimaryKey -- String that represents the course id
-	 *  
+	 * 
 	 * @return the created course
 	 */
 	@Transactional
@@ -47,7 +48,7 @@ public class TutoringCompanyCourseService {
 		courseRepository.save(course);
 		return course;
 	}
-	
+
 	/**
 	 * Read a specific course by its id
 	 * 
@@ -56,17 +57,18 @@ public class TutoringCompanyCourseService {
 	 */
 	@Transactional
 	public Course getCourse(String course_id) {
-		//courseExist(course_id);
+		// courseExist(course_id);
 		return courseRepository.findById(course_id).get();
 	}
-	
+
 	/**
 	 * Read a specific course with a given name and a given subject
 	 * 
 	 * @param name
 	 * @param subject
 	 * 
-	 * @exception NullPointerException if course with that name and that subject does not exist
+	 * @exception NullPointerException if course with that name and that subject
+	 *                                 does not exist
 	 * 
 	 * @return offering
 	 */
@@ -79,7 +81,7 @@ public class TutoringCompanyCourseService {
 		}
 		throw new NullPointerException("No such Course.");
 	}
-	
+
 	/**
 	 * Read List of Course with the given subject
 	 * 
@@ -90,11 +92,11 @@ public class TutoringCompanyCourseService {
 	public List<Course> getCourses(Subject subject) {
 		List<Course> coursesBySubject = new ArrayList<>();
 		for (Course course : courseRepository.findCourseBySubject(subject)) {
-			coursesBySubject.add(course);			
+			coursesBySubject.add(course);
 		}
 		return coursesBySubject;
 	}
-	
+
 	/**
 	 * Read List of all Courses in the system
 	 *
@@ -103,23 +105,22 @@ public class TutoringCompanyCourseService {
 	@Transactional
 	public List<Course> getAllCourses() {
 		return (List<Course>) courseRepository.findAll();
-		//return toList(courseRepository.findAll());
+		// return toList(courseRepository.findAll());
 	}
-	
+
 	@Transactional
 	public ArrayList<Course> getAllCoursesBySubject(Subject subject) {
 		List<Course> all = getAllCourses();
-		
+
 		ArrayList<Course> result = new ArrayList<Course>();
-		for(Course course : all) {
+		for (Course course : all) {
 			if (course.getSubject().equals(subject)) {
 				result.add(course);
 			}
 		}
-		return  result;
+		return result;
 	}
-	
-	
+
 	/**
 	 * Update name for the specific course whose course_id is passed
 	 * 
@@ -131,7 +132,7 @@ public class TutoringCompanyCourseService {
 		getCourse(course_id).setName(name);
 		courseRepository.save(getCourse(course_id));
 	}
-	
+
 	/**
 	 * Update subject for the specific course whose course_id is passed
 	 * 
@@ -143,14 +144,14 @@ public class TutoringCompanyCourseService {
 		getCourse(course_id).setSubject(subject);
 		courseRepository.save(getCourse(course_id));
 	}
-	
+
 //	Unnecessary complexity
 //	//update methods combined:
 //	public void updateCourse(String course_id, String name, Subject subject) {
 //		updateName(course_id, name);
 //		updateSubject(course_id, subject);
 //	}
-	
+
 	/**
 	 * Delete the specific course passed
 	 * 
@@ -160,7 +161,7 @@ public class TutoringCompanyCourseService {
 	public void deleteCourse(Course course) {
 		courseRepository.delete(course);
 	}
-	
+
 	/**
 	 * Delete specific course with the given course_id
 	 * 
@@ -171,19 +172,18 @@ public class TutoringCompanyCourseService {
 	 */
 	@Transactional
 	public void deleteCourse(String course_id) {
-		getCourse(course_id); //throw exception if course DNE
+		getCourse(course_id); // throw exception if course DNE
 		courseRepository.deleteById(course_id);
 	}
-	
-	
-	
+
 	/**
 	 * Delete specific course with a given name and a given subject
 	 * 
 	 * @param name
 	 * @param subject
 	 * 
-	 * @exception NullPointerException if course with that name and that subject does not exist
+	 * @exception NullPointerException if course with that name and that subject
+	 *                                 does not exist
 	 * 
 	 */
 	@Transactional
@@ -191,7 +191,7 @@ public class TutoringCompanyCourseService {
 		Course course = getCourse(name, subject);
 		courseRepository.deleteById(course.getCourse_id());
 	}
-	
+
 	/**
 	 * Delete all courses with a given subject
 	 * 
@@ -203,7 +203,7 @@ public class TutoringCompanyCourseService {
 			deleteCourse(course);
 		}
 	}
-	
+
 //	//function for getAllCourses
 //	private <T> List<T> toList(Iterable<T> iterable){
 //    	List<T> resultList = new ArrayList<T>();
@@ -212,7 +212,7 @@ public class TutoringCompanyCourseService {
 //    	}
 //    	return resultList;
 //    	}
-	
+
 	/**
 	 * Ensures that offering by the given id is unique or throws exception
 	 * 
@@ -220,35 +220,35 @@ public class TutoringCompanyCourseService {
 	 * @exception EntityExistsException if course already exists
 	 */
 	@Transactional
-    public void courseUnique(String course_id) {
-      if (courseRepository.existsById(course_id))
-        throw new EntityExistsException("offering Already Exists");
-    }
-	
-    /**
-     * Ensures that offering by the given id already exists or throws exception
-     * 
-     * @param course_id of course
-     * @exception NullPointerException if course does not exist
-     */
-    @Transactional
-    public void courseExist(String course_id) {
-      if (! courseRepository.existsById(course_id))
-        throw new NullPointerException("offering Does not Exist");
-    }
-    
-    /**
-     * Ensures that the course info given is valid or throws exception
-     * 
-     * @param course_id
-     * @param name
-     * @param subject
-     * @exception IllegalArgumentException if any of the given parameters are invalid (null or length 0 after trim)
-     */
-    private void courseValid(String course_id, String name, Subject subject) {
- 	    if (course_id == null || course_id.trim().length() == 0 || 
- 	    		name == null || name.trim().length() == 0) {
- 	      throw new IllegalArgumentException("Your course details are incomplete!");
- 	    }
-    }
+	public void courseUnique(String course_id) {
+		if (courseRepository.existsById(course_id))
+			throw new EntityExistsException("offering Already Exists");
+	}
+
+	/**
+	 * Ensures that offering by the given id already exists or throws exception
+	 * 
+	 * @param course_id of course
+	 * @exception NullPointerException if course does not exist
+	 */
+	@Transactional
+	public void courseExist(String course_id) {
+		if (!courseRepository.existsById(course_id))
+			throw new NullPointerException("offering Does not Exist");
+	}
+
+	/**
+	 * Ensures that the course info given is valid or throws exception
+	 * 
+	 * @param course_id
+	 * @param name
+	 * @param subject
+	 * @exception IllegalArgumentException if any of the given parameters are
+	 *                                     invalid (null or length 0 after trim)
+	 */
+	private void courseValid(String course_id, String name, Subject subject) {
+		if (course_id == null || course_id.trim().length() == 0 || name == null || name.trim().length() == 0) {
+			throw new IllegalArgumentException("Your course details are incomplete!");
+		}
+	}
 }

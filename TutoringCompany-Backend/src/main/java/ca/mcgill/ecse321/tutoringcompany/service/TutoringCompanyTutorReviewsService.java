@@ -1,6 +1,6 @@
 package ca.mcgill.ecse321.tutoringcompany.service;
-import java.security.InvalidParameterException;
 
+import java.security.InvalidParameterException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,12 +25,12 @@ public class TutoringCompanyTutorReviewsService {
 	TutorReviewsRepository tutorReviewsRepository;
 	@Autowired
 	private TutoringCompanyTutorService TutorService;
-	//create method
+	// create method
 
 	@Transactional
 	public TutorReviews createTutorReview(String body, int stars, String email) {
 		TutorService.tutorExist(email);
-		if(incorrectTutorReviewsDetails(body,stars,email)) {
+		if (incorrectTutorReviewsDetails(body, stars, email)) {
 			throw new InvalidParameterException("Your tutor review details are incomplete!");
 		}
 		TutorReviews reviews = new TutorReviews();
@@ -40,16 +40,19 @@ public class TutoringCompanyTutorReviewsService {
 		tutorReviewsRepository.save(reviews);
 		return reviews;
 	}
-	//get methods
+
+	// get methods
 	@Transactional
 	public List<TutorReviews> getAllTutorReviews() {
 		return (List<TutorReviews>) tutorReviewsRepository.findAll();
 	}
+
 	/*
 	 * @param id : ID of TutorReview that is trying to be read
-	 * @throws NoSuchElementException if review is null.   
+	 * 
+	 * @throws NoSuchElementException if review is null.
 	 */
-	@Transactional 
+	@Transactional
 	public TutorReviews getTutorReview(int id) {
 		TutorReviews review = tutorReviewsRepository.findById(id).get();
 		return review;
@@ -57,8 +60,8 @@ public class TutoringCompanyTutorReviewsService {
 
 	@Transactional
 	public List<TutorReviews> getAllReviewsForTutor(Tutor tutor) {
-		List<TutorReviews> reviews =new ArrayList<TutorReviews>();
-		for (TutorReviews review: toList(tutorReviewsRepository.findAll())) {
+		List<TutorReviews> reviews = new ArrayList<TutorReviews>();
+		for (TutorReviews review : toList(tutorReviewsRepository.findAll())) {
 			if (review.getTutor().equals(tutor)) {
 				reviews.add(review);
 			}
@@ -66,7 +69,7 @@ public class TutoringCompanyTutorReviewsService {
 		return reviews;
 	}
 
-	//update methods
+	// update methods
 	@Transactional
 	public void updateBody(TutorReviews review, String body) {
 		review.setBody(body);
@@ -81,23 +84,22 @@ public class TutoringCompanyTutorReviewsService {
 
 	@Transactional
 	public void updateTutorReview(TutorReviews review, String body, int stars) {
-		updateStars(review,stars);
-		updateBody(review,body);
+		updateStars(review, stars);
+		updateBody(review, body);
 		tutorReviewsRepository.save(review);
 	}
-	
+
 	@Transactional
 	public void updateTutorReviewsBody(TutorReviews review, String body) {
 		review.setBody(body);
 	}
 
-	//delete method
+	// delete method
 	public void deleteTutorReview(TutorReviews review) {
 		tutorReviewsRepository.delete(review);
 	}
 
-
-	private <T> List<T> toList(Iterable<T> iterable){
+	private <T> List<T> toList(Iterable<T> iterable) {
 		List<T> resultList = new ArrayList<T>();
 		for (T t : iterable) {
 			resultList.add(t);
@@ -106,7 +108,8 @@ public class TutoringCompanyTutorReviewsService {
 	}
 
 	private boolean incorrectTutorReviewsDetails(String body, int stars, String email) {
-		if(body == null || body.trim().length() == 0 || stars > 5 || stars < 0 || email == null || email.trim().length() == 0) {
+		if (body == null || body.trim().length() == 0 || stars > 5 || stars < 0 || email == null
+				|| email.trim().length() == 0) {
 			return true;
 		}
 		return false;

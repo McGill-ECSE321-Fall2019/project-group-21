@@ -10,7 +10,7 @@ import ca.mcgill.ecse321.tutoringcompany.model.RoomType;
 
 public interface RoomRepository extends CrudRepository<Room, Integer> {
 	Optional<Room> findByNumber(int id);
-	
-	//List<Room> findRoomByRoom_type(RoomType roomType);
-	
+
+	// List<Room> findRoomByRoom_type(RoomType roomType);
+
 }

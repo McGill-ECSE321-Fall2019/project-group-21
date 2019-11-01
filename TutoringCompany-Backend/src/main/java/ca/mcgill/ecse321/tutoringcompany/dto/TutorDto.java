@@ -13,15 +13,15 @@ import ca.mcgill.ecse321.tutoringcompany.model.TutorTimeBlock;
 public class TutorDto {
 
 	private String first_name, last_name, email, phone_number, password;
-	private boolean Verified ;
+	private boolean Verified;
 //	private Set<TutorReviews> reviews;
 //	private Set<Offering> offerings;
 //	private Set<TutorTimeBlock> timeBlocks;
 //	private Set<Session> sessions;
-	
+
 //	public TutorDto() {
 //	}
-	
+
 //	@SuppressWarnings("unchecked")
 //	public TutorDto(String first_name, String last_name, String email, String phone_number, String password) {
 //		this(first_name, last_name, email, phone_number, password, Collections.EMPTY_SET, Collections.EMPTY_SET, Collections.EMPTY_SET, Collections.EMPTY_SET);
@@ -33,13 +33,14 @@ public class TutorDto {
 //		this(first_name, last_name, email, phone_number, password, Collections.EMPTY_SET, offerings, timeBlocks, Collections.EMPTY_SET);
 //	}
 
-	public TutorDto(String first_name, String last_name, String email, String phone_number, String password, boolean Verified) { //should this be review or reviews
+	public TutorDto(String first_name, String last_name, String email, String phone_number, String password,
+			boolean Verified) { // should this be review or reviews
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.email = email;
 		this.phone_number = phone_number;
 		this.password = password;
-		this.Verified =Verified;
+		this.Verified = Verified;
 //		this.reviews = reviews;
 //		this.offerings = offerings;
 //		this.timeBlocks = timeBlocks;
@@ -85,6 +86,7 @@ public class TutorDto {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public boolean isVerified() {
 		return Verified;
 	}

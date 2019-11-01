@@ -30,17 +30,18 @@ public class TutoringCompanyOfferingService {
 
 	@Autowired
 	OfferingRepository offeringRepository;
-	
+
 	@Autowired
 	TutoringCompanyCourseService courseService;
+
 	/**
 	 * Create Offering instance with the given parameters, save it, and return it
 	 *
 	 * @param price_individual
 	 * @param price_group
-	 * @param course offered
+	 * @param course           offered
 	 * @param tutor
-	 *  
+	 * 
 	 * @return the created offering
 	 */
 	@Transactional
@@ -81,7 +82,7 @@ public class TutoringCompanyOfferingService {
 	public List<Offering> getAllOfferings() {
 		return (List<Offering>) offeringRepository.findAll();
 	}
-	
+
 	/**
 	 * Read a specific offering by its id
 	 * 
@@ -92,18 +93,19 @@ public class TutoringCompanyOfferingService {
 	 * @return offering
 	 */
 	@Transactional
-	public Offering getSpecificOffering(int id) { //should be called getOffering
+	public Offering getSpecificOffering(int id) { // should be called getOffering
 		offeringExist(id);
 		return offeringRepository.findById(id).get();
 	}
-	
+
 	/**
 	 * Read a specific offering for a given course by a given tutor
 	 * 
 	 * @param tutor
 	 * @param course
 	 * 
-	 * @exception NullPointerException if offering by that tutor and for that course does not exist
+	 * @exception NullPointerException if offering by that tutor and for that course
+	 *                                 does not exist
 	 * 
 	 * @return offering
 	 */
@@ -117,7 +119,7 @@ public class TutoringCompanyOfferingService {
 //		}
 //		throw new NullPointerException("No such Offering.");
 //	}
-	
+
 	/**
 	 * Update price_individual for the specific offering whose id is passed
 	 * 
@@ -129,9 +131,9 @@ public class TutoringCompanyOfferingService {
 		getSpecificOffering(id).setPrice_individual(price_individual);
 		offeringRepository.save(getSpecificOffering(id));
 	}
-	
+
 	/**
-	 * Update price_individual for the specific offering  whose id is passed
+	 * Update price_individual for the specific offering whose id is passed
 	 * 
 	 * @param id
 	 * @param price_group
@@ -141,7 +143,7 @@ public class TutoringCompanyOfferingService {
 		getSpecificOffering(id).setPrice_group(price_group);
 		offeringRepository.save(getSpecificOffering(id));
 	}
-	
+
 	/**
 	 * Delete the specific offering passed
 	 * 
@@ -151,7 +153,7 @@ public class TutoringCompanyOfferingService {
 	public void deleteOffering(Offering offering) {
 		offeringRepository.delete(offering);
 	}
-	
+
 	/**
 	 * Delete an offering specified by the given id
 	 * 
@@ -162,7 +164,7 @@ public class TutoringCompanyOfferingService {
 	 */
 	@Transactional
 	public void deleteOffering(int id) {
-		offeringRepository.delete(getSpecificOffering(id)); //throw exception if offering DNE
+		offeringRepository.delete(getSpecificOffering(id)); // throw exception if offering DNE
 	}
 
 	/**
@@ -171,14 +173,15 @@ public class TutoringCompanyOfferingService {
 	 * @param tutor
 	 * @param course
 	 * 
-	 * @exception NullPointerException if offering by that tutor and that course does not exist
+	 * @exception NullPointerException if offering by that tutor and that course
+	 *                                 does not exist
 	 * 
 	 */
 //	@Transactional
 //	public void deleteOffering(Tutor tutor, Course course) {
 //		deleteOffering(getSpecificOffering(tutor, course));
 //	}
-	
+
 	/**
 	 * Delete all offerings by a given tutor
 	 * 
@@ -198,38 +201,41 @@ public class TutoringCompanyOfferingService {
 	 * @exception EntityExistsException if offering already exists
 	 */
 	@Transactional
-    public void offeringUnique(int id) {
-      if (offeringRepository.existsById(id))
-        throw new EntityExistsException("offering Already Exists");
-    }
-    /**
-     * Ensures that offering by the given id already exists or throws exception
-     * 
-     * @param : id of offering
-     * @exception NullPointerException if offering does not exist
-     */
-    @Transactional
-    public void offeringExist(int id) {
-      if (offeringRepository.existsById(id)==false)
-        throw new NullPointerException("offering Does not Exist");
-    }
-    
-    /**
-     * Ensures that the offering info given is valid or throws exception
-     * 
-     * @param price_individual
-     * @param price_group
-     * @param course
-     * @exception InvalidParameterException if any of the given parameters are invalid (negative or zero price, or inexistent course)
-     */
-    private void offeringValid(int price_individual, int price_group, Course course) {
-    	try {
-    		courseService.courseExist(course.getCourse_id());
-    	} catch (NullPointerException e) {
-    		throw new InvalidParameterException("Your offering details are incomplete!");
-    	}
- 	    if (price_individual <= 0 || price_group <= 0 ) {
- 	      throw new InvalidParameterException("Your offering details are incomplete!");
- 	    }
- }
+	public void offeringUnique(int id) {
+		if (offeringRepository.existsById(id))
+			throw new EntityExistsException("offering Already Exists");
+	}
+
+	/**
+	 * Ensures that offering by the given id already exists or throws exception
+	 * 
+	 * @param : id of offering
+	 * @exception NullPointerException if offering does not exist
+	 */
+	@Transactional
+	public void offeringExist(int id) {
+		if (offeringRepository.existsById(id) == false)
+			throw new NullPointerException("offering Does not Exist");
+	}
+
+	/**
+	 * Ensures that the offering info given is valid or throws exception
+	 * 
+	 * @param price_individual
+	 * @param price_group
+	 * @param course
+	 * @exception InvalidParameterException if any of the given parameters are
+	 *                                      invalid (negative or zero price, or
+	 *                                      inexistent course)
+	 */
+	private void offeringValid(int price_individual, int price_group, Course course) {
+		try {
+			courseService.courseExist(course.getCourse_id());
+		} catch (NullPointerException e) {
+			throw new InvalidParameterException("Your offering details are incomplete!");
+		}
+		if (price_individual <= 0 || price_group <= 0) {
+			throw new InvalidParameterException("Your offering details are incomplete!");
+		}
+	}
 }

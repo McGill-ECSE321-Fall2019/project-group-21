@@ -24,7 +24,6 @@ import ca.mcgill.ecse321.tutoringcompany.model.Offering;
 import ca.mcgill.ecse321.tutoringcompany.model.Student;
 import ca.mcgill.ecse321.tutoringcompany.model.Subject;
 
-
 /**
  * 
  * @author George Kandalaft
@@ -34,54 +33,54 @@ import ca.mcgill.ecse321.tutoringcompany.model.Subject;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestOffering {
-	
+
 	@Autowired
 	private TutoringCompanyOfferingService offeringService;
-	
+
 	@Autowired
 	private TutoringCompanyCourseService courseService;
-	
+
 	@Autowired
 	private TutoringCompanyTutorService tutorService;
-	
-	
+
 	@Autowired
 	private TutorTimeBlockRepository tutorTimeBlockRepository;
-	
+
 	@Autowired
 	private TutorReviewsRepository tutorReviewsRepository;
-	
+
 	@Autowired
 	private OfferingRepository offeringRepository;
-	
+
 	@Autowired
 	private SessionRepository sessionRepository;
-	
+
 	@Autowired
-	private  TutorRepository tutorRepository;
-	
+	private TutorRepository tutorRepository;
+
 	@Autowired
 	private CourseRepository courseRepository;
-	
+
 	@Before
 	public void clearDatabase() {
 		sessionRepository.deleteAll();
 		offeringRepository.deleteAll();
-		
+
 		tutorTimeBlockRepository.deleteAll();
 		sessionRepository.deleteAll();
 		tutorReviewsRepository.deleteAll();
 		tutorRepository.deleteAll();
-		
+
 		courseRepository.deleteAll();
 	}
-	
+
 	/**
 	 * Create an offering
+	 * 
 	 * @result Offering will be persisted without any errors
 	 */
 	@Test
-	public void testCreateOffering(){
+	public void testCreateOffering() {
 		assertEquals(0, offeringService.getAllOfferings().size());
 		Tutor tutor = null;
 		Course course = null;
@@ -92,9 +91,8 @@ public class TestOffering {
 			fail();
 		}
 
-
 		int individualPrice = 15;
-		
+
 		try {
 			offeringService.createOffering(individualPrice, 20, course, tutor);
 		} catch (IllegalArgumentException e) {
@@ -105,15 +103,16 @@ public class TestOffering {
 		assertEquals(1, allOffering.size());
 		assertEquals(individualPrice, allOffering.get(0).getPrice_individual());
 	}
-	
+
 	/**
 	 * Create an offering with a null course
+	 * 
 	 * @result Offering will not be created due to an error
 	 */
 	@Test
 	public void testCreateOfferingNull() {
 		assertEquals(0, offeringService.getAllOfferings().size());
-		
+
 		Tutor tutor = null;
 		Course course = null;
 		try {
@@ -121,9 +120,9 @@ public class TestOffering {
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
-		
+
 		String error = null;
-		
+
 		try {
 			offeringService.createOffering(15, 20, course, tutor);
 		} catch (IllegalArgumentException e) {
@@ -132,15 +131,16 @@ public class TestOffering {
 		assertEquals("Your offering details are incomplete!", error);
 		assertEquals(0, offeringService.getAllOfferings().size());
 	}
-	
+
 	/**
 	 * Create an offering with a negative individual price
+	 * 
 	 * @result Offering will not be created due to an error
 	 */
 	@Test
 	public void testCreateOfferingNegative() {
 		assertEquals(0, offeringService.getAllOfferings().size());
-		
+
 		Tutor tutor = null;
 		Course course = null;
 		try {
@@ -149,7 +149,7 @@ public class TestOffering {
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
-		
+
 		String error = null;
 		int price_individual = -25;
 		try {
@@ -160,15 +160,16 @@ public class TestOffering {
 		assertEquals("Your offering details are incomplete!", error);
 		assertEquals(0, offeringService.getAllOfferings().size());
 	}
-	
+
 	/**
 	 * Delete an offering
+	 * 
 	 * @result Offering will be deleted without any errors
 	 */
 	@Test
 	public void testDeleteOffering() {
 		assertEquals(0, offeringService.getAllOfferings().size());
-		
+
 		Tutor tutor = null;
 		Course course = null;
 		try {
@@ -177,9 +178,9 @@ public class TestOffering {
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
-		
+
 		Offering offering = offeringService.createOffering(15, 20, course, tutor);
-		
+
 		assertEquals(1, offeringService.getAllOfferings().size());
 		try {
 			offeringService.deleteOffering(offering);
@@ -188,14 +189,15 @@ public class TestOffering {
 		}
 		assertEquals(0, offeringService.getAllOfferings().size());
 	}
-	
+
 	/**
 	 * Update an offering
+	 * 
 	 * @result Offering will be updated without any errors
 	 */
 	@Test
 	public void testUpdateOffering() {
-		
+
 		assertEquals(0, offeringService.getAllOfferings().size());
 		Tutor tutor = null;
 		Course course = null;
@@ -208,21 +210,20 @@ public class TestOffering {
 
 		Offering offering = null;
 
-		
 		int individualPrice2 = 20;
 		int groupPrice2 = 30;
-		
+
 		try {
 			offering = offeringService.createOffering(15, 20, course, tutor);
 		} catch (IllegalArgumentException e) {
 			fail();
-		}	
-		
+		}
+
 		offeringService.updatePrice_individual(offering.getId(), individualPrice2);
 		offeringService.updatePrice_group(offering.getId(), groupPrice2);
-		
+
 		List<Offering> allOfferings = offeringService.getAllOfferings();
-		
+
 		assertEquals(individualPrice2, allOfferings.get(0).getPrice_individual());
 		assertEquals(groupPrice2, allOfferings.get(0).getPrice_group());
 	}

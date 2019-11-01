@@ -31,8 +31,10 @@ public class TutoringCompanyRoomService {
 	/**
 	 * Create a room instance with the given parameters, save it, and return it
 	 * 
-	 * @param roomNumber -- @PrimaryKey -- integer that represents the room number //what do these dashes mean
-	 * @param type -- one of the RoomType INDIVIDUAL_ROOM or GROUP_ROOM constants
+	 * @param roomNumber -- @PrimaryKey -- integer that represents the room number
+	 *                   //what do these dashes mean
+	 * @param type       -- one of the RoomType INDIVIDUAL_ROOM or GROUP_ROOM
+	 *                   constants
 	 * 
 	 * @return the created room
 	 * 
@@ -47,8 +49,7 @@ public class TutoringCompanyRoomService {
 		roomRepository.save(room);
 		return room;
 	}
-	
-	
+
 	/**
 	 * Read a specific room by its roomNumber
 	 * 
@@ -60,7 +61,7 @@ public class TutoringCompanyRoomService {
 		roomExist(number);
 		return roomRepository.findById(number).get();
 	}
-	
+
 	/**
 	 * Read List of Rooms with the given roomType
 	 * 
@@ -75,7 +76,7 @@ public class TutoringCompanyRoomService {
 //		}
 //		return roomsByRoomType;
 //	}
-	
+
 	/**
 	 * Read List of all Courses in the system
 	 * 
@@ -84,9 +85,9 @@ public class TutoringCompanyRoomService {
 	@Transactional
 	public List<Room> getAllRooms() {
 		return (List<Room>) roomRepository.findAll();
-		//return toList(roomRepository.findAll());
+		// return toList(roomRepository.findAll());
 	}
-	
+
 	/**
 	 * Update the roomType for the specific room passed
 	 * 
@@ -99,7 +100,7 @@ public class TutoringCompanyRoomService {
 		getRoom(number).setRoom_type(roomType);
 		roomRepository.save(getRoom(number));
 	}
-	
+
 	/**
 	 * Delete the specific room passed
 	 * 
@@ -109,17 +110,16 @@ public class TutoringCompanyRoomService {
 	public void deleteRoom(Room room) {
 		roomRepository.delete(room);
 	}
-	
+
 	/**
 	 * Delete a specific room with the given roomNumber
+	 * 
 	 * @param roomNumber
 	 */
 	@Transactional
 	public void deleteRoom(int roomNumber) {
 		deleteRoom(getRoom(roomNumber));
 	}
-	
-	
 
 	/**
 	 * 
@@ -145,68 +145,68 @@ public class TutoringCompanyRoomService {
 		}
 		return resultList;
 	}
-	
+
 	@Transactional
 	public ArrayList<Room> getAllIndividualRooms() {
-		List<Room> allRooms= toList(roomRepository.findAll());
-		ArrayList<Room> allIndividualRooms= new ArrayList<Room>();
+		List<Room> allRooms = toList(roomRepository.findAll());
+		ArrayList<Room> allIndividualRooms = new ArrayList<Room>();
 		for (Room room : allRooms) {
 			if (room.getRoom_type().equals(RoomType.INDIVIDUAL_ROOM)) {
 				allIndividualRooms.add(room);
 			}
 		}
 		return allIndividualRooms;
-		
+
 	}
 
 	@Transactional
 	public ArrayList<Room> getAllGroupRooms() {
-		List<Room> allRooms= toList(roomRepository.findAll());
-		ArrayList<Room> allGroupRooms= new ArrayList<Room>();
+		List<Room> allRooms = toList(roomRepository.findAll());
+		ArrayList<Room> allGroupRooms = new ArrayList<Room>();
 		for (Room room : allRooms) {
 			if (room.getRoom_type().equals(RoomType.GROUP_ROOM)) {
 				allGroupRooms.add(room);
 			}
 		}
 		return allGroupRooms;
-		
+
 	}
-	
-	 /**
-	  * Ensure that room by the given id is unique or throws exception
-	  * 
-	  * @param number
-	  * @exception EntityExistsException if room already exists
-	  */
-	 @Transactional
-	    public void roomUnique(int number) {
-	      if (roomRepository.existsById(number)) {
-	        throw new EntityExistsException("room Already Exists");
-	    }
-	 }
-	 
-	 /**
-	  * Ensures that room by the given id already exists or throws exception
-	  * 
-	  * @param id
-	  * @exception NullPointerException if room does not exist
-	  */
-	 @Transactional
-	    public void roomExist(int id) {
-	      if (roomRepository.existsById(id)==false)
-	        throw new NullPointerException("room Does not Exist");
-	    }
-	 
-	 /**
-	  * Ensures that the room info given is valid or throws exception  
-	  * 
-	  * @param number
-	  * @exception InvalidParameterException if the number is null or negative
-	  */
-	 @Transactional
-	 private void roomValid(int number, RoomType roomType) {
- 	    if ((Integer) number == null || number <= 0 || roomType == null) {
- 	      throw new InvalidParameterException("Your room details are incomplete!");
- 	    }
- 	  }
+
+	/**
+	 * Ensure that room by the given id is unique or throws exception
+	 * 
+	 * @param number
+	 * @exception EntityExistsException if room already exists
+	 */
+	@Transactional
+	public void roomUnique(int number) {
+		if (roomRepository.existsById(number)) {
+			throw new EntityExistsException("room Already Exists");
+		}
+	}
+
+	/**
+	 * Ensures that room by the given id already exists or throws exception
+	 * 
+	 * @param id
+	 * @exception NullPointerException if room does not exist
+	 */
+	@Transactional
+	public void roomExist(int id) {
+		if (roomRepository.existsById(id) == false)
+			throw new NullPointerException("room Does not Exist");
+	}
+
+	/**
+	 * Ensures that the room info given is valid or throws exception
+	 * 
+	 * @param number
+	 * @exception InvalidParameterException if the number is null or negative
+	 */
+	@Transactional
+	private void roomValid(int number, RoomType roomType) {
+		if ((Integer) number == null || number <= 0 || roomType == null) {
+			throw new InvalidParameterException("Your room details are incomplete!");
+		}
+	}
 }

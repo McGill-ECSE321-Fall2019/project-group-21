@@ -33,22 +33,23 @@ public class TestRoom {
 
 	@Autowired
 	private RoomRepository roomRepository;
-	
+
 	@Autowired
 	private RoomTimeBlockRepository roomTimeBlockRepository;
-	
+
 	@Autowired
 	private SessionRepository sessionRepository;
-	
+
 	@Before
 	public void clearDatabase() {
 		sessionRepository.deleteAll();
 		roomTimeBlockRepository.deleteAll();
 		roomRepository.deleteAll();
 	}
-	
+
 	/**
 	 * Create a room
+	 * 
 	 * @result Room will be persisted without any errors
 	 */
 	@Test
@@ -62,14 +63,14 @@ public class TestRoom {
 		}
 		List<Room> allRooms = roomService.getAllRooms();
 		assertEquals(1, allRooms.size());
-		//no getRoomNumber()?
+		// no getRoomNumber()?
 		assertEquals(roomNumber, allRooms.get(0).getNumber());
 	}
-	
-	
-	//note, it is not trivial to check that an enum value is valid
+
+	// note, it is not trivial to check that an enum value is valid
 	/**
 	 * Create a room with a null room type
+	 * 
 	 * @result Room will not be created due to an error
 	 */
 	@Test
@@ -77,7 +78,7 @@ public class TestRoom {
 		assertEquals(0, roomService.getAllRooms().size());
 		RoomType roomtype = null;
 		String error = null;
-		
+
 		try {
 			roomService.createRoom(123, roomtype);
 		} catch (IllegalArgumentException e) {
@@ -86,9 +87,10 @@ public class TestRoom {
 		assertEquals("Your room details are incomplete!", error);
 		assertEquals(0, roomService.getAllRooms().size());
 	}
-	
+
 	/**
 	 * Delete a room
+	 * 
 	 * @result Room will be deleted without any errors
 	 */
 	@Test
@@ -103,29 +105,30 @@ public class TestRoom {
 		}
 		assertEquals(0, roomService.getAllRooms().size());
 	}
-	
+
 	/**
 	 * Update a room by changing its room type
+	 * 
 	 * @result Room will be updated without any errors
 	 */
 	@Test
 	public void testUpdateRoom() {
-		
+
 		assertEquals(0, roomService.getAllRooms().size());
 		int number = 123;
 		RoomType roomType2 = RoomType.GROUP_ROOM;
-		
+
 		try {
 			roomService.createRoom(number, RoomType.INDIVIDUAL_ROOM);
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
-		
+
 		roomService.updateRoom(number, roomType2);
-		
+
 		List<Room> allRooms = roomService.getAllRooms();
 		Room room = allRooms.get(0);
-		
+
 		assertEquals(roomType2, room.getRoom_type());
 	}
 }

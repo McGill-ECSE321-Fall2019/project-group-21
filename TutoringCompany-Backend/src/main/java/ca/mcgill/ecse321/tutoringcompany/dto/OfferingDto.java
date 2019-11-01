@@ -8,24 +8,24 @@ import ca.mcgill.ecse321.tutoringcompany.model.Session;
 import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
 
 public class OfferingDto {
-	
+
 	private int price_individual, price_group, id;
 	private Tutor tutor;
 	private Course course;
-	//private Set<Session> sessions;
-	
+	// private Set<Session> sessions;
+
 //	@SuppressWarnings("unchecked")
 //	public OfferingDto(int price_individual, int price_group, int id, Tutor tutor, Course course) {
 //		this(price_individual, price_group, id, tutor, course, Collections.EMPTY_SET);
 //	}
-	
+
 	public OfferingDto(int price_individual, int price_group, int id, Tutor tutor, Course course) {
 		this.price_individual = price_individual;
 		this.price_group = price_group;
 		this.id = id;
 		this.tutor = tutor;
 		this.course = course;
-		//this.sessions = sessions;
+		// this.sessions = sessions;
 	}
 
 	public int getPrice_individual() {
@@ -78,15 +78,19 @@ public class OfferingDto {
 //	
 	/*
 	 * @param session to add to the Set of sessions
-	 * @return boolean of whether the sessions Set did not already contain the specified element (true if successfully added)
+	 * 
+	 * @return boolean of whether the sessions Set did not already contain the
+	 * specified element (true if successfully added)
 	 */
 //	public boolean addSession(Session session) {
 //		return this.sessions.add(session);
 //	}
-	
+
 	/*
 	 * @param session to remove from the Set of sessions
-	 * @return whether the sessions Set contained the element (if the sessions Set changed as a result of the call)
+	 * 
+	 * @return whether the sessions Set contained the element (if the sessions Set
+	 * changed as a result of the call)
 	 */
 //	public boolean removeSession(Session session) {
 //		return this.sessions.remove(session);

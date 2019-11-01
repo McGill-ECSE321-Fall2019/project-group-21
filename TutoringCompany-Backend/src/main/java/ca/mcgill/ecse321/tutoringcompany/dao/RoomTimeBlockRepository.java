@@ -4,7 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import ca.mcgill.ecse321.tutoringcompany.model.RoomTimeBlock;
 
-
-public interface RoomTimeBlockRepository extends CrudRepository<RoomTimeBlock, Integer> { 
+public interface RoomTimeBlockRepository extends CrudRepository<RoomTimeBlock, Integer> {
 
 }

@@ -20,7 +20,6 @@ import ca.mcgill.ecse321.tutoringcompany.model.Course;
 import ca.mcgill.ecse321.tutoringcompany.model.Subject;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyCourseService;
 
-
 /**
  * 
  * @author calebsh
@@ -35,22 +34,23 @@ public class TestCourse {
 
 	@Autowired
 	private CourseRepository courseRepository;
-	
+
 	@Autowired
 	private SessionRepository sessionRepository;
-	
+
 	@Autowired
 	private OfferingRepository offeringRepository;
-	
+
 	@Before
 	public void clearDatabase() {
 		sessionRepository.deleteAll();
 		offeringRepository.deleteAll();
 		courseRepository.deleteAll();
 	}
-	
+
 	/**
 	 * Create a course
+	 * 
 	 * @result Course will be persisted without any errors
 	 */
 	@Test
@@ -67,9 +67,10 @@ public class TestCourse {
 		assertEquals(1, allcourses.size());
 		assertEquals(name, allcourses.get(0).getName());
 	}
-	
+
 	/**
 	 * Create a course with a null name
+	 * 
 	 * @result course will not be created due to an error
 	 */
 	@Test
@@ -86,9 +87,10 @@ public class TestCourse {
 		assertEquals("Your course details are incomplete!", error);
 		assertEquals(0, CourseService.getAllCourses().size());
 	}
-	
+
 	/**
 	 * Create a course with an empty name
+	 * 
 	 * @result course will not be created due to an error
 	 */
 	@Test
@@ -105,9 +107,10 @@ public class TestCourse {
 		assertEquals("Your course details are incomplete!", error);
 		assertEquals(0, CourseService.getAllCourses().size());
 	}
-	
+
 	/**
 	 * Create a course with a space as it's first name
+	 * 
 	 * @result course will not be created due to an error
 	 */
 	@Test
@@ -124,9 +127,10 @@ public class TestCourse {
 		assertEquals("Your course details are incomplete!", error);
 		assertEquals(0, CourseService.getAllCourses().size());
 	}
-	
+
 	/**
 	 * Delete a course
+	 * 
 	 * @result course will be deleted without any errors
 	 */
 	@Test
@@ -142,25 +146,26 @@ public class TestCourse {
 		assertEquals(0, CourseService.getAllCourses().size());
 	}
 
-	//TODO
+	// TODO
 	/**
 	 * Update a course
+	 * 
 	 * @result course will be updated without any errors
 	 */
 	@Test
 	public void testUpdateCourse() {
 		assertEquals(0, CourseService.getAllCourses().size());
-		
+
 		String name2 = "name2";
 		Subject subject2 = Subject.PHYSICS;
 		Course course = null;
-		
+
 		try {
 			course = CourseService.createCourse("name1", Subject.MATH, "ecse321");
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
-		
+
 		CourseService.updateCourseName(course.getCourse_id(), name2);
 		CourseService.updateCourseSubject(course.getCourse_id(), subject2);
 

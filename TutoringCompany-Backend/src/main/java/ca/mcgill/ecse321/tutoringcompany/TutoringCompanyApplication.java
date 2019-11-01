@@ -30,16 +30,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 @SpringBootApplication
 public class TutoringCompanyApplication {
-	
-	
-  public static void main(String[] args) {
-    SpringApplication.run(TutoringCompanyApplication.class, args);
-  }
-  
-  @RequestMapping("/")
-  public String greeting(){
-    return "hello world!";
-  }
- 
-}
 
+	public static void main(String[] args) {
+		SpringApplication.run(TutoringCompanyApplication.class, args);
+	}
+
+	@RequestMapping("/")
+	public String greeting() {
+		return "hello world!";
+	}
+
+}

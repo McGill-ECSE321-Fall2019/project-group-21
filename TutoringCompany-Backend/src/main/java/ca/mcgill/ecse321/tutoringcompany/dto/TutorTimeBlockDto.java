@@ -16,6 +16,7 @@ public class TutorTimeBlockDto {
 	public double getStart_time() {
 		return start_time;
 	}
+
 	public TutorDto getTutorDto() {
 		return tutorDto;
 	}
@@ -47,7 +48,7 @@ public class TutorTimeBlockDto {
 	public void setYear(int year) {
 		this.year = year;
 	}
-	
+
 	/**
 	 * Wrapper that sets the day, month and year passed as arguments
 	 * 
@@ -60,13 +61,13 @@ public class TutorTimeBlockDto {
 		this.month = month;
 		this.year = year;
 	}
-	
+
 	/**
 	 * Wrapper that gets the day, month and year as a 3-item integer array
 	 * 
 	 * @return array with the day, month, and year
 	 */
 	public int[] getDMY() {
-		return new int[] {day, month, year};
+		return new int[] { day, month, year };
 	}
 }

@@ -33,7 +33,7 @@ public class TutoringCompanySessionService {
 
 	@Autowired
 	SessionRepository sessionRepository;
-	
+
 	@Autowired
 	TutoringCompanyTutorService tutorService;
 
@@ -51,7 +51,7 @@ public class TutoringCompanySessionService {
 	 * @param room
 	 * @param tutor
 	 * @param offering
-	 * @param Set of student(s)
+	 * @param Set            of student(s)
 	 * 
 	 * @exception InvalidParameterException if any of the previous integer
 	 *                                      parameters is not valid.
@@ -163,6 +163,7 @@ public class TutoringCompanySessionService {
 		s.setSession_type(SessionType.GROUP_SESSION);
 
 	}
+
 //TODO: add month and day
 	/**
 	 * Delete the specific session
@@ -174,7 +175,7 @@ public class TutoringCompanySessionService {
 	@Transactional
 	public void deleteSession(String tutorEmail, int startingHour) {
 		Session session = null;
-		//List<Session> sessionsByTutor = getTutorSessions(tutor);
+		// List<Session> sessionsByTutor = getTutorSessions(tutor);
 		for (Session sessionByTutor : getTutorSessions(tutorService.getTutor(tutorEmail))) {
 			if (sessionByTutor.getStart_time().getHours() == startingHour) {
 				session = sessionByTutor;
@@ -185,7 +186,7 @@ public class TutoringCompanySessionService {
 		}
 		sessionRepository.delete(session);
 	}
-	
+
 	/**
 	 * Read list of all sessions in the repository
 	 * 
@@ -206,10 +207,11 @@ public class TutoringCompanySessionService {
 	 * @param startingMinute
 	 * @param endingHour
 	 * @param endingMinute
-	 * @exception InvalidParameterException if any of the given parameters are invalid (time units outside of range)
+	 * @exception InvalidParameterException if any of the given parameters are
+	 *                                      invalid (time units outside of range)
 	 */
-	public void sessionValid(int year, int month, int day, int startingHour, int startingMinute,
-			int endingHour, int endingMinute) {
+	public void sessionValid(int year, int month, int day, int startingHour, int startingMinute, int endingHour,
+			int endingMinute) {
 		if (year < 2019 || month > 12 || month <= 0 || day > 31 || day <= 0 || endingHour - startingHour < 0
 				|| endingHour > 24 || startingHour < 00 || startingMinute < 0 || startingMinute >= 60
 				|| endingMinute < 0 || endingMinute >= 60) {

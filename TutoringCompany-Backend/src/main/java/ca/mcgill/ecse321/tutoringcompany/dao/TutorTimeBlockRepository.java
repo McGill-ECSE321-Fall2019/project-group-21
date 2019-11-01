@@ -11,6 +11,5 @@ import ca.mcgill.ecse321.tutoringcompany.model.TutorTimeBlock;
 
 public interface TutorTimeBlockRepository extends CrudRepository<TutorTimeBlock, Integer> {
 
-
 //	TutorTimeBlock findByTutorAndStart_time(Tutor t, double start_time);
 }
