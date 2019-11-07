@@ -1,5 +1,5 @@
 <template>
-  <div id="MainPage">
+  <div id="login">
     <h1>Welcome to Quality over Quantity Tutoring Company</h1>
     
     <table>
@@ -13,7 +13,7 @@
 
           </td>
           <td>
-              <input type="password" v-model="password" placeholder="password">
+              <input type="text" v-model="password" placeholder="password">
           </td>
           <td>
               <button @click="ManagerLogin(email,password)">Log in</button>
@@ -25,17 +25,14 @@
       <span style="color:red">Error: Message text comes here</span>
     </p>
   </div>
-  
 </template>
-<script src="./login.js">
+<script>
 </script>
 <style>
-
-  #MainPage {
+  #login {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     color: #172431;
     font-size: 25px;
     background: #a7c5e0;
-    text-align: inherit
   }
 </style>
