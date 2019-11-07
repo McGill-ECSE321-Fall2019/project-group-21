@@ -33,7 +33,7 @@ var AXIOS = axios.create({
                 this.errorLogin = errorMsg
                 return
             }
-            AXIOS.post(`/Manager/login/` + username + '/' + password, {}, {})
+            AXIOS.post(`/Manager/login/`, {}, {})
                 .then(response => {
                     // JSON responses are automatically parsed.
                     this.response = response.data

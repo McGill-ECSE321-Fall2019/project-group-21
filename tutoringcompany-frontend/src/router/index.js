@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import TutoringCompany from '@/components/TutoringCompany'
-import login from '@/components/login'
+import Login from '@/components/Login'
+import ManagerSignUp from '@/components/ManagerSignUp'
 
 Vue.use(Router)
 
@@ -19,9 +20,15 @@ export default new Router({
       component: TutoringCompany
     },
   {
+    
     path: '/login',
-    name: 'login',
-    component: TutoringCompany
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/managersignup',
+    name: 'ManagerSignUp',
+    component: ManagerSignUp
   }
 ]
 })
