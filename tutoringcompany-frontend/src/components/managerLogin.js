@@ -8,61 +8,49 @@ var AXIOS = axios.create({
     baseURL: backendUrl,
     headers: { 'Access-Control-Allow-Origin': frontendUrl }
   })
-
+  
   export default {
-    name: 'login',
+    name: 'ManagerLogin',
     data() {
         return {
-            username:  '',
-            password:  '',
+            ManagerEmail: '',
+            ManagerPassword: '',
             errorLogin: '',
             response: ''
         }
     },
+    created: function () {
+    },    
     methods: {
-        login(username, password) {
-            if (username == '') {
-                var errorMsg = "Unvalid username"
+        ManagerLogin: function(ManagerEmail,ManagerPassword) {
+            if (ManagerEmail == '') {
+                var errorMsg = "Email is empty"
                 console.log(errorMsg)
                 this.errorLogin = errorMsg
                 return
             }
-            if (password == '') {
-                var errorMsg = "Unvalid password"
+            if (ManagerPassword == '') {
+                var errorMsg = "Password is empty"
                 console.log(errorMsg)
                 this.errorLogin = errorMsg
                 return
             }
-            AXIOS.post(`/Manager/login/`, {}, {})
-                .then(response => {
-                    // JSON responses are automatically parsed.
-                    this.response = response.data
-                    this.errorLogin = ''
-                    //store username and password in local storage
-                    //localStorage.setItem('username', username)
-                    //localStorage.setItem('password', password)
-                    this.$cookie.set("username", username, { expires: '1h' })
-                    this.$cookie.set("password", password, { expires: '1h' })
-                    this.username = this.$cookie.get("username") || ''
-                    this.password = this.$cookie.get("password") || ''
-                    if (this.response == 'TermInstructor') {
-                        localStorage.setItem('loggedIn', "TermInstructor")
-                        window.location.href = "/";           
-                    }
-                    else if (this.response == "ProgramManager") {
-                        localStorage.setItem('loggedIn', "ProgramManager")
-                        window.location.href = "/";
-                    }
-                    else{
-                        this.errorLogin = response.data
-                        console.log(this.response)
-                    }
-                })
-                .catch(e => {
-                    var errorMsg = e.message
-                    console.log(errorMsg)
-                    this.errorLogin = errorMsg
-                });
-        } 
+            this.errorSignUp =''
+                    AXIOS.post(`/Manager/Login` + "?ManagerEmail=" + ManagerEmail +"&ManagerPassword=" + ManagerPassword , {}, {})
+            .then(response=>{
+                this.response = response.data
+                    console.log(this.response)
+                    this.response = "You're Loged in!"
+                    this.ManagerEmail= ''
+                    this.ManagerPassword= ''
+                    
+            })
+            .catch(e => {
+                errorMsg = e.message
+                console.log(errorMsg)
+                this.errorLogin = errorMsg
+                this.response = ''
+            });
+        }
     }
-}
+  }

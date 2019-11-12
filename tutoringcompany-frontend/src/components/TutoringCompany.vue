@@ -14,8 +14,8 @@
          <p>Our Tutors:</p>
          <p>Our Courses:</p>
          <p>Our Offerings:</p>
-         <p>Login</p>
-         <p>Sign up</p>
+         <p><a href="http://127.0.0.1:8087/#/login">Login</a></p>
+         <p><a href="http://127.0.0.1:8087/#/signup" class="button">Sign up</a></p>
 </div>
    </div> 
  </template>
