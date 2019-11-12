@@ -17,10 +17,6 @@
          <p>Login</p>
          <p>Sign up</p>
 </div>
-    <p>
-       <span v-if="errorSignUp" style="color:red">Error: {{errorSignUp}} </span>
-       <span v-if="response" style="color:green">Success: {{response}} </span>
-    </p>
    </div> 
  </template>
 <script>
@@ -52,9 +48,9 @@
     color: #172431;
     font-size: 22px;
     background: #a7c5e0;
-    text-align: end;
-    display: grid;
-    grid-area: auto;
+    text-align: center;
+    display: -moz-grid;
+    grid-area: span;
     grid-template-columns: 200px 200px 200px 200px 200px
   }
 
