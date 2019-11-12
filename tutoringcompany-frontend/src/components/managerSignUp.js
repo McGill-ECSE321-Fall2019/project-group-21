@@ -8,16 +8,16 @@ var AXIOS = axios.create({
     baseURL: backendUrl,
     headers: { 'Access-Control-Allow-Origin': frontendUrl }
   })
-
+  
   export default {
-    name: 'managerSignUp',
+    name: 'createManager',
     data() {
         return {
-            firstName: this.$cookie.get("firstName") || '',
-            LastName: this.$cookie.get("LastName") || '',
-            email: this.$cookie.get("email") || '',
-            phonenumber: this.$cookie.get("phonenumber") ||'',
-            password: this.$cookie.get("password") || '',
+            firstName: '',
+            lastName: '',
+            email: '',
+            phonenumber: '',
+            password: '',
             errorSignUp: '',
             response: ''
         }
@@ -39,7 +39,7 @@ var AXIOS = axios.create({
                 return
             }
             if (email == '') {
-                var errorMsg = "email name is empty"
+                var errorMsg = "email is empty"
                 console.log(errorMsg)
                 this.errorSignUp = errorMsg
                 return
@@ -57,7 +57,7 @@ var AXIOS = axios.create({
                 return
             }
             this.errorSignUp =''
-                    AXIOS.post(`/Manager/Create` + "&firstName=" + firstName +"&lastName=" + lastName + "&email=" + email + "&phonenumber=" + phonenumber + "&password" + password , {}, {})
+                    AXIOS.post(`/Manager/Create` + "?firstName=" + firstName +"&lastName=" + lastName + "&email=" + email + "&phonenumber=" + phonenumber + "&password=" + password , {}, {})
             .then(response=>{
                 this.response = response.data
                     console.log(this.response)
@@ -70,9 +70,9 @@ var AXIOS = axios.create({
                     
             })
             .catch(e => {
-                var errorMsg = e.message
+                errorMsg = e.message
                 console.log(errorMsg)
-                this.errorRegister = errorMsg
+                this.errorSignUp = errorMsg
                 this.response = ''
             });
         }

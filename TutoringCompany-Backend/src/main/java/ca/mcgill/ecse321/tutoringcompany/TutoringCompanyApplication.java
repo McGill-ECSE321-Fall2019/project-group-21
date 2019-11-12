@@ -30,6 +30,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 @SpringBootApplication
 public class TutoringCompanyApplication {
+	
+	@Autowired
+	private TutoringCompanyManagerService ManagerService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(TutoringCompanyApplication.class, args);
@@ -39,5 +42,9 @@ public class TutoringCompanyApplication {
 	public String greeting() {
 		return "hello world!";
 	}
+	@RequestMapping("/m")
+	  public List<Manager> managers(){
+	    return ManagerService.getAllManagers();
+	  }
 
 }

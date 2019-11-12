@@ -26,7 +26,7 @@
     </p>
   </div>
 </template>
-<script>
+<script src= "./managerLogin.js">
 </script>
 <style>
   #login {

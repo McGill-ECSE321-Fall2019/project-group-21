@@ -13,8 +13,8 @@ var AXIOS = axios.create({
     name: 'login',
     data() {
         return {
-            username: this.$cookie.get("username") || '',
-            password: this.$cookie.get("password") || '',
+            username:  '',
+            password:  '',
             errorLogin: '',
             response: ''
         }

@@ -1,5 +1,5 @@
-<template>
-  <div id="Signup">
+ <template>
+   <div id="Signup">
     <h1>Welcome to Quality over Quantity Tutoring Company</h1>
     
     <table>
@@ -32,11 +32,11 @@
       </tr>
     </table>
     <p>
-       <span v-if="errorRegister" style="color:red">Error: {{errorRegister}} </span>
+       <span v-if="errorSignUp" style="color:red">Error: {{errorSignUp}} </span>
        <span v-if="response" style="color:green">Success: {{response}} </span>
     </p>
    </div> 
-</template>
+ </template>
 <script src="./managerSignUp.js">
 </script>
 <style>

@@ -1,7 +1,18 @@
 <template>
   <div id="MainPage">
     <h1>Welcome to Quality over Quantity Tutoring Company</h1>
-    
+    <div id="Options"> 
+      <tr>
+      <td>
+      <a href="http://127.0.0.1:8087/#/" class="button">Our Tutors</a>
+      </td>
+      <td> &nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+      <td>
+      <a href="http://127.0.0.1:8087/#/" class="button">Our Course</a>
+      </td>
+      </tr>
+    </div>    
     <table>
         <h2>Login</h2>
       <tr>
@@ -10,16 +21,15 @@
       </tr>
       <tr>
           <td>Password:
-
           </td>
           <td>
               <input type="password" v-model="password" placeholder="password">
           </td>
-          <td>
-              <button @click="ManagerLogin(email,password)">Log in</button>
-              <a href="http://127.0.0.1:8087/#/" class="button">Go to Google</a>
-          </td>
       </tr>
+          <td>
+              <a href="http://127.0.0.1:8087/#/login" class="button">Log in as a manager</a>
+          </td>
+      
     </table>
     <p>
       <span style="color:red">Error: Message text comes here</span>
@@ -27,7 +37,7 @@
   </div>
   
 </template>
-<script src="./login.js">
+<script>
 </script>
 <style>
 
@@ -35,6 +45,15 @@
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     color: #172431;
     font-size: 25px;
+    background: #a7c5e0;
+    text-align: inherit
+  }
+
+  #Options{
+    display: grid;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    color: #1a7ee2;
+    font-size: 40px;
     background: #a7c5e0;
     text-align: inherit
   }
