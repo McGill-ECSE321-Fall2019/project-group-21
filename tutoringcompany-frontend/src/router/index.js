@@ -4,7 +4,7 @@ import Hello from '@/components/Hello'
 import TutoringCompany from '@/components/TutoringCompany'
 import Login from '@/components/Login'
 import Signup from '@/components/Signup'
-import Jjj from '@/components/Jjj'
+import Tutor from '@/components/Tutor'
 
 Vue.use(Router)
 
@@ -20,8 +20,7 @@ export default new Router({
       name: 'TutoringCompany',
       component: TutoringCompany
     },
-  {
-    
+  { 
     path: '/login',
     name: 'Login',
     component: Login
@@ -33,8 +32,8 @@ export default new Router({
   },
   {
     path: '/tutors',
-    name: 'Jjj',
-    component: Jjj
+    name: 'Tutor',
+    component: Tutor
   }
 ]
 })
