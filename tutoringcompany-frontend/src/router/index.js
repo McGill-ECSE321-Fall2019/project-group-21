@@ -4,6 +4,9 @@ import Hello from '@/components/Hello'
 import TutoringCompany from '@/components/TutoringCompany'
 import Login from '@/components/Login'
 import Signup from '@/components/Signup'
+import HomePage from '@/components/HomePage'
+import ManagerHomePage from '@/components/ManagerHomePage'
+import TutorsM from '@/components/TutorsM'
 
 Vue.use(Router)
 
@@ -25,6 +28,23 @@ export default new Router({
     name: 'Login',
     component: Login
   },
+  {
+    
+    path: '/HomePage',
+    name: 'HomePage',
+    component: HomePage
+  },
+  {
+    
+    path: '/ManagerHomePage',
+    name: 'ManagerHomePage',
+    component: ManagerHomePage
+  },
+  {
+  path: '/TutorsM',
+  name: 'TutorsM',
+  component: TutorsM
+},
   {
     path: '/signup',
     name: 'Signup',
