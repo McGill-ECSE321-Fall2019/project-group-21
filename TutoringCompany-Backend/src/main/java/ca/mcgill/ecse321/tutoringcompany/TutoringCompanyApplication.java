@@ -33,6 +33,9 @@ public class TutoringCompanyApplication {
 	
 	@Autowired
 	private TutoringCompanyManagerService ManagerService;
+	
+	@Autowired
+	private TutoringCompanyTutorService TutorService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(TutoringCompanyApplication.class, args);
@@ -45,6 +48,10 @@ public class TutoringCompanyApplication {
 	@RequestMapping("/m")
 	  public List<Manager> managers(){
 	    return ManagerService.getAllManagers();
+	  }
+	@RequestMapping("/t")
+	  public List<Tutor> tutors(){
+	    return TutorService.getAllTutors();
 	  }
 
 }

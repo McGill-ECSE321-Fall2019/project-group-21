@@ -7,6 +7,7 @@ import Signup from '@/components/Signup'
 import HomePage from '@/components/HomePage'
 import ManagerHomePage from '@/components/ManagerHomePage'
 import TutorsM from '@/components/TutorsM'
+import Jjj from '@/components/Jjj'
 
 Vue.use(Router)
 
@@ -49,6 +50,11 @@ export default new Router({
     path: '/signup',
     name: 'Signup',
     component: Signup
+  },
+  {
+    path: '/tutors',
+    name: 'Jjj',
+    component: Jjj
   }
 ]
 })
