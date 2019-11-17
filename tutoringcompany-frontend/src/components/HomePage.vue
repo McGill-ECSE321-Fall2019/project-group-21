@@ -30,30 +30,30 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">
+              <router-link to='/HomePage' class="nav-link">
                 Home
                 <span class="sr-only">(current)</span>
-              </a>
+              </router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Tutors</a>
+              <router-link to='/Tutors' class="nav-link">Tutors</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Courses</a>
+              <router-link to='/Course' class="nav-link">Courses</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <router-link to='/About' class="nav-link">About</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <router-link to='/Contact' class="nav-link">Contact</router-link>
             </li>
           </ul>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#">Book a Session</a>
+              <router-link to='/StudentSignUp' class="nav-link">Book a Session</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Work with us</a>
+              <router-link to='/TutorSignUp' class="nav-link">Work with us</router-link>
             </li>
           </ul>
         </div>
@@ -76,7 +76,7 @@
   right: 0px;
 }
 .navbar-brand img {
-  max-width: 30%;
+  max-width: 10%;
   overflow: visible;
 }
 </style>

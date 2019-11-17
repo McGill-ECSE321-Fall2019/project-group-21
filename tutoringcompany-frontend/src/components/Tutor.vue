@@ -3,16 +3,15 @@
         <h1>our tutors </h1>
         <div class="container-fluid">
           <td v-for="(tutor) in tutors">
-              <div class="card" style="width: 14rem; color: #00000; "> 
+              <div class="card" style="width: 14rem; color: #00000; ">
                 <div class="card-body">
                     <h5 class="card-title">
                         <td >{{ tutor.first_name }} {{tutor.last_name}}</td>
                       </h5>
                     <p class="card-text">
-                        <td>{{tutor.email}} {{email}}</td>
+                        <td>{{ tutor.email }}</td>
                       </p>
-                      <button @click="getTutor(tutor.email)">Log in</button>
-                    <a href="#" class="btn btn-primary" >checkout {{tutor.first_name}}</a>
+                    <a href="#" class="btn btn-primary">checkout {{tutor.first_name}}</a>
                   </div>
               </div>
           </td>
