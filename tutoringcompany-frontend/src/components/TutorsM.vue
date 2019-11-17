@@ -2,7 +2,7 @@
 <template>
 <html lang="en">
   <head>
-    <title>Bootstrap Examkkvkhvple</title>
+    <title>Manage Tutors</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
@@ -68,7 +68,7 @@
       <h1 class="display-4">Tutors</h1>
       <p
         class="lead"
-      >View the gallery of all tutors, click on the name of any tutor to access their profile.</p>
+      >Gallery of all tutors, click on the name of any tutor to access and manage their profile.</p>
     </div>
   </div>
   <div class="container-fluid">
