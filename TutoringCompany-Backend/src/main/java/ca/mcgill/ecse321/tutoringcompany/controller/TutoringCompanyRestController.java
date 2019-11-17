@@ -621,6 +621,11 @@ public class TutoringCompanyRestController {
 		Student student = StudentService.createStudent(FirstName, LastName, Email, PhoneNumber, Password);
 		return convertToDto(student);
 	}
+	@PostMapping(value = { "/Manager/get/Student", "/Manager/get/Student/" })
+	public StudentDto getStudent(@RequestParam("email") String email) throws IllegalArgumentException {
+		Student student = StudentService.getstudent(email);
+		return convertToDto(student);
+	}
 
 	@PostMapping(value = { "/Manager/Delete/Student", "/Manager/Delete/Student/" })
 	public void deleteStudent(@RequestParam(name = "email") String Email) throws IllegalArgumentException {

@@ -10,6 +10,8 @@ import ManagerHomePage from '@/components/ManagerHomePage'
 import TutorsM from '@/components/TutorsM'
 import StudentsM from '@/components/StudentsM'
 import TutorPage from '@/components/TutorPage'
+import RoomsM from '@/components/RoomsM'
+
 
 Vue.use(Router)
 
@@ -29,6 +31,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/RoomsM',
+      name: 'RoomsM',
+      component: RoomsM
     },
     {
 
