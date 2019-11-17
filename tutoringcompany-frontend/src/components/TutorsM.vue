@@ -70,6 +70,7 @@
                     <p class="card-text">
                       {{ tutor.email }}
                 </p>
+                <button @click="getTutor(tutor.email)">Log in</button>
                     <a href="#" class="btn btn-primary">checkout {{tutor.first_name}}</a>
                     <a href="#" class="btn btn-primary">Edit {{tutor.first_name}}</a>
                     <a href="#" class="btn btn-primary">Fire {{tutor.first_name}}</a>

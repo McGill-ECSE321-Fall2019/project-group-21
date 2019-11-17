@@ -9,16 +9,9 @@
                         <td >{{ tutor.first_name }} {{tutor.last_name}}</td>
                       </h5>
                     <p class="card-text">
-<<<<<<< HEAD
-                        <td>{{tutor.email}} {{email}}</td>
-                       </p>
-                      <button @click="getTutor(tutor.email)">Log in</button>
-                    <a href="#" class="btn btn-primary" >checkout {{tutor.first_name}}</a>
-=======
                         <td>{{ tutor.email }}</td>
                       </p>
                     <a href="#" class="btn btn-primary">checkout {{tutor.first_name}}</a>
->>>>>>> fcb10b5dbb9ae8460ec885ca40852d210d64ea13
                   </div>
               </div>
           </div>
