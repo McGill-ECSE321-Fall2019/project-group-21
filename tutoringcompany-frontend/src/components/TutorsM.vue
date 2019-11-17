@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   </head>
 
-  <body>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <router-link to = '/ManagerHomePage' class="navbar-brand" href="#">Quality Academy</router-link>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,55 +56,53 @@
   </div>
 </nav>
 
-<h1 id="greeting">Hi you have nonon logged in</h1>
-<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-  Tooltip on top
-</button>
-<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Tooltip on right">
-  Tooltip on right
-</button>
-<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
-  Tooltip on bottom
-</button>
-<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="left" title="Tooltip on left">
-  Tooltip on left
-</button>
+<h1 id="greeting">Hi you have Secsessfully logged in</h1>
+    
+<div class="row">
+  <div class="column">
+    
+       <div v-for="(tutor) in tutors">
+              <div class="card" style="width: 30rem; color: #00000; ">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <td >{{ tutor.first_name }} {{tutor.last_name}}</td>
+                      </h5>
+                    <p class="card-text">
+                      {{ tutor.email }}
+                </p>
+                    <a href="#" class="btn btn-primary">checkout {{tutor.first_name}}</a>
+                    <a href="#" class="btn btn-primary">Edit {{tutor.first_name}}</a>
+                    <a href="#" class="btn btn-primary">Fire {{tutor.first_name}}</a>
+                    
+                  </div>
+              </div>
+          </div>
 
-</body>
 
-</html>
+  </div>
+</div>
+    
+    </html>
 </template>
 
+<script src="./tut.js">
+</script>
+
 <style>
-.btn btn-secondary{
-font-size: 90px;
+.card-text{
+  font-size: 20px;
 }
-#greeting{
-text-align: center;
+.card{
+ margin-left: 50px;
+ margin-bottom: 10px;
 }
-#logo{
- margin-left: 30%;
-}
-
-#tutors{
-/* 
-  --to be implemented */
-  }
-
-
 .nav-link{
   font-size: 20px;
-margin-left: 20px;
-
-
-  
  
+margin-left: 20px;
 }
-
+.card-title{
+    font-size: 25px;
+font-weight: bold;
+}
 </style>
-
-<script>
-  import jsPDF from 'jspdf';
-  import axios from 'axios'
-  
-</script>
