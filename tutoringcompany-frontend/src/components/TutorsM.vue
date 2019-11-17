@@ -85,8 +85,7 @@
     </html>
 </template>
 
-<script src="./tut.js">
-</script>
+
 
 <style>
 .card-text{
