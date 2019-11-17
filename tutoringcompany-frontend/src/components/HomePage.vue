@@ -14,7 +14,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
       <!-- <div class="container"> -->
         <a class="navbar-brand" href="#">
-          <img alt="Brand" src="../assets/logo.png" class="image-responsive" />Quality over Quantity
+          <img alt="Brand" src="../assets/logo.png" class="image-responsive" style="max-width: 10%;overflow: visible;"/>Quality over Quantity
         </a>
         <button
           class="navbar-toggler"
@@ -44,9 +44,6 @@
             <li class="nav-item">
               <router-link to='/About' class="nav-link">About</router-link>
             </li>
-            <li class="nav-item">
-              <router-link to='/Contact' class="nav-link">Contact</router-link>
-            </li>
           </ul>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -62,6 +59,7 @@
 
     <!-- Page Content -->
     <div class="container">
+      
       <h1 class="mt-4">Logo Nav by Start Bootstrap</h1>
       <p>The logo in the navbar is now a default Bootstrap feature in Bootstrap 4! Make sure to set the width and height of the logo within the HTML or with CSS. For best results, use an SVG image as your logo.</p>
     </div>
@@ -75,10 +73,7 @@
   left: auto !important;
   right: 0px;
 }
-.navbar-brand img {
-  max-width: 10%;
-  overflow: visible;
-}
+
 </style>
 
 <script>

@@ -23,12 +23,12 @@
 </script>
 
 <style>
-  #tutors {
+  /* #tutors {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     color: #172431;
     font-size: 25px;
     background: #a7c5e0;
     grid-template-rows: min-content;
  
-  }
+  } */
 </style>
