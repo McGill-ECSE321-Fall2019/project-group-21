@@ -34,21 +34,29 @@ export default {
     },
     methods: {
         confirmSession: function (tutorEmail, roomNumber, sartingTime) {
-            AXIOS.post(`/Manager/confirm/session` + "?sartingTime" + sartingTime + "&roomNumber" + roomNumber + "&tutorEmail" + tutorEmail)
+            AXIOS.post(`/Manager/confirm/session` + "?sartingTime=" + sartingTime + "&roomNumber=" + roomNumber + "&tutorEmail=" + tutorEmail)
                 .then(response => {
                     // JSON responses are automatically parsed.
                     this.response = response.data
 
-                }),
-                deleteSession: function (tutorEmail, sartingTime) {
-                    AXIOS.post(`/Manager/confirm/session` + "?sartingTime" + sartingTime + "&tutorEmail" + tutorEmail)
-                        .then(response => {
-                            // JSON responses are automatically parsed.
-                            this.response = response.data
+                })
+        },
+        deleteSession: function (tutorEmail, sartingTime) {
+            AXIOS.post(`/Manager/confirm/session` + "?sartingTime=" + sartingTime + "&tutorEmail=" + tutorEmail)
+                .then(response => {
+                    // JSON responses are automatically parsed.
+                    this.response = response.data
 
-                        })
+                })
+        },
+        getAllSession: function (tutorEmail, sartingTime) {
+            AXIOS.post(`/Manager/get/allSessions`)
+                .then(response => {
+                    // JSON responses are automatically parsed.
+                    this.sessions = response.data
 
-                }
+                })
+
         }
     }
 }

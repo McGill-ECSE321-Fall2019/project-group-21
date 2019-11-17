@@ -12,6 +12,7 @@ import TutorPage from '@/components/TutorPage'
 import StudentPage from '@/components/StudentPage'
 import studentTest from '@/components/studentTest'
 import RoomsM from '@/components/RoomsM'
+import RoomTest from '@/components/RoomTest'
 
 
 Vue.use(Router)
@@ -79,6 +80,11 @@ export default new Router({
       path: '/studentTest',
       name: 'studentTest',
       component: studentTest
+    },
+    {
+      path: '/roomTest',
+      name: 'RoomTest',
+      component: RoomTest
     }
   ]
 })
