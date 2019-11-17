@@ -10,8 +10,14 @@
                           <div v-if ="tutor.verified"> VERIFIEDD YESS BITCHH </div>
                           <h1 v-else>Oh no 😢
                           <button @click="verifyTutor(tutor.email)"> verify Tutor  </button>
-                          </h1>
+                                 </h1>
+                          <input type="text" v-model="FirstName" placeholder="last Name"></td>
+                          <button @click="updateTutorFirstName(tutor.email, FirstName)">update first name in</button>
+                          <input type="text" v-model="LastName" placeholder="last Name"></td>
+                          <button @click="updateTutorLastName(tutor.email, LastName)">update last name in</button>
+                   
                         </div>
+                        <span v-if="errorTutor" style="color:red">Error: {{errorTutor}} </span>
             </div>
         </div>
 
