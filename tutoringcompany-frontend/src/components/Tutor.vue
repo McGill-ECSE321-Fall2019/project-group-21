@@ -9,9 +9,12 @@
                         <td >{{ tutor.first_name }} {{tutor.last_name}}</td>
                       </h5>
                     <p class="card-text">
-                        <td>{{ tutor.email }}</td>
-                      </p>
-                    <a href="#" class="btn btn-primary">checkout {{tutor.first_name}}</a>
+
+                        <td>{{tutor.email}} {{email}}</td>
+                       </p>
+                      <button @click="getTutor(tutor.email)">Log in</button>
+                    <a href="#" class="btn btn-primary" >checkout {{tutor.first_name}}</a>
+
                   </div>
               </div>
           </div>
@@ -23,5 +26,12 @@
 </script>
 
 <style>
+  /* #tutors {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    color: #172431;
+    font-size: 25px;
+    background: #a7c5e0;
+    grid-template-rows: min-content;
  
+  } */
 </style>
