@@ -8,6 +8,7 @@ import Tutor from '@/components/Tutor'
 import HomePage from '@/components/HomePage'
 import ManagerHomePage from '@/components/ManagerHomePage'
 import TutorsM from '@/components/TutorsM'
+import TutorPage from '@/components/TutorPage'
 
 Vue.use(Router)
 
@@ -54,6 +55,11 @@ export default new Router({
     path: '/tutors',
     name: 'Tutor',
     component: Tutor
+  },
+  {
+    path: '/tutorPage/:id',
+    name: 'TutorPage',
+    component: TutorPage
   }
 ]
 })
