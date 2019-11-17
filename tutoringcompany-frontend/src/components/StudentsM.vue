@@ -2,7 +2,7 @@
 <template>
 <html lang="en">
   <head>
-    <title>Manage Tutors</title>
+    <title>Bootstrap Example</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
@@ -33,14 +33,14 @@
         <li class="nav-item">
           <router-link to="/ManagerHomePage" class="nav-link">Manager Home</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/TutorsM" class="nav-link">Tutors</router-link>
+        </li>
         <li class="nav-item active">
-          <router-link to="/TutorsM" class="nav-link">
-            Tutors
+          <router-link to="/StudentsM" class="nav-link">
+            Students
             <span class="sr-only">(current)</span>
           </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/StudentsM" class="nav-link">Students</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/CoursesM" class="nav-link">Courses</router-link>
@@ -68,16 +68,16 @@
       <h1 class="display-4">Tutors</h1>
       <p
         class="lead"
-      >Gallery of all tutors, click on the name of any tutor to access and manage their profile.</p>
+      >View the gallery of all tutors, click on the name of any tutor to access their profile.</p>
     </div>
   </div>
   <div class="container-fluid">
     <div class="row">
-      <div v-for="tutor in tutors" class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+      <div v-for="student in students" class="col-6 col-md-4 col-lg-3 mb-4">
         <div class="card mx-auto text-center">
           <div class="card-body">
             <h5 class="card-title">
-              <router-link v-bind:to="'/' + tutor.email">{{ tutor.first_name }} {{tutor.last_name}}</router-link>
+              <router-link v-bind:to="'/' + student.email">{{ student.first_name }} {{student.last_name}}</router-link>
             </h5>
             <h6 class="card-subtitle mb-2 text-muted">Tutor</h6>
             <p
@@ -85,9 +85,8 @@
             >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Email: {{tutor.email}}</li>
-            <li class="list-group-item">Phone: {{tutor.phone_number}}</li>
-            <li class="list-group-item">Verified: {{tutor.verified}}</li>
+            <li class="list-group-item">Email: {{student.email}}</li>
+            <li class="list-group-item">Phone: {{student.phone_number}}</li>
           </ul>
         </div>
       </div>
@@ -97,8 +96,6 @@
 </html>
 </template>
 
-<script src="./tut.js">
-</script>
 
 <style>
 .card {
