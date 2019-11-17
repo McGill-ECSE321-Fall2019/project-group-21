@@ -10,7 +10,7 @@
                       </h5>
                     <p class="card-text">
                         <td>{{tutor.email}} {{email}}</td>
-                      </p>
+                       </p>
                       <button @click="getTutor(tutor.email)">Log in</button>
                     <a href="#" class="btn btn-primary" >checkout {{tutor.first_name}}</a>
                   </div>
