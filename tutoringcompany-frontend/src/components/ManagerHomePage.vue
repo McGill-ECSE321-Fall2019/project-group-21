@@ -23,7 +23,7 @@
       </li>
 
       <li class="nav-item">
-        <router-link to = '/' class="nav-link"> Rooms </router-link>
+        <router-link to = '/TutorsM' class="nav-link"> Rooms </router-link>
       </li>
       <li class="nav-item">
         <router-link to = '/' class="nav-link" >Courses</router-link>
