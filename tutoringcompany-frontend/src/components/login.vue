@@ -6,6 +6,7 @@
 <html>
 <head>
 	<title>Login Page</title>
+  
    <!--Made with love by Mutiullah Samim -->
    
 	<!--Bootsrap 4 CDN-->
@@ -18,12 +19,58 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+      <!-- <div class="container"> -->
+        <a class="navbar-brand" href="#">
+          <img alt="Brand" src="../assets/logo.png" class="image-responsive" style="max-width: 10%;overflow: visible;"/>Quality over Quantity
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <router-link to='/HomePage' class="nav-link">
+                Home
+                <span class="sr-only">(current)</span>
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to='/Tutors' class="nav-link">Tutors</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to='/Course' class="nav-link">Courses</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to='/About' class="nav-link">About</router-link>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <router-link to='/StudentSignUp' class="nav-link">Book a Session</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to='/TutorSignUp' class="nav-link">Work with us</router-link>
+            </li>
+          </ul>
+        </div>
+      <!-- </div> uncomment to make the nav bar more narrow --> 
+    </nav>
 <div class="container">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
 			<div class="card-header">
 				<h3>Sign In</h3>
 				<div class="d-flex justify-content-end social_icon">
+          <a href=""></a>
 					<span><i class="fab fa-facebook-square"></i></span>
 					<span><i class="fab fa-google-plus-square"></i></span>
 					<span><i class="fab fa-twitter-square"></i></span>
@@ -48,22 +95,19 @@
 						<input type="checkbox">Remember Me
 					</div>
 
-					<div class="form-group">
-						<input type="submit" @click="managerLogin(ManagerEmail,ManagerPassword)" value="Login" class="btn float-right login_btn">
-            
-        
-        	</div>
+				
 				</form>
 			</div>
-      <button @click="ManagerLogin(ManagerEmail,ManagerPassword)">Log in</button>
-      <span v-if="errorLogin" style="color:red">Error: {{errorLogin}}</span>
+      <button @click="ManagerLogin(ManagerEmail,ManagerPassword)" class="btn float-right login_btn" id="btn">Log in</button>
+      <span v-if="errorLogin" style="color:red" id="errormsg">Error: {{errorLogin}}</span>
 			<div class="card-footer">
-				<div class="d-flex justify-content-center links">
+				<!-- <div class="d-flex justify-content-center links">
 					Don't have an account?<a href="#">Sign Up</a>
-				</div>
-				<div class="d-flex justify-content-center">
+				</div> -->
+				<!-- <div class="d-flex justify-content-center">
 					<a href="#">Forgot your password?</a>
-				</div>
+				</div> -->
+        <p id="msg">if you forget your password contact our website developper on 4389883384</p>
 			</div>
 		</div>
 	</div>
@@ -89,18 +133,28 @@ background-image: url('../assets/quality.jpg');
 background-size: auto;
 background-repeat: no-repeat;
 background-position-x: 20%;
-background-position-y: 0%;
+background-position-y: 5%;
 height: 100%;
 font-family: 'Numans', sans-serif;
 }
-
+#errormsg{
+  text-align: center;
+  margin-top: 20px;
+}
+#btn{
+  margin-left: 60%;
+ 
+}
 .container{
 height: 100%;
 align-content: center;
 }
-
+#msg{
+  text-align: center;
+  font-size: 15px;
+}
 .card{
-height: 450px;
+height: 400px;
 margin-top: 10%;
 margin-left: 50%;
 margin-bottom: auto;
