@@ -2,7 +2,7 @@
     <div id="tutors">
         <h1>our tutors </h1>
         <div class="container-fluid">
-          <td v-for="(tutor) in tutors">
+          <div v-for="(tutor) in tutors">
               <div class="card" style="width: 14rem; color: #00000; ">
                 <div class="card-body">
                     <h5 class="card-title">
@@ -14,7 +14,7 @@
                     <a href="#" class="btn btn-primary">checkout {{tutor.first_name}}</a>
                   </div>
               </div>
-          </td>
+          </div>
          </div>
      </div>
 </template>
