@@ -8,8 +8,9 @@
                           <div>Email: {{tutor.email}}</div> 
                           <div>Phone Number: {{tutor.phone_number}}</div> 
                           <div v-if ="tutor.verified"> VERIFIEDD YESS BITCHH </div>
-                          <h1 v-else>Oh no 😢</h1>
+                          <h1 v-else>Oh no 😢
                           <button @click="verifyTutor(tutor.email)"> verify Tutor  </button>
+                          </h1>
                         </div>
             </div>
         </div>

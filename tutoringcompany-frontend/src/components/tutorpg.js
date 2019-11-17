@@ -13,10 +13,12 @@ var AXIOS = axios.create({
     name: 'getTutors',
     data () {
       return {
-        tutors: [],
-        newPerson: '',
         errorPerson: '',
         tutor: '',
+        firstName: '',
+        lastName: '',
+        phoneNumber: '',
+
       }
     },
 created: function () {
@@ -35,8 +37,15 @@ created: function () {
                 this.tutor = response.data
               })
         }
-
+    },
+  methods: {
+    updateTutor: function(email,firstName){
+        AXIOS.post(`/Manager/update/Tutor/FirstName` + "?firstName=" + firstName + "&email=" + email, {}, {})
+            .then(response=>{
+                this.response = response.data
     }
-
-    }
+            )
+ }
+}
+  }
   
