@@ -2,7 +2,7 @@
 <template>
 <html lang="en">
   <head>
-    <title>Bootstrap Example</title>
+    <title>Bootstrap Examkkvkhvple</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
@@ -83,7 +83,6 @@
             <p
               class="card-text"
             >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Verify</a>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Email: {{tutor.email}}</li>
