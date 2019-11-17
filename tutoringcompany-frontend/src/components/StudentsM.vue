@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
     <!-- <div class="container"> -->
     <a class="navbar-brand" href="#">
       <img
@@ -30,17 +30,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <router-link to="/ManagerHomePage" class="nav-link">
-            Manager Home
-            <span class="sr-only">(current)</span>
-          </router-link>
+        <li class="nav-item">
+          <router-link to="/ManagerHomePage" class="nav-link">Manager Home</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/TutorsM" class="nav-link">Tutors</router-link>
         </li>
-        <li class="nav-item">
-          <router-link to="/StudentsM" class="nav-link">Students</router-link>
+        <li class="nav-item active">
+          <router-link to="/StudentsM" class="nav-link">
+            Students
+            <span class="sr-only">(current)</span>
+          </router-link>
         </li>
         <li class="nav-item">
           <router-link to="/CoursesM" class="nav-link">Courses</router-link>
@@ -63,39 +63,42 @@
     </div>
     <!-- </div> uncomment to make the nav bar more narrow -->
   </nav>
-
-    <h1 id="greeting">Hi you have Secsessfully logged in</h1>
-    <img src="../assets/quality.jpg" alt="logo" id="logo" />
-
-    </body>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Tutors</h1>
+      <p
+        class="lead"
+      >View the gallery of all tutors, click on the name of any tutor to access their profile.</p>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div v-for="student in students" class="col-6 col-md-4 col-lg-3 mb-4">
+        <div class="card mx-auto text-center">
+          <div class="card-body">
+            <h5 class="card-title">
+              <router-link v-bind:to="'/' + student.email">{{ student.first_name }} {{student.last_name}}</router-link>
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">Tutor</h6>
+            <p
+              class="card-text"
+            >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Email: {{student.email}}</li>
+            <li class="list-group-item">Phone: {{student.phone_number}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
 </html>
 </template>
 
+
 <style>
-/* #greeting{
-text-align: center;
+.card {
+  max-height: 100rem;
 }
-#logo{
- margin-left: 30%;
-}
-
-#tutors{
- 
-  //--to be implemented
-  }
-
-
-.nav-link{
-  font-size: 20px;
-margin-left: 20px;
-
-
-  
- 
-} */
 </style>
-
-<script>
-// import jsPDF from "jspdf";
-// import axios from "axios";
-</script>

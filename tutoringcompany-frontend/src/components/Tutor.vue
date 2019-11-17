@@ -9,10 +9,18 @@
                         <td >{{ tutor.first_name }} {{tutor.last_name}}</td>
                       </h5>
                     <p class="card-text">
+<<<<<<< HEAD
+=======
+
+>>>>>>> b4e06d6cb62440ebf14ae72bdeed2702feb291e0
                         <td>{{tutor.email}} {{email}}</td>
                        </p>
                       <button @click="getTutor(tutor.email)">update first name</button>
                     <a href="#" class="btn btn-primary" >checkout {{tutor.first_name}}</a>
+<<<<<<< HEAD
+=======
+
+>>>>>>> b4e06d6cb62440ebf14ae72bdeed2702feb291e0
                   </div>
               </div>
           </div>
@@ -24,12 +32,12 @@
 </script>
 
 <style>
-  #tutors {
+  /* #tutors {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     color: #172431;
     font-size: 25px;
     background: #a7c5e0;
     grid-template-rows: min-content;
  
-  }
+  } */
 </style>
