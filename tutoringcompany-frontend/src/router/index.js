@@ -11,6 +11,8 @@ import StudentsM from '@/components/StudentsM'
 import TutorPage from '@/components/TutorPage'
 import StudentPage from '@/components/StudentPage'
 import studentTest from '@/components/studentTest'
+import RoomsM from '@/components/RoomsM'
+
 
 Vue.use(Router)
 
@@ -30,6 +32,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/RoomsM',
+      name: 'RoomsM',
+      component: RoomsM
     },
     {
 
