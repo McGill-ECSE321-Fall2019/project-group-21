@@ -65,7 +65,14 @@ export default {
                     this.response = response.data
                     location.reload();
                 })
-        }
+        },
+         deleteTutor: function (email) {
+         AXIOS.post(`/Manager/Delete/Tutor`+ "?email=" + email)
+         .then(response => {
+            // JSON responses are automatically parsed.
+            this.response = response.data
+        })
+    }
     }
 }
 

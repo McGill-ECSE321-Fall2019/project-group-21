@@ -95,7 +95,7 @@
               <li class="list-group-item">Phone #: {{tutor.phone_number}}</li>
               <li class="list-group-item">Verified: {{tutor.verified}}</li>
               <li class="list-group-item">
-                <button class="btn btn-block btn-danger" type="button">
+                <button @click="deleteTutor(tutor.email)" class="btn btn-block btn-danger" type="button">
                   <router-link to="/TutorsM" style="color:inherit;text-decoration:inherit;"> 
                     <div v-if="tutor.verified">
                       Fire
@@ -140,7 +140,7 @@
               <li class="list-group-item">Phone #: {{tutor.phone_number}}</li>
               <li class="list-group-item">Verified: {{tutor.verified}}</li>
               <li class="list-group-item">
-                <button type="button" class="btn btn-block btn-danger">Fire 🔥</button>
+                <button @click="deleteTutor(tutor.email)" type="button" class="btn btn-block btn-danger">Firde sss🔥</button>
               </li>
             </ul>
           </div>

@@ -100,7 +100,7 @@
             </div>
             <div class="form-check">
               <input
-               v-model="isGroup"
+                v-model="isGroup"
                 class="form-check-input"
                 type="radio"
                 name="option1"

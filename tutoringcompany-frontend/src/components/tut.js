@@ -39,6 +39,9 @@ methods: {
         this.tutor = response.data
         window.location.href = "/#/tutorPage/"+ email
       })
+    },
+   deleteTutor: function (email) {
+
     }
   }
 }

@@ -40,21 +40,16 @@ export default {
                     // JSON responses are automatically parsed.
                     this.room = response.data
                 })
+                location.reload();
             }
-            if(isGroup="option1"){
+            if(this.isGroup=="option1"){
                 AXIOS.post(`/Manager/Create/Room` + "?roomNumber=" + number + "&RoomTypeIsGroup=false", {}, {})
                 .then(response => {
                     // JSON responses are automatically parsed.
                     this.room = response.data
                 })
+                location.reload();
             }
-        },
-        getRoomsByType: function (isGroup) {
-            AXIOS.post(`/Manager/get/RoomByType` + "?isGroupRoom=" + isGroup, {}, {})
-                .then(response => {
-                    // JSON responses are automatically parsed.
-                    this.rooms = response.data
-                })
         }
     }
 }
