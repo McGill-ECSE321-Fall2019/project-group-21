@@ -1,5 +1,9 @@
 <template>
+
 <body>
+  <head>
+  <title>Manage Tutor Profile</title>
+</head>
   <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
     <!-- <div class="container"> -->
     <router-link
@@ -255,18 +259,7 @@
               </div>
             </div>
 
-            <div class="card">
-              <div class="card-header">⭐⭐⭐⭐⭐</div>
-              <div class="card-body">
-                <blockquote class="blockquote mb-0">
-                  <p>Good Tutor</p>
-                  <footer class="blockquote-footer">
-                    Louca Dussssfault,
-                    <cite title="Source Title">Student</cite>
-                  </footer>
-                </blockquote>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -277,4 +270,9 @@
 </body>
 </template>
 <script src="./tutorpg.js">
+$(document).keypress(function(e) {
+  if ($("#exampleModal").hasClass('in') && (e.keycode == 13 || e.which == 13)) {
+    alert("Enter is pressed");
+  }
+});
 </script>

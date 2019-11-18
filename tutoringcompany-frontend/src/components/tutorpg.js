@@ -84,7 +84,7 @@ export default {
                 .then(response => {
                     // JSON responses are automatically parsed.
                     this.response = response.data
-                    window.location.href = "/#/TutorsM/"
+
                     location.reload();
                 })
         },
