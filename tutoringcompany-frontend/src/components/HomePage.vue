@@ -72,8 +72,8 @@
               <i class="fa fa-caret-down"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Book a session</a>
-              <a class="dropdown-item" href="#">Work with us</a>
+              <router-link to="/signup" class="dropdown-item" >Book a session</router-link>
+              <router-link to="/signup" class="dropdown-item" >Work with us</router-link>
             </div>
           </li>
           <li></li>
