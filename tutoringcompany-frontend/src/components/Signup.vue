@@ -1,6 +1,11 @@
  <template>
+ <body>
+
+ <head>
+   <title>Sign up</title>
+ </head>
    <div id="Signup">
-    <h1>Welcome to Quality over Quantity Tutoring Company</h1>
+    <h1>Welcome to Quality Academy tutoring</h1>
     
     <table>
         <h2>Sign Up </h2>
@@ -36,6 +41,7 @@
        <span v-if="response" style="color:green">Success: {{response}} </span>
     </p>
    </div> 
+ </body>
  </template>
 <script src="./managerSignUp.js">
 </script>

@@ -41,19 +41,19 @@
             <router-link to="/HomePage" class="nav-link">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/TutorsM" class="nav-link">Tutors</router-link>
+            <router-link to="/Tutors" class="nav-link">Tutors</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/StudentsM" class="nav-link">Students</router-link>
+            <router-link to="/Students" class="nav-link">Students</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/CoursesM" class="nav-link">Courses</router-link>
+            <router-link to="/Courses" class="nav-link">Courses</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/RoomsM" class="nav-link">Rooms</router-link>
+            <router-link to="/Rooms" class="nav-link">Rooms</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/SessionsM" class="nav-link">Sessions</router-link>
+            <router-link to="/Sessions" class="nav-link">Sessions</router-link>
           </li>
         </ul>
         <!-- </div> uncomment for main links left justified-->
@@ -67,12 +67,11 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <i class="fa fa-user"></i>
-              <i class="fa fa-caret-down"></i>
+
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Profile</a>
-              <a @click="ManagerLogout()" class="dropdown-item">Logout</a>
+              <a class="dropdown-item" href="#"></a>
+              <a @click="ManagerLogout()" class="dropdown-item"></a>
             </div>
           </li>
         </ul>
@@ -80,51 +79,43 @@
       <!-- </div> uncomment to make the nav bar more narrow -->
     </nav>
     <div class="container">
-      <div class="row">
-        <div class="col-10 col-md-8 col-lg-6">
-          <div class="card my-4 align-self-center" style="width:70%; margin:0 auto;">
-            <div class="card-header">
-              <h3>Sign in</h3>
+      <div class="card my-4" style="width:70%; margin:0 auto;">
+        <div class="card-header">
+          <h3>Sign in</h3>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input
+                v-model="ManagerEmail"
+                type="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+              />
+              <small
+                id="emailHelp"
+                class="form-text text-muted"
+              >We'll never share your email with anyone else.</small>
             </div>
-            <div class="card-body">
-              <form>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input
-                    v-model="ManagerEmail"
-                    type="email"
-                    class="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter email"
-                  />
-                  <small
-                    id="emailHelp"
-                    class="form-text text-muted"
-                  >We'll never share your email with anyone else.</small>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input
-                    v-model="ManagerPassword"
-                    type="password"
-                    class="form-control"
-                    id="exampleInputPassword1"
-                    placeholder="Password"
-                  />
-                </div>
-                <div class="form-group form-check">
-                  <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                  <label class="form-check-label" for="exampleCheck1">Remember me</label>
-                </div>
-                <button
-                  @click="ManagerLogin(ManagerEmail,ManagerPassword)"
-                  type="submit"
-                  class="btn btn-primary float-right"
-                >Sign in</button>
-              </form>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input
+                v-model="ManagerPassword"
+                type="password"
+                class="form-control"
+                id="exampleInputPassword1"
+                placeholder="Password"
+              />
             </div>
-          </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+              <label class="form-check-label" for="exampleCheck1">Remember me</label>
+            </div>
+            <button  @click="ManagerLogin(ManagerEmail,ManagerPassword)" type="submit" class="btn btn-primary float-right">Sign in</button>
+          </form>
         </div>
       </div>
     </div>
