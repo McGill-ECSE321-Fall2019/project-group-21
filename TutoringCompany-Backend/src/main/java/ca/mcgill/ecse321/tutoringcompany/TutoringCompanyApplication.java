@@ -17,7 +17,7 @@ import ca.mcgill.ecse321.tutoringcompany.model.Offering;
 import ca.mcgill.ecse321.tutoringcompany.model.Session;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyManagerService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanySessionService;
-//import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
+import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyRoomService;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyOfferingService;
 import ca.mcgill.ecse321.tutoringcompany.model.TutorTimeBlock;
 import ca.mcgill.ecse321.tutoringcompany.service.TutoringCompanyCourseService;
@@ -33,6 +33,9 @@ public class TutoringCompanyApplication {
 	
 	@Autowired
 	private TutoringCompanyManagerService ManagerService;
+	
+	@Autowired
+	private TutoringCompanyRoomService RoomService;
 	
 	@Autowired
 	private TutoringCompanyTutorService TutorService;
@@ -52,6 +55,10 @@ public class TutoringCompanyApplication {
 	@RequestMapping("/t")
 	  public List<Tutor> tutors(){
 	    return TutorService.getAllTutors();
+	  }
+	@RequestMapping("/r")
+	  public List<Room> rooms(){
+	    return RoomService.getAllRooms();
 	  }
 
 }

@@ -506,7 +506,7 @@ public class TutoringCompanyRestController {
 
 	@PostMapping(value = { "/Manager/Delete/Tutor", "/Manager/Delete/Tutor/" })
 	public void deleteTutor(@RequestParam(name = "email") String Email) throws IllegalArgumentException {
-		tutorService.deleteTutor(Email);
+	tutorService.deleteTutor(Email);
 	}
 
 	/****************** @Identifier F11 ***************/
