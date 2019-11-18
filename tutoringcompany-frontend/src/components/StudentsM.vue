@@ -83,14 +83,11 @@
       <div v-for="student in students" class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
         <div class="card mx-auto text-center">
           <div class="card-body">
-            <h5 class="card-title">
+            <h4 class="card-title">
               <!-- <router-link v-bind:to="'/' + student.email">{{ student.first_name }} {{student.last_name}}</router-link> -->
               <a href="#">{{ student.first_name }} {{student.last_name}}</a>
-            </h5>
+            </h4>
             <h6 class="card-subtitle mb-2 text-muted">Student</h6>
-            <p
-              class="card-text"
-            >content.</p>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Email: {{student.email}}</li>

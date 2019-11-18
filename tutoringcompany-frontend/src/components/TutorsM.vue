@@ -81,9 +81,9 @@
       <div v-for="tutor in tutors" class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
         <div class="card mx-auto text-center">
           <div class="card-body">
-            <h5 class="card-title">
+            <h4 class="card-title">
               <router-link v-bind:to="'/TutorPage/' + tutor.email">{{ tutor.first_name }} {{tutor.last_name}}</router-link>
-            </h5>
+            </h4>
             <h6 class="card-subtitle mb-2 text-muted">Tutor 
               <span v-if="tutor.verified" class="badge badge-pill badge-success">Verified ✔</span>
             </h6>
