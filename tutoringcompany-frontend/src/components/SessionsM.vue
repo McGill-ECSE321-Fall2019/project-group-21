@@ -93,9 +93,9 @@
             <li class="list-group-item">Starts: {{session.start_time}}</li>
             <li class="list-group-item">Ends: {{session.end_time}}</li>
             <li class="list-group-item">Date: {{session.date}}</li>
-             <li class="list-group-item">Date: {{session.date}}</li>
+             <li class="list-group-item">Date: {{session}}</li>
               <li class="list-group-item">Tutor: {{session.offeringDto.tutor.first_name}}</li>
-               <li class="list-group-item">Date: {{session.date}}</li>
+               <li class="list-group-item">Course ID: {{session.offeringDto.course.course_id}}</li>
           </ul>
         </div>
       </div> 
