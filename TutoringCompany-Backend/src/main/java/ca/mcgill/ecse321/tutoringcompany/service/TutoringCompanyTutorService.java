@@ -3,6 +3,9 @@ package ca.mcgill.ecse321.tutoringcompany.service;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.persistence.EntityExistsException;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import ca.mcgill.ecse321.tutoringcompany.model.Tutor;
  */
 @Service
 public class TutoringCompanyTutorService {
+	Pattern patternEmail = Pattern.compile(("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$"));
 	@Autowired
 	TutorRepository tutorRepository;
 
@@ -39,6 +43,7 @@ public class TutoringCompanyTutorService {
 	@Transactional
 	public Tutor createTutor(String first_name, String last_name, String email, String phone_number, String password) {
 		tutorUnique(email);
+		regexEmail(email);
 		if (invalidTutorInfo(first_name, last_name, email, phone_number, password)) {
 			throw new InvalidParameterException("Your tutor details are incomplete!");
 		}
@@ -275,5 +280,11 @@ public class TutoringCompanyTutorService {
 		tutorRepository.save(t);
 		return t;
 	}
+	public void regexEmail (String email){
+		Matcher Emailmatcher = patternEmail.matcher(email);
+		if(!Emailmatcher.matches()) {
+			throw new InvalidParameterException("invalid email style");
+		}
+	}   
 
 }

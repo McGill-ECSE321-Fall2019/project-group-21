@@ -3,7 +3,7 @@ package ca.mcgill.ecse321.tutoringcompany.service;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.regex.*;
 import javax.persistence.EntityExistsException;
 import javax.transaction.Transactional;
 
@@ -22,6 +22,11 @@ import ca.mcgill.ecse321.tutoringcompany.model.Manager;
 
 @Service
 public class TutoringCompanyManagerService {
+
+
+	Pattern patternEmail = Pattern.compile(("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$"));
+	
+	
 	@Autowired
 	TutorRepository tutorRepository;
 	@Autowired
@@ -48,6 +53,8 @@ public class TutoringCompanyManagerService {
 	public Manager createManager(String first_name, String last_name, String email, String phone_number,
 			String password) {
 		managerUnique(email);
+		regexEmail(email);
+
 		if (invalidManagerInfo(first_name, last_name, email, phone_number, password)) {
 			throw new InvalidParameterException("Your manager details are incomplete!");
 		}
@@ -93,6 +100,7 @@ public class TutoringCompanyManagerService {
 	@Transactional
 	public void updateManager(String email, String first_name, String last_name, String PhoneNumber, String Password) {
 		managerExist(email);
+		
 		if (invalidManagerInfo(first_name, last_name, email, PhoneNumber, Password)) {
 			throw new InvalidParameterException("Your manager details are incomplete!");
 		}
@@ -261,4 +269,14 @@ public class TutoringCompanyManagerService {
 		}
 		return results;
 	}
+
+
+	public void regexEmail (String email){
+		Matcher Emailmatcher = patternEmail.matcher(email);
+		if(!Emailmatcher.matches()) {
+			throw new InvalidParameterException("invalid email style");
+		}
+	}    
+
+	
 }
