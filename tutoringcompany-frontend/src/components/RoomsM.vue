@@ -96,7 +96,7 @@
           <form>
             <div class="form-group">
               <label for="exampleFormControlInput1">Room Number</label>
-              <input type="number" min="0" class="form-control" placeholder="#" />
+              <input v-model="number" type="number" min="0" class="form-control" placeholder="#" />
             </div>
             <div class="form-check">
               <input
@@ -120,7 +120,7 @@
               <label class="form-check-label" for="exampleRadios2">Group Room</label>
             </div>
           </form>
-          <button type="submit" class="btn btn-primary float-right">Save room</button>
+          <button @click="CreatRoom(number)"type="submit" class="btn btn-primary float-right">Save room</button>
         </div>
       </div>
     </div>
@@ -130,9 +130,6 @@
           <div class="card mx-auto text-center">
             <div class="card-body">
               <h5 class="card-title">
-                <router-link
-                  v-bind:to="'/' + tutor.email"
-                >{{ tutor.first_name }} {{tutor.last_name}}</router-link>
               </h5>
               <h6 class="card-subtitle mb-2 text-muted">Tutor</h6>
               <p
@@ -140,9 +137,8 @@
               >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Email: {{tutor.email}}</li>
-              <li class="list-group-item">Phone: {{tutor.phone_number}}</li>
-              <li class="list-group-item">Verified: {{tutor.verified}}</li>
+              <li class="list-group-item">Number: {{room.number}}</li>
+              <li class="list-group-item">Phone: {{room.roomType}</li>
             </ul>
           </div>
         </div>
@@ -152,7 +148,8 @@
 </html>
 </template>
 
-
+<script src="./room.js">
+</script>
 
 <style>
 .card {

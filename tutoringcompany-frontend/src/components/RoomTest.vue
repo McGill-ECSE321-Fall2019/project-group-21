@@ -25,8 +25,7 @@
     
    </div> 
  </template>
-<script src="./room.js">
-</script>
+
 <style>
 
   #Signup {
