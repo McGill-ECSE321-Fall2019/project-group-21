@@ -106,6 +106,14 @@
         <p>Many of our students excel and finish their courses with 90% +, find out the difference that Quality tutoring can make in the academic life of our students</p>
         <router-link class="btn btn-primary btn-lg" to="/signup" role="button">Sign up</router-link>
       </div>
+      <div class="jumbotron">
+        <h1 class="display-4">We are hiring</h1>
+        <p class="lead">Are you a current or former student who is passionate about helping their peers, has found their academic strenghts, and want to gain real-life experience in the workfield of a company?</p>
+        <p class="lead">Apply now to become one of our tutors! One of our managers will review your application and then you will be ready to start tutoring.</p>
+        <hr class="my-4" />
+        <p>Simply fill out your contact information and sign up to get in touch with one of our managers</p>
+        <router-link class="btn btn-primary btn-lg" to="/signup" role="button">Apply now</router-link>
+      </div>
     </div>
   </body>
 </html>
