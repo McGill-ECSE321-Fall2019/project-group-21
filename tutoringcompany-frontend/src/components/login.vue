@@ -89,6 +89,7 @@
             <div class="form-group">
               <label for="exampleInputEmail1">Email address</label>
               <input
+                v-model="ManagerEmail"
                 type="email"
                 class="form-control"
                 id="exampleInputEmail1"
@@ -103,6 +104,7 @@
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
               <input
+                v-model="ManagerPassword"
                 type="password"
                 class="form-control"
                 id="exampleInputPassword1"
@@ -113,7 +115,7 @@
               <input type="checkbox" class="form-check-input" id="exampleCheck1" />
               <label class="form-check-label" for="exampleCheck1">Remember me</label>
             </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button  @click="ManagerLogin(ManagerEmail,ManagerPassword)" type="submit" class="btn btn-primary">Sign in</button>
           </form>
         </div>
       </div>
