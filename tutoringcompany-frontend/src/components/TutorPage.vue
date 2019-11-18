@@ -161,7 +161,7 @@
               </li>
             </ul>
 
-            <!-- <div v-for="review in tutor_reviews" class="card mb-2">
+            <div v-for="review in tutor_reviews" class="card mb-2">
               <div class="card-header">
                 <div v-if="review.stars == 1">
                 ⭐
@@ -182,13 +182,13 @@
               </div>
               <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                  <p>Good Tutor</p>
+                  <p>{{ review.body }}</p>
                   <footer class="blockquote-footer">
                     <cite title="Source Title">Student</cite>
                   </footer>
                 </blockquote>
               </div>
-            </div>-->
+            </div>
 
             <div class="card">
               <div class="card-header">⭐⭐⭐⭐⭐</div>
