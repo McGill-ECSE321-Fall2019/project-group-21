@@ -3,6 +3,8 @@ package ca.mcgill.ecse321.tutoringcompany.service;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.persistence.EntityExistsException;
 import javax.transaction.Transactional;
@@ -18,7 +20,7 @@ import ca.mcgill.ecse321.tutoringcompany.model.Student;
  */
 @Service
 public class TutoringCompanyStudentService {
-
+	Pattern patternEmail = Pattern.compile(("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$"));
 	@Autowired
 	StudentRepository studentRepository;
 
@@ -44,6 +46,7 @@ public class TutoringCompanyStudentService {
 		if (incorrectStudentDetails(FirsName, LastName, Email, PhoneNumber, Password)) {
 			throw new InvalidParameterException("Your student details are incomplete!");
 		}
+		regexEmail(Email);
 		Student student = new Student();
 		student.setFirst_name(FirsName);
 		student.setLast_name(LastName);
@@ -253,5 +256,10 @@ public class TutoringCompanyStudentService {
 		if (!studentRepository.existsById(email))
 			throw new NullPointerException("Student Does not Exist");
 	}
-
+	public void regexEmail (String email){
+		Matcher Emailmatcher = patternEmail.matcher(email);
+		if(!Emailmatcher.matches()) {
+			throw new InvalidParameterException("invalid email style");
+		}
+	}   
 }
