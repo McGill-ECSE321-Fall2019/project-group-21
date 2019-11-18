@@ -12,6 +12,7 @@ import TutorPage from '@/components/TutorPage'
 import StudentPage from '@/components/StudentPage'
 import studentTest from '@/components/studentTest'
 import RoomsM from '@/components/RoomsM'
+import SessionsM from '@/components/SessionsM'
 import RoomTest from '@/components/RoomTest'
 
 
@@ -33,6 +34,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/SessionsM',
+      name: 'SessionsM',
+      component: SessionsM
     },
     {
       path: '/RoomsM',

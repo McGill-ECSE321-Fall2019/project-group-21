@@ -2,25 +2,19 @@
 <template>
 <html lang="en">
   <head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
-    />
+    <title>Manage Sessions</title>
   </head>
-
+  <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
     <!-- <div class="container"> -->
-    <a class="navbar-brand" href="#">
+    <router-link to="/HomePage" class="navbar-brand mr-0" style="max-width:calc((1em + 1vw) * 7 + .5rem + 1vw + 30px);font-size:calc(1em + 1vw);">
       <img
         alt="Brand"
-        src="../assets/logo.png"
-        class="image-responsive"
-        style="max-width: 10%;overflow: visible;"
-      />Quality over Quantity
-    </a>
+        src="../assets/quality.png"
+        class="image-responsive mr-2"
+        style="max-width:calc(30px + 1vw);overflow: visible;"
+      />Quality Academy
+    </router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -32,79 +26,88 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <div class="collapse navbar-collapse" id="navbarResponsive">
+      <!-- <div class="float-right"> -->
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <router-link to="/HomePage" class="nav-link">
-            Home
-            <span class="sr-only">(current)</span>
+        <li class="nav-item">
+          <router-link to="/ManagerHomePage" class="nav-link">Manager Home</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/TutorsM" class="nav-link">
+            Tutors
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/Tutors" class="nav-link">Tutors</router-link>
+          <router-link to="/StudentsM" class="nav-link">Students</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/Course" class="nav-link">Courses</router-link>
+          <router-link to="/CoursesM" class="nav-link">Courses</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/About" class="nav-link">About</router-link>
+          <router-link to="/RoomsM" class="nav-link">Rooms</router-link>
         </li>
-        <li class="nav-item">
-          <router-link to="/Contact" class="nav-link">Contact</router-link>
+        <li class="nav-item active">
+          <router-link to="/SessionsM" class="nav-link">Sessions
+          <span class="sr-only">(current)</span>
+          </router-link>
         </li>
       </ul>
+      <!-- </div> uncomment for main links left justified--> 
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <router-link to="/StudentSignUp" class="nav-link">Book a Session</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/TutorSignUp" class="nav-link">Work with us</router-link>
+        <li class="nav-item dropdown">
+            <a class="nav-link" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-user"></i>
+              <i class="fa fa-caret-down"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Profile</a>
+                <a class="dropdown-item" href="#">Logout</a>
+            </div>
         </li>
       </ul>
     </div>
     <!-- </div> uncomment to make the nav bar more narrow -->
   </nav>
-
-  <h1 id="greeting">Hi you have Secsessfully logged in</h1>
-
-  <div class="container-fluid">
-    <div class="row">
-      <div v-for="session in sessions" class="col-6 col-md-4 col-lg-3 mb-4">
-        <div class="card mx-auto text-center">
-          <a href="#url">
-            <img class="card-img-top" src="http://placehold.it/350x350" alt="Sample Title" />
-          </a>
-          <div class="card-body">
-            <h2 class="card-title">
-              <span class="fa fa-external-link mr-1"></span>
-              <a href="#url">Sample Title</a>
-            </h2>
-          </div>
-        </div>
-      </div>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Sessions</h1>
+      <p
+        class="lead"
+      >Gallery of all sessions, view all sessions or pending sessions, and assign a room to any session by choosing from the dropdown.</p>
     </div>
   </div>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- <div v-for="session in sessions" class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+        <div class="card mx-auto text-center">
+          <div class="card-body">
+            <h5 class="card-title">
+              <router-link v-bind:to="'/TutorPage/' + tutor.email">{{ tutor.first_name }} {{tutor.last_name}}</router-link>
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">Tutor 
+              <span v-if="tutor.verified" class="badge badge-pill badge-success">Verified ✔</span>
+            </h6>
+            <p
+              class="card-text"
+            ></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Email: {{tutor.email}}</li>
+            <li class="list-group-item">Phone #: {{tutor.phone_number}}</li>
+            <li class="list-group-item">Verified: {{tutor.verified}}</li>
+          </ul>
+        </div>
+      </div> -->
+    </div>
+  </div>
+  </body>
 </html>
 </template>
 
-<script src="./tut.js">
-</script>
 
 <style>
-.card-text {
-  font-size: 20px;
-}
 .card {
-  margin-left: 50px;
-  margin-bottom: 10px;
-}
-.nav-link {
-  font-size: 20px;
-
-  margin-left: 20px;
-}
-.card-title {
-  font-size: 25px;
-  font-weight: bold;
+  max-height: 100rem;
 }
 </style>
