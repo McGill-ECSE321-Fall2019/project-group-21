@@ -40,9 +40,16 @@ methods: {
         window.location.href = "/#/tutorPage/"+ email
       })
     },
-   deleteTutor: function (email) {
+    ManagerLogout: function () {
+      AXIOS.post(`/Manager/Logout`, {}, {})
+          .then(response => {
+              this.response = response.data
+              console.log(this.response)
+              this.response = "You're logged out!"
+              window.location.href = "/#/login"
 
-    }
+          })
+  }
   }
 }
 

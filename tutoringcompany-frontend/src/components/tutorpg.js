@@ -44,7 +44,7 @@ export default {
                 this.errorTutor = errorMsg
                 return
             }
-            this.errorTutor =''
+            this.errorTutor = ''
             AXIOS.post(`/Manager/update/Tutor/FirstName` + "?FirstName=" + FirstName + "&email=" + email, {}, {})
                 .then(response => {
                     this.response = response.data
@@ -59,20 +59,32 @@ export default {
                 this.errorTutor = errorMsg
                 return
             }
-            this.errorTutor =''
+            this.errorTutor = ''
             AXIOS.post(`/Manager/update/Tutor/LastName` + "?LastName=" + LastName + "&email=" + email, {}, {})
                 .then(response => {
                     this.response = response.data
                     location.reload();
                 })
         },
-         deleteTutor: function (email) {
-         AXIOS.post(`/Manager/Delete/Tutor`+ "?email=" + email)
-         .then(response => {
-            // JSON responses are automatically parsed.
-            this.response = response.data
-        })
-    }
+        deleteTutor: function (email) {
+            AXIOS.post(`/Manager/Delete/Tutor` + "?email=" + email)
+                .then(response => {
+                    // JSON responses are automatically parsed.
+                    this.response = response.data
+                    window.location.href = "/#/TutorsM/"
+                    location.reload();
+                })
+        },
+        ManagerLogout: function () {
+            AXIOS.post(`/Manager/Logout`, {}, {})
+                .then(response => {
+                    this.response = response.data
+                    console.log(this.response)
+                    this.response = "You're logged out!"
+                    window.location.href = "/#/login"
+
+                })
+        }
     }
 }
 

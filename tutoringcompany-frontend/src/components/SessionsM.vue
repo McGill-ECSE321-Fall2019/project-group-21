@@ -62,7 +62,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#">Profile</a>
-                <a class="dropdown-item" href="#">Logout</a>
+                <a @click="ManagerLogout()" class="dropdown-item" >Logout</a>
             </div>
         </li>
       </ul>
@@ -79,7 +79,7 @@
   </div>
   <div class="container-fluid">
     <div class="row">
-      <!-- <div v-for="session in sessions" class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+       <div v-for="session in sessions" class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
         <div class="card mx-auto text-center">
           <div class="card-body">
             <h5 class="card-title">
@@ -98,13 +98,14 @@
             <li class="list-group-item">Verified: {{tutor.verified}}</li>
           </ul>
         </div>
-      </div> -->
+      </div> 
     </div>
   </div>
   </body>
 </html>
 </template>
-
+<script src="./pendingSession.js">
+</script>
 
 <style>
 .card {
