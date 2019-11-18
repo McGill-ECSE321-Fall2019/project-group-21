@@ -47,12 +47,12 @@ export default {
                 })
         },
         updateTutorReviews: function (reviewId, body) {
-            if (FirstName == '') {
-                var errorMsg = "firstname is empty"
-                console.log(errorMsg)
-                this.errorTutor = errorMsg
-                return
-            }
+            // if (FirstName == '') {
+            //     var errorMsg = "firstname is empty"
+            //     console.log(errorMsg)
+            //     this.errorTutor = errorMsg
+            //     return
+            // }
             this.errorTutor = ''
             AXIOS.post(`Manager/update/Tutor/Reviews` + "?id=" + reviewId + "&body=" + body, {}, {})
                 .then(response => {

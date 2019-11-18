@@ -215,13 +215,13 @@
                     <form>
                       <div class="form-group">
                         <label for="message-text" class="col-form-label">Message:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
+                        <textarea class="form-control" id="message-text" v-bind="body"></textarea>
                       </div>
                     </form>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" @click="updateTutorReviews(review.id, body)">Save changes</button>
                   </div>
                 </div>
               </div>
@@ -241,6 +241,7 @@
                     class="btn btn-primary"
                     data-toggle="modal"
                     data-target="#exampleModal"
+                    @click="updateTutorReviews(review.id, 'dvdsdvdsvsdvds')"
                   >Edit</button>
                 </div>
               </div>
