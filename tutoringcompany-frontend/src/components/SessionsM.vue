@@ -82,20 +82,20 @@
        <div v-for="session in sessions" class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
         <div class="card mx-auto text-center">
           <div class="card-body">
-            <h5 class="card-title">
-              <router-link v-bind:to="'/TutorPage/' + tutor.email">{{ tutor.first_name }} {{tutor.last_name}}</router-link>
-            </h5>
-            <h6 class="card-subtitle mb-2 text-muted">Tutor 
-              <span v-if="tutor.verified" class="badge badge-pill badge-success">Verified ✔</span>
+            <h6 class="card-subtitle mb-2 text-muted">Sessions 
+              
             </h6>
             <p
               class="card-text"
             ></p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Email: {{tutor.email}}</li>
-            <li class="list-group-item">Phone #: {{tutor.phone_number}}</li>
-            <li class="list-group-item">Verified: {{tutor.verified}}</li>
+            <li class="list-group-item">Starts: {{session.start_time}}</li>
+            <li class="list-group-item">Ends: {{session.end_time}}</li>
+            <li class="list-group-item">Date: {{session.date}}</li>
+             <li class="list-group-item">Date: {{session.date}}</li>
+              <li class="list-group-item">Tutor: {{session.offeringDto.tutor.first_name}}</li>
+               <li class="list-group-item">Date: {{session.date}}</li>
           </ul>
         </div>
       </div> 
