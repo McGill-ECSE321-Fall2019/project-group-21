@@ -19,6 +19,8 @@ export default {
             LastName: '',
             phoneNumber: '',
             tutorReviews: [],
+            reviewId: '',
+            body: '',
 
 
         }
@@ -44,7 +46,7 @@ export default {
                     this.tutor = response.data
                 })
         },
-        updateTutorFirstName: function (email, FirstName) {
+        updateTutorReviews: function (reviewId, body) {
             if (FirstName == '') {
                 var errorMsg = "firstname is empty"
                 console.log(errorMsg)
@@ -52,7 +54,7 @@ export default {
                 return
             }
             this.errorTutor = ''
-            AXIOS.post(`/Manager/update/Tutor/FirstName` + "?FirstName=" + FirstName + "&email=" + email, {}, {})
+            AXIOS.post(`Manager/update/Tutor/Reviews` + "?id=" + reviewId + "&body=" + body, {}, {})
                 .then(response => {
                     this.response = response.data
                     location.reload();
@@ -67,7 +69,7 @@ export default {
                 return
             }
             this.errorTutor = ''
-            AXIOS.post(`/Manager/update/Tutor/LastName` + "?LastName=" + LastName + "&email=" + email, {}, {})
+            AXIOS.post(`/Manager/update/Tutor/LastName` + "?LastName=" + reviewId + "&email=" + email, {}, {})
                 .then(response => {
                     this.response = response.data
                     location.reload();
