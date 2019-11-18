@@ -68,10 +68,11 @@ public class TutoringCompanyTutorService {
 	@Transactional
 	public void deleteTutor(String email) {
 		tutorExist(email);
-		tutorRepository.delete(getTutor(email));
+		Tutor tutor = getTutor(email);
+		tutor.setVerified(false);
+		tutorRepository.save(tutor);
 
-	}
-	/*------- Update methods -------*/
+	}	/*------- Update methods -------*/
 
 	/**
 	 * Update all information for the tutor with the given email
