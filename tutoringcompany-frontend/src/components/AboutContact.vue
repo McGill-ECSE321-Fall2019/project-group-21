@@ -109,6 +109,7 @@
             <a
               href="https://www.facebook.com/QualityAcademy/"
               style="color:inherit;text-decoration:inherit;"
+              target="_blank"
             >
               Facebook
               <i class="fa fa-facebook ml-3"></i>
@@ -118,6 +119,7 @@
             <a
               href="https://twitter.com/QualityAcademy/"
               style="color:inherit;text-decoration:inherit;"
+              target="_blank"
             >
               Twitter
               <i class="fa fa-twitter ml-3"></i>
@@ -127,9 +129,20 @@
             <a
               href="mailto:customersupport@qualityacademy.com"
               style="color:inherit;text-decoration:inherit;"
+              target="_blank"
             >
               Email
               <i class="fa fa-envelope ml-3"></i>
+            </a>
+          </button>
+          <button class="btn btn-primary mx-1" type="button">
+            <a
+              href="https://www.google.com/maps/place/Trottier+Bldg,+3630+Rue+University,+Montreal,+QC+H3A+0C6/@45.5074121,-73.5800895,18z/data=!3m1!4b1!4m5!3m4!1s0x4cc91a3829eadafd:0x304925aa0c44027d!8m2!3d45.5074102!4d-73.5789952"
+              style="color:inherit;text-decoration:inherit;"
+              target="_blank"
+            >
+              Headquarters
+              <i class="fa fa-map ml-3"></i>
             </a>
           </button>
           <img class="mt-4" src="../assets/map.png" alt="map" style="max-width:100%;">
