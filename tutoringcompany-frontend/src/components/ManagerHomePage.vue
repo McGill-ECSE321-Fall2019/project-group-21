@@ -63,7 +63,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#">Profile</a>
-                <a class="dropdown-item" href="#">Logout</a>
+                <a @click="ManagerLogout()" class="dropdown-item" href="#">Logout</a>
             </div>
         </li>
       </ul>
@@ -87,7 +87,7 @@
         <p class="lead">Select one of the navbar links above to view and edit the database.</p>
       </div>
     </div>
-    <img src="../assets/quality.jpg" alt="logo" id="logo" />
+    <img src="../assets/quality.png" alt="logo" id="logo" />
   </body>
 </html>
 </template>
@@ -111,7 +111,6 @@ margin-left: 20px;
 } */
 </style>
 
-<script>
-// import jsPDF from "jspdf";
-// import axios from "axios";
+<script src="./managerlogout.js">
+     
 </script>

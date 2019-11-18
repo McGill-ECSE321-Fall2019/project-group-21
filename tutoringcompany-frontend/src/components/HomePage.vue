@@ -35,25 +35,23 @@
         <!-- <div class="float-right"> -->
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <router-link to="/ManagerHomePage" class="nav-link">Home</router-link>
+            <router-link to="/HomePage" class="nav-link">Home</router-link>
             <span class="sr-only">(current)</span>
           </li>
           <li class="nav-item">
-            <router-link to="/TutorsM" class="nav-link">Tutors</router-link>
+            <router-link to="/Tutors" class="nav-link">Tutors</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/StudentsM" class="nav-link">Students</router-link>
+            <router-link to="/Students" class="nav-link">Students</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/CoursesM" class="nav-link">
-              Courses
-            </router-link>
+            <router-link to="/Courses" class="nav-link">Courses</router-link>
           </li>
           <li class="nav-ite">
-            <router-link to="/RoomsM" class="nav-link">Rooms</router-link>
+            <router-link to="/Rooms" class="nav-link">Rooms</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/SessionsM" class="nav-link">Sessions</router-link>
+            <router-link to="/Sessions" class="nav-link">Sessions</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/AboutContact" class="nav-link">About &amp; Contact</router-link>
@@ -78,24 +76,50 @@
               <a class="dropdown-item" href="#">Work with us</a>
             </div>
           </li>
-          <li>
-          </li>
+          <li></li>
         </ul>
       </div>
       <!-- </div> uncomment to make the nav bar more narrow -->
     </nav>
 
     <!-- Page Content -->
+
+    <div class="jumbotron jumbotron-fluid" id="hero">
+      <div class="container">
+        <h1 class="display-4">Welcome to Quality Academy</h1>
+      </div>
+    </div>
     <div class="container">
-      
-      <h1 class="mt-4">Logo Nav by Start Bootstrap</h1>
-      <p>The logo in the navbar is now a default Bootstrap feature in Bootstrap 4! Make sure to set the width and height of the logo within the HTML or with CSS. For best results, use an SVG image as your logo.</p>
+      <div class="jumbotron">
+        <h1 class="display-4">Our expert Tutors</h1>
+        <p class="lead">Our vast selection of expert tutors are here to help students.</p>
+        <p class="lead">Our tutors are formers students themselves, so they understand the difficulties of education the best approaches to help their pupils learn quickly and effectively.</p>
+        <hr class="my-4" />
+        <p>Click here to browse our gallery of tutors!</p>
+        <router-link class="btn btn-primary btn-lg" to="/Tutors" role="button">Browse</router-link>
+      </div>
+      <div class="jumbotron">
+        <h1 class="display-4">You will see nothing but A+</h1>
+        <p class="lead">Here at Quality Academy<i class="fa fa-copyright ml-1"></i>, we guarantee that our tutored students will see their grade increase by one letter grade in one month or your money-back!</p>
+        <p class="lead">Your or your child's success is our priority, and our staff members work around the clock to ensure that our students have access to the tutors they need, when they need them.</p>
+        <hr class="my-4" />
+        <p>Many of our students excel and finish their courses with 90% +, find out the difference that Quality tutoring can make in the academic life of our students</p>
+        <router-link class="btn btn-primary btn-lg" to="/signup" role="button">Sign up</router-link>
+      </div>
     </div>
   </body>
 </html>
 </template>
 
 <style>
+#hero {
+  color: white;
+  background-image: url("../assets/tutor.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
 </style>
 
 <script>
