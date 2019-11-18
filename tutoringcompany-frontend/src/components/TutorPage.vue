@@ -161,7 +161,7 @@
               </li>
             </ul>
 
-            <div v-for="review in tutor_reviews" class="card mb-2">
+            <div v-for="review in tutorReviews" class="card mb-2">
               <div class="card-header">
                 <div v-if="review.stars == 1">
                 ⭐

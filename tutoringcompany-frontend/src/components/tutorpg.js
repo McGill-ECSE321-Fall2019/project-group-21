@@ -18,6 +18,8 @@ export default {
             FirstName: '',
             LastName: '',
             phoneNumber: '',
+            tutorReviews: [],
+
 
         }
     },
@@ -28,7 +30,12 @@ export default {
                 // JSON responses are automatically parsed.
                 this.tutor = response.data
             });
-    },
+    AXIOS.get(`get/Tutor/Reviews` + "?tutorEmail=" + window.location.href.substring(34))
+            .then(response => {
+                // JSON responses are automatically parsed.
+                this.tutorReviews = response.data
+            })
+        },
     methods: {
         verifyTutor: function (email) {
             AXIOS.post(`/Manager/VerifyTutor` + "?email=" + email, {}, {})
