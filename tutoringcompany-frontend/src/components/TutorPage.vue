@@ -2,14 +2,14 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
     <!-- <div class="container"> -->
-    <a class="navbar-brand" href="#">
+    <router-link to="/HomePage" class="navbar-brand mr-0" style="max-width:calc((1em + 1vw) * 7 + .5rem + 1vw + 30px);font-size:calc(1em + 1vw);">
       <img
         alt="Brand"
         src="../assets/quality.png"
-        class="image-responsive"
-        style="max-width: 3rem;overflow: visible;"
+        class="image-responsive mr-2"
+        style="max-width:calc(30px + 1vw);overflow: visible;"
       />Quality Academy
-    </a>
+    </router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -21,7 +21,9 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <div class="collapse navbar-collapse" id="navbarResponsive">
+      <!-- <div class="float-right"> -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <router-link to="/ManagerHomePage" class="nav-link">Manager Home</router-link>
@@ -45,12 +47,17 @@
           <router-link to="/SessionsM" class="nav-link">Sessions</router-link>
         </li>
       </ul>
+      <!-- </div> uncomment for main links left justified--> 
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <router-link to="/Manager" class="nav-link">Profile</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/Logout" class="nav-link">Logout</router-link>
+        <li class="nav-item dropdown">
+            <a class="nav-link" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-user"></i>
+              <i class="fa fa-caret-down"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Profile</a>
+                <a class="dropdown-item" href="#">Logout</a>
+            </div>
         </li>
       </ul>
     </div>
@@ -58,7 +65,7 @@
   </nav>
 
   <div id="id">
-    <div class="jumbotron jumbotron-fluid position-fixed">
+    <div class="jumbotron jumbotron-fluid">
       <div class="container">
         <h1 class="display-4">{{tutor.first_name}} {{tutor.last_name}}</h1>
       </div>
@@ -67,7 +74,7 @@
     <div class="container-fluid">
       <div class="row">
         <div
-          class="col-12 col-md-5 col-lg-4 col-xl-3 mx-auto d-block d-sm-none d-md-block position-fixed"
+          class="col-12 col-md-5 col-lg-4 col-xl-3 mx-auto d-none d-md-block position-fixed"
           id="sticky-sidebar"
         >
           <!-- <div class="sticky-top"> -->
@@ -76,23 +83,40 @@
               <h5 class="card-title">{{ tutor.first_name }} {{tutor.last_name}}</h5>
               <h6 class="card-subtitle mb-2 text-muted">
                 Tutor
-                <span v-if="tutor.verified" class="badge badge-pill badge-success">Verified ✔</span>
+                <span v-if="tutor.verified" class="badge badge-pill badge-success">
+                  Verified
+                  <i class="fa fa-check ml-1"></i>
+                </span>
               </h6>
               <p class="card-text"></p>
-
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">Email: {{tutor.email}}</li>
               <li class="list-group-item">Phone #: {{tutor.phone_number}}</li>
               <li class="list-group-item">Verified: {{tutor.verified}}</li>
               <li class="list-group-item">
-                <button type="button" class="btn btn-block btn-danger">
-                  <div v-if="tutor.verified">Fire 🔥</div>
-                  <div v-else>Delete ✖️</div>
+                <button class="btn btn-block btn-danger" type="button">
+                  <router-link to="/TutorsM" style="color:inherit;text-decoration:inherit;"> 
+                    <div v-if="tutor.verified">
+                      Fire
+                      <i class="fa fa-fire ml-3"></i>
+                    </div>
+                    <div v-else>
+                      Reject
+                      <i class="fa fa-trash ml-3"></i>
+                    </div>
+                  </router-link>
                 </button>
               </li>
               <li v-if="!tutor.verified" class="list-group-item">
-                <button type="button" class="btn btn-block btn-success">Hire 💼</button>
+                <button
+                  type="button"
+                  class="btn btn-block btn-success"
+                  @click="verifyTutor(tutor.email)"
+                >
+                  Hire
+                  <i class="fa fa-briefcase ml-3"></i>
+                </button>
               </li>
             </ul>
           </div>
@@ -129,11 +153,11 @@
             <ul class="list-group list-group-flush mb-4">
               <li class="list-group-item">
                 Press the
-                <span class="badge badge-secondary">Edit</span> button to edit the content of the review body.
+                <span class="badge badge-primary">Edit</span> button to edit the the review contents.
               </li>
               <li class="list-group-item">
                 Press the
-                <span class="badge badge-success">Submit</span> button to save the changes and finish editing.
+                <span class="badge badge-success">Submit</span> button to save the changes to the review contents and finish editing.
               </li>
             </ul>
 
