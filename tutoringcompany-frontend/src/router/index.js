@@ -12,9 +12,10 @@ import TutorPage from '@/components/TutorPage'
 import StudentPage from '@/components/StudentPage'
 import studentTest from '@/components/studentTest'
 import RoomsM from '@/components/RoomsM'
+import CoursesM from '@/components/CoursesM'
 import SessionsM from '@/components/SessionsM'
 import RoomTest from '@/components/RoomTest'
-
+import AboutContact from '@/components/AboutContact'
 
 Vue.use(Router)
 
@@ -46,10 +47,21 @@ export default new Router({
       component: RoomsM
     },
     {
+      path: '/CoursesM',
+      name: 'CoursesM',
+      component: CoursesM
+    },
+    {
 
       path: '/HomePage',
       name: 'HomePage',
       component: HomePage
+    },
+    {
+
+      path: '/AboutContact',
+      name: 'AboutContact',
+      component: AboutContact
     },
     {
 
