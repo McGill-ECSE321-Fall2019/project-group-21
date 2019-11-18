@@ -82,7 +82,7 @@
       <!-- </div> uncomment to make the nav bar more narrow -->
     </nav>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <strong>Welcome!</strong>You have successfully logged in as Manager.
+      <strong>Welcome! </strong>You have successfully logged in as Manager.
       <button
         type="button"
         class="close"

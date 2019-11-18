@@ -113,7 +113,7 @@
               <input type="checkbox" class="form-check-input" id="exampleCheck1" />
               <label class="form-check-label" for="exampleCheck1">Remember me</label>
             </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button type="submit" class="btn btn-primary float-right">Sign in</button>
           </form>
         </div>
       </div>
