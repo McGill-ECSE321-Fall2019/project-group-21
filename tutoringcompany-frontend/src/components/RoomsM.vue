@@ -133,14 +133,15 @@
             <div class="card-body">
               <h5 class="card-title">
               </h5>
-              <h6 class="card-subtitle mb-2 text-muted">Room</h6>
+              <h3 class="card-subtitle mb-2 text-muted">Room #{{room.number}}</h3>
               <p
                 class="card-text"
               ></p>
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">Number: {{room.number}}</li>
-              <li class="list-group-item">Type: {{room.roomType}}</li>
+              <li v-if="room.roomType == 'GROUP_ROOM'" class="list-group-item">Type: Group</li>
+              <li v-else class="list-group-item">Type: Individual</li>
             </ul>
           </div>
         </div>

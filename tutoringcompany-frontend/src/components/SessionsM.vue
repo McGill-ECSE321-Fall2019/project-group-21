@@ -26,7 +26,7 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-   
+    
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <!-- <div class="float-right"> -->
       <ul class="navbar-nav ml-auto">
@@ -53,7 +53,7 @@
           </router-link>
         </li>
       </ul>
-      <!-- </div> uncomment for main links left justified-->
+      <!-- </div> uncomment for main links left justified--> 
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
             <a class="nav-link" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -98,7 +98,7 @@
                <li class="list-group-item">Course ID: {{session.offeringDto.course.course_id}}</li>
           </ul>
         </div>
-      </div>
+      </div> 
     </div>
   </div>
   </body>

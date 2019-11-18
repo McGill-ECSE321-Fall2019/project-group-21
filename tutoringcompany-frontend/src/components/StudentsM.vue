@@ -84,7 +84,8 @@
         <div class="card mx-auto text-center">
           <div class="card-body">
             <h5 class="card-title">
-              <router-link v-bind:to="'/' + student.email">{{ student.first_name }} {{student.last_name}}</router-link>
+              <!-- <router-link v-bind:to="'/' + student.email">{{ student.first_name }} {{student.last_name}}</router-link> -->
+              <a href="#">{{ student.first_name }} {{student.last_name}}</a>
             </h5>
             <h6 class="card-subtitle mb-2 text-muted">Student</h6>
             <p
