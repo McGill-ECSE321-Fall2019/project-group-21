@@ -103,6 +103,8 @@
 </html>
 </template>
 
+<script src="./student.js">
+</script>
 
 <style>
 .card {

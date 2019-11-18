@@ -19,8 +19,6 @@
          </div>
      </div>
 </template>
-<script src="./student.js">
-</script>
 
 
 <style>

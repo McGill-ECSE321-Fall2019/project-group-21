@@ -98,7 +98,7 @@
           <form>
             <div class="form-group">
               <label for="exampleFormControlInput1">Course Name</label>
-              <input
+              <input v-model="coursename"
                 type="text"
                 class="form-control"
                 placeholder="Introduction to Software Engineering"
@@ -106,38 +106,39 @@
             </div>
             <div class="form-group">
               <label for="exampleFormControlInput1">Course ID</label>
-              <input type="text" class="form-control" placeholder="ECSE321" />
+              <input type="text" v-model="courseid" class="form-control" placeholder="ECSE321" />
             </div>
             <div class="form-group">
               <label for="exampleFormControlSelect1">Example select</label>
-              <select class="form-control" id="exampleFormControlSelect1">
-                <option v-for="subject in subjects">{{ subject }}</option>
+              <select v-model="selected" class="form-control" id="exampleFormControlSelect1">
+                <option>Math</option>
+                <option>Physics</option>
+                <option>Chemistry</option>
+                <option>Biology</option>
+                <option>Languages</option>
               </select>
             </div>
           </form>
-          <button type="submit" class="btn btn-primary float-right">Save course</button>
+          <button @click="createCourse(coursename, courseid,selected)" type="submit" class="btn btn-primary float-right" >Save course</button>
         </div>
       </div>
     </div>
     <div class="container-fluid">
       <div class="row">
-        <div v-for="room in rooms" class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+        <div v-for="course in courses" class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
           <div class="card mx-auto text-center">
             <div class="card-body">
               <h5 class="card-title">
-                <router-link
-                  v-bind:to="'/' + tutor.email"
-                >{{ tutor.first_name }} {{tutor.last_name}}</router-link>
               </h5>
-              <h6 class="card-subtitle mb-2 text-muted">Tutor</h6>
+              <h6 class="card-subtitle mb-2 text-muted">Course</h6>
               <p
                 class="card-text"
               >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Email: {{tutor.email}}</li>
-              <li class="list-group-item">Phone: {{tutor.phone_number}}</li>
-              <li class="list-group-item">Verified: {{tutor.verified}}</li>
+              <li class="list-group-item">Name: {{course.name}}</li>
+              <li class="list-group-item">Subject: {{course.subject}}</li>
+              <li class="list-group-item">Id: {{course.course_id}}</li>
             </ul>
           </div>
         </div>
@@ -148,6 +149,8 @@
 </template>
 
 
+<script src="./course.js">
+</script>
 
 <style>
 .card {
