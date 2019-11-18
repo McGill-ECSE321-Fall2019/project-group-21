@@ -4,7 +4,6 @@ import Hello from '@/components/Hello'
 import TutoringCompany from '@/components/TutoringCompany'
 import Login from '@/components/Login'
 import Signup from '@/components/Signup'
-import Tutor from '@/components/Tutor'
 import HomePage from '@/components/HomePage'
 import ManagerHomePage from '@/components/ManagerHomePage'
 import TutorsM from '@/components/TutorsM'
@@ -56,11 +55,6 @@ export default new Router({
       path: '/signup',
       name: 'Signup',
       component: Signup
-    },
-    {
-      path: '/tutors',
-      name: 'Tutor',
-      component: Tutor
     },
     {
       path: '/tutorPage/:id',

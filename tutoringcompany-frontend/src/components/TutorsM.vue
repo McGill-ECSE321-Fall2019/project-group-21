@@ -3,20 +3,18 @@
 <html lang="en">
   <head>
     <title>Manage Tutors</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
     <!-- <div class="container"> -->
-    <a class="navbar-brand" href="#">
+    <router-link to="/HomePage" class="navbar-brand mr-0" style="max-width:calc((1em + 1vw) * 7 + .5rem + 1vw + 30px);font-size:calc(1em + 1vw);">
       <img
         alt="Brand"
-        src="../assets/logo.png"
-        class="image-responsive"
-        style="max-width: 10%;overflow: visible;"
-      />Quality over Quantity
-    </a>
+        src="../assets/quality.png"
+        class="image-responsive mr-2"
+        style="max-width:calc(30px + 1vw);overflow: visible;"
+      />Quality Academy
+    </router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -28,7 +26,9 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <div class="collapse navbar-collapse" id="navbarResponsive">
+      <!-- <div class="float-right"> -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <router-link to="/ManagerHomePage" class="nav-link">Manager Home</router-link>
@@ -52,12 +52,17 @@
           <router-link to="/SessionsM" class="nav-link">Sessions</router-link>
         </li>
       </ul>
+      <!-- </div> uncomment for main links left justified--> 
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <router-link to="/Manager" class="nav-link">Profile</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/Logout" class="nav-link">Logout</router-link>
+        <li class="nav-item dropdown">
+            <a class="nav-link" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-user"></i>
+              <i class="fa fa-caret-down"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Profile</a>
+                <a class="dropdown-item" href="#">Logout</a>
+            </div>
         </li>
       </ul>
     </div>
@@ -77,16 +82,18 @@
         <div class="card mx-auto text-center">
           <div class="card-body">
             <h5 class="card-title">
-              <router-link v-bind:to="'/' + tutor.email">{{ tutor.first_name }} {{tutor.last_name}}</router-link>
+              <router-link v-bind:to="'/TutorPage/' + tutor.email">{{ tutor.first_name }} {{tutor.last_name}}</router-link>
             </h5>
-            <h6 class="card-subtitle mb-2 text-muted">Tutor</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Tutor 
+              <span v-if="tutor.verified" class="badge badge-pill badge-success">Verified ✔</span>
+            </h6>
             <p
               class="card-text"
-            >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            ></p>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Email: {{tutor.email}}</li>
-            <li class="list-group-item">Phone: {{tutor.phone_number}}</li>
+            <li class="list-group-item">Phone #: {{tutor.phone_number}}</li>
             <li class="list-group-item">Verified: {{tutor.verified}}</li>
           </ul>
         </div>

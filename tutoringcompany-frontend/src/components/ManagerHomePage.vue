@@ -8,66 +8,80 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
-    <!-- <div class="container"> -->
-    <a class="navbar-brand" href="#">
-      <img
-        alt="Brand"
-        src="../assets/logo.png"
-        class="image-responsive"
-        style="max-width: 10%;overflow: visible;"
-      />Quality over Quantity
-    </a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarResponsive"
-      aria-controls="navbarResponsive"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <router-link to="/ManagerHomePage" class="nav-link">
-            Manager Home
-            <span class="sr-only">(current)</span>
-          </router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/TutorsM" class="nav-link">Tutors</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/StudentsM" class="nav-link">Students</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/CoursesM" class="nav-link">Courses</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/RoomsM" class="nav-link">Rooms</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/SessionsM" class="nav-link">Sessions</router-link>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <router-link to="/Manager" class="nav-link">Profile</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/Logout" class="nav-link">Logout</router-link>
-        </li>
-      </ul>
+      <!-- <div class="container"> -->
+      <a class="navbar-brand" href="#">
+        <img
+          alt="Brand"
+          src="../assets/logo.png"
+          class="image-responsive"
+          style="max-width: 10%;overflow: visible;"
+        />Quality over Quantity
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarResponsive"
+        aria-controls="navbarResponsive"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <router-link to="/ManagerHomePage" class="nav-link">
+              Manager Home
+              <span class="sr-only">(current)</span>
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/TutorsM" class="nav-link">Tutors</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/StudentsM" class="nav-link">Students</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/CoursesM" class="nav-link">Courses</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/RoomsM" class="nav-link">Rooms</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/SessionsM" class="nav-link">Sessions</router-link>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <router-link to="/Manager" class="nav-link">Profile</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/Logout" class="nav-link">Logout</router-link>
+          </li>
+        </ul>
+      </div>
+      <!-- </div> uncomment to make the nav bar more narrow -->
+    </nav>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Welcome! </strong>You have successfully logged in as Manager.
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
-    <!-- </div> uncomment to make the nav bar more narrow -->
-  </nav>
-
-    <h1 id="greeting">Hi you have Secsessfully logged in</h1>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Managing homepage</h1>
+        <p class="lead">Select one of the navbar links above to view and edit the database.</p>
+      </div>
+    </div>
     <img src="../assets/quality.jpg" alt="logo" id="logo" />
-
-    </body>
+  </body>
 </html>
 </template>
 
