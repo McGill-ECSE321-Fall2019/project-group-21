@@ -37,22 +37,22 @@
         <!-- <div class="float-right"> -->
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <router-link to="/ManagerHomePage" class="nav-link">Home</router-link>
+            <router-link to="/HomePage" class="nav-link">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/TutorsM" class="nav-link">Tutors</router-link>
+            <router-link to="/Tutors" class="nav-link">Tutors</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/StudentsM" class="nav-link">Students</router-link>
+            <router-link to="/Students" class="nav-link">Students</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/CoursesM" class="nav-link">Courses</router-link>
+            <router-link to="/Courses" class="nav-link">Courses</router-link>
           </li>
           <li class="nav-ite">
-            <router-link to="/RoomsM" class="nav-link">Rooms</router-link>
+            <router-link to="/Rooms" class="nav-link">Rooms</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/SessionsM" class="nav-link">Sessions</router-link>
+            <router-link to="/Sessions" class="nav-link">Sessions</router-link>
           </li>
           <li class="nav-ite active">
             <router-link to="/AboutContact" class="nav-link">
