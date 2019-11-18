@@ -21,6 +21,7 @@ export default {
             tutorReviews: [],
             reviewId: '',
             body: '',
+            id: '',
 
 
         }
@@ -46,15 +47,18 @@ export default {
                     this.tutor = response.data
                 })
         },
-        updateTutorReviews: function (reviewId, body) {
-            // if (FirstName == '') {
-            //     var errorMsg = "firstname is empty"
-            //     console.log(errorMsg)
-            //     this.errorTutor = errorMsg
-            //     return
-            // }
+        getId: function (id){
+        this.reviewId = id
+        },
+        updateTutorReviews: function (body) {
+            if (body == '') {
+                var errorMsg = "body is empty"
+                console.log(errorMsg)
+                this.errorTutor = errorMsg
+                return
+            }
             this.errorTutor = ''
-            AXIOS.post(`Manager/update/Tutor/Reviews` + "?id=" + reviewId + "&body=" + body, {}, {})
+            AXIOS.post(`Manager/update/Tutor/Reviews` + "?id=" + this.reviewId + "&body=" + body, {}, {})
                 .then(response => {
                     this.response = response.data
                     location.reload();
@@ -69,7 +73,7 @@ export default {
                 return
             }
             this.errorTutor = ''
-            AXIOS.post(`/Manager/update/Tutor/LastName` + "?LastName=" + reviewId + "&email=" + email, {}, {})
+            AXIOS.post(`/Manager/update/Tutor/LastName` + "?LastName=" + LastName + "&email=" + email, {}, {})
                 .then(response => {
                     this.response = response.data
                     location.reload();
