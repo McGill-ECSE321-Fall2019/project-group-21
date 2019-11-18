@@ -34,14 +34,14 @@ export default {
     },
     methods: {
         CreatRoom: function (number) {
-            //if(isGroup=="option2"){
+            if(this.isGroup=="option2"){
             AXIOS.post(`/Manager/Create/Room` + "?roomNumber=" + number + "&RoomTypeIsGroup=true", {}, {})
                 .then(response => {
                     // JSON responses are automatically parsed.
                     this.room = response.data
                 })
-           // }
-            if(isGroup="Individual Room"){
+            }
+            if(isGroup="option1"){
                 AXIOS.post(`/Manager/Create/Room` + "?roomNumber=" + number + "&RoomTypeIsGroup=false", {}, {})
                 .then(response => {
                     // JSON responses are automatically parsed.

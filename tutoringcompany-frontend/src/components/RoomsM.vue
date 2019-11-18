@@ -100,10 +100,11 @@
             </div>
             <div class="form-check">
               <input
+               v-model="isGroup"
                 class="form-check-input"
                 type="radio"
-                name="exampleRadios"
-                id="exampleRadios1"
+                name="option1"
+                id="option1"
                 value="option1"
                 checked
               />
@@ -114,8 +115,8 @@
                 v-model="isGroup"
                 class="form-check-input"
                 type="radio"
-                name="exampleRadios"
-                id="exampleRadios2"
+                name="option2"
+                id="option2"
                 value="option2"
               />
               <label  class="form-check-label" for="exampleRadios2">Group Room</label>
