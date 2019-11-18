@@ -39,11 +39,11 @@ var AXIOS = axios.create({
                     AXIOS.post(`/Manager/Login` + "?ManagerEmail=" + ManagerEmail +"&ManagerPassword=" + ManagerPassword , {}, {})
             .then(response=>{
                 this.response = response.data
-                window.location.herf = "/#/ManagerHomePage"
                     console.log(this.response)
                     this.response = "You're Loged in!"
                     this.ManagerEmail= ''
                     this.ManagerPassword= ''
+                    window.location.href = "/#/managerhomepage"
                     
                     
             })

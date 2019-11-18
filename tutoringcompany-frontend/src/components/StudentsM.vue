@@ -2,7 +2,7 @@
 <template>
 <html lang="en">
   <head>
-    <title>Bootstrap Example</title>
+    <title>Manage Students</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
@@ -65,24 +65,24 @@
   </nav>
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4">Tutors</h1>
+      <h1 class="display-4">Students</h1>
       <p
         class="lead"
-      >View the gallery of all tutors, click on the name of any tutor to access their profile.</p>
+      >Gallery of all students, click on the name of any student to access and manage their profile.</p>
     </div>
   </div>
   <div class="container-fluid">
     <div class="row">
-      <div v-for="student in students" class="col-6 col-md-4 col-lg-3 mb-4">
+      <div v-for="student in students" class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
         <div class="card mx-auto text-center">
           <div class="card-body">
             <h5 class="card-title">
               <router-link v-bind:to="'/' + student.email">{{ student.first_name }} {{student.last_name}}</router-link>
             </h5>
-            <h6 class="card-subtitle mb-2 text-muted">Tutor</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Student</h6>
             <p
               class="card-text"
-            >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            >content.</p>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Email: {{student.email}}</li>

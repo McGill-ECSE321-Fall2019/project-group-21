@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <template>
-
-
-
 <html>
 <head>
 	<title>Login Page</title>
@@ -162,68 +159,75 @@ width: 400px;
 background-color: rgba(0,0,0,0.5) !important;
 }
 
-.social_icon span{
-font-size: 60px;
-margin-left: 10px;
-color: #FFC312;
+.card {
+  height: 450px;
+  margin-top: 10%;
+  margin-left: 50%;
+  margin-bottom: auto;
+  width: 400px;
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-.social_icon span:hover{
-color: white;
-cursor: pointer;
+.social_icon span {
+  font-size: 60px;
+  margin-left: 10px;
+  color: #ffc312;
 }
 
-.card-header h3{
-color: white;
+.social_icon span:hover {
+  color: white;
+  cursor: pointer;
 }
 
-.social_icon{
-position: absolute;
-right: 20px;
-top: -45px;
+.card-header h3 {
+  color: white;
 }
 
-.input-group-prepend span{
-width: 50px;
-background-color: #FFC312;
-color: black;
-border:0 !important;
+.social_icon {
+  position: absolute;
+  right: 20px;
+  top: -45px;
 }
 
-input:focus{
-outline: 0 0 0 0  !important;
-box-shadow: 0 0 0 0 !important;
-
+.input-group-prepend span {
+  width: 50px;
+  background-color: #ffc312;
+  color: black;
+  border: 0 !important;
 }
 
-.remember{
-color: white;
+input:focus {
+  outline: 0 0 0 0 !important;
+  box-shadow: 0 0 0 0 !important;
 }
 
-.remember input
-{
-width: 20px;
-height: 20px;
-margin-left: 15px;
-margin-right: 5px;
+.remember {
+  color: white;
 }
 
-.login_btn{
-color: black;
-background-color: #FFC312;
-width: 100px;
+.remember input {
+  width: 20px;
+  height: 20px;
+  margin-left: 15px;
+  margin-right: 5px;
 }
 
-.login_btn:hover{
-color: black;
-background-color: white;
+.login_btn {
+  color: black;
+  background-color: #ffc312;
+  width: 100px;
 }
 
-.links{
-color: white;
+.login_btn:hover {
+  color: black;
+  background-color: white;
 }
 
-.links a{
-margin-left: 4px;
+.links {
+  color: white;
+}
+
+.links a {
+  margin-left: 4px;
 }
 </style>
