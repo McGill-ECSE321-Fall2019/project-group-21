@@ -33,12 +33,21 @@ export default {
             });
     },
     methods: {
-        CreatRoom: function (number, isGroup) {
-            AXIOS.post(`/Manager/Create/Room` + "?roomNumber=" + number + "&RoomTypeIsGroup=" + isGroup, {}, {})
+        CreatRoom: function (number) {
+            //if(isGroup=="option2"){
+            AXIOS.post(`/Manager/Create/Room` + "?roomNumber=" + number + "&RoomTypeIsGroup=true", {}, {})
                 .then(response => {
                     // JSON responses are automatically parsed.
                     this.room = response.data
                 })
+           // }
+            if(isGroup="Individual Room"){
+                AXIOS.post(`/Manager/Create/Room` + "?roomNumber=" + number + "&RoomTypeIsGroup=false", {}, {})
+                .then(response => {
+                    // JSON responses are automatically parsed.
+                    this.room = response.data
+                })
+            }
         },
         getRoomsByType: function (isGroup) {
             AXIOS.post(`/Manager/get/RoomByType` + "?isGroupRoom=" + isGroup, {}, {})
