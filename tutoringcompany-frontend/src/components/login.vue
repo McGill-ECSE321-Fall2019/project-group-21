@@ -38,7 +38,7 @@
         <!-- <div class="float-right"> -->
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <router-link to="/ManagerHomePage" class="nav-link">Manager Home</router-link>
+            <router-link to="/HomePage" class="nav-link">Home</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/TutorsM" class="nav-link">Tutors</router-link>
@@ -80,43 +80,51 @@
       <!-- </div> uncomment to make the nav bar more narrow -->
     </nav>
     <div class="container">
-      <div class="card my-4" style="width:70%; margin:0 auto;">
-        <div class="card-header">
-          <h3>Sign in</h3>
-        </div>
-        <div class="card-body">
-          <form>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input
-                v-model="ManagerEmail"
-                type="email"
-                class="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Enter email"
-              />
-              <small
-                id="emailHelp"
-                class="form-text text-muted"
-              >We'll never share your email with anyone else.</small>
+      <div class="row">
+        <div class="col-10 col-md-8 col-lg-6">
+          <div class="card my-4 align-self-center" style="width:70%; margin:0 auto;">
+            <div class="card-header">
+              <h3>Sign in</h3>
             </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input
-                v-model="ManagerPassword"
-                type="password"
-                class="form-control"
-                id="exampleInputPassword1"
-                placeholder="Password"
-              />
+            <div class="card-body">
+              <form>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input
+                    v-model="ManagerEmail"
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter email"
+                  />
+                  <small
+                    id="emailHelp"
+                    class="form-text text-muted"
+                  >We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input
+                    v-model="ManagerPassword"
+                    type="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                    placeholder="Password"
+                  />
+                </div>
+                <div class="form-group form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+                  <label class="form-check-label" for="exampleCheck1">Remember me</label>
+                </div>
+                <button
+                  @click="ManagerLogin(ManagerEmail,ManagerPassword)"
+                  type="submit"
+                  class="btn btn-primary float-right"
+                >Sign in</button>
+              </form>
             </div>
-            <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-              <label class="form-check-label" for="exampleCheck1">Remember me</label>
-            </div>
-            <button @click="ManagerLogin(ManagerEmail,ManagerPassword)" type="submit" class="btn btn-primary float-right">Sign in</button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
