@@ -79,6 +79,7 @@
                 <span v-if="tutor.verified" class="badge badge-pill badge-success">Verified ✔</span>
               </h6>
               <p class="card-text"></p>
+
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">Email: {{tutor.email}}</li>

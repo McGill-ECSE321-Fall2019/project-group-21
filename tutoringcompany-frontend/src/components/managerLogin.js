@@ -35,7 +35,7 @@ var AXIOS = axios.create({
                 this.errorLogin = errorMsg
                 return
             }
-            this.errorSignUp =''
+            this.errorLogin =''
                     AXIOS.post(`/Manager/Login` + "?ManagerEmail=" + ManagerEmail +"&ManagerPassword=" + ManagerPassword , {}, {})
             .then(response=>{
                 this.response = response.data
@@ -43,6 +43,8 @@ var AXIOS = axios.create({
                     this.response = "You're Loged in!"
                     this.ManagerEmail= ''
                     this.ManagerPassword= ''
+                    window.location.href = "/#/managerhomepage"
+                    
                     
             })
             .catch(e => {
@@ -51,6 +53,7 @@ var AXIOS = axios.create({
                 this.errorLogin = errorMsg
                 this.response = ''
             });
+           
         }
     }
   }

@@ -7,45 +7,65 @@ var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPo
 var AXIOS = axios.create({
     baseURL: backendUrl,
     headers: { 'Access-Control-Allow-Origin': frontendUrl }
-  })
+})
 
-  export default {
+export default {
     name: 'getTutors',
-    data () {
-      return {
-        errorPerson: '',
-        tutor: '',
-        firstName: '',
-        lastName: '',
-        phoneNumber: '',
+    data() {
+        return {
+            errorTutor: '',
+            tutor: '',
+            FirstName: '',
+            LastName: '',
+            phoneNumber: '',
 
-      }
+        }
     },
-created: function () {
-   var email = window.location.href.substring(34)
-      AXIOS.post(`/Manager/get/Tutor/`+ "?email=" + email , {}, {})
-      .then(response => {
-        // JSON responses are automatically parsed.
-        this.tutor = response.data
-      });
-    },
-    methods: {
-        verifyTutor: function(email){
-            AXIOS.post(`/Manager/VerifyTutor`+ "?email=" + email , {}, {})
+    created: function () {
+        var email = window.location.href.substring(34)
+        AXIOS.post(`/Manager/get/Tutor/` + "?email=" + email, {}, {})
             .then(response => {
                 // JSON responses are automatically parsed.
                 this.tutor = response.data
-              })
-        }
+            });
     },
-  methods: {
-    updateTutor: function(email,firstName){
-        AXIOS.post(`/Manager/update/Tutor/FirstName` + "?firstName=" + firstName + "&email=" + email, {}, {})
-            .then(response=>{
-                this.response = response.data
+    methods: {
+        verifyTutor: function (email) {
+            AXIOS.post(`/Manager/VerifyTutor` + "?email=" + email, {}, {})
+                .then(response => {
+                    // JSON responses are automatically parsed.
+                    this.tutor = response.data
+                })
+        },
+        updateTutorFirstName: function (email, FirstName) {
+            if (FirstName == '') {
+                var errorMsg = "firstname is empty"
+                console.log(errorMsg)
+                this.errorTutor = errorMsg
+                return
+            }
+            this.errorTutor =''
+            AXIOS.post(`/Manager/update/Tutor/FirstName` + "?FirstName=" + FirstName + "&email=" + email, {}, {})
+                .then(response => {
+                    this.response = response.data
+                    location.reload();
+
+                })
+        },
+        updateTutorLastName: function (email, LastName) {
+            if (LastName == '') {
+                var errorMsg = "lastname is empty"
+                console.log(errorMsg)
+                this.errorTutor = errorMsg
+                return
+            }
+            this.errorTutor =''
+            AXIOS.post(`/Manager/update/Tutor/LastName` + "?LastName=" + LastName + "&email=" + email, {}, {})
+                .then(response => {
+                    this.response = response.data
+                    location.reload();
+                })
+        }
     }
-            )
- }
 }
-  }
-  
+

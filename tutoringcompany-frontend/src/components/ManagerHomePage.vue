@@ -92,18 +92,13 @@ text-align: center;
 #logo{
  margin-left: 30%;
 }
-
 #tutors{
  
   //--to be implemented
   }
-
-
 .nav-link{
   font-size: 20px;
 margin-left: 20px;
-
-
   
  
 } */
