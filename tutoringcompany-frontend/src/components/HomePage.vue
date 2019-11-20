@@ -91,11 +91,11 @@
         <div class="carousel-inner">
           <div class="carousel-item active" data-interval="5000">
             <img src="../assets/tutor.png" class="d-block w-100 slide-image" alt="..." />
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption">
               <div class="jumbotron" id="slide-caption">
-                <h2 class="display-4">Start moving that report card up the alphabet</h2>
+                <h2 class="display-4 label-title">Start moving that report card up the alphabet</h2>
                 <p
-                  class="lead"
+                  class="lead label-body"
                 >No matter your student's level, our tutors help them become a stronger learner at their pace, with the grades to prove it.</p>
                 <hr class="my-4 bg-light" />
                 <!-- <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
@@ -105,11 +105,11 @@
           </div>
           <div class="carousel-item" data-interval="5000">
             <img src="../assets/distractedtutoring.png" class="d-block w-100 slide-image" alt="..." />
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption">
               <div class="jumbotron" id="slide-caption">
-                <h2 class="display-4">Certified Tutors to best suit your child's needs</h2>
+                <h2 class="display-4 label-title">Certified Tutors to best suit your child's needs</h2>
                 <p
-                  class="lead"
+                  class="lead label-body"
                 >All of our tutors exceed rigorous application standards, and their experience equips your student with all the tools to succeed.</p>
                 <hr class="my-4 bg-light" />
                 <!-- <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
@@ -117,17 +117,16 @@
               </div>
             </div>
           </div>
-          <div class="carousel-item" data-interval="5000">
+          <div class="carousel-item" data-interval="5000000">
             <img src="../assets/room.png" class="d-block w-100 slide-image" alt="..." />
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption">
               <div class="jumbotron" id="slide-caption">
-                <h2 class="display-4">Group sessions offered in rooms on site</h2>
+                 <!-- d-none d-md-block -->
+                <h2 class="display-4 label-title">Group sessions offered in rooms on site</h2>
                 <p
-                  class="lead"
+                  class="lead label-body"
                 >We offer group review sessions for upcoming exams where you child can collaborate with peers, guided by an expert tutor.</p>
                 <hr class="my-4 bg-light" />
-                <!-- <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
               </div>
             </div>
           </div>
@@ -159,7 +158,7 @@
       </div>
     </div>-->
     <div class="container">
-      <div class="jumbotron">
+      <div class="jumbotron announcement">
         <h1 class="display-4">Our expert Tutors</h1>
         <p class="lead">Our vast selection of expert tutors are here to help students.</p>
         <p
@@ -167,9 +166,9 @@
         >Our tutors are formers students themselves, so they understand the difficulties of education the best approaches to help their pupils learn quickly and effectively.</p>
         <hr class="my-4" />
         <p>Click here to browse our gallery of tutors!</p>
-        <router-link class="btn btn-primary btn-lg" to="/Tutors" role="button">Browse</router-link>
+        <router-link class="btn btn-primary btn-lg float-right" to="/Tutors" role="button">Browse</router-link>
       </div>
-      <div class="jumbotron">
+      <div class="jumbotron announcement">
         <h1 class="display-4">You will see nothing but A+</h1>
         <p class="lead">
           Here at Quality Academy
@@ -180,9 +179,9 @@
         >Your or your child's success is our priority, and our staff members work around the clock to ensure that our students have access to the tutors they need, when they need them.</p>
         <hr class="my-4" />
         <p>Many of our students excel and finish their courses with 90% +, find out the difference that Quality tutoring can make in the academic life of our students</p>
-        <router-link class="btn btn-primary btn-lg" to="/signup" role="button">Sign up</router-link>
+        <router-link class="btn btn-primary btn-lg float-right" to="/signup" role="button">Sign up</router-link>
       </div>
-      <div class="jumbotron">
+      <div class="jumbotron announcement">
         <h1 class="display-4">We are hiring</h1>
         <p
           class="lead"
@@ -192,7 +191,7 @@
         >Apply now to become one of our tutors! One of our managers will review your application and then you will be ready to start tutoring.</p>
         <hr class="my-4" />
         <p>Simply fill out your contact information and sign up to get in touch with one of our managers</p>
-        <router-link class="btn btn-primary btn-lg" to="/signup" role="button">Apply now</router-link>
+        <router-link class="btn btn-primary btn-lg float-right" to="/signup" role="button">Apply now</router-link>
       </div>
     </div>
   </body>
@@ -216,6 +215,35 @@
 .slide-image {
   height: 85vh;
   object-fit: cover;
+}
+
+.announcement {
+  padding: 4rem 2rem 5rem 2rem;
+}
+
+@media (max-width: 1199.98px) {
+  .label-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .label-title {
+    font-size: 2rem;
+  }
+  .label-body {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .label-body {
+    display: none;
+  }
+}
+
+.small-label {
+    font-size: 2rem;
 }
 </style>
 
