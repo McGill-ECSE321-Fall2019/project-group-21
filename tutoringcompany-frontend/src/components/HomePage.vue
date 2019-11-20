@@ -81,12 +81,83 @@
     </nav>
 
     <!-- Page Content -->
+    <div class="bd-example">
+      <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+          <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-interval="5000">
+            <img src="../assets/tutor.png" class="d-block w-100 slide-image" alt="..." />
+            <div class="carousel-caption d-none d-md-block">
+              <div class="jumbotron" id="slide-caption">
+                <h2 class="display-4">Start moving that report card up the alphabet</h2>
+                <p
+                  class="lead"
+                >No matter your student's level, our tutors help them become a stronger learner at their pace, with the grades to prove it.</p>
+                <hr class="my-4 bg-light" />
+                <!-- <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item" data-interval="5000">
+            <img src="../assets/distractedtutoring.png" class="d-block w-100 slide-image" alt="..." />
+            <div class="carousel-caption d-none d-md-block">
+              <div class="jumbotron" id="slide-caption">
+                <h2 class="display-4">Certified Tutors to best suit your child's needs</h2>
+                <p
+                  class="lead"
+                >All of our tutors exceed rigorous application standards, and their experience equips your student with all the tools to succeed.</p>
+                <hr class="my-4 bg-light" />
+                <!-- <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item" data-interval="5000">
+            <img src="../assets/room.png" class="d-block w-100 slide-image" alt="..." />
+            <div class="carousel-caption d-none d-md-block">
+              <div class="jumbotron" id="slide-caption">
+                <h2 class="display-4">Group sessions offered in rooms on site</h2>
+                <p
+                  class="lead"
+                >We offer group review sessions for upcoming exams where you child can collaborate with peers, guided by an expert tutor.</p>
+                <hr class="my-4 bg-light" />
+                <!-- <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <a
+          class="carousel-control-prev"
+          href="#carouselExampleCaptions"
+          role="button"
+          data-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a
+          class="carousel-control-next"
+          href="#carouselExampleCaptions"
+          role="button"
+          data-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
 
-    <div class="jumbotron jumbotron-fluid" id="hero">
+    <!-- <div class="jumbotron jumbotron-fluid" id="hero">
       <div class="container">
         <h1 class="display-4">Welcome to Quality Academy</h1>
       </div>
-    </div>
+    </div>-->
     <div class="container">
       <div class="jumbotron">
         <h1 class="display-4">Our expert Tutors</h1>
@@ -136,6 +207,15 @@
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
+}
+#slide-caption {
+  padding: 2rem 2rem;
+  background-color:rgba(0, 0, 0, 0.40);
+}
+
+.slide-image {
+  height: 85vh;
+  object-fit: cover;
 }
 </style>
 
