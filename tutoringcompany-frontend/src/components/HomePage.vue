@@ -117,7 +117,7 @@
               </div>
             </div>
           </div>
-          <div class="carousel-item" data-interval="5000000">
+          <div class="carousel-item" data-interval="5000">
             <img src="../assets/room.png" class="d-block w-100 slide-image" alt="..." />
             <div class="carousel-caption">
               <div class="jumbotron" id="slide-caption">
