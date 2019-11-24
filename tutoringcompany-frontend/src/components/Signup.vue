@@ -140,10 +140,10 @@
                 aria-describedby="emailHelp"
                 placeholder="@example.com"
               />
-              <small
+              <!-- <small
                 id="emailHelp"
                 class="form-text text-muted"
-              >We'll never share your email with anyone else.</small>
+              >We'll never share your email with anyone else.</small> -->
             </div>
             <div class="form-group">
               <label for="inputPassword">Password</label>

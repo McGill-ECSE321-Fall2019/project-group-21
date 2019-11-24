@@ -40,7 +40,7 @@ var AXIOS = axios.create({
             .then(response=>{
                 this.response = response.data
                     console.log(this.response)
-                    this.response = "You're Loged in!"
+                    this.response = "You're Logged in!"
                     this.ManagerEmail= ''
                     this.ManagerPassword= ''
                     window.location.href = "/#/managerhomepage"
