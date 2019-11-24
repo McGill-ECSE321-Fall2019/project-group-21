@@ -1,4 +1,3 @@
- <!DOCTYPE html>
 <template>
 <html>
   <head>
@@ -97,7 +96,7 @@
     <div class="container">
       <div class="card my-4" style="width:70%; margin:0 auto;">
         <div class="card-header">
-          <h3>Sign in</h3>
+          <h3>Sign up</h3>
         </div>
         <div class="card-body">
           <form>
@@ -167,8 +166,6 @@
         </div>
       </div>
     </div>
-    <!-- <span v-if="errorSignUp" style="color:red">Error: {{errorSignUp}}</span>
-    <span v-if="response" style="color:green">Success: {{response}}</span>-->
   </body>
 </html>
 </template>
@@ -176,51 +173,3 @@
 </script>
 <style>
 </style>
-
-
-<!--<template>
- <body>
-
- <head>
-   <title>Sign up</title>
- </head>
-   <div id="Signup">
-    <h1>Welcome to Quality Academy tutoring</h1>
-    
-    <table>
-        <h2>Sign Up </h2>
-        <tr>
-         <td>First Name:</td>
-         <td><input type="text" v-model="firstName" placeholder="first name"></td>
-      </tr>
-      <tr>
-         <td>Last Name:</td>
-         <td><input type="text" v-model="lastName" placeholder="last name"></td>
-      </tr>
-      <tr>
-         <td>Phone Number:</td>
-         <td><input type="text" v-model="phonenumber" placeholder="phone number"></td>
-      </tr>
-        <tr>
-          <td>Email:</td>
-          <td><input type="text" v-model="email" placeholder="email"></td>
-        </tr>
-      <tr>
-          <td>Password:</td>
-          <td>
-              <input type="password" v-model="password" placeholder="password">
-          </td>
-          <td>
-              <button @click="createManager(firstName,lastName,email,phonenumber,password)">Sign Up</button>
-              <a href="http://127.0.0.1:8087/#/" class="button">Go to Google</a>
-          </td>
-      </tr>
-    </table>
-    <p>
-       <span v-if="errorSignUp" style="color:red">Error: {{errorSignUp}} </span>
-       <span v-if="response" style="color:green">Success: {{response}} </span>
-    </p>
-   </div> 
- </body>
- </template>
--->
