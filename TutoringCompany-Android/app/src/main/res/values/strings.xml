@@ -1,4 +1,10 @@
 <resources>
-    <string name="app_name">TutoringCompany-Android</string>
+    <string name="app_name">Qualitty Academy</string>
     <string name="action_settings">Settings</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">password</string>
+    <string name="login_button">Login</string>
+    <string name="title_activity_manager_home_pager">ManagerHomePager</string>
+
+
 </resources>
