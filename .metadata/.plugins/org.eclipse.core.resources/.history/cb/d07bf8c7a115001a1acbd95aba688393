@@ -1,0 +1,11 @@
+# EVERY MODIFICATOIN MADE TO THIS FILE WILL BE OVERRIDDEN IN THE EVALUATION ENVIRONMENT
+
+server.port=${PORT:8080}
+spring.datasource.url=SPRING_DATASOURCE_URL=jdbc:postgresql://ec2-174-129-255-26.compute-1.amazonaws.com:5432/d36bstgmcdp6v8?user=xyjjpdbniwksqv&password=01c2093a8d6c8807b8b55ca87c87a1250e7e6d017388710d014834b6487ce856&sslmode=require
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults = false
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL9Dialect
+
+spring.jpa.hibernate.ddl-auto=create
+# Possible values are `none`, `create`, `validate`, and `update`
+
+# EVERY MODIFICATOIN MADE TO THIS FILE WILL BE OVERRIDDEN IN THE EVALUATION ENVIRONMENT

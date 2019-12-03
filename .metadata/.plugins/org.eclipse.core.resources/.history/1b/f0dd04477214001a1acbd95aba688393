@@ -1,0 +1,8 @@
+package ca.mcgill.ecse321.eventregistration.dao;
+
+import ca.mcgill.ecse321.eventregistration.model.Volunteer;
+
+public interface VolunteerRepositoryextends CrudRepository<Organizer, String> {
+	Organizer findByName(String name);
+
+}

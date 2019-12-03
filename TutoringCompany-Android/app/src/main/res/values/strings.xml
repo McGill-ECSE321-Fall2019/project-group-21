@@ -6,6 +6,4 @@
     <string name="login_button">Login</string>
     <string name="title_activity_manager_home_pager">ManagerHomePager</string>
     <string name="title_activity_tutors">Tutors</string>
-
-
 </resources>

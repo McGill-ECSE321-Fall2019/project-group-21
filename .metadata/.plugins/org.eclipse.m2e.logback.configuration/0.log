@@ -1,0 +1,62 @@
+2019-11-20 18:20:21,716 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2019-11-29 19:42:34,849 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2019-11-29 20:23:17,516 [Worker-16: Match Job] ERROR o.e.m.i.l.MavenConsoleLineTracker - Launch configuration EventRegistration-Backend - EventRegistrationApplication at file:/Users/georgekandalaft/git/project-group-21-original/.metadata/.plugins/org.eclipse.debug.core/.launches/EventRegistration-Backend%20-%20EventRegistrationApplication.launch does not exist.
+org.eclipse.debug.core.DebugException: Launch configuration EventRegistration-Backend - EventRegistrationApplication at file:/Users/georgekandalaft/git/project-group-21-original/.metadata/.plugins/org.eclipse.debug.core/.launches/EventRegistration-Backend%20-%20EventRegistrationApplication.launch does not exist.
+	at org.eclipse.debug.internal.core.LaunchManager.createDebugException(LaunchManager.java:886) ~[na:na]
+	at org.eclipse.debug.internal.core.LaunchManager.getInfo(LaunchManager.java:1381) ~[na:na]
+	at org.eclipse.debug.internal.core.LaunchConfiguration.getInfo(LaunchConfiguration.java:489) ~[na:na]
+	at org.eclipse.debug.internal.core.LaunchConfiguration.getType(LaunchConfiguration.java:644) ~[na:na]
+	at org.eclipse.m2e.internal.launch.MavenConsoleLineTracker.isMavenProcess(MavenConsoleLineTracker.java:142) ~[na:na]
+	at org.eclipse.m2e.internal.launch.MavenConsoleLineTracker.lineAppended(MavenConsoleLineTracker.java:85) ~[na:na]
+	at org.eclipse.debug.internal.ui.views.console.ConsoleLineNotifier.lineAppended(ConsoleLineNotifier.java:124) ~[na:na]
+	at org.eclipse.debug.internal.ui.views.console.ConsoleLineNotifier.matchFound(ConsoleLineNotifier.java:116) ~[na:na]
+	at org.eclipse.ui.internal.console.ConsolePatternMatcher$MatchJob.run(ConsolePatternMatcher.java:137) ~[org.eclipse.ui.console_3.8.600.v20190815-2020.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63) ~[org.eclipse.core.jobs_3.10.500.v20190620-1426.jar:na]
+2019-11-29 20:23:17,527 [Worker-16: Match Job] ERROR o.e.m.i.l.MavenConsoleLineTracker - Launch configuration EventRegistration-Backend - EventRegistrationApplication at file:/Users/georgekandalaft/git/project-group-21-original/.metadata/.plugins/org.eclipse.debug.core/.launches/EventRegistration-Backend%20-%20EventRegistrationApplication.launch does not exist.
+org.eclipse.debug.core.DebugException: Launch configuration EventRegistration-Backend - EventRegistrationApplication at file:/Users/georgekandalaft/git/project-group-21-original/.metadata/.plugins/org.eclipse.debug.core/.launches/EventRegistration-Backend%20-%20EventRegistrationApplication.launch does not exist.
+	at org.eclipse.debug.internal.core.LaunchManager.createDebugException(LaunchManager.java:886) ~[na:na]
+	at org.eclipse.debug.internal.core.LaunchManager.getInfo(LaunchManager.java:1381) ~[na:na]
+	at org.eclipse.debug.internal.core.LaunchConfiguration.getInfo(LaunchConfiguration.java:489) ~[na:na]
+	at org.eclipse.debug.internal.core.LaunchConfiguration.getType(LaunchConfiguration.java:644) ~[na:na]
+	at org.eclipse.m2e.internal.launch.MavenConsoleLineTracker.isMavenProcess(MavenConsoleLineTracker.java:142) ~[na:na]
+	at org.eclipse.m2e.internal.launch.MavenConsoleLineTracker.lineAppended(MavenConsoleLineTracker.java:85) ~[na:na]
+	at org.eclipse.debug.internal.ui.views.console.ConsoleLineNotifier.lineAppended(ConsoleLineNotifier.java:124) ~[na:na]
+	at org.eclipse.debug.internal.ui.views.console.ConsoleLineNotifier.matchFound(ConsoleLineNotifier.java:116) ~[na:na]
+	at org.eclipse.ui.internal.console.ConsolePatternMatcher$MatchJob.run(ConsolePatternMatcher.java:137) ~[org.eclipse.ui.console_3.8.600.v20190815-2020.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63) ~[org.eclipse.core.jobs_3.10.500.v20190620-1426.jar:na]
+2019-11-29 20:23:17,531 [Worker-16: Match Job] ERROR o.e.m.i.l.MavenConsoleLineTracker - Launch configuration EventRegistration-Backend - EventRegistrationApplication at file:/Users/georgekandalaft/git/project-group-21-original/.metadata/.plugins/org.eclipse.debug.core/.launches/EventRegistration-Backend%20-%20EventRegistrationApplication.launch does not exist.
+org.eclipse.debug.core.DebugException: Launch configuration EventRegistration-Backend - EventRegistrationApplication at file:/Users/georgekandalaft/git/project-group-21-original/.metadata/.plugins/org.eclipse.debug.core/.launches/EventRegistration-Backend%20-%20EventRegistrationApplication.launch does not exist.
+	at org.eclipse.debug.internal.core.LaunchManager.createDebugException(LaunchManager.java:886) ~[na:na]
+	at org.eclipse.debug.internal.core.LaunchManager.getInfo(LaunchManager.java:1381) ~[na:na]
+	at org.eclipse.debug.internal.core.LaunchConfiguration.getInfo(LaunchConfiguration.java:489) ~[na:na]
+	at org.eclipse.debug.internal.core.LaunchConfiguration.getType(LaunchConfiguration.java:644) ~[na:na]
+	at org.eclipse.m2e.internal.launch.MavenConsoleLineTracker.isMavenProcess(MavenConsoleLineTracker.java:142) ~[na:na]
+	at org.eclipse.m2e.internal.launch.MavenConsoleLineTracker.lineAppended(MavenConsoleLineTracker.java:85) ~[na:na]
+	at org.eclipse.debug.internal.ui.views.console.ConsoleLineNotifier.lineAppended(ConsoleLineNotifier.java:124) ~[na:na]
+	at org.eclipse.debug.internal.ui.views.console.ConsoleLineNotifier.matchFound(ConsoleLineNotifier.java:116) ~[na:na]
+	at org.eclipse.ui.internal.console.ConsolePatternMatcher$MatchJob.run(ConsolePatternMatcher.java:137) ~[org.eclipse.ui.console_3.8.600.v20190815-2020.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63) ~[org.eclipse.core.jobs_3.10.500.v20190620-1426.jar:na]
+2019-11-29 20:23:17,535 [Worker-16: Match Job] ERROR o.e.m.i.l.MavenConsoleLineTracker - Launch configuration EventRegistration-Backend - EventRegistrationApplication at file:/Users/georgekandalaft/git/project-group-21-original/.metadata/.plugins/org.eclipse.debug.core/.launches/EventRegistration-Backend%20-%20EventRegistrationApplication.launch does not exist.
+org.eclipse.debug.core.DebugException: Launch configuration EventRegistration-Backend - EventRegistrationApplication at file:/Users/georgekandalaft/git/project-group-21-original/.metadata/.plugins/org.eclipse.debug.core/.launches/EventRegistration-Backend%20-%20EventRegistrationApplication.launch does not exist.
+	at org.eclipse.debug.internal.core.LaunchManager.createDebugException(LaunchManager.java:886) ~[na:na]
+	at org.eclipse.debug.internal.core.LaunchManager.getInfo(LaunchManager.java:1381) ~[na:na]
+	at org.eclipse.debug.internal.core.LaunchConfiguration.getInfo(LaunchConfiguration.java:489) ~[na:na]
+	at org.eclipse.debug.internal.core.LaunchConfiguration.getType(LaunchConfiguration.java:644) ~[na:na]
+	at org.eclipse.m2e.internal.launch.MavenConsoleLineTracker.isMavenProcess(MavenConsoleLineTracker.java:142) ~[na:na]
+	at org.eclipse.m2e.internal.launch.MavenConsoleLineTracker.lineAppended(MavenConsoleLineTracker.java:85) ~[na:na]
+	at org.eclipse.debug.internal.ui.views.console.ConsoleLineNotifier.lineAppended(ConsoleLineNotifier.java:124) ~[na:na]
+	at org.eclipse.debug.internal.ui.views.console.ConsoleLineNotifier.matchFound(ConsoleLineNotifier.java:116) ~[na:na]
+	at org.eclipse.ui.internal.console.ConsolePatternMatcher$MatchJob.run(ConsolePatternMatcher.java:137) ~[org.eclipse.ui.console_3.8.600.v20190815-2020.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63) ~[org.eclipse.core.jobs_3.10.500.v20190620-1426.jar:na]
+2019-11-29 20:23:17,540 [Worker-16: Match Job] ERROR o.e.m.i.l.MavenConsoleLineTracker - Launch configuration EventRegistration-Backend - EventRegistrationApplication at file:/Users/georgekandalaft/git/project-group-21-original/.metadata/.plugins/org.eclipse.debug.core/.launches/EventRegistration-Backend%20-%20EventRegistrationApplication.launch does not exist.
+org.eclipse.debug.core.DebugException: Launch configuration EventRegistration-Backend - EventRegistrationApplication at file:/Users/georgekandalaft/git/project-group-21-original/.metadata/.plugins/org.eclipse.debug.core/.launches/EventRegistration-Backend%20-%20EventRegistrationApplication.launch does not exist.
+	at org.eclipse.debug.internal.core.LaunchManager.createDebugException(LaunchManager.java:886) ~[na:na]
+	at org.eclipse.debug.internal.core.LaunchManager.getInfo(LaunchManager.java:1381) ~[na:na]
+	at org.eclipse.debug.internal.core.LaunchConfiguration.getInfo(LaunchConfiguration.java:489) ~[na:na]
+	at org.eclipse.debug.internal.core.LaunchConfiguration.getType(LaunchConfiguration.java:644) ~[na:na]
+	at org.eclipse.m2e.internal.launch.MavenConsoleLineTracker.isMavenProcess(MavenConsoleLineTracker.java:142) ~[na:na]
+	at org.eclipse.m2e.internal.launch.MavenConsoleLineTracker.lineAppended(MavenConsoleLineTracker.java:85) ~[na:na]
+	at org.eclipse.debug.internal.ui.views.console.ConsoleLineNotifier.lineAppended(ConsoleLineNotifier.java:124) ~[na:na]
+	at org.eclipse.debug.internal.ui.views.console.ConsoleLineNotifier.matchFound(ConsoleLineNotifier.java:116) ~[na:na]
+	at org.eclipse.ui.internal.console.ConsolePatternMatcher$MatchJob.run(ConsolePatternMatcher.java:137) ~[org.eclipse.ui.console_3.8.600.v20190815-2020.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63) ~[org.eclipse.core.jobs_3.10.500.v20190620-1426.jar:na]

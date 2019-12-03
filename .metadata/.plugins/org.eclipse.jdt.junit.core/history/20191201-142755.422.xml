@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ca.mcgill.ecse321.eventregistration.service.payment" project="EventRegistration-Backend" tests="11" started="11" failures="0" errors="0" ignored="0">
+  <testsuite name="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="14.687">
+    <testcase name="test_13_testCreateCreditCardSpace" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="0.673"/>
+    <testcase name="test_04_testMultiplePaysBreakNegative" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="6.013"/>
+    <testcase name="test_09_testCreateCreditCardWrongFormat" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="0.31"/>
+    <testcase name="test_05_testUpdatePay" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="2.316"/>
+    <testcase name="test_06_testCreateCreditCard" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="0.769"/>
+    <testcase name="test_10_testCreateCreditCardLongFormat" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="0.303"/>
+    <testcase name="test_11_testCreateCreditCardNull" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="0.307"/>
+    <testcase name="test_14_testCreateCreditCardZero" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="0.758"/>
+    <testcase name="test_01_testPayWithCreditCard" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="1.699"/>
+    <testcase name="test_12_testCreateCreditCardEmpty" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="0.301"/>
+    <testcase name="test_08_testPayWithRegistrationNull" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="1.237"/>
+  </testsuite>
+</testrun>
