@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ca.mcgill.ecse321.eventregistration.service.payment" project="EventRegistration-Backend" tests="11" started="11" failures="0" errors="1" ignored="0">
+  <testsuite name="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="14.964">
+    <testcase name="test_13_testCreateCreditCardSpace" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="0.967"/>
+    <testcase name="test_04_testMultiplePaysBreakNegative" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="5.817"/>
+    <testcase name="test_09_testCreateCreditCardWrongFormat" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="0.312"/>
+    <testcase name="test_05_testUpdatePay" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="2.337"/>
+    <testcase name="test_06_testCreateCreditCard" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="0.766"/>
+    <testcase name="test_10_testCreateCreditCardLongFormat" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="0.312"/>
+    <testcase name="test_11_testCreateCreditCardNull" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="0.31">
+      <error>java.lang.NullPointerException
+	at ca.mcgill.ecse321.eventregistration.service.EventRegistrationService.createCreditCardPay(EventRegistrationService.java:196)
+	at ca.mcgill.ecse321.eventregistration.service.EventRegistrationService$$FastClassBySpringCGLIB$$81565908.invoke(&lt;generated&gt;)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:749)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:294)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)
+	at ca.mcgill.ecse321.eventregistration.service.EventRegistrationService$$EnhancerBySpringCGLIB$$93d4544b.createCreditCardPay(&lt;generated&gt;)
+	at ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard.test_11_testCreateCreditCardNull(TestPaymentWithCreditCard.java:178)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestExecutionCallbacks.evaluate(RunBeforeTestExecutionCallbacks.java:74)
+	at org.springframework.test.context.junit4.statements.RunAfterTestExecutionCallbacks.evaluate(RunAfterTestExecutionCallbacks.java:84)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:251)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:89)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:41)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:541)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:763)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:463)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:209)
+
+</error>
+    </testcase>
+    <testcase name="test_14_testCreateCreditCardZero" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="0.764"/>
+    <testcase name="test_01_testPayWithCreditCard" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="1.78"/>
+    <testcase name="test_12_testCreateCreditCardEmpty" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="0.299"/>
+    <testcase name="test_08_testPayWithRegistrationNull" classname="ca.mcgill.ecse321.eventregistration.service.payment.TestPaymentWithCreditCard" time="1.297"/>
+  </testsuite>
+</testrun>

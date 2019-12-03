@@ -1,0 +1,22 @@
+package ca.mcgill.ecse321.eventregistration.model;
+
+@Entity
+public class Volunteer extends Person {
+
+}
+package ca.mcgill.ecse321.eventregistration.model;
+
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+
+@Entity
+public class Organizer extends Person{
+	
+	
+	
+}

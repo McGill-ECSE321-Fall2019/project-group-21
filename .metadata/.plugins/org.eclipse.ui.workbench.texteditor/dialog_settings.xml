@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="Session"/>
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<list key="findhistory">
+			<item value="session"/>
+			<item value="getall"/>
+			<item value="review"/>
+			<item value="delete"/>
+			<item value="deletetutor"/>
+			<item value="deletetutpr"/>
+			<item value="getallroom"/>
+			<item value="F10"/>
+			<item value="F9"/>
+			<item value="F8"/>
+			<item value="F7"/>
+			<item value="F6"/>
+			<item value="F5"/>
+			<item value="F4"/>
+			<item value="F3"/>
+		</list>
+		<list key="replacehistory">
+			<item value="sutor"/>
+			<item value="Tutor"/>
+			<item value="tutor"/>
+			<item value="StudentReviews"/>
+			<item value="StudentReviewsDto"/>
+			<item value="student"/>
+			<item value="Student"/>
+			<item value="Room"/>
+			<item value="room"/>
+			<item value="roomRepository"/>
+			<item value="roomTimeBlock"/>
+			<item value="RoomTimeBlock"/>
+			<item value="TutorTimeBlockDto"/>
+			<item value="TutoTimeBlock"/>
+			<item value="TutoTimeBlockDto"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="1066"/>
+		<item key="DIALOG_Y_ORIGIN" value="55"/>
+		<item key="DIALOG_WIDTH" value="294"/>
+		<item key="DIALOG_HEIGHT" value="408"/>
+		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
+	</section>
+</section>

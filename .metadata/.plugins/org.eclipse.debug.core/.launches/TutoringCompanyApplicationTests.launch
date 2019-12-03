@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.junit.launchconfig">
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+        <listEntry value="/TutoringCompany-Backend/src/test/java/ca/mcgill/ecse321/tutoringcompany/TutoringCompanyApplicationTests.java"/>
+    </listAttribute>
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+        <listEntry value="1"/>
+    </listAttribute>
+    <mapAttribute key="org.eclipse.debug.core.environmentVariables">
+        <mapEntry key="SPRING_DATASOURCE_URL" value="jdbc:postgresql://ec2-107-22-222-161.compute-1.amazonaws.com:5432/d5i91l76fj97ir?user=ragwongyoafsgz&amp;password=c5a0c267f7e5c25c1d389f2c330fde17a9f0b85e7adf862b7ce1093491f264bc&amp;sslmode=require"/>
+    </mapAttribute>
+    <stringAttribute key="org.eclipse.jdt.junit.CONTAINER" value=""/>
+    <booleanAttribute key="org.eclipse.jdt.junit.KEEPRUNNING_ATTR" value="false"/>
+    <stringAttribute key="org.eclipse.jdt.junit.TESTNAME" value=""/>
+    <stringAttribute key="org.eclipse.jdt.junit.TEST_KIND" value="org.eclipse.jdt.junit.loader.junit4"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
+    <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="ca.mcgill.ecse321.tutoringcompany.TutoringCompanyApplicationTests"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="TutoringCompany-Backend"/>
+    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-ea"/>
+</launchConfiguration>

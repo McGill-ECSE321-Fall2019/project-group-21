@@ -1,0 +1,10 @@
+package ca.mcgill.ecse321.eventregistration.dao;
+
+import ca.mcgill.ecse321.eventregistration.model.Cinema;
+import ca.mcgill.ecse321.eventregistration.model.Event;
+
+public interface CinemaRepository CrudRepository<Cinema, String> {
+	Event findByName(String name);
+
+
+}

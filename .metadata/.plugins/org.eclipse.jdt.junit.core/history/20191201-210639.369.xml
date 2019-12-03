@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestCinema" project="EventRegistration-Backend" tests="5" started="5" failures="0" errors="0" ignored="0">
+  <testsuite name="ca.mcgill.ecse321.eventregistration.service.event.TestCinema" time="2.719">
+    <testcase name="test_01_CreateCinema" classname="ca.mcgill.ecse321.eventregistration.service.event.TestCinema" time="1.715"/>
+    <testcase name="test_07_CreateCinemaMovieSpaces" classname="ca.mcgill.ecse321.eventregistration.service.event.TestCinema" time="0.296"/>
+    <testcase name="test_05_CreateCinemaEndTimeBeforeStartTime" classname="ca.mcgill.ecse321.eventregistration.service.event.TestCinema" time="0.243"/>
+    <testcase name="test_02_CreateCinemaNull" classname="ca.mcgill.ecse321.eventregistration.service.event.TestCinema" time="0.223"/>
+    <testcase name="test_03_CreateCinemaNameEmpty" classname="ca.mcgill.ecse321.eventregistration.service.event.TestCinema" time="0.242"/>
+  </testsuite>
+</testrun>
