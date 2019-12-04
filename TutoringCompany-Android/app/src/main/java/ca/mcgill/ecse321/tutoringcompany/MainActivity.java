@@ -80,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         error = "";
         final TextView tv = (TextView) findViewById(R.id.email);
         final TextView tv2 = (TextView) findViewById(R.id.password);
+        tv.setText("georgeKandalaft@gmail.com");
+        tv2.setText("42069");
         HttpUtils.post("Manager/Login" +"?ManagerEmail=" + tv.getText().toString()+"&ManagerPassword=" + tv2.getText().toString(), new RequestParams(), new TextHttpResponseHandler() {
             //@Override
             public void onSuccess(int statusCode, Header[] headers, String response) {
