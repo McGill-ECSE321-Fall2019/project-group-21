@@ -21,6 +21,7 @@ import cz.msebera.android.httpclient.Header;
 public class ManagerHomePager extends AppCompatActivity {
 
     /**
+     * This method runs after the creation of the page
      * Initialize activity
      *
      * @param savedInstanceState
@@ -43,7 +44,7 @@ public class ManagerHomePager extends AppCompatActivity {
     }
 
     /**
-     * Open the tutors page
+     * Opens the tutors page and displays it in the view
      *
      * @param v
      */
@@ -54,7 +55,7 @@ public class ManagerHomePager extends AppCompatActivity {
     }
 
     /**
-     * Open the room page
+     * Opens the rooms page and displays it in the view
      *
      * @param v
      */

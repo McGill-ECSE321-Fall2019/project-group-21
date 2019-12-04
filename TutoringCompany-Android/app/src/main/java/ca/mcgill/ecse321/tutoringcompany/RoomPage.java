@@ -19,6 +19,7 @@ public class RoomPage extends AppCompatActivity {
 String error;
 
     /**
+     * This method runs after the creation of the page
      * Initialize activity
      *
      * @param savedInstanceState

@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> studentAdapter;
 
     /**
+     * This method runs after the creation of the page
      * Initialize activity
      *
      * @param savedInstanceState
