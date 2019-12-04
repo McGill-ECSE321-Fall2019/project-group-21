@@ -15,11 +15,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cz.msebera.android.httpclient.entity.mime.Header;
+import cz.msebera.android.httpclient.Header;
+
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -70,20 +73,33 @@ public class MainActivity extends AppCompatActivity {
         error = "";
         final TextView tv = (TextView) findViewById(R.id.email);
         final TextView tv2 = (TextView) findViewById(R.id.password);
-        HttpUtils.post("Manager/Login" +"?ManagerEmail=" + tv.getText().toString()+"&ManagerPassword=" + tv2.getText().toString(), new RequestParams(), new JsonHttpResponseHandler() {
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+        HttpUtils.post("Manager/Login" +"?ManagerEmail=" + tv.getText().toString()+"&ManagerPassword=" + tv2.getText().toString(), new RequestParams(), new TextHttpResponseHandler() {
+            //@Override
+            public void onSuccess(int statusCode, Header[] headers, String response) {
+                //System.out.println(response.toString());
+                System.out.println("onSuccess ============");
+                refreshErrorMessage();
+                openManagerHomePage();
+                tv.setText("");
+                tv2.setText("");
+
+            }
+            public void onFailure(int statusCode, Header[] headers, String errorResponseString, Throwable throwable) {
+                System.out.println("onFailure ============");
+                refreshErrorMessage();
+                System.out.println(errorResponseString);//.toString());
+                try {
+                    JSONObject errorResponseJSON = new JSONObject(errorResponseString);
+                    error += errorResponseJSON.get("message").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+                
                 refreshErrorMessage();
                 tv.setText("");
                 tv2.setText("");
             }
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                try {
-                    error += errorResponse.get("message").toString();
-                } catch (JSONException e) {
-                    error += e.getMessage();
-                }
-                refreshErrorMessage();
-            }
+
         });
     }
 
