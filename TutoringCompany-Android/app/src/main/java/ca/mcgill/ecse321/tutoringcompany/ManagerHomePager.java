@@ -20,6 +20,11 @@ import cz.msebera.android.httpclient.Header;
 
 public class ManagerHomePager extends AppCompatActivity {
 
+    /**
+     * Initialize activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +42,22 @@ public class ManagerHomePager extends AppCompatActivity {
         });
     }
 
+    /**
+     * Open the tutors page
+     *
+     * @param v
+     */
     public void openTutorsPage(View v) {
         Intent intent = new Intent(this, TutorsPage.class);
         startActivity(intent);
 
     }
+
+    /**
+     * Open the room page
+     *
+     * @param v
+     */
     public void openRoomsPage(View v) {
         Intent intent = new Intent(this, RoomPage.class);
         startActivity(intent);

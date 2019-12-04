@@ -17,6 +17,12 @@ import cz.msebera.android.httpclient.Header;
 
 public class RoomPage extends AppCompatActivity {
 String error;
+
+    /**
+     * Initialize activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +40,11 @@ String error;
         });
     }
 
+    /**
+     * Create an individual room
+     *
+     * @param v
+     */
     public void CreateIndividualRoom(View v){
         error = "";
         final TextView tv = (TextView) findViewById(R.id.IndividualRoomNumber);
@@ -66,6 +77,12 @@ String error;
 
 
     }
+
+    /**
+     * Create a group room
+     *
+     * @param v
+     */
     public void CreateGroupRoom(View v){
         error = "";
         final TextView tv = (TextView) findViewById(R.id.GroupRoomNumber);
@@ -98,6 +115,10 @@ String error;
 
 
     }
+
+    /**
+     * Displays error message on the screen, if there is any
+     */
     private void refreshErrorMessage() {
         // set the error message
         TextView tvError = (TextView) findViewById(R.id.RoomMsg);

@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
     private List<String> studentNames = new ArrayList<>();
     private ArrayAdapter<String> studentAdapter;
 
+    /**
+     * Initialize activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
         });
         refreshErrorMessage();
     }
+
+    /**
+     * Displays error message on the screen, if there is any
+     */
     private void refreshErrorMessage() {
         // set the error message
         TextView tvError = (TextView) findViewById(R.id.error);
@@ -82,6 +91,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Login to the application
+     *
+     * @param v
+     */
     public void login(View v) {
         error = "";
         final TextView tv = (TextView) findViewById(R.id.email);
@@ -113,6 +127,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Logout of the application
+     *
+     * @param v
+     */
     public void logout(View v) {
         error = "";
 //        final TextView tv = (TextView) findViewById(R.id.email);
@@ -188,6 +207,13 @@ public class MainActivity extends AppCompatActivity {
 //        });
 //    }
 
+
+    /**
+     * Inflate the menu/action bar with items
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -195,6 +221,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Handles action bar item clicks
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -210,6 +242,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Open the home page
+     */
     public void openManagerHomePage(){
         Intent intent = new Intent(this, ManagerHomePager.class);
         startActivity(intent);
