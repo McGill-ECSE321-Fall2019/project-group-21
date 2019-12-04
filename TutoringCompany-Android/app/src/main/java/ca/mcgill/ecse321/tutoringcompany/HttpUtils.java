@@ -41,4 +41,6 @@ public class HttpUtils {
     private static String getAbsoluteUrl(String relativeUrl) {
         return baseUrl + relativeUrl;
     }
+
+
 }
