@@ -88,7 +88,7 @@
       <div class="container">
         <h1 class="display-4">Welcome to Quality Academy</h1>
         <p class="lead">
-          The Quality Over Quantity Tutoring Company aims to provide students with the opportunity to connect with expert tutors in their field.
+          The Quality Academy Tutoring Company aims to provide students with the opportunity to connect with expert tutors in their field.
           As a new startup company (founded in 2019), our simple but efficient website and mobile interfaces allow easy access to our services.
           Students can find tutors at all levels of education (elementary school, high school, cegep and university) covering all subjects and courses.
           We strive to give students the education they deserve, and offer exciting opportunities for tutors to help their peers.

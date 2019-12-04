@@ -85,7 +85,7 @@
       Please enter a valid input for all fields
 
     </div>
-    <div v-if="response" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div v-if="response" class="alert alert-success alert-dismissible fade show" role="alert">
       <strong>Success! </strong>
       {{response}}
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
