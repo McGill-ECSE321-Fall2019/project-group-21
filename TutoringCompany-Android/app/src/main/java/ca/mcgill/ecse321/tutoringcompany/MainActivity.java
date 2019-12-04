@@ -82,19 +82,14 @@ public class MainActivity extends AppCompatActivity {
                 openManagerHomePage();
                 tv.setText("");
                 tv2.setText("");
-
             }
             public void onFailure(int statusCode, Header[] headers, String errorResponseString, Throwable throwable) {
-                System.out.println("onFailure ============");
-                refreshErrorMessage();
-                System.out.println(errorResponseString);//.toString());
                 try {
                     JSONObject errorResponseJSON = new JSONObject(errorResponseString);
                     error += errorResponseJSON.get("message").toString();
                 } catch (JSONException e) {
                     error += e.getMessage();
                 }
-                
                 refreshErrorMessage();
                 tv.setText("");
                 tv2.setText("");
@@ -105,18 +100,27 @@ public class MainActivity extends AppCompatActivity {
 
     public void logout(View v) {
         error = "";
-        HttpUtils.post("Manager/Logout", new RequestParams(), new JsonHttpResponseHandler() {
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//        final TextView tv = (TextView) findViewById(R.id.email);
+//        final TextView tv2 = (TextView) findViewById(R.id.password);
+        HttpUtils.post("Manager/Logout", new RequestParams(), new TextHttpResponseHandler() {
+            //@Override
+            public void onSuccess(int statusCode, Header[] headers, String response) {
+                //System.out.println(response.toString());
                 refreshErrorMessage();
             }
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+            public void onFailure(int statusCode, Header[] headers, String errorResponseString, Throwable throwable) {
                 try {
-                    error += errorResponse.get("message").toString();
+                    JSONObject errorResponseJSON = new JSONObject(errorResponseString);
+                    error += errorResponseJSON.get("message").toString();
                 } catch (JSONException e) {
                     error += e.getMessage();
                 }
+
                 refreshErrorMessage();
+                tv.setText("");
+                tv2.setText("");
             }
+
         });
     }
 
@@ -143,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     public void openManagerHomePage(){
         Intent intent = new Intent(this, ManagerHomePager.class);
         startActivity(intent);
