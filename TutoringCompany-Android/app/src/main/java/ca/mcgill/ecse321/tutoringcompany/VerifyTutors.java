@@ -64,7 +64,6 @@ public class VerifyTutors extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, String errorResponseString, Throwable throwable) {
                 error = "wrong format or tutor does not exist";
                 refreshErrorMessage();
-                refreshErrorMessage();
                 tv.setText("");
 
             }

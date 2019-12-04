@@ -138,55 +138,55 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void viewTutors(View v) {
-        error = "";
-        //tutorAdapter = new ArrayAdapter<String>(this, android.R.layout.listview_name, tutorNames);
-        //ListView tutorListView = (ListView) findViewById(R.id.tutors);
-        //tutorListView.setAdapter(tutorAdapter);
-        getNames(tutorAdapter, tutorNames, "/Manager/get/allTutors");
-    }
-
-    public void verifyTutor(View v) {
-        error = "";
-    }
-
-    public void viewStudents(View v) {
-        error = "";
-        //studentAdapter = new ArrayAdapter<String>(this, android.R.layout.listview_name, studentNames);
-        //ListView studentListView = (ListView) findViewById(R.id.students);
-        //studentListView.setAdapter(studentAdapter);
-        getNames(studentAdapter, studentNames, "/Manager/get/allStudents");
-    }
-
-    private void getNames(final ArrayAdapter<String> adapter, final List<String> names, final String restFunctionName) {
-        HttpUtils.get(restFunctionName, new RequestParams(), new JsonHttpResponseHandler() {
-
-            //@Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                names.clear();
-//                names.add("Please select...");
-                for( int i = 0; i < response.length(); i++){
-                    try {
-                        names.add(response.getJSONObject(i).getString("name"));
-                    } catch (Exception e) {
-                        error += e.getMessage();
-                    }
-                    refreshErrorMessage();
-                }
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                try {
-                    error += errorResponse.get("message").toString();
-                } catch (JSONException e) {
-                    error += e.getMessage();
-                }
-                refreshErrorMessage();
-            }
-        });
-    }
+//    public void viewTutors(View v) {
+//        error = "";
+//        //tutorAdapter = new ArrayAdapter<String>(this, android.R.layout.listview_name, tutorNames);
+//        //ListView tutorListView = (ListView) findViewById(R.id.tutors);
+//        //tutorListView.setAdapter(tutorAdapter);
+//        getNames(tutorAdapter, tutorNames, "/Manager/get/allTutors");
+//    }
+//
+//    public void verifyTutor(View v) {
+//        error = "";
+//    }
+//
+//    public void viewStudents(View v) {
+//        error = "";
+//        //studentAdapter = new ArrayAdapter<String>(this, android.R.layout.listview_name, studentNames);
+//        //ListView studentListView = (ListView) findViewById(R.id.students);
+//        //studentListView.setAdapter(studentAdapter);
+//        getNames(studentAdapter, studentNames, "/Manager/get/allStudents");
+//    }
+//
+//    private void getNames(final ArrayAdapter<String> adapter, final List<String> names, final String restFunctionName) {
+//        HttpUtils.get(restFunctionName, new RequestParams(), new JsonHttpResponseHandler() {
+//
+//            //@Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+//                names.clear();
+////                names.add("Please select...");
+//                for( int i = 0; i < response.length(); i++){
+//                    try {
+//                        names.add(response.getJSONObject(i).getString("name"));
+//                    } catch (Exception e) {
+//                        error += e.getMessage();
+//                    }
+//                    refreshErrorMessage();
+//                }
+//                adapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+//                try {
+//                    error += errorResponse.get("message").toString();
+//                } catch (JSONException e) {
+//                    error += e.getMessage();
+//                }
+//                refreshErrorMessage();
+//            }
+//        });
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
