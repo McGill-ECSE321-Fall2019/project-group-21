@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.tutoringcompany;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -11,12 +10,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 
-public class TutorsPage extends AppCompatActivity {
+public class ViewTutors extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tutors_page);
+        setContentView(R.layout.activity_view_tutors);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -29,12 +28,5 @@ public class TutorsPage extends AppCompatActivity {
             }
         });
     }
-    public void openVerifyTutors(View v){
-        Intent intent = new Intent(this, VerifyTutors.class);
-        startActivity(intent);
-    }
-    public void openViewTutors(View v){
-        Intent intent = new Intent(this, ViewTutors.class);
-        startActivity(intent);
-    }
+
 }

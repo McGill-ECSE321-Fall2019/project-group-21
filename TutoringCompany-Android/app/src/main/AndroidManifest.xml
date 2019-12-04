@@ -12,9 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ViewTutors"
+            android:label="@string/title_activity_view_tutors"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".VerifyTutors"
+            android:label="@string/title_activity_verify_tutors"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".TutorsPage"
             android:label="@string/title_activity_tutors_page"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ManagerHomePager"
             android:label="@string/title_activity_manager_home_pager"
