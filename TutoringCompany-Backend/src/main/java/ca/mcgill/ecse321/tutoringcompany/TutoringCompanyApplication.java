@@ -50,6 +50,7 @@ public class TutoringCompanyApplication {
 	}
 	@RequestMapping("/m")
 	  public List<Manager> managers(){
+		ManagerService.createManager("heroku", "kok", "nana@mail.com", "54344412", "pp00ook");
 	    return ManagerService.getAllManagers();
 	  }
 	@RequestMapping("/t")

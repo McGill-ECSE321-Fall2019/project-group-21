@@ -32,12 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         button = (Button) findViewById(R.id.Loginbtn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openManagerHomePage();
-            }
-        });
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openManagerHomePage();
+//            }
+//        });
 
 
 
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         error = "";
         final TextView tv = (TextView) findViewById(R.id.email);
         final TextView tv2 = (TextView) findViewById(R.id.password);
-        HttpUtils.post("Manager/Login/" + tv.getText().toString() + tv2.getText().toString(), new RequestParams(), new JsonHttpResponseHandler() {
+        HttpUtils.post("Manager/Login" +"?ManagerEmail=" + tv.getText().toString()+"&ManagerPassword=" + tv2.getText().toString(), new RequestParams(), new JsonHttpResponseHandler() {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 refreshErrorMessage();
                 tv.setText("");
