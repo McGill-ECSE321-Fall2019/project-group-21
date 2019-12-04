@@ -19,7 +19,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SessionsBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/SessionsBtn"
+        android:onClick="openTutorsPage"/>
 
     <Button
         android:id="@+id/StudentsBtn"

@@ -7,12 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
 
-import org.json.JSONObject;
-
-import cz.msebera.android.httpclient.Header;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -20,9 +15,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 
 
 
@@ -72,29 +70,60 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(View v) {
-//        error = "";
+        error = "";
+        final TextView tv = (TextView) findViewById(R.id.email);
+        final TextView tv2 = (TextView) findViewById(R.id.password);
+        HttpUtils.post("Manager/Login" +"?ManagerEmail=" + tv.getText().toString()+"&ManagerPassword=" + tv2.getText().toString(), new RequestParams(), new TextHttpResponseHandler() {
+            //@Override
+            public void onSuccess(int statusCode, Header[] headers, String response) {
+                //System.out.println(response.toString());
+                System.out.println("onSuccess ============");
+                refreshErrorMessage();
+                openManagerHomePage();
+                tv.setText("");
+                tv2.setText("");
+            }
+            public void onFailure(int statusCode, Header[] headers, String errorResponseString, Throwable throwable) {
+                try {
+                    JSONObject errorResponseJSON = new JSONObject(errorResponseString);
+                    error += errorResponseJSON.get("message").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+                refreshErrorMessage();
+                tv.setText("");
+                tv2.setText("");
+            }
+
+        });
+    }
+
+    public void logout(View v) {
+        error = "";
 //        final TextView tv = (TextView) findViewById(R.id.email);
 //        final TextView tv2 = (TextView) findViewById(R.id.password);
-//        HttpUtils.post("Manager/Login" +"?ManagerEmail=" + tv.getText().toString()+"&ManagerPassword=" + tv2.getText().toString(), new RequestParams(), new JsonHttpResponseHandler() {
-//           @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//               System.out.println(statusCode);
-//                refreshErrorMessage();
-//
-//            }
-//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-//                try {
-//                    error += errorResponse.get("message").toString();
-//                } catch (JSONException e) {
-//                    error += e.getMessage();
-//                }
-//                System.out.println(statusCode);
-//                refreshErrorMessage();
-//            }
-//        });
+        HttpUtils.post("Manager/Logout", new RequestParams(), new TextHttpResponseHandler() {
+            //@Override
+            public void onSuccess(int statusCode, Header[] headers, String response) {
+                //System.out.println(response.toString());
+                refreshErrorMessage();
+            }
+            public void onFailure(int statusCode, Header[] headers, String errorResponseString, Throwable throwable) {
+                try {
+                    JSONObject errorResponseJSON = new JSONObject(errorResponseString);
+                    error += errorResponseJSON.get("message").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
 
-        openManagerHomePage();
+                refreshErrorMessage();
+             
+            }
+
+        });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -117,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     public void openManagerHomePage(){
         Intent intent = new Intent(this, ManagerHomePager.class);
         startActivity(intent);
