@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Open the home page
+     * Opens the home page for the manager perspective
      */
     public void openManagerHomePage(){
         Intent intent = new Intent(this, ManagerHomePager.class);

@@ -51,9 +51,9 @@ public class VerifyTutors extends AppCompatActivity {
      * This method is connected to backend controller that takes a String input (email address)
      * and then verifies the tutors that has this email address
      * if the email is not existed in the backend (Null Pointer Exception is thrown)
-     * @param v
      *
-     * @exception IllegalArgumentException if input is not of correct format, or if tutor does not exist.
+     *  @param v
+     *
      */
     public void Verify(View v){
         error = "";
