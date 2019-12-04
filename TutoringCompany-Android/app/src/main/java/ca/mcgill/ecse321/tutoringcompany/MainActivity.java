@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 refreshErrorMessage();
                 tv.setText("");
+                tv2.setText("");
             }
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 try {
@@ -85,6 +86,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void logout(View v) {
+        error = "";
+        HttpUtils.post("Manager/Logout", new RequestParams(), new JsonHttpResponseHandler() {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                refreshErrorMessage();
+            }
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    error += errorResponse.get("message").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+                refreshErrorMessage();
+            }
+        });
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
