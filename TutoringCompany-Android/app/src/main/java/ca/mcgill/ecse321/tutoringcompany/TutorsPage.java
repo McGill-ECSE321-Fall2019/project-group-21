@@ -13,6 +13,12 @@ import android.view.View;
 
 public class TutorsPage extends AppCompatActivity {
 
+    /**
+     * This method runs after the creation of the page.
+     * Initialize activity.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +35,22 @@ public class TutorsPage extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Opens a list of all verified tutors and displays it in the View.
+     *
+     * @param v
+     */
     public void openVerifyTutors(View v){
         Intent intent = new Intent(this, VerifyTutors.class);
         startActivity(intent);
     }
+    
+    /**
+     * Opens a list of all tutors, verified or not, and displays it in the View.
+     *
+     * @param v
+     */
     public void openViewTutors(View v){
         Intent intent = new Intent(this, ViewTutors.class);
         startActivity(intent);

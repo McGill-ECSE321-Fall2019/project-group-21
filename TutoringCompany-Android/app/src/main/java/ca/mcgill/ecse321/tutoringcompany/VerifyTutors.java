@@ -22,6 +22,13 @@ import cz.msebera.android.httpclient.Header;
 public class VerifyTutors extends AppCompatActivity {
     private String error = null;
 
+    /**
+     * This method runs after the creation of the page.
+     * Initialize activity.
+     *
+     * @param savedInstanceState
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -45,6 +52,8 @@ public class VerifyTutors extends AppCompatActivity {
      * and then verifies the tutors that has this email address
      * if the email is not existed in the backend (Null Pointer Exception is thrown)
      * @param v
+     *
+     * @exception IllegalArgumentException if input is not of correct format, or if tutor does not exist.
      */
     public void Verify(View v){
         error = "";
@@ -73,6 +82,10 @@ public class VerifyTutors extends AppCompatActivity {
 
 
     }
+
+    /**
+     * Displays error message on the screen, if there is any
+     */
     private void refreshErrorMessage() {
         // set the error message
         TextView tvError = (TextView) findViewById(R.id.errorMsg);

@@ -31,6 +31,13 @@ public class ViewTutors extends AppCompatActivity {
     private List<String> tutorNames = new ArrayList<>();
     private ArrayAdapter<String> tutorAdapter;
 
+    /**
+     * This method runs after the creation of the page.
+     * Initialize activity.
+     *
+     * @param savedInstanceState
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +68,9 @@ public class ViewTutors extends AppCompatActivity {
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(arrayAdapter);
     }
-
+    /**
+     * Displays error message on the screen, if there is any
+     */
     private void refreshErrorMessage() {
         // set the error message
 
