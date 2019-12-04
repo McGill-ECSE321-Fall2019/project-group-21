@@ -25,6 +25,7 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 
 public class ViewTutors extends AppCompatActivity {
+  ListView listView;
     private String error = null;
 
     private List<String> tutorNames = new ArrayList<>();
@@ -46,9 +47,20 @@ public class ViewTutors extends AppCompatActivity {
             }
         });
 
-        tutorAdapter = new ArrayAdapter<String>(this, android.R.layout.listview_name, tutorNames);
-        ListView tutorListView = (ListView) findViewById(R.id.tutors);
-        tutorListView.setAdapter(tutorAdapter);
+//        tutorAdapter = new ArrayAdapter<String>(this, android.R.layout.listview_name, tutorNames);
+//        ListView tutorListView = (ListView) findViewById(R.id.tutors);
+//        tutorListView.setAdapter(tutorAdapter);
+
+        listView = (ListView)findViewById(R.id.listview_name);
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("android");
+        arrayList.add("wow");
+        arrayList.add("android");
+        arrayList.add("wow");arrayList.add("android");
+        arrayList.add("wow");
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
+        listView.setAdapter(arrayAdapter);
     }
 
     private void refreshErrorMessage() {
@@ -63,13 +75,13 @@ public class ViewTutors extends AppCompatActivity {
         }
     }
 
-    public void viewTutors(View v) {
-        error = "";
-        tutorAdapter = new ArrayAdapter<String>(this, android.R.layout.listview_name, tutorNames);
-        ListView tutorListView = (ListView) findViewById(R.id.tutors);
-        tutorListView.setAdapter(tutorAdapter);
-        getNames(tutorAdapter, tutorNames, "/Manager/get/allTutors");
-    }
+//    public void viewTutors(View v) {
+//        error = "";
+//        tutorAdapter = new ArrayAdapter<String>(this, android.R.layout.listview_name, tutorNames);
+//        ListView tutorListView = (ListView) findViewById(R.id.tutors);
+//        tutorListView.setAdapter(tutorAdapter);
+//        getNames(tutorAdapter, tutorNames, "/Manager/get/allTutors");
+//    }
 
     private void getNames(final ArrayAdapter<String> adapter, final List<String> names, final String restFunctionName) {
         HttpUtils.get(restFunctionName, new RequestParams(), new JsonHttpResponseHandler() {
