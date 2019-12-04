@@ -75,7 +75,7 @@ public class TutoringCompanyRestController {
 	 * @exception InvalidParameterException if the passowrd is incorrect
 	 */
 	@PostMapping(value = { "/Manager/Login", "/Manager/Login/" })
-	public String ManagerLogin(@RequestParam(name = "ManagerEmail") String ManagerEmail,
+	public void ManagerLogin(@RequestParam(name = "ManagerEmail") String ManagerEmail,
 			@RequestParam(name = "ManagerPassword") String ManagerPassword) throws IllegalArgumentException {
 		if (!managerRepository.existsById(ManagerEmail)) {
 			throw new NullPointerException("manager Does not Exist");
@@ -84,7 +84,7 @@ public class TutoringCompanyRestController {
 			throw new InvalidParameterException("Incorrect Password");
 		}
 		ManagerLoggedin = true;
-		return "Welcome you're logged in sucessfully";
+		
 	}
 
 	/****************** @Identifier F2 ***************/
@@ -92,14 +92,14 @@ public class TutoringCompanyRestController {
 	 * @return false to the boolean ManagerLoggedin
 	 * @exception InvalidParameterException the manager is not logged in
 	 */
-	@PostMapping(value = { "/Manager/Logout", "/Manager/Logout/" })
-	public String ManagerLogout() {
+	@PostMapping(value = { "/   ", "/Manager/Logout/" })
+	public void ManagerLogout() {
 
 		if (!ManagerLoggedin) {
 			throw new InvalidParameterException("you did not log in");
 		}
 		ManagerLoggedin = false;
-		return "you have logged out successfully";
+		
 	}
 
 	/****************** Room Services Controllers *********************/
