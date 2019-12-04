@@ -36,10 +36,15 @@ public class ManagerHomePager extends AppCompatActivity {
             }
         });
     }
+
     public void openTutorsPage(View v) {
         Intent intent = new Intent(this, TutorsPage.class);
         startActivity(intent);
 
     }
+    public void openRoomsPage(View v) {
+        Intent intent = new Intent(this, RoomPage.class);
+        startActivity(intent);
 
+    }
 }

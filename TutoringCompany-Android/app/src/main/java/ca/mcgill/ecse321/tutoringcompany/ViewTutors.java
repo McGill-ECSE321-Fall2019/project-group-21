@@ -47,32 +47,33 @@ public class ViewTutors extends AppCompatActivity {
             }
         });
 
-//        tutorAdapter = new ArrayAdapter<String>(this, android.R.layout.listview_name, tutorNames);
-//        ListView tutorListView = (ListView) findViewById(R.id.tutors);
-//        tutorListView.setAdapter(tutorAdapter);
 
         listView = (ListView)findViewById(R.id.listview_name);
         ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("android");
-        arrayList.add("wow");
-        arrayList.add("android");
-        arrayList.add("wow");arrayList.add("android");
-        arrayList.add("wow");
+        arrayList.add("Elias");
+        arrayList.add("George");
+        arrayList.add("Ryan");
+        arrayList.add("Caleb");arrayList.add("Louca");
 
+//        getNames(tutorNames, "/Manager/get/allTutors");
+
+        System.out.println(tutorNames.size());
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(arrayAdapter);
     }
 
     private void refreshErrorMessage() {
         // set the error message
-        TextView tvError = (TextView) findViewById(R.id.errorMsg);
-        tvError.setText(error);
 
-        if (error == null || error.length() == 0) {
-            tvError.setVisibility(View.GONE);
-        } else {
-            tvError.setVisibility(View.VISIBLE);
-        }
+        System.out.println(error);
+//        TextView tvError = (TextView) findViewById(R.id.errorMsg);
+//        tvError.setText(error);
+//
+//        if (error == null || error.length() == 0) {
+//            tvError.setVisibility(View.GONE);
+//        } else {
+//            tvError.setVisibility(View.VISIBLE);
+//        }
     }
 
 //    public void viewTutors(View v) {
@@ -83,34 +84,45 @@ public class ViewTutors extends AppCompatActivity {
 //        getNames(tutorAdapter, tutorNames, "/Manager/get/allTutors");
 //    }
 
-    private void getNames(final ArrayAdapter<String> adapter, final List<String> names, final String restFunctionName) {
-        HttpUtils.get(restFunctionName, new RequestParams(), new JsonHttpResponseHandler() {
-
-            //@Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                names.clear();
-//                names.add("Please select...");
-                for( int i = 0; i < response.length(); i++){
-                    try {
-                        names.add(response.getJSONObject(i).getString("name"));
-                    } catch (Exception e) {
-                        error += e.getMessage();
-                    }
-                    refreshErrorMessage();
-                }
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                try {
-                    error += errorResponse.get("message").toString();
-                } catch (JSONException e) {
-                    error += e.getMessage();
-                }
-                refreshErrorMessage();
-            }
-        });
-    }
+//    private void getNames(final List<String> names, final String restFunctionName) {
+//        //final List<String> names = new ArrayList<>();
+//        HttpUtils.get(restFunctionName, new RequestParams(), new JsonHttpResponseHandler() {
+//
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+//                try {
+//                    System.out.println(response.getJSONObject(0).toString());
+//                    System.out.println(response.getJSONObject(0).getString("first_name"));
+//                } catch (Exception e) { error += e.getMessage();System.out.println("error getting 0th"); }
+//                names.clear();
+//                //names.add("hello"); names.add("name2");
+////                names.add("Please select...");
+//                System.out.println(response.length());
+//                for( int i = 0; i < 3; i++){
+//                    try {
+//                        names.add(response.getJSONObject(i).getString("first_name")
+//                                );
+//                    } catch (Exception e) {
+//                        error += e.getMessage();
+//                    }
+//                    //refreshErrorMessage();
+//                    System.out.println(names.get(i));
+//                }
+//                System.out.println("done for loop");
+//                //tutorAdapter.notifyDataSetChanged();
+//
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+//                try {
+//                    error += errorResponse.get("message").toString();
+//                } catch (JSONException e) {
+//                    error += e.getMessage();
+//                }
+//                //refreshErrorMessage();
+//            }
+//        });
+//    }
 
 }

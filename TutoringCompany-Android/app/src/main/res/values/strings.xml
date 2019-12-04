@@ -9,4 +9,5 @@
     <string name="title_activity_tutors_page">TutorsPage</string>
     <string name="title_activity_verify_tutors">VerifyTutors</string>
     <string name="title_activity_view_tutors">ViewTutors</string>
+    <string name="title_activity_room_page">RoomPage</string>
 </resources>
