@@ -7,4 +7,6 @@
     <string name="title_activity_manager_home_pager">ManagerHomePager</string>
     <string name="title_activity_tutors">Tutors</string>
     <string name="title_activity_tutors_page">TutorsPage</string>
+    <string name="title_activity_verify_tutors">VerifyTutors</string>
+    <string name="title_activity_view_tutors">ViewTutors</string>
 </resources>
