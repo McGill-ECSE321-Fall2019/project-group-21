@@ -7,7 +7,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -19,7 +24,7 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cz.msebera.android.httpclient.entity.mime.Header;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -67,23 +72,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(View v) {
-        error = "";
-        final TextView tv = (TextView) findViewById(R.id.email);
-        final TextView tv2 = (TextView) findViewById(R.id.password);
-        HttpUtils.post("Manager/Login" +"?ManagerEmail=" + tv.getText().toString()+"&ManagerPassword=" + tv2.getText().toString(), new RequestParams(), new JsonHttpResponseHandler() {
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                refreshErrorMessage();
-                tv.setText("");
-            }
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                try {
-                    error += errorResponse.get("message").toString();
-                } catch (JSONException e) {
-                    error += e.getMessage();
-                }
-                refreshErrorMessage();
-            }
-        });
+//        error = "";
+//        final TextView tv = (TextView) findViewById(R.id.email);
+//        final TextView tv2 = (TextView) findViewById(R.id.password);
+//        HttpUtils.post("Manager/Login" +"?ManagerEmail=" + tv.getText().toString()+"&ManagerPassword=" + tv2.getText().toString(), new RequestParams(), new JsonHttpResponseHandler() {
+//           @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//               System.out.println(statusCode);
+//                refreshErrorMessage();
+//
+//            }
+//            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+//                try {
+//                    error += errorResponse.get("message").toString();
+//                } catch (JSONException e) {
+//                    error += e.getMessage();
+//                }
+//                System.out.println(statusCode);
+//                refreshErrorMessage();
+//            }
+//        });
+
+        openManagerHomePage();
     }
 
     @Override
