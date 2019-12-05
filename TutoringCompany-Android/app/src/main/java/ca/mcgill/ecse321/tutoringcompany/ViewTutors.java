@@ -57,10 +57,12 @@ public class ViewTutors extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.listview_name);
         ArrayList<String> arrayList = new ArrayList<>();
+        // Dummy data, we were able to get the JSONarray from the backend and process it in the commented out method below, but we were unable to return from this method after call
         arrayList.add("Elias");
         arrayList.add("George");
         arrayList.add("Ryan");
-        arrayList.add("Caleb");arrayList.add("Louca");
+        arrayList.add("Caleb");
+        arrayList.add("Louca");
 
 //        getNames(tutorNames, "/Manager/get/allTutors");
 
@@ -68,21 +70,20 @@ public class ViewTutors extends AppCompatActivity {
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(arrayAdapter);
     }
+
     /**
      * Displays error message on the screen, if there is any
      */
     private void refreshErrorMessage() {
         // set the error message
+        TextView tvError = (TextView) findViewById(R.id.errorMsg);
+        tvError.setText(error);
 
-        System.out.println(error);
-//        TextView tvError = (TextView) findViewById(R.id.errorMsg);
-//        tvError.setText(error);
-//
-//        if (error == null || error.length() == 0) {
-//            tvError.setVisibility(View.GONE);
-//        } else {
-//            tvError.setVisibility(View.VISIBLE);
-//        }
+        if (error == null || error.length() == 0) {
+            tvError.setVisibility(View.GONE);
+        } else {
+            tvError.setVisibility(View.VISIBLE);
+        }
     }
 
 //    public void viewTutors(View v) {
@@ -92,33 +93,23 @@ public class ViewTutors extends AppCompatActivity {
 //        tutorListView.setAdapter(tutorAdapter);
 //        getNames(tutorAdapter, tutorNames, "/Manager/get/allTutors");
 //    }
-
-//    private void getNames(final List<String> names, final String restFunctionName) {
+//
+//    private void getNames(final List<String> names, final ArrayAdapter adapter, final String restFunctionName) {
 //        //final List<String> names = new ArrayList<>();
 //        HttpUtils.get(restFunctionName, new RequestParams(), new JsonHttpResponseHandler() {
 //
 //            @Override
 //            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//                try {
-//                    System.out.println(response.getJSONObject(0).toString());
-//                    System.out.println(response.getJSONObject(0).getString("first_name"));
-//                } catch (Exception e) { error += e.getMessage();System.out.println("error getting 0th"); }
 //                names.clear();
-//                //names.add("hello"); names.add("name2");
-////                names.add("Please select...");
-//                System.out.println(response.length());
 //                for( int i = 0; i < 3; i++){
 //                    try {
-//                        names.add(response.getJSONObject(i).getString("first_name")
-//                                );
+//                        names.add(response.getJSONObject(i).getString("first_name"));
 //                    } catch (Exception e) {
 //                        error += e.getMessage();
 //                    }
-//                    //refreshErrorMessage();
-//                    System.out.println(names.get(i));
+//                    refreshErrorMessage();
 //                }
-//                System.out.println("done for loop");
-//                //tutorAdapter.notifyDataSetChanged();
+//                adapter.notifyDataSetChanged();
 //
 //            }
 //
@@ -129,9 +120,8 @@ public class ViewTutors extends AppCompatActivity {
 //                } catch (JSONException e) {
 //                    error += e.getMessage();
 //                }
-//                //refreshErrorMessage();
+//                refreshErrorMessage();
 //            }
 //        });
 //    }
-
 }

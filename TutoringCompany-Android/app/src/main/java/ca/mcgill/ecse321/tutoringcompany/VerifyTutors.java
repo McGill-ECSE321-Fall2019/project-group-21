@@ -57,26 +57,21 @@ public class VerifyTutors extends AppCompatActivity {
      */
     public void Verify(View v){
         error = "";
-        final TextView tv = (TextView) findViewById(R.id.TutorEmail);
-        HttpUtils.post("Manager/VerifyTutor" +"?email=" + tv.getText().toString(), new RequestParams(), new TextHttpResponseHandler() {
+        final TextView emailTV = (TextView) findViewById(R.id.TutorEmail);
+        HttpUtils.post("Manager/VerifyTutor" +"?email=" + emailTV.getText().toString(), new RequestParams(), new TextHttpResponseHandler() {
             //@Override
             public void onSuccess(int statusCode, Header[] headers, String response) {
                 //System.out.println(response.toString());
                 System.out.println("onSuccess ============");
-
-
-                tv.setText("");
-            error = "your Tutor is verified";
+                emailTV.setText("");
+                error = "your Tutor is verified";
                 refreshErrorMessage();
-
             }
             public void onFailure(int statusCode, Header[] headers, String errorResponseString, Throwable throwable) {
                 error = "wrong format or tutor does not exist";
                 refreshErrorMessage();
-                tv.setText("");
-
+                emailTV.setText("");
             }
-
         });
 
 

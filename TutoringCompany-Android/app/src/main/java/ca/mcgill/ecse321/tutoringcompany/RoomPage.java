@@ -16,7 +16,7 @@ import android.widget.TextView;
 import cz.msebera.android.httpclient.Header;
 
 public class RoomPage extends AppCompatActivity {
-String error;
+    String error;
 
     /**
      * This method runs after the creation of the page
@@ -46,35 +46,27 @@ String error;
      *
      * @param v
      */
-    public void CreateIndividualRoom(View v){
+    public void CreateIndividualRoom(View v) {
         error = "";
-        final TextView tv = (TextView) findViewById(R.id.IndividualRoomNumber);
+        final TextView numberTV = (TextView) findViewById(R.id.IndividualRoomNumber);
 
-        final int number = Integer.parseInt(tv.getText().toString());
+        final int number = Integer.parseInt(numberTV.getText().toString());
         boolean isgroup = false;
 
 
-        HttpUtils.post("Manager/Create/Room" +"?roomNumber=" + number+"&RoomTypeIsGroup=" + isgroup, new RequestParams(), new TextHttpResponseHandler() {
+        HttpUtils.post("Manager/Create/Room" + "?roomNumber=" + number + "&RoomTypeIsGroup=" + isgroup, new RequestParams(), new TextHttpResponseHandler() {
             //@Override
             public void onSuccess(int statusCode, Header[] headers, String response) {
-
-
-
-
-                error ="individual room number " + number+ " is created";
-
+                error = "individual room number " + number + " is created";
                 refreshErrorMessage();
-
             }
+
             public void onFailure(int statusCode, Header[] headers, String errorResponseString, Throwable throwable) {
                 error = "wrong format or empty input";
                 refreshErrorMessage();
-
-
             }
 
         });
-
 
 
     }
@@ -84,35 +76,27 @@ String error;
      *
      * @param v
      */
-    public void CreateGroupRoom(View v){
+    public void CreateGroupRoom(View v) {
         error = "";
-        final TextView tv = (TextView) findViewById(R.id.GroupRoomNumber);
+        final TextView numberTV = (TextView) findViewById(R.id.GroupRoomNumber);
 
-        final int number = Integer.parseInt(tv.getText().toString());
+        final int number = Integer.parseInt(numberTV.getText().toString());
         boolean isgroup = true;
 
 
-        HttpUtils.post("Manager/Create/Room" +"?roomNumber=" + number+"&RoomTypeIsGroup=" + isgroup, new RequestParams(), new TextHttpResponseHandler() {
+        HttpUtils.post("Manager/Create/Room" + "?roomNumber=" + number + "&RoomTypeIsGroup=" + isgroup, new RequestParams(), new TextHttpResponseHandler() {
             //@Override
             public void onSuccess(int statusCode, Header[] headers, String response) {
-                //System.out.println(response.toString());
-                System.out.println("onSuccess ============");
-
-
-                error ="group room number " + number+ " is created";
-
+                error = "group room number " + number + " is created";
                 refreshErrorMessage();
-
             }
+
             public void onFailure(int statusCode, Header[] headers, String errorResponseString, Throwable throwable) {
                 error = "wrong format or empty input";
                 refreshErrorMessage();
-
-
             }
 
         });
-
 
 
     }

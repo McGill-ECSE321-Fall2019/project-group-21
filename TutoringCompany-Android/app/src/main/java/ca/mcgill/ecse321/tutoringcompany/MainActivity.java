@@ -54,12 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         button = (Button) findViewById(R.id.Loginbtn);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                openManagerHomePage();
-//            }
-//        });
 
 
 
@@ -99,19 +93,17 @@ public class MainActivity extends AppCompatActivity {
      */
     public void login(View v) {
         error = "";
-        final TextView tv = (TextView) findViewById(R.id.email);
-        final TextView tv2 = (TextView) findViewById(R.id.password);
-        tv.setText("georgeKandalaft@gmail.com");
-        tv2.setText("42069");
-        HttpUtils.post("Manager/Login" +"?ManagerEmail=" + tv.getText().toString()+"&ManagerPassword=" + tv2.getText().toString(), new RequestParams(), new TextHttpResponseHandler() {
+        final TextView emailTV = (TextView) findViewById(R.id.email);
+        final TextView passwordTV = (TextView) findViewById(R.id.password);
+
+        HttpUtils.post("Manager/Login" +"?ManagerEmail=" + emailTV.getText().toString()+"&ManagerPassword=" + passwordTV.getText().toString(), new RequestParams(), new TextHttpResponseHandler() {
             //@Override
             public void onSuccess(int statusCode, Header[] headers, String response) {
                 //System.out.println(response.toString());
-                System.out.println("onSuccess ============");
                 refreshErrorMessage();
                 openManagerHomePage();
-                tv.setText("");
-                tv2.setText("");
+                emailTV.setText("");
+                passwordTV.setText("");
             }
             public void onFailure(int statusCode, Header[] headers, String errorResponseString, Throwable throwable) {
                 try {
@@ -121,8 +113,8 @@ public class MainActivity extends AppCompatActivity {
                     error += e.getMessage();
                 }
                 refreshErrorMessage();
-                tv.setText("");
-                tv2.setText("");
+                emailTV.setText("");
+                passwordTV.setText("");
             }
 
         });
@@ -135,12 +127,10 @@ public class MainActivity extends AppCompatActivity {
      */
     public void logout(View v) {
         error = "";
-//        final TextView tv = (TextView) findViewById(R.id.email);
-//        final TextView tv2 = (TextView) findViewById(R.id.password);
+
         HttpUtils.post("Manager/Logout", new RequestParams(), new TextHttpResponseHandler() {
             //@Override
             public void onSuccess(int statusCode, Header[] headers, String response) {
-                //System.out.println(response.toString());
                 refreshErrorMessage();
             }
             public void onFailure(int statusCode, Header[] headers, String errorResponseString, Throwable throwable) {
@@ -166,17 +156,6 @@ public class MainActivity extends AppCompatActivity {
 //        getNames(tutorAdapter, tutorNames, "/Manager/get/allTutors");
 //    }
 //
-//    public void verifyTutor(View v) {
-//        error = "";
-//    }
-//
-//    public void viewStudents(View v) {
-//        error = "";
-//        //studentAdapter = new ArrayAdapter<String>(this, android.R.layout.listview_name, studentNames);
-//        //ListView studentListView = (ListView) findViewById(R.id.students);
-//        //studentListView.setAdapter(studentAdapter);
-//        getNames(studentAdapter, studentNames, "/Manager/get/allStudents");
-//    }
 //
 //    private void getNames(final ArrayAdapter<String> adapter, final List<String> names, final String restFunctionName) {
 //        HttpUtils.get(restFunctionName, new RequestParams(), new JsonHttpResponseHandler() {
