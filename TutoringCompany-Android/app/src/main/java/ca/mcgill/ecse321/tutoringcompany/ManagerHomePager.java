@@ -19,7 +19,7 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 public class ManagerHomePager extends AppCompatActivity {
-
+    private String error = null;
     /**
      * This method runs after the creation of the page
      * Initialize activity
@@ -33,14 +33,21 @@ public class ManagerHomePager extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+    }
+
+    /**
+     * Displays error message on the screen, if there is any
+     */
+    private void refreshErrorMessage() {
+        // set the error message
+        TextView tvError = (TextView) findViewById(R.id.error);
+        tvError.setText(error);
+
+        if (error == null || error.length() == 0) {
+            tvError.setVisibility(View.GONE);
+        } else {
+            tvError.setVisibility(View.VISIBLE);
+        }
     }
 
     /**
@@ -60,6 +67,43 @@ public class ManagerHomePager extends AppCompatActivity {
      */
     public void openRoomsPage(View v) {
         Intent intent = new Intent(this, RoomPage.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Logout of the application
+     *
+     * @param v
+     */
+    public void logout(View v) {
+        error = "";
+        System.out.println("logging out method");
+        HttpUtils.post("Manager/Logout", new RequestParams(), new TextHttpResponseHandler() {
+            //@Override
+            public void onSuccess(int statusCode, Header[] headers, String response) {
+                refreshErrorMessage();
+                openManagerLoginPage();
+            }
+            public void onFailure(int statusCode, Header[] headers, String errorResponseString, Throwable throwable) {
+                try {
+                    JSONObject errorResponseJSON = new JSONObject(errorResponseString);
+                    error += errorResponseJSON.get("message").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+
+                refreshErrorMessage();
+
+            }
+
+        });
+    }
+
+    /**
+     * Open the login page for the manager perspective
+     */
+    public void openManagerLoginPage() {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

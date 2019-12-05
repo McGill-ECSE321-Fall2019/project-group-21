@@ -49,22 +49,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         button = (Button) findViewById(R.id.Loginbtn);
-
-
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         refreshErrorMessage();
     }
 
@@ -93,6 +83,17 @@ public class MainActivity extends AppCompatActivity {
         final TextView emailTV = (TextView) findViewById(R.id.email);
         final TextView passwordTV = (TextView) findViewById(R.id.password);
 
+        //preliminary client-side validation
+        if (emailTV.getText().toString() == null || emailTV.getText().toString().isEmpty()) {
+            error += "email field is empty";
+            refreshErrorMessage();
+            return;
+        } else if (passwordTV.getText().toString() == null || passwordTV.getText().toString().isEmpty()) {
+            error += "password field is empty";
+            refreshErrorMessage();
+            return;
+        }
+
         HttpUtils.post("Manager/Login" +"?ManagerEmail=" + emailTV.getText().toString()+"&ManagerPassword=" + passwordTV.getText().toString(), new RequestParams(), new TextHttpResponseHandler() {
             //@Override
             public void onSuccess(int statusCode, Header[] headers, String response) {
@@ -117,33 +118,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Logout of the application
-     *
-     * @param v
-     */
-    public void logout(View v) {
-        error = "";
-
-        HttpUtils.post("Manager/Logout", new RequestParams(), new TextHttpResponseHandler() {
-            //@Override
-            public void onSuccess(int statusCode, Header[] headers, String response) {
-                refreshErrorMessage();
-            }
-            public void onFailure(int statusCode, Header[] headers, String errorResponseString, Throwable throwable) {
-                try {
-                    JSONObject errorResponseJSON = new JSONObject(errorResponseString);
-                    error += errorResponseJSON.get("message").toString();
-                } catch (JSONException e) {
-                    error += e.getMessage();
-                }
-
-                refreshErrorMessage();
-
-            }
-
-        });
-    }
 
 //    public void viewTutors(View v) {
 //        error = "";
@@ -222,8 +196,9 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Opens the home page for the manager perspective
      */
-    public void openManagerHomePage(){
+    public void openManagerHomePage() {
         Intent intent = new Intent(this, ManagerHomePager.class);
         startActivity(intent);
     }
+
 }
