@@ -28,9 +28,6 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
-
-
-
 public class MainActivity extends AppCompatActivity {
     private String error = null;
     private Button button;
