@@ -5,8 +5,6 @@ import TutoringCompany from '@/components/TutoringCompany'
 import Login from '@/components/Login'
 import Signup from '@/components/Signup'
 import HomePage from '@/components/HomePage'
-<<<<<<< HEAD
-=======
 import ManagerHomePage from '@/components/ManagerHomePage'
 import TutorsM from '@/components/TutorsM'
 import StudentsM from '@/components/StudentsM'
@@ -18,7 +16,6 @@ import CoursesM from '@/components/CoursesM'
 import SessionsM from '@/components/SessionsM'
 import RoomTest from '@/components/RoomTest'
 import AboutContact from '@/components/AboutContact'
->>>>>>> df3f7d4898e02a121e5d17555c8b088ca2a2a350
 
 Vue.use(Router)
 
@@ -34,26 +31,6 @@ export default new Router({
       name: 'TutoringCompany',
       component: TutoringCompany
     },
-<<<<<<< HEAD
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login
-  },
-  
-  {
-    path: '/HomePage',
-    name: 'HomePage',
-    component: HomePage
-  },
-  {
-    path: '/signup',
-    name: 'Signup',
-    component: Signup
-  }
-
-]
-=======
     {
       path: '/login',
       name: 'Login',
@@ -128,5 +105,4 @@ export default new Router({
       component: RoomTest
     }
   ]
->>>>>>> df3f7d4898e02a121e5d17555c8b088ca2a2a350
 })
